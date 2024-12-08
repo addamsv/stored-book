@@ -4,6 +4,6 @@ export const AuthPageAsync = lazy(
   () =>
     new Promise((resolve) => {
       // @ts-ignore
-      setTimeout(() => resolve(import("./AuthPage")), 1500);
+      setTimeout(() => resolve(import("./AuthPage")), 500);
     })
 );

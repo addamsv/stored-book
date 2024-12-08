@@ -1,5 +1,21 @@
 разрабатывалось с node version: v16.14.0
 
+# Install
+
+clone the repo then (sudo)
+
+```bash
+npm install
+```
+
+build storybook: (sudo)
+
+```bash
+npm run sb:build
+```
+
+в node_modules/entities удалил поля "module" и "exports" и всё заработало
+
 # Запуск App:
 
 ```bash

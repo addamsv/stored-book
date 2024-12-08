@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { memo, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
 import {
@@ -111,4 +111,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default memo(ProfilePage);
