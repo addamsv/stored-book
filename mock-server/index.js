@@ -52,19 +52,19 @@ const CustomReturnData = (message, data) => ({
   data
 });
 
-const getUserByCredentials = (data) => {
-  try {
-    const decode = decodeBase64(data);
+// const getUserByCredentials = (data) => {
+//   try {
+//     const decode = decodeBase64(data);
 
-    const [username] = decode.split(":");
+//     const [username] = decode.split(":");
 
-    const { users = [] } = getData();
+//     const { users = [] } = getData();
 
-    return users.find((user) => user.name === username);
-  } catch (e) {
-    throw new Error(e.message);
-  }
-};
+//     return users.find((user) => user.name === username);
+//   } catch (e) {
+//     throw new Error(e.message);
+//   }
+// };
 
 const authFilterByUsernameAndPassword = (data) => {
   try {
@@ -153,34 +153,11 @@ const isAuth = (req) => {
   return false;
 };
 
-//
-// GET /api/v1/profiles/{profileId}
-server.get("/api/v1/profiles/:profileId", (req, res) => {
-  try {
-    const username = isAuth(req);
-
-    if (!username) {
-      return res.status(403).json(err403("User"));
-    }
-
-    const { profiles = [] } = getData();
-
-    const profileCandidate = profiles.find(
-      (profile) => profile.owner === Number(req.params.profileId)
-    );
-
-    if (profileCandidate) {
-      return res.json(CustomReturnData("Profile info", profileCandidate));
-    }
-
-    return res.status(403).json(err403("Profile"));
-  } catch (e) {
-    return res.status(500).json(err500);
-  }
-});
-
-// Authentication of user by login and password -> token
-// POST /api/v1/users/login
+/**   Authentication of user by login and password -> token
+ *
+ *     POST /api/v1/users/login
+ *
+ */
 server.post("/api/v1/users/login", (req, res) => {
   try {
     const username = isAuth(req);
@@ -213,8 +190,40 @@ server.post("/api/v1/users/login", (req, res) => {
   }
 });
 
-// Authentication of user by login and password -> token
-// POST /api/v1/users/login
+/**  Get profile by ID (authOnly)
+ *
+ *  GET /api/v1/profiles/{profileId}
+ *
+ */
+server.get("/api/v1/profiles/:profileId", (req, res) => {
+  try {
+    const username = isAuth(req);
+
+    if (!username) {
+      return res.status(403).json(err403("User"));
+    }
+
+    const { profiles = [] } = getData();
+
+    const profileCandidate = profiles.find(
+      (profile) => profile.owner === Number(req.params.profileId)
+    );
+
+    if (profileCandidate) {
+      return res.json(CustomReturnData("Profile info", profileCandidate));
+    }
+
+    return res.status(403).json(err403("Profile"));
+  } catch (e) {
+    return res.status(500).json(err500);
+  }
+});
+
+/**   Update Profile (authOnly)
+ *
+ * PUT /api/v1/profiles/{profileId}
+ *
+ */
 server.put("/api/v1/profiles/:profileId", (req, res) => {
   try {
     const username = isAuth(req);
@@ -246,6 +255,56 @@ server.put("/api/v1/profiles/:profileId", (req, res) => {
     }
 
     return res.status(403).json(err403("User"));
+  } catch (e) {
+    console.log(e);
+
+    return res.status(500).json(err500);
+  }
+});
+
+/** Get All articles (authOnly)
+ *
+ *  GET /api/v1/articles
+ *
+ */
+server.get("/api/v1/articles", (req, res) => {
+  try {
+    const username = isAuth(req);
+
+    if (!username) {
+      return res.status(403).json(err403("User"));
+    }
+
+    const { articles = [] } = getData();
+
+    return res.json(CustomReturnData("All articles", articles));
+  } catch (e) {
+    return res.status(500).json(err500);
+  }
+});
+
+/** Get article by ID (authOnly)
+ *
+ *  GET /api/v1/articles
+ *
+ */
+server.get("/api/v1/articles/:id", (req, res) => {
+  try {
+    if (!isAuth(req)) {
+      return res.status(403).json(err403("User"));
+    }
+
+    const { articles = [] } = getData();
+
+    const articleCandidate = articles.find(
+      (article) => article.id === Number(req.params.id)
+    );
+
+    if (articleCandidate) {
+      return res.json(CustomReturnData("Article Details", articleCandidate));
+    }
+
+    return res.status(404).json(CustomReturnData(`Article with id: ${req.params.id}`, null));
   } catch (e) {
     console.log(e);
 

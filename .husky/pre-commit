@@ -4,5 +4,5 @@
 npm run eslint
 npm run stylelint
 npm run test
-# npm run sb:build
+# npm run sb
 # npm run ui

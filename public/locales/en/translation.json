@@ -1,5 +1,9 @@
 {
   "404": "404",
+  "BlockOfArticleCode": "",
+  "BlockOfArticleImage": "",
+  "BlockOfArticleText": "",
+  "Skeleton": "",
   "error": "",
   "lorem": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est.",
   "Аутентификация": "Authentication",
@@ -8,15 +12,17 @@
   "Главная": "Main",
   "О проекте": "About",
   "Профиль": "Profile",
+  "Статьи": "Books",
   "Страна": "Country",
   "войти": "login",
   "имя пользователя": "user name",
+  "копировать": "copy",
   "логотип настроек": "settings logo",
   "ошибка": "error",
   "ошибка на сервере": "server error",
   "пароль": "password",
   "перезагрузить": "reload",
+  "скачать": "",
   "тема": "theme",
-  "язык": "lang",
-  "Статьи": "Articles"
+  "язык": "lang"
 }
