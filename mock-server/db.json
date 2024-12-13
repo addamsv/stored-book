@@ -11,7 +11,7 @@
       "owner": 1
     }
   ],
-  "articles": [
+  "books": [
     {
       "id": 1,
       "owner": 1,
@@ -57,7 +57,7 @@
     {
       "id": 2,
       "owner": 1,
-      "title": "Article Title 2",
+      "title": "Book Title 2",
       "subTitle": "SubTitle 2",
       "img": "http://localhost:3000/images/img3.jpg",
       "views": 1,
@@ -94,21 +94,21 @@
     {
       "id": 1,
       "postId": 1,
-      "articleId": 1,
+      "bookId": 1,
       "owner": 1,
       "text": "some comment"
     },
     {
       "id": 2,
       "postId": 1,
-      "articleId": 1,
+      "bookId": 1,
       "owner": 1,
       "text": "some comment"
     },
     {
       "id": 3,
       "postId": 1,
-      "articleId": 1,
+      "bookId": 1,
       "owner": 1,
       "text": "some comment"
     }
@@ -140,6 +140,18 @@
       "city": "Minsk",
       "address": "Chyrlenisa 14-22",
       "image": "http://localhost:3000/images/img2.png",
+      "currency": "BYN"
+    },
+    {
+      "id": 2,
+      "owner": 2,
+      "firstname": "Joh",
+      "lastname": "Dore",
+      "age": 20,
+      "country": "Belarus",
+      "city": "Minsk",
+      "address": "Chyrlenisa 288-555",
+      "image": "http://localhost:3000/images/img3.jpg",
       "currency": "BYN"
     }
   ]

@@ -7,7 +7,7 @@ export const SidebarItemsList: INavbarItem[] = [
     text: "Главная"
   },
   {
-    path: RoutePath.articles,
+    path: RoutePath.books,
     text: "Статьи",
     authOnly: true
   },

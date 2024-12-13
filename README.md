@@ -39,7 +39,7 @@ npm run sb
 # ТEST:
 
 ```bash
-npm run eslint
+npm run lint
 npm run stylelint
 npm run test
 ```

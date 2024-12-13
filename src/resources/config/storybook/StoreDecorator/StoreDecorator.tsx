@@ -1,7 +1,7 @@
 // import { DeepPartial, ReducersMapObject } from "@reduxjs/toolkit";
 import { Story } from "@storybook/react";
 import { IStateSchema, StoreProvider } from "app/providers/StoreProvider";
-import { articleDetailsReducer } from "entities/Article/model/slices/articleDetailsSlice";
+import { bookDetailsReducer } from "entities/Book/model/slices/bookDetailsSlice";
 import { profileReducer } from "entities/Profile";
 import { loginReducer } from "features/AuthByUserName/model/slice/loginSlice";
 import { ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
@@ -10,7 +10,7 @@ import { ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
 const defaultReducer: ReducerListT = {
   loginForm: loginReducer,
   profile: profileReducer,
-  articleDetails: articleDetailsReducer
+  bookDetails: bookDetailsReducer
 };
 
 export const StoreDecorator = (

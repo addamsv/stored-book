@@ -262,12 +262,12 @@ server.put("/api/v1/profiles/:profileId", (req, res) => {
   }
 });
 
-/** Get All articles (authOnly)
+/** Get All books (authOnly)
  *
- *  GET /api/v1/articles
+ *  GET /api/v1/books
  *
  */
-server.get("/api/v1/articles", (req, res) => {
+server.get("/api/v1/books", (req, res) => {
   try {
     const username = isAuth(req);
 
@@ -275,36 +275,36 @@ server.get("/api/v1/articles", (req, res) => {
       return res.status(403).json(err403("User"));
     }
 
-    const { articles = [] } = getData();
+    const { books = [] } = getData();
 
-    return res.json(CustomReturnData("All articles", articles));
+    return res.json(CustomReturnData("All books", books));
   } catch (e) {
     return res.status(500).json(err500);
   }
 });
 
-/** Get article by ID (authOnly)
+/** Get book by ID (authOnly)
  *
- *  GET /api/v1/articles
+ *  GET /api/v1/books
  *
  */
-server.get("/api/v1/articles/:id", (req, res) => {
+server.get("/api/v1/books/:id", (req, res) => {
   try {
     if (!isAuth(req)) {
       return res.status(403).json(err403("User"));
     }
 
-    const { articles = [] } = getData();
+    const { books = [] } = getData();
 
-    const articleCandidate = articles.find(
-      (article) => article.id === Number(req.params.id)
+    const bookCandidate = books.find(
+      (book) => book.id === Number(req.params.id)
     );
 
-    if (articleCandidate) {
-      return res.json(CustomReturnData("Article Details", articleCandidate));
+    if (bookCandidate) {
+      return res.json(CustomReturnData("Book Details", bookCandidate));
     }
 
-    return res.status(404).json(CustomReturnData(`Article with id: ${req.params.id}`, null));
+    return res.status(404).json(CustomReturnData(`Book with id: ${req.params.id}`, null));
   } catch (e) {
     console.log(e);
 

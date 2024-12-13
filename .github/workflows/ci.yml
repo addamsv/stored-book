@@ -22,7 +22,7 @@ jobs:
         run: npm run build:prod
       - name: TEST eslint...
         if: always()
-        run: npm run eslint
+        run: npm run lint
       - name: TEST stylelint...
         if: always()
         run: npm run stylelint

@@ -1,5 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import GitIon from "shared/assets/icons/git.svg";
 import { IconSVG } from "./IconSVG";
 
 export default {
@@ -13,5 +14,4 @@ export default {
 const Template: ComponentStory<typeof IconSVG> = (args) => <IconSVG {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = {
-};
+Primary.args = { Svg: GitIon };
