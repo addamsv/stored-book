@@ -1,10 +1,10 @@
-@import "reset";
-@import "variables/global";
-@import "themes/light";
-@import "themes/dark";
-@import "themes/darkBlue";
-@import "themes/lightBlue";
-@import "themes/lightGreen";
+@use "./reset";
+@use "./variables/global";
+@use "./themes/light";
+@use "./themes/dark";
+@use "./themes/darkBlue";
+@use "./themes/lightBlue";
+@use "./themes/lightGreen";
 
 body {
   font: var(--font-m);

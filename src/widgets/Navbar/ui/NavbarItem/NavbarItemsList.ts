@@ -7,9 +7,18 @@ export const SidebarItemsList: INavbarItem[] = [
     text: "Главная"
   },
   {
-    path: RoutePath.about,
-    text: "О проекте"
+    path: RoutePath.books,
+    text: "Статьи",
+    authOnly: true
   },
+  // {
+  //   path: RoutePath.about,
+  //   text: "О проекте"
+  // },
+  // {
+  //   path: RoutePath.auth,
+  //   text: "Зарегистрироваться"
+  // },
   {
     path: RoutePath.profile,
     text: "Профиль",

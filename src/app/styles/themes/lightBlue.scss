@@ -1,14 +1,15 @@
 .app_light_blue_theme {
-  --bg-color: #f4f6fb;
-  --primary-color: #2f5aa4;
-  --secondary-color: #2f5aa4;
+  --bg-color: #eef2fa;
+  --primary-color: #4e6da2;
+  --secondary-color: #4f73b2;
   --accent-color: #0b5c60; // #49975d;
-  --link-color: #ccc;
+  --link-color: #eef2fa;
+  --skeleton-color: #b1c8ff;
 
   // inverted colors
-  --bg-color-inverted: #0f3a84;
-  --primary-color-inverted: #f4f6fb;
-  --secondary-color-inverted: #f4f6fb;
+  --bg-color-inverted: #4e6da2;
+  --primary-color-inverted: #eef2fa;
+  --secondary-color-inverted: #eef2fa;
   --accent-color-inverted: #49975d;
 
   // shadows

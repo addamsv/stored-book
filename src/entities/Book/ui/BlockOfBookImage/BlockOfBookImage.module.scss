@@ -1,0 +1,11 @@
+.BlockOfBookImage {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.image {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+}

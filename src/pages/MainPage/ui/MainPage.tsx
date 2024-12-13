@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Logo from "shared/assets/icons/logo.svg";
 import { useTheme } from "app/providers/ThemeProvider";
 import { useTranslation } from "react-i18next";
@@ -18,4 +18,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default memo(MainPage);

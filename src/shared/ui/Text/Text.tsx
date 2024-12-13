@@ -15,20 +15,30 @@ export enum TextAlign {
   LEFT = "left",
 }
 
+export enum TextSize {
+  XS = "extraSmall",
+  S = "small",
+  M = "middle",
+  L = "large",
+  XL = "extraLarge",
+}
+
 interface ITextProps {
   className?: string;
   title?: string;
   text?: string;
   theme?: TextTheme;
   textAlign?: TextAlign;
+  textSize?: TextSize;
 }
 
 export const Text = memo(({
-  className, text, title, theme = TextTheme.PRIMARY, textAlign = TextAlign.CENTER
+  className, text, title, theme = TextTheme.PRIMARY, textAlign = TextAlign.CENTER, textSize = TextSize.M
 }: ITextProps) => {
   const mods: Mods = {
     [cls[theme]]: true,
     [cls[textAlign]]: true,
+    [cls[textSize]]: true,
   };
 
   return (

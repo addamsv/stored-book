@@ -28,16 +28,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
 }
 
-export const Button = memo((props: ButtonProps) => {
-  const {
-    className,
-    theme = ButtonTheme.ACCENT_OUTLINE,
-    size = ButtonSize.M,
-    disabled,
-    children,
-    ...otherProps
-  } = props;
-
+export const Button = memo(({
+  className,
+  theme = ButtonTheme.ACCENT_OUTLINE,
+  size = ButtonSize.M,
+  disabled,
+  children,
+  ...otherProps
+}: ButtonProps) => {
   const mods: Mods = {
     [cls[size]]: true,
     [cls[theme]]: true,

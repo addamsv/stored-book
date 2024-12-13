@@ -17,7 +17,16 @@ export function cssLoader(isDev: boolean) {
           },
         },
       },
-      "sass-loader",
+      {
+        loader: "sass-loader",
+        options: {
+          api: "modern", // legacy | modern,
+          // sassOptions: {
+          //   // Your sass options
+          // },
+        },
+      },
+      // "sass-loader",
     ],
   };
 }

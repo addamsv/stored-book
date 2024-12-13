@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
 import { Theme } from "app/providers/ThemeProvider";
-import { Text, TextTheme } from "./Text";
+import { Text, TextAlign, TextSize, TextTheme } from "./Text";
 
 export default {
   title: "shared/Text",
@@ -55,3 +55,12 @@ Error.args = {
   text: "Lorem ipsum",
   theme: TextTheme.ERROR
 };
+
+export const TextLarge = Template.bind({});
+TextLarge.args = {
+  title: "Awesome Title",
+  text: "Lorem ipsum super popular text",
+  textAlign: TextAlign.LEFT,
+  textSize: TextSize.L
+};
+TextLarge.decorators = [ThemeDecorator(Theme.DARK)];

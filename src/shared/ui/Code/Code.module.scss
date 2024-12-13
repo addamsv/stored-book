@@ -1,0 +1,15 @@
+.Code {
+  display: block;
+  text-align: left;
+  padding: 15px;
+  position: relative;
+  background: var(--bg-color);
+  box-shadow: var(--shadow);
+  border-radius: 6px;
+}
+
+.copyButton {
+  position: absolute;
+  right: 25px;
+  top: 20px;
+}

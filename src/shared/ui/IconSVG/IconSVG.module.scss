@@ -1,0 +1,13 @@
+.IconSVG {
+  fill: var(--primary-color);
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.9;
+  }
+
+  cursor: pointer;
+}

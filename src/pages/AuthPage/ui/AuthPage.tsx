@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 const AuthPage = () => {
@@ -11,4 +11,4 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default memo(AuthPage);
