@@ -1,6 +1,31 @@
-разрабатывалось с node version: v16.14.0
+# STORED AUDIO BOOKS
 
-# Install
+## Basic и JSON Web Token аутентификация
+
+## Различные темы и интернационализация (RU, EN)
+
+<img src="./.github/projectDescription/images/darkBlue.png" width="104px">
+<img src="./.github/projectDescription/images/dark.png" width="104px">
+<img src="./.github/projectDescription/images/lightBlue.png" width="104px">
+
+## Страницы User Profile м Book Details
+
+<img src="./.github/projectDescription/images/userProfile.png" width="104px">
+<img src="./.github/projectDescription/images/bookDescription.png" width="104px">
+
+<br><br>
+
+# Технологический стек FRONT:
+
+Typescript, React, Redux Toolkit, Thunk (async), Webpack, FSD;
+<br>
+jest, integration, ui, screenshot tests, ts lint, style lint; Storybook; Nodejs mock-server.
+
+<br>
+
+# Install APP
+
+### разрабатывалось с node version: v16.14.0
 
 clone the repo then (sudo)
 
