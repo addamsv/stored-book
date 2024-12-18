@@ -1,10 +1,6 @@
 {
   "404": "404",
-  "BlockOfBookCode": "",
-  "BlockOfBookImage": "",
-  "BlockOfBookText": "",
-  "Skeleton": "",
-  "error": "",
+  "error": "error",
   "lorem": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est.",
   "Аутентификация": "Authentication",
   "Валюта": "Currency",
@@ -22,7 +18,8 @@
   "ошибка на сервере": "server error",
   "пароль": "password",
   "перезагрузить": "reload",
-  "скачать": "",
+  "скачать": "download",
   "тема": "theme",
-  "язык": "lang"
+  "язык": "lang",
+  "нет комментариев": "no comments"
 }

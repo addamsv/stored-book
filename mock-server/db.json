@@ -93,24 +93,21 @@
   "comments": [
     {
       "id": 1,
-      "postId": 1,
       "bookId": 1,
       "owner": 1,
-      "text": "some comment"
+      "text": "Awesome Comment"
     },
     {
       "id": 2,
-      "postId": 1,
       "bookId": 1,
-      "owner": 1,
-      "text": "some comment"
+      "owner": 2,
+      "text": "The comment I've never heard  before"
     },
     {
       "id": 3,
-      "postId": 1,
-      "bookId": 1,
+      "bookId": 2,
       "owner": 1,
-      "text": "some comment"
+      "text": "Whoo-hooo"
     }
   ],
   "users": [
@@ -118,14 +115,16 @@
       "id": 1,
       "name": "admin",
       "password": "123",
-      "roles": "ADMIN",
+      "roles": "ROLE_ADMIN",
+      "image": "http://localhost:3000/images/img2.png",
       "enabled": true
     },
     {
       "id": 2,
       "name": "user",
       "password": "123",
-      "roles": "USER",
+      "roles": "ROLE_USER",
+      "image": "http://localhost:3000/images/img2.png",
       "enabled": true
     }
   ],
@@ -145,14 +144,14 @@
     {
       "id": 2,
       "owner": 2,
-      "firstname": "Joh",
-      "lastname": "Dore",
-      "age": 20,
-      "country": "Belarus",
-      "city": "Minsk",
-      "address": "Chyrlenisa 288-555",
+      "firstname": "Michael",
+      "lastname": "Las",
+      "age": 50,
+      "country": "Russia",
+      "city": "Novosibirsk",
+      "address": "Gorky 288-555",
       "image": "http://localhost:3000/images/img3.jpg",
-      "currency": "BYN"
+      "currency": "RUB"
     }
   ]
 }

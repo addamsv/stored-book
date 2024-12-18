@@ -1,6 +1,23 @@
 const fs = require("fs");
 const jsonServer = require("json-server");
 const path = require("path");
+const { createHmac } = require("node:crypto");
+
+const SECRET_KEY = "L16wsStHbN1V44K0f7xM4vJb3lvC3rrHGRCloTOD3f";
+
+/**
+ * SHA-256 hash function reference implementation.
+ *
+ * This is an annotated direct implementation of FIPS 180-4, without any optimisations. It is
+ * intended to aid understanding of the algorithm rather than for production use.
+ *
+ * While it could be used where performance is not critical, I would recommend using the ‘Web
+ * Cryptography API’ (developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest) for the browser,
+ * or the ‘crypto’ library (nodejs.org/api/crypto.html#crypto_class_hash) in Node.js.
+ *
+ * See csrc.nist.gov/groups/ST/toolkit/secure_hashing.html
+ *     csrc.nist.gov/groups/ST/toolkit/examples.html
+ */
 
 const decodeBase64 = (data) => {
   return Buffer.from(data, "base64").toString("ascii");
@@ -33,7 +50,7 @@ const putData = (json) => {
   fs.writeFileSync(path.resolve(__dirname, "db.json"), data, "UTF-8");
 };
 
-const err500 = {
+const serverSideErr500 = {
   isSuccess: false,
   statusCode: 500,
   message: "Server Side Err" // e.message
@@ -52,19 +69,11 @@ const CustomReturnData = (message, data) => ({
   data
 });
 
-// const getUserByCredentials = (data) => {
-//   try {
-//     const decode = decodeBase64(data);
-
-//     const [username] = decode.split(":");
-
-//     const { users = [] } = getData();
-
-//     return users.find((user) => user.name === username);
-//   } catch (e) {
-//     throw new Error(e.message);
-//   }
-// };
+const getIat = Math.round((new Date().getTime() / 1000));
+// in seconds from now:
+// (new Date().getTime() + seconds * 1000)/1000
+// 1 hour from now:
+const getExp = Math.round((new Date().getTime() + 60 * 60 * 1000) / 1000);
 
 const authFilterByUsernameAndPassword = (data) => {
   try {
@@ -89,9 +98,81 @@ const authFilterByUsernameAndPassword = (data) => {
   }
 };
 
+const makeFakeTokenByName = (sub) => {
+  const { users = [] } = getData();
+
+  const candidate = users.find(
+    (user) => user.name === sub
+  );
+
+  if (!candidate) {
+    return "";
+  }
+
+  const jwtHeader = { alg: "RS256" };
+
+  const authorities = candidate.roles;
+  console.log(authorities);
+
+  const iat = getIat;
+
+  const exp = getExp;
+
+  console.log(iat, exp);
+
+  const claims = {
+    iss: "self",
+    sub, // "admin"
+    exp, // 1732827822
+    iat, // 1732820622
+    authorities // "ROLE_ADMIN"
+  };
+
+  const data = `${btoa(JSON.stringify(jwtHeader))}.${btoa(JSON.stringify(claims))}`;
+
+  // https://nodejs.org/api/crypto.html#crypto_class_hash
+
+  const hmac = createHmac("sha256", SECRET_KEY);
+
+  hmac.update(data);
+
+  const signature = hmac.digest("hex");
+
+  console.log("own signature:");
+  // console.log("45c00f7a986fbab2099a8174605ec63f35fbb4127fb912414c308402d14e01bc");
+  console.log(signature);
+  return `${data}.${signature}`;
+};
+
 const parseJwt = (token) => {
   try {
-    return JSON.parse(atob(token.split(".")[1]));
+    const tokenParts = token.split(".");
+    const payloadClaims = JSON.parse(atob(tokenParts[1]));
+    console.log(atob(tokenParts[0]));
+    console.log(atob(tokenParts[1]));
+
+    const hmac = createHmac("sha256", SECRET_KEY);
+
+    const data = `${tokenParts[0]}.${tokenParts[1]}`;
+
+    hmac.update(data);
+
+    const signature = hmac.digest("hex");
+
+    console.log("shouldExp: ", payloadClaims.exp, "curr: ", getIat, "isExp:", payloadClaims.exp < getIat);
+
+    if (payloadClaims.exp < getIat) {
+      console.log("is JWT expired: ", true);
+      return null;
+    }
+
+    if (signature === tokenParts[2]) {
+      console.log("is JWT valid:", true);
+      return payloadClaims;
+    }
+
+    console.log("is JWT valid:", false);
+    return null;
   } catch (e) {
     return null;
   }
@@ -153,6 +234,10 @@ const isAuth = (req) => {
   return false;
 };
 
+const getToken = (name) => {
+  return makeFakeTokenByName(name);
+};
+
 /**   Authentication of user by login and password -> token
  *
  *     POST /api/v1/users/login
@@ -169,14 +254,14 @@ server.post("/api/v1/users/login", (req, res) => {
     const { users = [] } = getData();
 
     const candidate = users.find(
-      (user) => user.name === username // && user.password === password,
+      (user) => user.name === username
     );
 
     if (candidate) {
+      console.log(getToken(username));
       const data = {
         user: candidate,
-        // eslint-disable-next-line max-len
-        token: "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MzI4Mjc4MjIsImlhdCI6MTczMjgyMDYyMiwiYXV0aG9yaXRpZXMiOiJST0xFX0FETUlOIn0.L16wsStHbN1V44K0f7xM4vJb3lvC3rrHGRCloTOD3f-9abNn8BJCpeWCCst-IZwWjEM2XVgUjMxZTQoZpcs0wPY76bmGsH-gYEXIbY9h3HCmi3dqPq1NOKfEZnsY2A6ecKf8jFJliyHygfcVSkRvSYxPieo7A-0rlt6o2Aa90jP99sPemPiPyizA2hbxneVi6y5UrpOfBCxHwmo7XKAHddqWPN0dbyQKD_PaOpcLv3HnSFE7gdhJ_iS7ciejt49cmL4gzxD9xUzGJzwrXq1_mgy-r8fMLENfJO51sR9cHVEYDWPt-Gtrw2qpRSz4GTapqSlFStvJcsvMZSLqpiJSAA"
+        token: getToken(username)
       };
 
       return res.json(CustomReturnData("Login user info and JWT", data));
@@ -186,7 +271,7 @@ server.post("/api/v1/users/login", (req, res) => {
   } catch (e) {
     console.log(e);
 
-    return res.status(500).json(err500);
+    return res.status(500).json(serverSideErr500);
   }
 });
 
@@ -203,10 +288,14 @@ server.get("/api/v1/profiles/:profileId", (req, res) => {
       return res.status(403).json(err403("User"));
     }
 
-    const { profiles = [] } = getData();
+    const { profiles = [], users = [] } = getData();
+
+    const userCandidate = users.find(
+      (user) => user.name === username
+    );
 
     const profileCandidate = profiles.find(
-      (profile) => profile.owner === Number(req.params.profileId)
+      (profile) => profile.owner === userCandidate.id // && profile.owner === Number(req.params.profileId)
     );
 
     if (profileCandidate) {
@@ -215,7 +304,7 @@ server.get("/api/v1/profiles/:profileId", (req, res) => {
 
     return res.status(403).json(err403("Profile"));
   } catch (e) {
-    return res.status(500).json(err500);
+    return res.status(500).json(serverSideErr500);
   }
 });
 
@@ -258,7 +347,7 @@ server.put("/api/v1/profiles/:profileId", (req, res) => {
   } catch (e) {
     console.log(e);
 
-    return res.status(500).json(err500);
+    return res.status(500).json(serverSideErr500);
   }
 });
 
@@ -279,13 +368,13 @@ server.get("/api/v1/books", (req, res) => {
 
     return res.json(CustomReturnData("All books", books));
   } catch (e) {
-    return res.status(500).json(err500);
+    return res.status(500).json(serverSideErr500);
   }
 });
 
 /** Get book by ID (authOnly)
  *
- *  GET /api/v1/books
+ *  GET /api/v1/books/{id}
  *
  */
 server.get("/api/v1/books/:id", (req, res) => {
@@ -308,23 +397,64 @@ server.get("/api/v1/books/:id", (req, res) => {
   } catch (e) {
     console.log(e);
 
-    return res.status(500).json(err500);
+    return res.status(500).json(serverSideErr500);
   }
 });
 
-// eslint-disable-next-line
-// server.use((req, res, next) => {
-//   if (!req.headers.authorization) {
-//     return res.status(403).json({
-//       isSuccess: false,
-//       statusCode: 403,
-//       message: "AUTH ERROR"
-//     });
-//   }
+/** Get Comments by BookID (authOnly)
+ *
+ *  GET /api/v1/comments/{bookId}
+ *
+ */
+server.get("/api/v1/comments/:bookId", (req, res) => {
+  try {
+    if (!isAuth(req)) {
+      return res.status(403).json(err403("User"));
+    }
 
-//   next();
-// });
+    const { comments = [], profiles = [] } = getData();
 
+    const filteredCommentsByBookId = comments
+      .filter((comment) => comment.bookId === Number(req.params.bookId))
+      .map((comment) => {
+        const profileCandidate = profiles
+          .find((profile) => profile.owner === comment.owner);
+        const { id, firstname: name, image } = profileCandidate;
+        return { ...comment, owner: { id, name, image } };
+      });
+    // _expand "user"
+    console.log("PARAMS: ", Number(req.params.bookId));
+    console.log("QUERY: ", req.query, Number(req.query.bookId), req.query._expand);
+
+    return res.json(CustomReturnData("Comments", filteredCommentsByBookId || []));
+  } catch (e) {
+    console.log(e);
+
+    return res.status(500).json(serverSideErr500);
+  }
+});
+
+/**
+ *      CHECK AUTH
+ */
+// eslint-disable-next-line consistent-return
+server.use((req, res, next) => {
+  try {
+    if (!isAuth(req)) {
+      return res.status(403).json(err403("AUTH ERROR"));
+    }
+  } catch (e) {
+    console.log(e);
+
+    return res.status(500).json(serverSideErr500);
+  }
+
+  next();
+});
+
+/**
+ *      OTHER ENDPOINTS
+ */
 server.use(router);
 
 // запуск сервера
@@ -333,5 +463,7 @@ const API_SERVER_PORT = 8000;
 server.listen(API_SERVER_PORT, () => {
   console.log(`server is running on ${API_SERVER_PORT} port`);
   // console.log(`http://localhost:${API_SERVER_PORT}/api/v1/users/login`);
+  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/books`);
+  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/books/1`);
   console.log(`http://localhost:${API_SERVER_PORT}/api/v1/profiles/1`);
 });
