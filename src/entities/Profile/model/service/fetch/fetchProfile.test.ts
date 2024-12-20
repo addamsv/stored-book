@@ -43,7 +43,7 @@ describe("fetchProfile.test", () => {
 
     mockedAxios.get.mockReturnValue(Promise.resolve({ data }));
 
-    const asyncThunkAction = fetchProfile({ profileId: 1 });
+    const asyncThunkAction = fetchProfile({ userId: 1 });
 
     const resultData = await asyncThunkAction(dispatch, getState, { axios: api });
 
@@ -62,7 +62,7 @@ describe("fetchProfile.test", () => {
       })
     );
 
-    const asyncThunkAction = fetchProfile({ profileId: 1 });
+    const asyncThunkAction = fetchProfile({ userId: 1 });
 
     const resultData = await asyncThunkAction(dispatch, getState, { axios: api });
 

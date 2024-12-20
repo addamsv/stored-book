@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { ECurrency } from "entities/Currency";
 import { ECountry } from "entities/Country";
 import { Text, TextTheme } from "shared/ui/Text/Text";
+import { useParams } from "react-router-dom";
 import { Header } from "./Header/Header";
 import { Footer } from "./Footer/Footer";
 
@@ -21,8 +22,9 @@ const reducers: ReducerListT = {
 };
 
 const ProfilePage = () => {
-  // const { theme } = useTheme();
   const [t] = useTranslation("profile");
+
+  const { id } = useParams<{id: string}>();
 
   const profileCardData = useSelector(getProfileEdited);
 
@@ -76,9 +78,9 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (__PROJECT_TYPE__ !== "storybook") {
-      dispatch(fetchProfile({ profileId: 1 }));
+      dispatch(fetchProfile({ userId: Number(id) }));
     }
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <AsyncModule reducers={reducers}>

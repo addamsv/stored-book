@@ -5,7 +5,7 @@ import { IProfile } from "../../type/IProfile";
 import { profileActions } from "../../slice/profileSlice";
 
 interface IFetchProfileProps {
-  profileId: number;
+  userId: number;
 }
 
 interface ICustomReturnedData {
@@ -18,11 +18,11 @@ export const fetchProfile = createAsyncThunk<
   IProfile, IFetchProfileProps, IThunkConf<string>
 >(
   "profile/fetchProfile",
-  async ({ profileId }, thunkAPI) => {
+  async ({ userId }, thunkAPI) => {
     const { extra, dispatch, rejectWithValue, } = thunkAPI;
 
     const response = await extra.axios.get<ICustomReturnedData>(
-      `/profiles/${profileId}`,
+      `/profiles/${userId}`,
       { headers: { Authorization: `Bearer ${getCredentials()?.token || ""}` } }
     );
 

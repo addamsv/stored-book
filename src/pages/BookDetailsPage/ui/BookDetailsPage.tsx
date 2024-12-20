@@ -9,6 +9,7 @@ import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
 import { useDispatch, useSelector } from "react-redux";
 import { storybookEffect } from "shared/lib/hooks/storybookEffect";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { SendCommentForm } from "features/SendCommentForm";
 import { bookDetailsCommentsReducer, getBooksComments } from "../model/slices";
 import cls from "./BookDetailsPage.module.scss";
 import { getBooksCommentsError, getBooksCommentsIsLoading } from "../model/selectors";
@@ -53,6 +54,8 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
         <BookDetails bookId={Number(id)} />
 
         <Text textSize={TextSize.L} title={t("комментарии")} />
+
+        <SendCommentForm />
 
         <CommentList
           isLoading={isLoading}

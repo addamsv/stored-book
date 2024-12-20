@@ -1,0 +1,12 @@
+.SendCommentForm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.textArea {
+  flex-grow: 1;
+}

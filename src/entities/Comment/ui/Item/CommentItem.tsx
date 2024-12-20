@@ -4,6 +4,8 @@ import { memo } from "react";
 import { ImageJpg } from "shared/ui/ImageJpg/ImageJpg";
 import { Text, TextAlign, TextSize } from "shared/ui/Text/Text";
 import { Skeleton } from "shared/ui/Skeleton/Skeleton";
+import { AppLink } from "shared/ui/AppLink/AppLink";
+import { RoutePath } from "resources/config/routeConfig/routeConfig";
 import cls from "./CommentItem.module.scss";
 import { IComment } from "../../model/types";
 
@@ -31,10 +33,10 @@ export const CommentItem = memo(({ className, comment, isLoading = false }: ICom
 
   return (
     <div className={classes(cls.CommentItem, {}, [className])}>
-      <div className={cls.commentHeader}>
+      <AppLink to={`${RoutePath.profile}${comment.owner.id}`} className={cls.commentHeader}>
         {comment.owner.image ? <ImageJpg className={cls.image} size={20} alt="*" src={comment.owner.image} /> : null}
         <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={comment.owner.name} />
-      </div>
+      </AppLink>
 
       <Text className={cls.content} textAlign={TextAlign.LEFT} text={comment.text} />
     </div>

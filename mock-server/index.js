@@ -2,6 +2,7 @@ const fs = require("fs");
 const jsonServer = require("json-server");
 const path = require("path");
 const { createHmac } = require("node:crypto");
+const CustomReturnData = require("./model/CustomReturnData.ts");
 
 const SECRET_KEY = "L16wsStHbN1V44K0f7xM4vJb3lvC3rrHGRCloTOD3f";
 
@@ -62,13 +63,6 @@ const err403 = (unit) => ({
   message: `${unit} not found`
 });
 
-const CustomReturnData = (message, data) => ({
-  isSuccess: true,
-  statusCode: 200,
-  message,
-  data
-});
-
 const getIat = Math.round((new Date().getTime() / 1000));
 // in seconds from now:
 // (new Date().getTime() + seconds * 1000)/1000
@@ -89,7 +83,7 @@ const authFilterByUsernameAndPassword = (data) => {
 
     if (candidate) {
       console.log("Auth by Basic");
-      return username;
+      return candidate;
     }
 
     return false;
@@ -98,7 +92,7 @@ const authFilterByUsernameAndPassword = (data) => {
   }
 };
 
-const makeFakeTokenByName = (sub) => {
+const getCustomJWT = (sub) => {
   const { users = [] } = getData();
 
   const candidate = users.find(
@@ -192,7 +186,7 @@ const authFilterByToken = (data) => {
 
     if (candidate) {
       console.log("Auth by Token");
-      return String(decode.sub);
+      return candidate;
     }
 
     return false;
@@ -235,7 +229,7 @@ const isAuth = (req) => {
 };
 
 const getToken = (name) => {
-  return makeFakeTokenByName(name);
+  return getCustomJWT(name);
 };
 
 /**   Authentication of user by login and password -> token
@@ -245,7 +239,7 @@ const getToken = (name) => {
  */
 server.post("/api/v1/users/login", (req, res) => {
   try {
-    const username = isAuth(req);
+    const { name: username } = isAuth(req);
 
     if (!username) {
       return res.status(403).json(err403("User"));
@@ -280,25 +274,24 @@ server.post("/api/v1/users/login", (req, res) => {
  *  GET /api/v1/profiles/{profileId}
  *
  */
-server.get("/api/v1/profiles/:profileId", (req, res) => {
+server.get("/api/v1/profiles/:userId", (req, res) => {
   try {
-    const username = isAuth(req);
-
-    if (!username) {
+    if (!isAuth(req)) {
       return res.status(403).json(err403("User"));
     }
 
-    const { profiles = [], users = [] } = getData();
+    const { profiles = [] } = getData();
 
-    const userCandidate = users.find(
-      (user) => user.name === username
-    );
-
+    console.log("User ID: ", Number(req.params.userId));
+    console.log("User ID: ", Number(req.params.userId));
     const profileCandidate = profiles.find(
-      (profile) => profile.owner === userCandidate.id // && profile.owner === Number(req.params.profileId)
+      // (profile) => profile.owner === userCandidate.id
+      (profile) => profile.owner === Number(req.params.userId)
     );
 
     if (profileCandidate) {
+      console.log(profileCandidate);
+
       return res.json(CustomReturnData("Profile info", profileCandidate));
     }
 
@@ -315,7 +308,7 @@ server.get("/api/v1/profiles/:profileId", (req, res) => {
  */
 server.put("/api/v1/profiles/:profileId", (req, res) => {
   try {
-    const username = isAuth(req);
+    const { name: username } = isAuth(req);
 
     if (!username) {
       return res.status(403).json(err403("User"));
@@ -358,7 +351,7 @@ server.put("/api/v1/profiles/:profileId", (req, res) => {
  */
 server.get("/api/v1/books", (req, res) => {
   try {
-    const username = isAuth(req);
+    const { name: username } = isAuth(req);
 
     if (!username) {
       return res.status(403).json(err403("User"));
@@ -427,6 +420,52 @@ server.get("/api/v1/comments/:bookId", (req, res) => {
     console.log("QUERY: ", req.query, Number(req.query.bookId), req.query._expand);
 
     return res.json(CustomReturnData("Comments", filteredCommentsByBookId || []));
+  } catch (e) {
+    console.log(e);
+
+    return res.status(500).json(serverSideErr500);
+  }
+});
+
+/** Add Comment (authOnly)
+ *
+ *  POST /api/v1/comments
+ *
+ */
+server.post("/api/v1/comments", (req, res) => {
+  try {
+    console.log("clientData");
+    const user = isAuth(req);
+
+    if (!user.name) {
+      return res.status(403).json(err403("User"));
+    }
+
+    const { comments = [] } = getData();
+
+    const commentIds = comments
+      .map((comment) => comment.id);
+
+    const maxCommentId = Math.max.apply(null, commentIds);
+
+    const { body } = req;
+
+    const comment = {
+      id: maxCommentId + 1,
+      bookId: body.bookId,
+      owner: user.id,
+      text: body.text
+    };
+
+    console.log(comment);
+    console.log(user);
+    console.log(body);
+
+    const json = { ...getData() };
+    json.comments.push(comment);
+    putData(json);
+
+    return res.json(CustomReturnData("Profile info", comment));
   } catch (e) {
     console.log(e);
 

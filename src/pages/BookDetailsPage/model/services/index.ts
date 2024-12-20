@@ -20,7 +20,6 @@ export const fetchCommentsByBookId = createAsyncThunk<
   async ({ bookId }, thunkAPI) => {
     const { extra, dispatch, rejectWithValue, } = thunkAPI;
 
-    console.log("====== HERE ========");
     if (!bookId) {
       return rejectWithValue("ошибка");
     }

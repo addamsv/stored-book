@@ -7,3 +7,5 @@ export const BookDetailsPageAsync = lazy(
       setTimeout(() => resolve(import("./BookDetailsPage")), 500);
     })
 );
+
+// export const BookDetailsPageAsync = lazy(() => import("./BookDetailsPage"));

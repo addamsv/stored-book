@@ -58,7 +58,6 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           </div>
 
           <Button
-            // theme={theme === Theme.DARK ? ButtonTheme.WHITE_OUTLINE : ButtonTheme.GRAY_OUTLINE}
             theme={ButtonTheme.ACCENT_OUTLINE}
             className={classes(cls.DarkThemeBtn, {}, [className])}
             onClick={onLogout}
