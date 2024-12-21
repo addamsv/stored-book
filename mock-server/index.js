@@ -232,6 +232,12 @@ const getToken = (name) => {
   return getCustomJWT(name);
 };
 
+/**
+ *
+ *        PUBLIC API
+ *
+ */
+
 /**   Authentication of user by login and password -> token
  *
  *     POST /api/v1/users/login
@@ -269,30 +275,37 @@ server.post("/api/v1/users/login", (req, res) => {
   }
 });
 
-/**  Get profile by ID (authOnly)
+/**
  *
- *  GET /api/v1/profiles/{profileId}
+ *        PRIVATE API
+ *
+ *        auth required
+ *
+ */
+
+/**  Get profile by USER ID
+ *
+ *  GET /api/v1/profiles/{profileId} (authOnly)
  *
  */
 server.get("/api/v1/profiles/:userId", (req, res) => {
   try {
-    if (!isAuth(req)) {
+    const user = isAuth(req);
+
+    if (!user) {
       return res.status(403).json(err403("User"));
     }
 
     const { profiles = [] } = getData();
 
-    console.log("User ID: ", Number(req.params.userId));
-    console.log("User ID: ", Number(req.params.userId));
     const profileCandidate = profiles.find(
-      // (profile) => profile.owner === userCandidate.id
       (profile) => profile.owner === Number(req.params.userId)
     );
 
     if (profileCandidate) {
       console.log(profileCandidate);
 
-      return res.json(CustomReturnData("Profile info", profileCandidate));
+      return res.json(CustomReturnData(`Profile info for User: ${req.params.userId}`, profileCandidate));
     }
 
     return res.status(403).json(err403("Profile"));
@@ -301,39 +314,39 @@ server.get("/api/v1/profiles/:userId", (req, res) => {
   }
 });
 
-/**   Update Profile (authOnly)
+/**   Update Profile
  *
- * PUT /api/v1/profiles/{profileId}
+ * PUT /api/v1/profiles/{profileId} (authOnly)
  *
  */
 server.put("/api/v1/profiles/:profileId", (req, res) => {
   try {
-    const { name: username } = isAuth(req);
+    const user = isAuth(req);
 
-    if (!username) {
+    if (!user) {
       return res.status(403).json(err403("User"));
     }
 
     const data = getData();
 
-    const { users = [], profiles = [] } = data;
-
-    const userCandidate = users.find(
-      (user) => user.name === username // && user.password === password,
-    );
+    const { profiles = [] } = data;
 
     const profileCandidate = profiles.find(
-      (profile) => profile.owner === Number(req.params.profileId)
+      // (profile) => profile.owner === Number(req.params.profileId)
+      (profile) => profile.owner === user.id
     );
 
-    if (userCandidate && profileCandidate) {
+    if (profileCandidate) {
       const json = { ...data };
-      const clientData = req.body;
-      const newData = { ...profileCandidate, ...clientData };
-      json.profiles[profiles.indexOf(profileCandidate)] = newData;
+      const { body } = req;
+      // some validation in real API...
+      const updatedProfile = { ...profileCandidate, ...body };
+      // put updatedProfile JSON
+      json.profiles[profiles.indexOf(profileCandidate)] = updatedProfile;
+
       putData(json);
-      console.log(json);
-      return res.json(CustomReturnData("Profile info", newData));
+
+      return res.json(CustomReturnData(`Updated Profile for User: ${user.id}`, updatedProfile));
     }
 
     return res.status(403).json(err403("User"));
@@ -344,16 +357,14 @@ server.put("/api/v1/profiles/:profileId", (req, res) => {
   }
 });
 
-/** Get All books (authOnly)
+/** Get All books
  *
- *  GET /api/v1/books
+ *  GET /api/v1/books (authOnly)
  *
  */
 server.get("/api/v1/books", (req, res) => {
   try {
-    const { name: username } = isAuth(req);
-
-    if (!username) {
+    if (!isAuth(req)) {
       return res.status(403).json(err403("User"));
     }
 
@@ -365,9 +376,9 @@ server.get("/api/v1/books", (req, res) => {
   }
 });
 
-/** Get book by ID (authOnly)
+/** Get book by ID
  *
- *  GET /api/v1/books/{id}
+ *  GET /api/v1/books/{id} (authOnly)
  *
  */
 server.get("/api/v1/books/:id", (req, res) => {
@@ -383,10 +394,10 @@ server.get("/api/v1/books/:id", (req, res) => {
     );
 
     if (bookCandidate) {
-      return res.json(CustomReturnData("Book Details", bookCandidate));
+      return res.json(CustomReturnData(`Book Details with ID: ${req.params.id}`, bookCandidate));
     }
 
-    return res.status(404).json(CustomReturnData(`Book with id: ${req.params.id}`, null));
+    return res.status(404).json(CustomReturnData(`Book with id: ${req.params.id} not found`, null));
   } catch (e) {
     console.log(e);
 
@@ -394,9 +405,9 @@ server.get("/api/v1/books/:id", (req, res) => {
   }
 });
 
-/** Get Comments by BookID (authOnly)
+/** Get Comments for Book with certain ID with User Profiles in it
  *
- *  GET /api/v1/comments/{bookId}
+ *  GET /api/v1/comments/{bookId} (authOnly)
  *
  */
 server.get("/api/v1/comments/:bookId", (req, res) => {
@@ -412,14 +423,16 @@ server.get("/api/v1/comments/:bookId", (req, res) => {
       .map((comment) => {
         const profileCandidate = profiles
           .find((profile) => profile.owner === comment.owner);
+
         const { id, firstname: name, image } = profileCandidate;
+
         return { ...comment, owner: { id, name, image } };
       });
-    // _expand "user"
-    console.log("PARAMS: ", Number(req.params.bookId));
-    console.log("QUERY: ", req.query, Number(req.query.bookId), req.query._expand);
+    // _expand "profile"
+    // console.log("PARAMS: ", Number(req.params.bookId));
+    // console.log("QUERY: ", req.query, Number(req.query.bookId), req.query._expand);
 
-    return res.json(CustomReturnData("Comments", filteredCommentsByBookId || []));
+    return res.json(CustomReturnData(`Comments for book: ${req.params.bookId}`, filteredCommentsByBookId || []));
   } catch (e) {
     console.log(e);
 
@@ -427,17 +440,16 @@ server.get("/api/v1/comments/:bookId", (req, res) => {
   }
 });
 
-/** Add Comment (authOnly)
+/** Add Comment
  *
- *  POST /api/v1/comments
+ *  POST /api/v1/comments (authOnly)
  *
  */
 server.post("/api/v1/comments", (req, res) => {
   try {
-    console.log("clientData");
     const user = isAuth(req);
 
-    if (!user.name) {
+    if (!user) {
       return res.status(403).json(err403("User"));
     }
 
@@ -457,15 +469,17 @@ server.post("/api/v1/comments", (req, res) => {
       text: body.text
     };
 
-    console.log(comment);
-    console.log(user);
-    console.log(body);
+    // console.log(comment);
+    // console.log(user);
+    // console.log(body);
 
     const json = { ...getData() };
+
     json.comments.push(comment);
+
     putData(json);
 
-    return res.json(CustomReturnData("Profile info", comment));
+    return res.json(CustomReturnData("New comment", comment));
   } catch (e) {
     console.log(e);
 
@@ -501,8 +515,9 @@ const API_SERVER_PORT = 8000;
 
 server.listen(API_SERVER_PORT, () => {
   console.log(`server is running on ${API_SERVER_PORT} port`);
-  // console.log(`http://localhost:${API_SERVER_PORT}/api/v1/users/login`);
+  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/users/login`);
   console.log(`http://localhost:${API_SERVER_PORT}/api/v1/books`);
   console.log(`http://localhost:${API_SERVER_PORT}/api/v1/books/1`);
   console.log(`http://localhost:${API_SERVER_PORT}/api/v1/profiles/1`);
+  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/comments/1`);
 });

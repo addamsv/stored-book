@@ -19,7 +19,12 @@
 
 Typescript, React, Redux Toolkit, Thunk (async), Webpack, FSD;
 <br>
-jest, integration, ui, screenshot tests, ts lint, style lint; Storybook; Nodejs mock-server.
+jest, integration, ui, screenshot tests, ts lint, style lint; Storybook;
+
+# Технологический стек BACK:
+
+Dev: Nodejs json-mock-server.
+Prod: Java Spring Boot + (H2 | postgresql | mysql...) (see sb-lab-api repo)
 
 <br>
 

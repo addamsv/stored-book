@@ -3,7 +3,7 @@ export interface INavbarItem {
 
   text: string;
 
-  Icon?: React.VFC<React.SVGProps<SVGSVGElement>>
+  Icon?: React.VFC<React.SVGProps<SVGSVGElement>>;
 
   authOnly?: boolean;
 }

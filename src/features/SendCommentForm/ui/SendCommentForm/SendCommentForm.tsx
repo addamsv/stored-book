@@ -6,20 +6,21 @@ import { Button } from "shared/ui/Button/Button";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
-import { sendComment } from "../../model/services/sendComment";
+// import { sendComment } from "../../model/services/sendComment";
 import { sendCommentFormActions, sendCommentFormReducer } from "../../model/slices";
 import { getErrorTextFromSendCommentForm, getTextFromSendCommentForm } from "../../model/selectors";
 import cls from "./SendCommentForm.module.scss";
 
 interface ISendCommentFormProps {
   className?: string;
+  onSendCommentHandler: (text: string) => void;
 }
 
 const reducers: ReducerListT = {
   sendCommentForm: sendCommentFormReducer
 };
 
-const SendCommentForm = memo(({ className }: ISendCommentFormProps) => {
+const SendCommentForm = memo(({ className, onSendCommentHandler }: ISendCommentFormProps) => {
   const { t } = useTranslation();
 
   const comment = useSelector(getTextFromSendCommentForm);
@@ -27,13 +28,14 @@ const SendCommentForm = memo(({ className }: ISendCommentFormProps) => {
 
   const dispatch = useAppDispatch();
 
-  const onchangeHandler = useCallback((value: string) => {
+  const onChangeHandler = useCallback((value: string) => {
     dispatch(sendCommentFormActions.setText(value));
   }, [dispatch]);
 
   const onSendHandler = useCallback(() => {
-    dispatch(sendComment());
-  }, [dispatch]);
+    onSendCommentHandler(comment);
+    onChangeHandler("");
+  }, [comment, onChangeHandler, onSendCommentHandler]);
 
   return (
     <AsyncModule reducers={reducers} isRemoveAfterUnmount>
@@ -42,7 +44,7 @@ const SendCommentForm = memo(({ className }: ISendCommentFormProps) => {
           className={cls.textArea}
           placeholder={t("текст комментария")}
           value={comment}
-          onChange={onchangeHandler}
+          onChange={onChangeHandler}
         />
         <Button onClick={onSendHandler}>{t("отправить")}</Button>
       </div>

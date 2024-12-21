@@ -101,6 +101,7 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
             <Button className={cls.buttonSkeleton} theme={ButtonTheme.GREEN}>{t("скачать")}</Button>
           </div>
         </div>
+
         {data?.blocks.map(blocks)}
       </>
     );

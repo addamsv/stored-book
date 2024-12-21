@@ -1,19 +1,18 @@
 import { classes } from "shared/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { memo, useEffect } from "react";
+import { memo, useCallback, useEffect } from "react";
 import { BookDetails } from "entities/Book";
 import { useParams } from "react-router-dom";
 import { Text, TextSize } from "shared/ui/Text/Text";
 import { CommentList } from "entities/Comment";
 import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
-import { useDispatch, useSelector } from "react-redux";
-import { storybookEffect } from "shared/lib/hooks/storybookEffect";
+import { useSelector } from "react-redux";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { SendCommentForm } from "features/SendCommentForm";
 import { bookDetailsCommentsReducer, getBooksComments } from "../model/slices";
 import cls from "./BookDetailsPage.module.scss";
 import { getBooksCommentsError, getBooksCommentsIsLoading } from "../model/selectors";
-import { fetchCommentsByBookId } from "../model/services";
+import { fetchCommentsByBookId, sendBookComment } from "../model/services";
 
 interface IBookDetailsPageProps {
   className?: string;
@@ -34,6 +33,10 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
   const isLoading = useSelector(getBooksCommentsIsLoading);
   const error = useSelector(getBooksCommentsError);
 
+  const onSendCommentHandler = useCallback((text: string) => {
+    dispatch(sendBookComment(text));
+  }, [dispatch]);
+
   useEffect(() => {
     if (__PROJECT_TYPE__ !== "storybook") {
       dispatch(fetchCommentsByBookId({ bookId: Number(id) }));
@@ -48,6 +51,14 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
     );
   }
 
+  if (error) {
+    return (
+      <div className={classes(cls.BookDetailsPage, {}, [className])}>
+        {t("ошибка")}
+      </div>
+    );
+  }
+
   return (
     <AsyncModule reducers={reducerList} isRemoveAfterUnmount>
       <div className={classes(cls.BookDetailsPage, {}, [className])}>
@@ -55,12 +66,9 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
 
         <Text textSize={TextSize.L} title={t("комментарии")} />
 
-        <SendCommentForm />
+        <SendCommentForm onSendCommentHandler={onSendCommentHandler} />
 
-        <CommentList
-          isLoading={isLoading}
-          comments={comments}
-        />
+        <CommentList isLoading={isLoading} comments={comments} />
         <br />
         <br />
       </div>

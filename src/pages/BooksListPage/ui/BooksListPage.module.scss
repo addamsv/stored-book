@@ -1,3 +1,32 @@
 .BooksListPage {
   display: block;
+  max-width: 800px;
+  margin: 12px auto;
+}
+
+.topWrapper {
+  display: flex;
+  justify-content: start;
+  align-self: center;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.bookImage {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  // margin-left: 20px;
+}
+
+.imageDescriptionSkeleton {
+  margin-top: 15px;
+}
+
+.info {
+  display: flex;
+  font-size: 12px;
 }

@@ -77,11 +77,6 @@
           ]
         },
         {
-          "id": "2",
-          "type": "CODE",
-          "code": "<div>\n<p>hi</p>\n</div>"
-        },
-        {
           "id": "5",
           "type": "IMAGE",
           "src": "http://localhost:3000/images/img3.jpg",
@@ -108,6 +103,24 @@
       "bookId": 2,
       "owner": 1,
       "text": "Whoo-hooo"
+    },
+    {
+      "id": 4,
+      "bookId": 1,
+      "owner": 1,
+      "text": "hey"
+    },
+    {
+      "id": 5,
+      "bookId": 1,
+      "owner": 2,
+      "text": "hey from user"
+    },
+    {
+      "id": 6,
+      "bookId": 1,
+      "owner": 2,
+      "text": "cin-cin"
     }
   ],
   "users": [
@@ -116,7 +129,6 @@
       "name": "admin",
       "password": "123",
       "roles": "ROLE_ADMIN",
-      "image": "http://localhost:3000/images/img2.png",
       "enabled": true
     },
     {
@@ -124,7 +136,6 @@
       "name": "user",
       "password": "123",
       "roles": "ROLE_USER",
-      "image": "http://localhost:3000/images/img2.png",
       "enabled": true
     }
   ],
@@ -145,7 +156,7 @@
       "id": 2,
       "owner": 2,
       "firstname": "Michael",
-      "lastname": "Las",
+      "lastname": "Last",
       "age": 50,
       "country": "Russia",
       "city": "Novosibirsk",

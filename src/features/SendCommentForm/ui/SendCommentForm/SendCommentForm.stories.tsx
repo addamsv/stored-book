@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 // import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
 import { Theme } from "app/providers/ThemeProvider";
 import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
-import { SendCommentForm } from "./SendCommentForm";
+import SendCommentForm from "./SendCommentForm";
 
 export default {
   title: "shared/SendCommentForm",
