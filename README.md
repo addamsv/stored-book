@@ -1,7 +1,5 @@
 # STORED AUDIO BOOKS
 
-## Basic и JSON Web Token аутентификация
-
 ## Различные темы и интернационализация (RU, EN)
 
 <img src="./.github/projectDescription/images/darkBlue.png" width="104px">
@@ -13,6 +11,10 @@
 <img src="./.github/projectDescription/images/userProfile.png" width="104px">
 <img src="./.github/projectDescription/images/bookDescription.png" width="104px">
 
+## Basic и JSON Web Token аутентификация
+
+<img src="./.github/projectDescription/images/basicAuth.png" width="104px">
+
 <br><br>
 
 # Технологический стек FRONT:
@@ -23,8 +25,9 @@ jest, integration, ui, screenshot tests, ts lint, style lint; Storybook;
 
 # Технологический стек BACK:
 
-Dev: Nodejs json-mock-server.
-Prod: Java Spring Boot + (H2 | postgresql | mysql...) (see sb-lab-api repo)
+Dev: Nodejs json-mock-server (смотри папку mock-server)
+<br>
+Prod: Java Spring Boot + (H2 | postgresql | mysql...) (смотри sb-lab-api repo)
 
 <br>
 

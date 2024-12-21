@@ -22,7 +22,7 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
 
       <h1>{t("Книги")}</h1>
 
-      <AppLink to={`${RoutePath.book_details}1`}>
+      <AppLink key="1" to={`${RoutePath.book_details}1`}>
         <div className={cls.topWrapper}>
           <ImageJpg className={cls.bookImage} size={200} alt="*" src="http://localhost:3000/images/img2.png" />
           <div style={{ display: "inline-block", marginLeft: 20 }}>
@@ -30,7 +30,7 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
               className={cls.imageDescriptionSkeleton}
               textAlign={TextAlign.LEFT}
               title={t("Fahrenheit 451")}
-              text={t("Author...")}
+              text={t("Author Author")}
             />
             <div className={cls.info}>
               <span style={{ display: "flex", width: 40, justifyContent: "space-around" }}>
@@ -46,7 +46,7 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
         </div>
       </AppLink>
 
-      <AppLink to={`${RoutePath.book_details}2`}>
+      <AppLink key="2" to={`${RoutePath.book_details}2`}>
         <div className={cls.topWrapper}>
           <ImageJpg className={cls.bookImage} size={200} alt="*" src="http://localhost:3000/images/img3.jpg" />
           <div style={{ display: "inline-block", marginLeft: 20 }}>
@@ -54,7 +54,7 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
               className={cls.imageDescriptionSkeleton}
               textAlign={TextAlign.LEFT}
               title={t("Book Title 2")}
-              text={t("Author...")}
+              text={t("Author Author")}
             />
             <div className={cls.info}>
               <span style={{ display: "flex", width: 40, justifyContent: "space-around" }}>

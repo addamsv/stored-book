@@ -64,9 +64,9 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
   if (isLoading) {
     content = (
       <>
-        <Skeleton className={cls.bookImage} width={200} height={160} />
-        <div style={{ display: "inline-block", marginLeft: 20 }}>
-          <Skeleton className={cls.imageDescriptionSkeleton} width={200} height={60} />
+        <Skeleton className={cls.bookImage} width={300} height={160} />
+        <div style={{ display: "block", margin: "20px auto", width: 300 }}>
+          <Skeleton className={cls.imageDescriptionSkeleton} width={200} height={15} />
           <Skeleton className={cls.buttonSkeleton} width={50} height={20} />
         </div>
         <div style={{ display: "inline-block", marginTop: 30 }}>
@@ -80,8 +80,9 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
     content = (
       <>
         <div className={cls.topWrapper}>
-          <ImageJpg className={cls.bookImage} size={200} alt={data?.title} src={data?.img} />
-          <div style={{ display: "inline-block", marginLeft: 20 }}>
+          <ImageJpg className={cls.bookImage} alt={data?.title} src={data?.img} />
+
+          <div style={{ display: "block", margin: "20px", width: 300 }}>
             <Text
               className={cls.imageDescriptionSkeleton}
               textAlign={TextAlign.LEFT}
