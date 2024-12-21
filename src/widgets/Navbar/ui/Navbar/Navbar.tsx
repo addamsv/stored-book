@@ -9,10 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import UserProfileSVG from "shared/assets/icons/user-profile.svg";
 
 import { getUserAuthData, userActions } from "entities/User";
-import { Theme, useTheme } from "app/providers/ThemeProvider";
+import { INavbarItem } from "widgets/Navbar/model/types";
+import { getNavbarItemsArr } from "../../model/selectors";
 import cls from "./Navbar.module.scss";
-import { SidebarItemsList } from "../NavbarItem/NavbarItemsList";
-import { INavbarItem } from "../NavbarItem/types/INavbarItem";
 import { NavbarItem } from "../NavbarItem/NavbarItem";
 
 interface NavbarProps {
@@ -22,11 +21,10 @@ interface NavbarProps {
 export const Navbar = memo(({ className }: NavbarProps) => {
   const { t } = useTranslation();
 
-  const { theme } = useTheme();
-
   const [isAuthModalWinOpen, setAuthModalWin] = useState(false);
 
   const authData = useSelector(getUserAuthData);
+  const navbarArr = useSelector(getNavbarItemsArr);
 
   const dispatch = useDispatch();
 
@@ -42,7 +40,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
     dispatch(userActions.logout());
   }, [dispatch]);
 
-  const NavbarItemList = SidebarItemsList.map((item: INavbarItem) => (
+  const NavbarItemList = navbarArr.map((item: INavbarItem) => (
     <NavbarItem
       key={item.path}
       item={item}
@@ -58,7 +56,6 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           </div>
 
           <Button
-            // theme={theme === Theme.DARK ? ButtonTheme.WHITE_OUTLINE : ButtonTheme.GRAY_OUTLINE}
             theme={ButtonTheme.ACCENT_OUTLINE}
             className={classes(cls.DarkThemeBtn, {}, [className])}
             onClick={onLogout}

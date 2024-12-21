@@ -1,8 +1,8 @@
 # https://rhysd.github.io/actionlint/
-name: SB-lab CI
+name: STORED AUDIO BOOKs
 on:
   push:
-    branches: [prod-front]
+    branches: [prod]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest

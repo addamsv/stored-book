@@ -4,7 +4,7 @@ import { memo } from "react";
 import { useSelector } from "react-redux";
 import { getUserAuthData } from "entities/User";
 import { classes } from "shared/lib/classNames/classes";
-import { INavbarItem } from "./types/INavbarItem";
+import { INavbarItem } from "widgets/Navbar/model/types";
 import cls from "./NavbarItem.module.scss";
 
 interface INavbarItemProps {

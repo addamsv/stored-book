@@ -12,11 +12,13 @@
 }
 
 .inputEntity {
-  color: #333;
+  color: var(--primary-color);
   width: 180px;
   border-radius: 4px;
   padding-left: 6px;
-  border: solid 2px #eee;
+  border: solid 2px rgba(255 255 255 / 30%);
+  background: rgba(255 255 255 / 30%);
+  box-shadow: var(--shadow);
 }
 
 .readOnly {

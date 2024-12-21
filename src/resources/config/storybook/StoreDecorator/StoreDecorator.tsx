@@ -4,13 +4,17 @@ import { IStateSchema, StoreProvider } from "app/providers/StoreProvider";
 import { bookDetailsReducer } from "entities/Book/model/slices/bookDetailsSlice";
 import { profileReducer } from "entities/Profile";
 import { loginReducer } from "features/AuthByUserName/model/slice/loginSlice";
+import { sendCommentFormReducer } from "features/SendCommentForm/model/slices";
+import { bookDetailsCommentsReducer } from "pages/BookDetailsPage/model/slices";
 import { ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
 
 // const defaultReducer: DeepPartial<ReducersMapObject<IStateSchema>> = {
 const defaultReducer: ReducerListT = {
   loginForm: loginReducer,
   profile: profileReducer,
-  bookDetails: bookDetailsReducer
+  bookDetails: bookDetailsReducer,
+  sendCommentForm: sendCommentFormReducer,
+  bookDetailsComments: bookDetailsCommentsReducer
 };
 
 export const StoreDecorator = (

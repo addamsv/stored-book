@@ -1,6 +1,24 @@
 const fs = require("fs");
 const jsonServer = require("json-server");
 const path = require("path");
+const { createHmac } = require("node:crypto");
+const CustomReturnData = require("./model/CustomReturnData.ts");
+
+const SECRET_KEY = "L16wsStHbN1V44K0f7xM4vJb3lvC3rrHGRCloTOD3f";
+
+/**
+ * SHA-256 hash function reference implementation.
+ *
+ * This is an annotated direct implementation of FIPS 180-4, without any optimisations. It is
+ * intended to aid understanding of the algorithm rather than for production use.
+ *
+ * While it could be used where performance is not critical, I would recommend using the ‘Web
+ * Cryptography API’ (developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest) for the browser,
+ * or the ‘crypto’ library (nodejs.org/api/crypto.html#crypto_class_hash) in Node.js.
+ *
+ * See csrc.nist.gov/groups/ST/toolkit/secure_hashing.html
+ *     csrc.nist.gov/groups/ST/toolkit/examples.html
+ */
 
 const decodeBase64 = (data) => {
   return Buffer.from(data, "base64").toString("ascii");
@@ -33,7 +51,7 @@ const putData = (json) => {
   fs.writeFileSync(path.resolve(__dirname, "db.json"), data, "UTF-8");
 };
 
-const err500 = {
+const serverSideErr500 = {
   isSuccess: false,
   statusCode: 500,
   message: "Server Side Err" // e.message
@@ -45,26 +63,11 @@ const err403 = (unit) => ({
   message: `${unit} not found`
 });
 
-const CustomReturnData = (message, data) => ({
-  isSuccess: true,
-  statusCode: 200,
-  message,
-  data
-});
-
-// const getUserByCredentials = (data) => {
-//   try {
-//     const decode = decodeBase64(data);
-
-//     const [username] = decode.split(":");
-
-//     const { users = [] } = getData();
-
-//     return users.find((user) => user.name === username);
-//   } catch (e) {
-//     throw new Error(e.message);
-//   }
-// };
+const getIat = Math.round((new Date().getTime() / 1000));
+// in seconds from now:
+// (new Date().getTime() + seconds * 1000)/1000
+// 1 hour from now:
+const getExp = Math.round((new Date().getTime() + 60 * 60 * 1000) / 1000);
 
 const authFilterByUsernameAndPassword = (data) => {
   try {
@@ -80,7 +83,7 @@ const authFilterByUsernameAndPassword = (data) => {
 
     if (candidate) {
       console.log("Auth by Basic");
-      return username;
+      return candidate;
     }
 
     return false;
@@ -89,9 +92,81 @@ const authFilterByUsernameAndPassword = (data) => {
   }
 };
 
+const getCustomJWT = (sub) => {
+  const { users = [] } = getData();
+
+  const candidate = users.find(
+    (user) => user.name === sub
+  );
+
+  if (!candidate) {
+    return "";
+  }
+
+  const jwtHeader = { alg: "RS256" };
+
+  const authorities = candidate.roles;
+  console.log(authorities);
+
+  const iat = getIat;
+
+  const exp = getExp;
+
+  console.log(iat, exp);
+
+  const claims = {
+    iss: "self",
+    sub, // "admin"
+    exp, // 1732827822
+    iat, // 1732820622
+    authorities // "ROLE_ADMIN"
+  };
+
+  const data = `${btoa(JSON.stringify(jwtHeader))}.${btoa(JSON.stringify(claims))}`;
+
+  // https://nodejs.org/api/crypto.html#crypto_class_hash
+
+  const hmac = createHmac("sha256", SECRET_KEY);
+
+  hmac.update(data);
+
+  const signature = hmac.digest("hex");
+
+  console.log("own signature:");
+  // console.log("45c00f7a986fbab2099a8174605ec63f35fbb4127fb912414c308402d14e01bc");
+  console.log(signature);
+  return `${data}.${signature}`;
+};
+
 const parseJwt = (token) => {
   try {
-    return JSON.parse(atob(token.split(".")[1]));
+    const tokenParts = token.split(".");
+    const payloadClaims = JSON.parse(atob(tokenParts[1]));
+    console.log(atob(tokenParts[0]));
+    console.log(atob(tokenParts[1]));
+
+    const hmac = createHmac("sha256", SECRET_KEY);
+
+    const data = `${tokenParts[0]}.${tokenParts[1]}`;
+
+    hmac.update(data);
+
+    const signature = hmac.digest("hex");
+
+    console.log("shouldExp: ", payloadClaims.exp, "curr: ", getIat, "isExp:", payloadClaims.exp < getIat);
+
+    if (payloadClaims.exp < getIat) {
+      console.log("is JWT expired: ", true);
+      return null;
+    }
+
+    if (signature === tokenParts[2]) {
+      console.log("is JWT valid:", true);
+      return payloadClaims;
+    }
+
+    console.log("is JWT valid:", false);
+    return null;
   } catch (e) {
     return null;
   }
@@ -111,7 +186,7 @@ const authFilterByToken = (data) => {
 
     if (candidate) {
       console.log("Auth by Token");
-      return String(decode.sub);
+      return candidate;
     }
 
     return false;
@@ -153,6 +228,16 @@ const isAuth = (req) => {
   return false;
 };
 
+const getToken = (name) => {
+  return getCustomJWT(name);
+};
+
+/**
+ *
+ *        PUBLIC API
+ *
+ */
+
 /**   Authentication of user by login and password -> token
  *
  *     POST /api/v1/users/login
@@ -160,7 +245,7 @@ const isAuth = (req) => {
  */
 server.post("/api/v1/users/login", (req, res) => {
   try {
-    const username = isAuth(req);
+    const { name: username } = isAuth(req);
 
     if (!username) {
       return res.status(403).json(err403("User"));
@@ -169,14 +254,14 @@ server.post("/api/v1/users/login", (req, res) => {
     const { users = [] } = getData();
 
     const candidate = users.find(
-      (user) => user.name === username // && user.password === password,
+      (user) => user.name === username
     );
 
     if (candidate) {
+      console.log(getToken(username));
       const data = {
         user: candidate,
-        // eslint-disable-next-line max-len
-        token: "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MzI4Mjc4MjIsImlhdCI6MTczMjgyMDYyMiwiYXV0aG9yaXRpZXMiOiJST0xFX0FETUlOIn0.L16wsStHbN1V44K0f7xM4vJb3lvC3rrHGRCloTOD3f-9abNn8BJCpeWCCst-IZwWjEM2XVgUjMxZTQoZpcs0wPY76bmGsH-gYEXIbY9h3HCmi3dqPq1NOKfEZnsY2A6ecKf8jFJliyHygfcVSkRvSYxPieo7A-0rlt6o2Aa90jP99sPemPiPyizA2hbxneVi6y5UrpOfBCxHwmo7XKAHddqWPN0dbyQKD_PaOpcLv3HnSFE7gdhJ_iS7ciejt49cmL4gzxD9xUzGJzwrXq1_mgy-r8fMLENfJO51sR9cHVEYDWPt-Gtrw2qpRSz4GTapqSlFStvJcsvMZSLqpiJSAA"
+        token: getToken(username)
       };
 
       return res.json(CustomReturnData("Login user info and JWT", data));
@@ -186,92 +271,100 @@ server.post("/api/v1/users/login", (req, res) => {
   } catch (e) {
     console.log(e);
 
-    return res.status(500).json(err500);
+    return res.status(500).json(serverSideErr500);
   }
 });
 
-/**  Get profile by ID (authOnly)
+/**
  *
- *  GET /api/v1/profiles/{profileId}
+ *        PRIVATE API
+ *
+ *        auth required
  *
  */
-server.get("/api/v1/profiles/:profileId", (req, res) => {
-  try {
-    const username = isAuth(req);
 
-    if (!username) {
+/**  Get profile by USER ID
+ *
+ *  GET /api/v1/profiles/{profileId} (authOnly)
+ *
+ */
+server.get("/api/v1/profiles/:userId", (req, res) => {
+  try {
+    const user = isAuth(req);
+
+    if (!user) {
       return res.status(403).json(err403("User"));
     }
 
     const { profiles = [] } = getData();
 
     const profileCandidate = profiles.find(
-      (profile) => profile.owner === Number(req.params.profileId)
+      (profile) => profile.owner === Number(req.params.userId)
     );
 
     if (profileCandidate) {
-      return res.json(CustomReturnData("Profile info", profileCandidate));
+      console.log(profileCandidate);
+
+      return res.json(CustomReturnData(`Profile info for User: ${req.params.userId}`, profileCandidate));
     }
 
     return res.status(403).json(err403("Profile"));
   } catch (e) {
-    return res.status(500).json(err500);
+    return res.status(500).json(serverSideErr500);
   }
 });
 
-/**   Update Profile (authOnly)
+/**   Update Profile
  *
- * PUT /api/v1/profiles/{profileId}
+ * PUT /api/v1/profiles/{profileId} (authOnly)
  *
  */
 server.put("/api/v1/profiles/:profileId", (req, res) => {
   try {
-    const username = isAuth(req);
+    const user = isAuth(req);
 
-    if (!username) {
+    if (!user) {
       return res.status(403).json(err403("User"));
     }
 
     const data = getData();
 
-    const { users = [], profiles = [] } = data;
-
-    const userCandidate = users.find(
-      (user) => user.name === username // && user.password === password,
-    );
+    const { profiles = [] } = data;
 
     const profileCandidate = profiles.find(
-      (profile) => profile.owner === Number(req.params.profileId)
+      // (profile) => profile.owner === Number(req.params.profileId)
+      (profile) => profile.owner === user.id
     );
 
-    if (userCandidate && profileCandidate) {
+    if (profileCandidate) {
       const json = { ...data };
-      const clientData = req.body;
-      const newData = { ...profileCandidate, ...clientData };
-      json.profiles[profiles.indexOf(profileCandidate)] = newData;
+      const { body } = req;
+      // some validation in real API...
+      const updatedProfile = { ...profileCandidate, ...body };
+      // put updatedProfile JSON
+      json.profiles[profiles.indexOf(profileCandidate)] = updatedProfile;
+
       putData(json);
-      console.log(json);
-      return res.json(CustomReturnData("Profile info", newData));
+
+      return res.json(CustomReturnData(`Updated Profile for User: ${user.id}`, updatedProfile));
     }
 
     return res.status(403).json(err403("User"));
   } catch (e) {
     console.log(e);
 
-    return res.status(500).json(err500);
+    return res.status(500).json(serverSideErr500);
   }
 });
 
-/** Get All books (authOnly)
+/** Get All books
  *
- *  GET /api/v1/books
+ *  GET /api/v1/books (authOnly)
  *
  */
 server.get("/api/v1/books", (req, res) => {
   try {
-    const username = isAuth(req);
-
-    if (!username) {
+    if (!isAuth(req)) {
       return res.status(403).json(err403("User"));
     }
 
@@ -279,13 +372,13 @@ server.get("/api/v1/books", (req, res) => {
 
     return res.json(CustomReturnData("All books", books));
   } catch (e) {
-    return res.status(500).json(err500);
+    return res.status(500).json(serverSideErr500);
   }
 });
 
-/** Get book by ID (authOnly)
+/** Get book by ID
  *
- *  GET /api/v1/books
+ *  GET /api/v1/books/{id} (authOnly)
  *
  */
 server.get("/api/v1/books/:id", (req, res) => {
@@ -301,37 +394,135 @@ server.get("/api/v1/books/:id", (req, res) => {
     );
 
     if (bookCandidate) {
-      return res.json(CustomReturnData("Book Details", bookCandidate));
+      return res.json(CustomReturnData(`Book Details with ID: ${req.params.id}`, bookCandidate));
     }
 
-    return res.status(404).json(CustomReturnData(`Book with id: ${req.params.id}`, null));
+    return res.status(404).json(CustomReturnData(`Book with id: ${req.params.id} not found`, null));
   } catch (e) {
     console.log(e);
 
-    return res.status(500).json(err500);
+    return res.status(500).json(serverSideErr500);
   }
 });
 
-// eslint-disable-next-line
-// server.use((req, res, next) => {
-//   if (!req.headers.authorization) {
-//     return res.status(403).json({
-//       isSuccess: false,
-//       statusCode: 403,
-//       message: "AUTH ERROR"
-//     });
-//   }
+/** Get Comments for Book with certain ID with User Profiles in it
+ *
+ *  GET /api/v1/comments/{bookId} (authOnly)
+ *
+ */
+server.get("/api/v1/comments/:bookId", (req, res) => {
+  try {
+    if (!isAuth(req)) {
+      return res.status(403).json(err403("User"));
+    }
 
-//   next();
-// });
+    const { comments = [], profiles = [] } = getData();
 
+    const filteredCommentsByBookId = comments
+      .filter((comment) => comment.bookId === Number(req.params.bookId))
+      .map((comment) => {
+        const profileCandidate = profiles
+          .find((profile) => profile.owner === comment.owner);
+
+        const { id, firstname: name, image } = profileCandidate;
+
+        return { ...comment, owner: { id, name, image } };
+      });
+    // _expand "profile"
+    // console.log("PARAMS: ", Number(req.params.bookId));
+    // console.log("QUERY: ", req.query, Number(req.query.bookId), req.query._expand);
+
+    return res.json(CustomReturnData(`Comments for book: ${req.params.bookId}`, filteredCommentsByBookId || []));
+  } catch (e) {
+    console.log(e);
+
+    return res.status(500).json(serverSideErr500);
+  }
+});
+
+/** Add Comment
+ *
+ *  POST /api/v1/comments (authOnly)
+ *
+ */
+server.post("/api/v1/comments", (req, res) => {
+  try {
+    const user = isAuth(req);
+
+    if (!user) {
+      return res.status(403).json(err403("User"));
+    }
+
+    const { comments = [] } = getData();
+
+    const commentIds = comments
+      .map((comment) => comment.id);
+
+    const maxCommentId = Math.max.apply(null, commentIds);
+
+    const { body } = req;
+
+    const d = new Date();
+
+    const comment = {
+      id: maxCommentId + 1,
+      bookId: body.bookId,
+      iat: `${d.getDate()}.${Number(d.getMonth()) + 1}.${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`,
+      owner: user.id,
+      text: body.text
+    };
+
+    // console.log(comment);
+    // console.log(user);
+    // console.log(body);
+
+    const json = { ...getData() };
+
+    json.comments.push(comment);
+
+    putData(json);
+
+    return res.json(CustomReturnData("New comment", comment));
+  } catch (e) {
+    console.log(e);
+
+    return res.status(500).json(serverSideErr500);
+  }
+});
+
+/**
+ *      CHECK AUTH
+ */
+// eslint-disable-next-line consistent-return
+server.use((req, res, next) => {
+  try {
+    if (!isAuth(req)) {
+      return res.status(403).json(err403("AUTH ERROR"));
+    }
+  } catch (e) {
+    console.log(e);
+
+    return res.status(500).json(serverSideErr500);
+  }
+
+  next();
+});
+
+/**
+ *      OTHER ENDPOINTS
+ */
 server.use(router);
 
 // запуск сервера
 const API_SERVER_PORT = 8000;
 
 server.listen(API_SERVER_PORT, () => {
-  console.log(`server is running on ${API_SERVER_PORT} port`);
-  // console.log(`http://localhost:${API_SERVER_PORT}/api/v1/users/login`);
+  const d = new Date();
+  // eslint-disable-next-line max-len
+  console.log(`server is running on ${API_SERVER_PORT} port ${d.getDate()}.${Number(d.getMonth()) + 1}.${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`);
+  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/users/login`);
+  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/books`);
+  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/books/1`);
   console.log(`http://localhost:${API_SERVER_PORT}/api/v1/profiles/1`);
+  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/comments/1`);
 });

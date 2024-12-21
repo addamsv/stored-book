@@ -5,6 +5,8 @@ import { ICounterSchema } from "entities/Counter";
 import { IProfileStateSchema } from "entities/Profile";
 import { IUserSchema } from "entities/User";
 import { ILoginSchema } from "features/AuthByUserName";
+import { ISendCommentFormStateSchema } from "features/SendCommentForm";
+import { IBooksDetailsCommentsStateSchema } from "pages/BookDetailsPage";
 // import { NavigateOptions, To } from "react-router";
 
 export interface IStateSchema {
@@ -15,6 +17,8 @@ export interface IStateSchema {
   loginForm?: ILoginSchema;
   profile?: IProfileStateSchema;
   bookDetails?: IBookDetailsStateSchema;
+  bookDetailsComments?: IBooksDetailsCommentsStateSchema;
+  sendCommentForm?: ISendCommentFormStateSchema;
 }
 
 export type IStateSchemaKey = keyof IStateSchema;

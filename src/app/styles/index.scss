@@ -20,10 +20,10 @@ body {
   color: var(--primary-color);
   background: var(--bg-color);
   min-height: 100vh;
-  text-align: center;
   display: block;
   position: relative;
   padding-top: 10px;
+  text-align: center;
 }
 
 code {
@@ -40,6 +40,5 @@ code {
 }
 
 .page-wrapper {
-  flex-grow: 1;
-  padding: 20px;
+  width: 100%;
 }
