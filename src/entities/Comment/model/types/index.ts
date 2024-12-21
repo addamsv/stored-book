@@ -7,7 +7,9 @@ export interface ICommentUserProfile {
 }
 
 export interface IComment {
-  id: string;
+  id: number;
   owner: ICommentUserProfile;
   text: string;
+  iat: string;
+  bookId: number;
 }

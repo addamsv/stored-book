@@ -43,7 +43,7 @@ const SendCommentForm = memo(({ className, onSendCommentHandler }: ISendCommentF
       <div className={classes(cls.SendCommentForm, {}, [className])}>
         <Input
           className={cls.textArea}
-          placeholder={t("текст комментария")}
+          placeholder={t("комментарий")}
           value={comment}
           onChange={onChangeHandler}
         />

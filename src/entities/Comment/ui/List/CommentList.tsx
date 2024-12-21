@@ -14,6 +14,15 @@ interface ICommentListProps {
 
 export const CommentList = memo(({ className, comments, isLoading = false }: ICommentListProps) => {
   const { t } = useTranslation();
+  if (isLoading) {
+    return (
+      <div className={classes(cls.CommentList, {}, [className])}>
+        <CommentItem key={1} isLoading />
+        <CommentItem key={2} isLoading />
+        <CommentItem key={3} isLoading />
+      </div>
+    );
+  }
 
   return (
     <div className={classes(cls.CommentList, {}, [className])}>

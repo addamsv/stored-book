@@ -35,11 +35,11 @@ export const Input = memo(({
 
   const mods: Mods = {
     [cls[theme]]: true,
-    // [cls.readOnly]: readonly,
+    [cls.readOnly]: readonly,
   };
 
   return (
-    <div className={classes(cls.Input, mods, [className])}>
+    <div className={classes(cls.Input, mods, [])}>
       {placeholder && (
         <div className={cls.placeholder}>
           {placeholder}
@@ -50,7 +50,7 @@ export const Input = memo(({
         value={value}
         readOnly={readonly}
         onChange={onChangeHandler}
-        className={classes(cls.inputEntity, { [cls.readOnly]: readonly }, [])}
+        className={classes(cls.inputEntity, mods, [className])}
         {...otherProps}
       />
     </div>

@@ -11,7 +11,7 @@ import { IComment } from "../../model/types";
 
 interface ICommentItemProps {
   className?: string;
-  comment: IComment;
+  comment?: IComment;
   isLoading?: boolean;
 }
 
@@ -29,6 +29,10 @@ export const CommentItem = memo(({ className, comment, isLoading = false }: ICom
         <Skeleton className={cls.content} width="100%" />
       </div>
     );
+  }
+
+  if (!comment) {
+    return null;
   }
 
   return (
