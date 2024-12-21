@@ -6,23 +6,22 @@
 
 .topWrapper {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-self: center;
   border-radius: 8px;
   box-shadow: var(--shadow);
   padding: 20px;
-  margin-top: 15px;
+  margin: 15px auto;
+  width: 90%;
 }
 
 .bookImage {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-
-  // margin-left: 20px;
 }
 
-.imageDescriptionSkeleton {
+.imageDescription {
   margin-top: 15px;
 }
 

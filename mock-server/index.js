@@ -462,9 +462,12 @@ server.post("/api/v1/comments", (req, res) => {
 
     const { body } = req;
 
+    const d = new Date();
+
     const comment = {
       id: maxCommentId + 1,
       bookId: body.bookId,
+      iat: `${d.getDate()}.${Number(d.getMonth()) + 1}.${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`,
       owner: user.id,
       text: body.text
     };
@@ -514,7 +517,9 @@ server.use(router);
 const API_SERVER_PORT = 8000;
 
 server.listen(API_SERVER_PORT, () => {
-  console.log(`server is running on ${API_SERVER_PORT} port`);
+  const d = new Date();
+  // eslint-disable-next-line max-len
+  console.log(`server is running on ${API_SERVER_PORT} port ${d.getDate()}.${Number(d.getMonth()) + 1}.${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`);
   console.log(`http://localhost:${API_SERVER_PORT}/api/v1/users/login`);
   console.log(`http://localhost:${API_SERVER_PORT}/api/v1/books`);
   console.log(`http://localhost:${API_SERVER_PORT}/api/v1/books/1`);

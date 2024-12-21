@@ -5,7 +5,8 @@
 }
 
 .image {
-  width: 100%;
+  max-width: 800px;
+  width: 90%;
   border-radius: 6px;
   box-shadow: var(--shadow);
 }

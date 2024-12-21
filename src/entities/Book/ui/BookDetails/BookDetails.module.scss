@@ -9,7 +9,7 @@
 }
 
 .bookImage {
-  width: 100%;
+  width: 90%;
   border-radius: 6px;
   box-shadow: var(--shadow);
   position: relative;
@@ -17,7 +17,7 @@
   margin: 20px auto;
 }
 
-.imageDescriptionSkeleton {
+.imageDescription {
   margin-top: 15px;
 }
 
@@ -33,5 +33,6 @@
 
 .block {
   margin: 26px auto 40px;
+  width: 90%;
   max-width: 800px;
 }

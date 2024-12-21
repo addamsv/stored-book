@@ -24,6 +24,7 @@ const SendCommentForm = memo(({ className, onSendCommentHandler }: ISendCommentF
   const { t } = useTranslation();
 
   const comment = useSelector(getTextFromSendCommentForm);
+
   const error = useSelector(getErrorTextFromSendCommentForm);
 
   const dispatch = useAppDispatch();

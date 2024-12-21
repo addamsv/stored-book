@@ -77,13 +77,3 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
 };
 
 export default memo(BookDetailsPage);
-//  {
-//     id: "1",
-//     text: "Awesome comment",
-//     owner: { id: 1, name: "john", image: "http://localhost:3000/images/img2.png" }
-//   },
-//   {
-//     id: "2",
-//     text: "Whooooo-hoooo",
-//     owner: { id: 1, name: "fedia", image: "http://localhost:3000/images/img3.jpg" }
-//   }

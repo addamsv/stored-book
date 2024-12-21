@@ -17,7 +17,7 @@
       "owner": 1,
       "title": "Fahrenheit 451",
       "subTitle": "Ray Bradbury",
-      "img": "http://localhost:3000/images/img2.png",
+      "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -57,9 +57,9 @@
     {
       "id": 2,
       "owner": 1,
-      "title": "Book Title 2",
-      "subTitle": "SubTitle 2",
-      "img": "http://localhost:3000/images/img3.jpg",
+      "title": "Dandelion Wine",
+      "subTitle": "Ray Bradbury",
+      "img": "http://localhost:3000/images/DandelionWine.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -90,42 +90,49 @@
       "id": 1,
       "bookId": 1,
       "owner": 1,
+      "iat": "1.12.2025",
       "text": "Awesome Comment"
     },
     {
       "id": 2,
       "bookId": 1,
       "owner": 2,
+      "iat": "1.12.2025",
       "text": "The comment I've never heard  before"
     },
     {
       "id": 3,
       "bookId": 2,
       "owner": 1,
+      "iat": "1.12.2025",
       "text": "Whoo-hooo"
     },
     {
       "id": 4,
       "bookId": 1,
       "owner": 1,
+      "iat": "1.12.2025",
       "text": "hey"
     },
     {
       "id": 5,
       "bookId": 1,
       "owner": 2,
+      "iat": "1.12.2025",
       "text": "hey from user"
     },
     {
       "id": 6,
       "bookId": 1,
       "owner": 2,
+      "iat": "1.12.2025",
       "text": "cin-cin"
     }
   ],
   "users": [
     {
       "id": 1,
+      "iat": "1.12.2025",
       "name": "admin",
       "password": "123",
       "roles": "ROLE_ADMIN",
@@ -133,6 +140,7 @@
     },
     {
       "id": 2,
+      "iat": "1.12.2025",
       "name": "user",
       "password": "123",
       "roles": "ROLE_USER",

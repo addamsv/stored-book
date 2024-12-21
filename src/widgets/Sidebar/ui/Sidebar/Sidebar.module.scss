@@ -1,6 +1,6 @@
 .Sidebar {
   display: block;
-  position: absolute;
+  position: fixed;
   right: 0;
   height: 300px;
   width: var(--sidebar-width); // 300px;
@@ -10,7 +10,10 @@
   border-radius: 12px;
   background: #ffffff20;
   backdrop-filter: blur(16px) saturate(120%);
-  transition: width 0.5s;
+  transition: width 0.5s, height 0.5s;
+
+  // transition: height 0.08s;
+  z-index: 1;
 }
 
 .svgIcon {
@@ -19,6 +22,7 @@
 
 .collapsed {
   width: var(--sidebar-width-collapsed); // 80px;
+  height: 60px;
   padding: 15px 4px;
 }
 

@@ -2,14 +2,11 @@
 
 ## Различные темы и интернационализация (RU, EN)
 
-<img src="./.github/projectDescription/images/darkBlue.png" width="104px">
-<img src="./.github/projectDescription/images/dark.png" width="104px">
-<img src="./.github/projectDescription/images/lightBlue.png" width="104px">
+<img src="./.github/projectDescription/images/darkBlue.png" width="104px"><img src="./.github/projectDescription/images/dark.png" width="104px"><img src="./.github/projectDescription/images/lightBlue.png" width="104px">
 
-## Страницы User Profile м Book Details
+## Страницы профиля пользователя и о книге подробнее
 
-<img src="./.github/projectDescription/images/userProfile.png" width="104px">
-<img src="./.github/projectDescription/images/bookDescription.png" width="104px">
+<img src="./.github/projectDescription/images/userProfile.png" width="104px"><img src="./.github/projectDescription/images/bookDescription.png" width="104px">
 
 ## Basic и JSON Web Token аутентификация
 
