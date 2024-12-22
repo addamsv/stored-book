@@ -1,7 +1,5 @@
 import { PageLoader } from "entities/PageLoader/PageLoader";
-import { getUserAuthData } from "entities/User";
-import { memo, Suspense, useCallback, useMemo } from "react";
-import { useSelector } from "react-redux";
+import { memo, Suspense, useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AppRoutesPropsT, routeConfig } from "resources/config/routeConfig/routeConfig";
 import { RequireAuth } from "./RequireAuth";
