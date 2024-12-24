@@ -1,3 +1,13 @@
+export enum EBookListView {
+  STANDARD = "STANDARD",
+  COMPACT = "COMPACT",
+}
+
+/**
+ *
+ *        BLOCKS
+ *
+ */
 export enum EBlockOfBookType {
   CODE = "CODE",
   IMAGE = "IMAGE",
@@ -32,11 +42,14 @@ export enum EBookOfHashTagType {
   IT = "IT",
   SCIFI = "SCIFI",
   POETRY = "POETRY",
+  POLITICS = "POLITICS",
+  ECONOMICS = "ECONOMICS",
+  SCIENCE = "SCIENCE",
 }
 
 export interface IBook {
-  id: string;
-  // owner: string;
+  id: number;
+  owner?: number;
   title: string;
   subTitle: string;
   img: string;

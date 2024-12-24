@@ -3,31 +3,32 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 // import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
 import { Theme } from "app/providers/ThemeProvider";
 import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
-// import BookDetails from "./BookDetails";
-import { StoreDecorator } from "resources/config/storybook/StoreDecorator/StoreDecorator";
-import img from "shared/assets/images/img.png";
-import { BookDetails } from "./BookDetails";
-import { EBookOfHashTagType, EBlockOfBookType, IBook } from "../../model/types";
+import { EBlockOfBookType, EBookListView, EBookOfHashTagType, IBook } from "../../model/types";
+import { Item } from ".";
 
 export default {
-  title: "entities/Book/Details",
-  component: BookDetails,
+  title: "entities/Book/Item",
+  component: Item,
   argTypes: {
     backgroundColor: { control: "color" },
   },
-} as ComponentMeta<typeof BookDetails>;
+} as ComponentMeta<typeof Item>;
 
-const Template: ComponentStory<typeof BookDetails> = (args) => <BookDetails {...args} />;
+const Template: ComponentStory<typeof Item> = (args) => <Item {...args} />;
 
-const data: IBook = {
+const book: IBook = {
   id: 1,
+  owner: 1,
   title: "Fahrenheit 451",
   subTitle: "Ray Bradbury",
-  img,
+  img: "http://localhost:3000/images/Fahrenheit451.jpg",
   views: 1,
   createdAt: "1.12.2025",
   hashTagType: [
-    EBookOfHashTagType.IT
+    EBookOfHashTagType.IT,
+    EBookOfHashTagType.ECONOMICS,
+    EBookOfHashTagType.POETRY,
+    EBookOfHashTagType.SCIENCE,
   ],
   blocks: [
     {
@@ -47,7 +48,7 @@ const data: IBook = {
     {
       id: "5",
       type: EBlockOfBookType.IMAGE,
-      src: img,
+      src: "http://localhost:3000/images/img3.jpg",
       title: "Awesome Image ever seen"
     },
     {
@@ -61,56 +62,15 @@ const data: IBook = {
   ]
 };
 
-export const Light = Template.bind({});
-Light.args = {
+export const LightBig = Template.bind({});
+LightBig.args = {
+  listView: EBookListView.STANDARD,
+  book
 };
-Light.decorators = [ThemeDecorator(Theme.LIGHT), StoreDecorator({
-  bookDetails: {
-    data
-  }
-})];
 
-export const Dark = Template.bind({});
-Dark.args = {
+export const DarkSmall = Template.bind({});
+DarkSmall.args = {
+  listView: EBookListView.COMPACT,
+  book
 };
-Dark.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({
-  bookDetails: {
-    data
-  }
-})];
-
-export const LightLoading = Template.bind({});
-LightLoading.args = {
-};
-LightLoading.decorators = [ThemeDecorator(Theme.LIGHT), StoreDecorator({
-  bookDetails: {
-    isLoading: true
-  }
-})];
-
-export const DarkLoading = Template.bind({});
-DarkLoading.args = {
-};
-DarkLoading.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({
-  bookDetails: {
-    isLoading: true
-  }
-})];
-
-export const LightError = Template.bind({});
-LightError.args = {
-};
-LightError.decorators = [ThemeDecorator(Theme.LIGHT), StoreDecorator({
-  bookDetails: {
-    error: "error"
-  }
-})];
-
-export const DarkError = Template.bind({});
-DarkError.args = {
-};
-DarkError.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({
-  bookDetails: {
-    error: "error"
-  }
-})];
+DarkSmall.decorators = [ThemeDecorator(Theme.DARK)];

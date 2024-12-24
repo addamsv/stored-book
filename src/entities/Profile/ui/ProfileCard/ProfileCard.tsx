@@ -1,7 +1,8 @@
 import { classes } from "shared/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 
-import { Text, TextAlign, TextTheme } from "shared/ui/Text/Text";
+import { Text } from "shared/ui/Text/Text";
+import { TextAlign, TextTheme } from "shared/ui/Text";
 import { Input } from "shared/ui/Input/Input";
 import { IProfile } from "entities/Profile/model/type/IProfile";
 import { Loader } from "shared/ui/Loader/Loader";

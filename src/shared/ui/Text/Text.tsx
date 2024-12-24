@@ -1,27 +1,7 @@
 import { classes, Mods } from "shared/lib/classNames/classes";
 import { memo } from "react";
 import cls from "./Text.module.scss";
-
-export enum TextTheme {
-  PRIMARY = "primary",
-  INVERTED = "inverted",
-  LIGHT = "light",
-  ERROR = "error",
-}
-
-export enum TextAlign {
-  CENTER = "center",
-  RIGHT = "right",
-  LEFT = "left",
-}
-
-export enum TextSize {
-  XS = "extraSmall",
-  S = "small",
-  M = "middle",
-  L = "large",
-  XL = "extraLarge",
-}
+import { TextTheme, TextAlign, TextSize } from ".";
 
 interface ITextProps {
   className?: string;
@@ -43,8 +23,8 @@ export const Text = memo(({
 
   return (
     <div className={classes(cls.Text, mods, [className])}>
-      {title && <p className={cls.title}>{title}</p>}
-      {text && <p className={cls.text}>{text}</p>}
+      {title && <div className={cls.title}>{title}</div>}
+      {text && <div className={cls.text}>{text}</div>}
     </div>
   );
 });

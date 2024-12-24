@@ -1,14 +1,20 @@
-/* eslint-disable max-len */
-import { classes } from "shared/lib/classNames/classes";
-import { useTranslation } from "react-i18next";
-import { memo } from "react";
-import { BookList, IBook } from "entities/Book";
-import { EBlockOfBookType, EBookListView, EBookOfHashTagType } from "entities/Book/model/types";
-import cls from "./BooksListPage.module.scss";
+import React from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+// import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
+import { Theme } from "app/providers/ThemeProvider";
+import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
+import { EBlockOfBookType, EBookListView, EBookOfHashTagType, IBook } from "entities/Book/model/types";
+import { List } from ".";
 
-interface IBooksListPageProps {
-  className?: string;
-}
+export default {
+  title: "entities/Book/List",
+  component: List,
+  argTypes: {
+    backgroundColor: { control: "color" },
+  },
+} as ComponentMeta<typeof List>;
+
+const Template: ComponentStory<typeof List> = (args) => <List {...args} />;
 
 const books: IBook[] = [
   {
@@ -148,20 +154,33 @@ const books: IBook[] = [
   },
 ];
 
-const BooksListPage = ({ className }: IBooksListPageProps) => {
-  const { t } = useTranslation("book");
-
-  return (
-    <div className={classes(cls.BooksListPage, {}, [className])}>
-
-      <h1>{t("Книги")}</h1>
-
-      <BookList isLoading bookArr={books} listView={EBookListView.STANDARD} />
-
-      <br />
-      <br />
-    </div>
-  );
+export const Light = Template.bind({});
+Light.args = {
+  isLoading: false,
+  listView: EBookListView.COMPACT,
+  bookArr: books
 };
 
-export default memo(BooksListPage);
+export const Dark = Template.bind({});
+Dark.args = {
+  isLoading: false,
+  listView: EBookListView.STANDARD,
+  bookArr: books
+};
+Dark.decorators = [ThemeDecorator(Theme.DARK)];
+
+export const DarkLoading = Template.bind({});
+DarkLoading.args = {
+  isLoading: true,
+  bookArr: [],
+  listView: EBookListView.STANDARD
+};
+DarkLoading.decorators = [ThemeDecorator(Theme.DARK)];
+
+export const DarkLoadingCompact = Template.bind({});
+DarkLoadingCompact.args = {
+  isLoading: true,
+  bookArr: [],
+  listView: EBookListView.COMPACT
+};
+DarkLoadingCompact.decorators = [ThemeDecorator(Theme.DARK)];

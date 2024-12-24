@@ -23,7 +23,7 @@
     "prepare": "husky install"
   },
   "keywords": [],
-  "author": "",
+  "author": "Serge",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.17.5",

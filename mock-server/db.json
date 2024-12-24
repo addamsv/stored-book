@@ -139,6 +139,14 @@
       "enabled": true
     },
     {
+      "id": 3,
+      "iat": "1.12.2025",
+      "name": "guest",
+      "password": "123",
+      "roles": "ROLE_GUEST",
+      "enabled": true
+    },
+    {
       "id": 2,
       "iat": "1.12.2025",
       "name": "user",
@@ -157,6 +165,18 @@
       "country": "Belarus",
       "city": "Minsk",
       "address": "Chyrlenisa 14-22",
+      "image": "http://localhost:3000/images/img2.png",
+      "currency": "BYN"
+    },
+    {
+      "id": 3,
+      "owner": 3,
+      "firstname": "Guest",
+      "lastname": "Johnson",
+      "age": 20,
+      "country": "Belarus",
+      "city": "Minsk",
+      "address": "Pravda 14-22",
       "image": "http://localhost:3000/images/img2.png",
       "currency": "BYN"
     },
