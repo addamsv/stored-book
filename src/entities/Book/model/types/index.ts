@@ -45,6 +45,7 @@ export enum EBookOfHashTagType {
   POLITICS = "POLITICS",
   ECONOMICS = "ECONOMICS",
   SCIENCE = "SCIENCE",
+  ADVENTURE = "ADVENTURE"
 }
 
 export interface IBook {

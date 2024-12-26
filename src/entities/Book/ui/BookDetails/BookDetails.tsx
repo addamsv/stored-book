@@ -64,16 +64,14 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
 
   if (isLoading) {
     content = (
-      <>
-        <Skeleton className={cls.bookImage} width={300} height={160} />
-        <div style={{ margin: "20px auto", width: 300 }}>
+      <div style={{ margin: "20px auto", maxWidth: 800, textAlign: "left" }}>
+        <Skeleton className={cls.bookImage} width={200} height={300} />
+        <div style={{ margin: "20px" }}>
           <Skeleton className={cls.imageDescription} width={200} height={15} />
           <Skeleton className={cls.buttonSkeleton} width={50} height={20} />
         </div>
-        <div style={{ display: "inline-block", marginTop: 30 }}>
-          <Skeleton width={300} height={170} />
-        </div>
-      </>
+        <Skeleton width={300} height={170} />
+      </div>
     );
   } else if (error) {
     content = <Text title={t("ошибка")} />;

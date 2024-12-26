@@ -6,15 +6,15 @@
   position: relative;
   max-width: 800px;
   margin: 20px auto;
+  text-align: left;
 }
 
 .bookImage {
-  width: 90%;
   border-radius: 6px;
   box-shadow: var(--shadow);
   position: relative;
-  max-width: 800px;
-  margin: 20px auto;
+  max-width: 300px;
+  margin: 20px;
 }
 
 .imageDescription {

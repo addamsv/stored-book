@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { memo } from "react";
 import { EBookListView, IBook } from "../../model/types";
 import cls from "./List.module.scss";
-import { Item } from "../Item";
+import { Item } from "../Item/Item";
 import { ItemSkeleton } from "../Item/ItemSkeleton";
 
 interface IListProps {
@@ -26,8 +26,9 @@ export const List = memo(({
       <div className={classes(cls.List, {}, [className, cls[listView]])}>
         {new Array(listView === EBookListView.COMPACT ? 12 : 5)
           .fill(0)
-          .map((ell) => (
-            <ItemSkeleton key={ell} listView={listView} />
+          .map((ell, indx) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <ItemSkeleton key={indx} listView={listView} />
           ))}
       </div>
     );

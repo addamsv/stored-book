@@ -44,7 +44,7 @@ export const Item = memo(({ className, book, listView }: IItemProps) => {
           className={cls.card}
         >
           <div className={cls.imageWrapper}>
-            <img src={book.img} alt="*" />
+            <img className={cls.img} src={book.img} alt="*" />
             <p className={cls.createdAt}>{book.createdAt}</p>
           </div>
 
@@ -68,7 +68,8 @@ export const Item = memo(({ className, book, listView }: IItemProps) => {
   }
 
   const paragraph = book.blocks.find((block) => block.type === EBlockOfBookType.TEXT) as IBlockOfBookText | undefined;
-  paragraph!.title = "";
+  // paragraph!.title = "";
+
   // STANDARD
   return (
     <div className={cls.Item}>
@@ -101,7 +102,7 @@ export const Item = memo(({ className, book, listView }: IItemProps) => {
           />
 
           {paragraph && (
-            <BlockOfBookText className={cls.paragraph} block={paragraph} />
+            <Text className={cls.paragraph} text={paragraph.paragraphs[0]} />
           )}
 
           <br />

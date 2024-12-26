@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Theme } from "app/providers/ThemeProvider";
 import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
 import { EBlockOfBookType, EBookListView, EBookOfHashTagType, IBook } from "../../model/types";
-import { Item } from ".";
+import { Item } from "./Item";
 
 export default {
   title: "entities/Book/Item",

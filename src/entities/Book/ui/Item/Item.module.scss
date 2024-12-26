@@ -10,7 +10,7 @@
   .bookImage {
     max-width: 200px;
     height: 260px;
-    object-fit: contain;
+    object-fit: fill;
   }
 
   .imageDescription {
@@ -60,7 +60,6 @@
   .imageWrapper {
     width: 130px;
     height: 190px;
-    object-fit: contain;
     border-radius: 8px;
     box-shadow: var(--shadow);
     overflow: hidden;
@@ -70,6 +69,7 @@
   .img {
     width: 130px;
     height: 190px;
+    object-fit: fill;
   }
 
   .createdAt {

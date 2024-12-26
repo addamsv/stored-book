@@ -1,0 +1,10 @@
+<svg viewBox="0 0 160 160">
+	<g>
+		<path d="M 10 40 L 10 80 L 50 80 L 50 40 Z"></path>
+		<path d="M 60 40 L 60 80 L 100 80 L 100 40 Z"></path>
+		<path d="M 110 40 L 110 80 L 150 80 L 150 40 Z"></path>
+		<path d="M 10 90 L 10 130 L 50 130 L 50 90 Z"></path>
+		<path d="M 60 90 L 60 130 L 100 130 L 100 90 Z"></path>
+		<path d="M 110 90 L 110 130 L 150 130 L 150 90 Z"></path>
+	</g>
+</svg>

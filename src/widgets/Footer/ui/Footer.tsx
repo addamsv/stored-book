@@ -6,6 +6,7 @@ import WiFiSVG from "shared/assets/icons/wifi.svg";
 import LinkSVG from "shared/assets/icons/link.svg";
 import InstagramSVG from "shared/assets/icons/instagram.svg";
 import FacebookSVG from "shared/assets/icons/facebook.svg";
+import ListStdSVG from "shared/assets/icons/listStandard.svg";
 import { memo } from "react";
 import cls from "./Footer.module.scss";
 
@@ -26,6 +27,7 @@ export const Footer = memo(({ className }: FooterProps) => {
       <div className={cls.iconWrapper}><LinkSVG className={cls.icons} /></div>
       <div className={cls.iconWrapper}><InstagramSVG className={cls.icons} /></div>
       <div className={cls.iconWrapper}><FacebookSVG className={cls.icons} /></div>
+      <div className={cls.iconWrapper}><ListStdSVG className={cls.icons} /></div>
     </div>
   );
 });

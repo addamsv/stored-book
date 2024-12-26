@@ -7,6 +7,7 @@ import { IUserSchema } from "entities/User";
 import { ILoginSchema } from "features/AuthByUserName";
 import { ISendCommentFormStateSchema } from "features/SendCommentForm";
 import { IBooksDetailsCommentsStateSchema } from "pages/BookDetailsPage";
+import { IBookListPageStateSchema } from "pages/BooksListPage";
 // import { NavigateOptions, To } from "react-router";
 
 export interface IStateSchema {
@@ -19,6 +20,7 @@ export interface IStateSchema {
   bookDetails?: IBookDetailsStateSchema;
   bookDetailsComments?: IBooksDetailsCommentsStateSchema;
   sendCommentForm?: ISendCommentFormStateSchema;
+  bookListPage?: IBookListPageStateSchema;
 }
 
 export type IStateSchemaKey = keyof IStateSchema;
