@@ -75,15 +75,29 @@ const authFilterByUsernameAndPassword = (data) => {
 
     const [username, password] = decode.split(":");
 
+    const cPass = password;
+
+    const hmac = createHmac("sha256", SECRET_KEY);
+
+    hmac.update(cPass);
+
+    const signature = hmac.digest("hex");
+
+    console.log("pass signature:");
+
+    console.log(signature);
+
     const { users = [] } = getData();
 
     const candidate = users.find(
-      (user) => user.name === username && user.password === password,
+      (user) => user.name === username && user.password === signature,
     );
 
     if (candidate) {
       console.log("Auth by Basic");
-      return candidate;
+
+      const { password, ...returnUserData } = candidate;
+      return returnUserData;
     }
 
     return false;
@@ -132,7 +146,7 @@ const getCustomJWT = (sub) => {
 
   const signature = hmac.digest("hex");
 
-  console.log("own signature:");
+  console.log("jwt signature:");
   // console.log("45c00f7a986fbab2099a8174605ec63f35fbb4127fb912414c308402d14e01bc");
   console.log(signature);
   return `${data}.${signature}`;
@@ -186,7 +200,8 @@ const authFilterByToken = (data) => {
 
     if (candidate) {
       console.log("Auth by Token");
-      return candidate;
+      const { password, ...returnUserData } = candidate;
+      return returnUserData;
     }
 
     return false;
@@ -245,29 +260,19 @@ const getToken = (name) => {
  */
 server.post("/api/v1/users/login", (req, res) => {
   try {
-    const { name: username } = isAuth(req);
+    const user = isAuth(req);
 
-    if (!username) {
+    if (!user) {
       return res.status(403).json(err403("User"));
     }
 
-    const { users = [] } = getData();
+    const token = getToken(user.name);
 
-    const candidate = users.find(
-      (user) => user.name === username
-    );
+    console.log(token);
 
-    if (candidate) {
-      console.log(getToken(username));
-      const data = {
-        user: candidate,
-        token: getToken(username)
-      };
+    const data = { user, token };
 
-      return res.json(CustomReturnData("Login user info and JWT", data));
-    }
-
-    return res.status(403).json(err403("User"));
+    return res.json(CustomReturnData("Login user info and JWT", data));
   } catch (e) {
     console.log(e);
 
