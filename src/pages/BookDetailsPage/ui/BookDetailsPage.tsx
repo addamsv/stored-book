@@ -12,6 +12,7 @@ import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { SendCommentForm } from "features/SendCommentForm";
 import { Button } from "shared/ui/Button/Button";
 import { RoutePath } from "resources/config/routeConfig/routeConfig";
+import { Page } from "shared/ui/Page/Page";
 import { bookDetailsCommentsReducer, getBooksComments } from "../model/slices";
 import cls from "./BookDetailsPage.module.scss";
 import { getBooksCommentsError, getBooksCommentsIsLoading } from "../model/selectors";
@@ -54,23 +55,23 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
 
   if (!id) {
     return (
-      <div className={classes(cls.BookDetailsPage, {}, [className])}>
+      <Page className={classes(cls.BookDetailsPage, {}, [className])}>
         {t("ничего не найдено")}
-      </div>
+      </Page>
     );
   }
 
   if (error) {
     return (
-      <div className={classes(cls.BookDetailsPage, {}, [className])}>
-        {t("ошибка")}
-      </div>
+      <Page className={classes(cls.BookDetailsPage, {}, [className])}>
+        <Text title={t("ошибка")} text={error} />
+      </Page>
     );
   }
 
   return (
     <AsyncModule reducers={reducerList} isRemoveAfterUnmount>
-      <div className={classes(cls.BookDetailsPage, {}, [className])}>
+      <Page className={classes(cls.BookDetailsPage, {}, [className])}>
         {/* <Button onClick={onBackListHandler}>{t("назад к списку")}</Button> */}
 
         <BookDetails bookId={Number(id)} />
@@ -82,7 +83,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
         <CommentList isLoading={isLoading} comments={comments} />
         <br />
         <br />
-      </div>
+      </Page>
     </AsyncModule>
   );
 };

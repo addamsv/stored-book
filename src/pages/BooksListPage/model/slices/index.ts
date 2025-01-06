@@ -19,6 +19,8 @@ export const bookListPageSlice = createSlice({
     isLoading: false,
     error: undefined,
     listView: EBookListView.COMPACT,
+    page: 1,
+    hasMore: true,
     ids: [
       // "1", "2"
     ],
@@ -31,8 +33,13 @@ export const bookListPageSlice = createSlice({
       state.listView = action.payload;
       localStorage.setItem(LIST_VIEW_LOCAL_STORAGE_KEY, action.payload);
     },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
     initState: (state) => {
-      state.listView = localStorage.getItem(LIST_VIEW_LOCAL_STORAGE_KEY) as EBookListView;
+      const listView = localStorage.getItem(LIST_VIEW_LOCAL_STORAGE_KEY) as EBookListView;
+      state.listView = listView;
+      state.limit = listView === EBookListView.STANDARD ? 4 : 9;
     }
   },
 
@@ -44,7 +51,12 @@ export const bookListPageSlice = createSlice({
       })
       .addCase(fetchBookList.fulfilled, (state, action: PayloadAction<IBook[]>) => {
         state.isLoading = false;
-        booksAdapter.setAll(state, action.payload);
+        // booksAdapter.setAll(state, action.payload);
+        booksAdapter.addMany(state, action.payload);
+
+        const hasMoreElements = action.payload.length > 0;
+
+        state.hasMore = hasMoreElements;
       })
       .addCase(fetchBookList.rejected, (state, action) => {
         state.isLoading = false;

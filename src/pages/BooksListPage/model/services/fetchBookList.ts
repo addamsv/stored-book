@@ -2,38 +2,45 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IThunkConf } from "app/providers/StoreProvider";
 import { IBook } from "entities/Book";
 import { getCredentials } from "shared/lib/auth/getCredentials";
+import { userActions } from "entities/User";
+import { getBooksListPageLimit } from "../selectors";
 
 interface IArguments {
-  // id: number | undefined;
+  page: number | undefined;
 }
 
 interface ICustomReturnedData {
   isSuccess: boolean;
   message: string;
+  statusCode?: number;
   data: IBook[];
 }
 
 export const fetchBookList = createAsyncThunk<
   IBook[],
-  void, // void | IArguments,
+  IArguments, // void | IArguments,
   IThunkConf<string>
 >(
   "bookListPage/fetchBookList",
   async (
-    _, // { id } IArguments
+    args, // : IArguments
     thunkAPI
   ) => {
-    const { extra, dispatch, rejectWithValue, } = thunkAPI;
+    const { extra, dispatch, rejectWithValue, getState } = thunkAPI;
+
+    const { page = 1 } = args;
+
+    const limit = getBooksListPageLimit(getState());
 
     try {
       const response = await extra.axios.get<ICustomReturnedData>(
         "/books",
         {
           headers: { Authorization: `Bearer ${getCredentials()?.token || ""}` },
-          // params: {
-          //   bookId,
-          //   _expand: "user"
-          // }
+          params: {
+            _limit: limit,
+            _page: page
+          }
         }
       );
 
@@ -42,15 +49,20 @@ export const fetchBookList = createAsyncThunk<
       }
 
       if (response.data.isSuccess === false) {
+        if (response.data.statusCode === 401) {
+          dispatch(userActions.logout());
+        }
+
         return rejectWithValue(`${response.data.message}`);
       }
-
-      // dispatch(profileActions.setProfileData(response.data.data));
 
       // extra.navigate("/");
 
       return response.data.data;
-    } catch (e) {
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        rejectWithValue(e.message);
+      }
       return rejectWithValue("ошибка");
     }
   }

@@ -7,10 +7,13 @@ import { EBookListView } from "entities/Book/model/types";
 import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
+import { Page } from "shared/ui/Page/Page";
+import { Text } from "shared/ui/Text/Text";
+import { TextTheme } from "shared/ui/Text";
 import { bookListPageActions, bookListPageReducer, getBooks } from "../model/slices";
 import cls from "./BooksListPage.module.scss";
-import { fetchBookList } from "../model/services";
-import { getBooksListPageError, getBooksListPageListView, getBooksListPageLoading } from "../model/selectors";
+import { fetchBookList, fetchNextBookList } from "../model/services";
+import { getBooksListPageError, getBooksListPageHasMore, getBooksListPageListView, getBooksListPageLoading, getBooksListPageNum } from "../model/selectors";
 
 interface IBooksListPageProps {
   className?: string;
@@ -61,97 +64,7 @@ interface IBooksListPageProps {
 //         ]
 //       }
 //     ]
-//   },
-//   {
-//     id: 2,
-//     owner: 1,
-//     title: "Dandelion Wine",
-//     subTitle: "Ray Bradbury",
-//     img: "http://localhost:3000/images/DandelionWine.jpg",
-//     views: 1,
-//     createdAt: "1.12.2025",
-//     hashTagType: [
-//       EBookOfHashTagType.IT,
-//     ],
-//     blocks: [
-//       {
-//         id: "1",
-//         type: EBlockOfBookType.TEXT,
-//         title: "Звголовок",
-//         paragraphs: [
-//           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est.",
-//           "rem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est.",
-//           "orem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
-//         ]
-//       },
-//       {
-//         id: "5",
-//         type: EBlockOfBookType.IMAGE,
-//         src: "http://localhost:3000/images/img3.jpg",
-//         title: "Title Image"
-//       }
-//     ]
-//   },
-//   {
-//     id: 3,
-//     owner: 1,
-//     title: "Dandelion Wine",
-//     subTitle: "Ray Bradbury",
-//     img: "http://localhost:3000/images/DandelionWine.jpg",
-//     views: 1,
-//     createdAt: "1.12.2025",
-//     hashTagType: [
-//       EBookOfHashTagType.IT,
-//     ],
-//     blocks: [
-//       {
-//         id: "1",
-//         type: EBlockOfBookType.TEXT,
-//         title: "Звголовок",
-//         paragraphs: [
-//           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est.",
-//           "rem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est.",
-//           "orem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
-//         ]
-//       },
-//       {
-//         id: "5",
-//         type: EBlockOfBookType.IMAGE,
-//         src: "http://localhost:3000/images/img3.jpg",
-//         title: "Title Image"
-//       }
-//     ]
-//   },
-//   {
-//     id: 4,
-//     owner: 1,
-//     title: "Dandelion Wine",
-//     subTitle: "Ray Bradbury",
-//     img: "http://localhost:3000/images/DandelionWine.jpg",
-//     views: 1,
-//     createdAt: "1.12.2025",
-//     hashTagType: [
-//       EBookOfHashTagType.IT,
-//     ],
-//     blocks: [
-//       {
-//         id: "1",
-//         type: EBlockOfBookType.TEXT,
-//         title: "Звголовок",
-//         paragraphs: [
-//           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est.",
-//           "rem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est.",
-//           "orem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
-//         ]
-//       },
-//       {
-//         id: "5",
-//         type: EBlockOfBookType.IMAGE,
-//         src: "http://localhost:3000/images/img3.jpg",
-//         title: "Title Image"
-//       }
-//     ]
-//   },
+//   }
 // ];
 
 const reducers: ReducerListT = {
@@ -163,40 +76,50 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
 
   const dispatch = useAppDispatch();
 
+  // SELECTORS
   const bookArr = useSelector(getBooks.selectAll);
-
   const isLoading = useSelector(getBooksListPageLoading);
   const error = useSelector(getBooksListPageError);
   const listView = useSelector(getBooksListPageListView);
 
+  const onNextChunk = useCallback(() => {
+    dispatch(fetchNextBookList());
+  }, [dispatch]);
+
   useEffect(() => {
     if (__PROJECT_TYPE__ !== "storybook") {
-      dispatch(fetchBookList());
       dispatch(bookListPageActions.initState());
+      dispatch(fetchBookList({ page: 1 }));
     }
   }, [dispatch]);
 
-  const onChangeViewHandler = useCallback((newlistView: EBookListView) => {
-    dispatch(bookListPageActions.setView(newlistView));
+  const onChangeViewHandler = useCallback((newListView: EBookListView) => {
+    dispatch(bookListPageActions.setView(newListView));
   }, [dispatch]);
 
   return (
     <AsyncModule reducers={reducers} isRemoveAfterUnmount>
-      <div data-testid="BooksListPage" className={classes(cls.BooksListPage, {}, [className])}>
+      <Page
+        onNextChunk={onNextChunk}
+        className={classes(cls.BooksListPage, {}, [className])}
+      >
 
-        <h1>{t("Книги")}</h1>
+        <h1 data-testid="BooksListPage">{t("Книги")}</h1>
 
-        <ListViewSwitcher listView={listView} onViewIconClickHandler={onChangeViewHandler} />
+        {error ? (
+          <Text theme={TextTheme.ERROR} title={t("Ошибка")} text={error} />
+        ) : (
+          <>
+            <ListViewSwitcher listView={listView} onViewIconClickHandler={onChangeViewHandler} />
 
-        <BookList
-          isLoading={isLoading}
-          bookArr={bookArr}
-          listView={listView}
-        />
-
-        <br />
-        <br />
-      </div>
+            <BookList
+              isLoading={isLoading}
+              bookArr={bookArr}
+              listView={listView}
+            />
+          </>
+        )}
+      </Page>
     </AsyncModule>
   );
 };

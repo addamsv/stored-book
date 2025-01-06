@@ -7,4 +7,8 @@ export interface IBookListPageStateSchema extends EntityState<IBook> {
   error?: string;
 
   listView: EBookListView;
+
+  page: number;
+  limit?: number;
+  hasMore: boolean;
 }

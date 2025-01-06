@@ -28,10 +28,10 @@ const App = () => {
     <div className={classes("app", {}, [theme])}>
       <Suspense fallback={<PageLoader />}>
         <Navbar />
-        <div className="content-page">
+        <main className="content-page">
           <Sidebar />
           {isAuthDataMounted && <AppRouter />}
-        </div>
+        </main>
         <Footer />
       </Suspense>
     </div>

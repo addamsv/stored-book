@@ -29,7 +29,7 @@ export const ListViewSwitcher = memo(({ className, listView, onViewIconClickHand
   return (
     <div className={classes(cls.Switcher, {}, [className])}>
       {listViewSwitchTypesArr.map((view) => (
-        <Button theme={ButtonTheme.CLEAR} onClick={onClickHandler(view.listView)}>
+        <Button key={view.listView} theme={ButtonTheme.CLEAR} onClick={onClickHandler(view.listView)}>
           <IconSVG className={classes("", { [cls.selected]: view.listView === listView })} Svg={view.icon} />
         </Button>
       ))}

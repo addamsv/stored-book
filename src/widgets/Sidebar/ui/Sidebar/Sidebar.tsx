@@ -25,7 +25,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
   };
 
   return (
-    <div
+    <aside
       data-testid="sidebar"
       className={classes(cls.Sidebar, { [cls.collapsed]: collapsed }, [
         className
@@ -53,6 +53,6 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         <DarkThemeBtn className={cls.sidebarSpacing} />
         <ChangeLangBtn className={cls.sidebarSpacing} />
       </div>
-    </div>
+    </aside>
   );
 });

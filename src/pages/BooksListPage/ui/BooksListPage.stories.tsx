@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 // import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
 import { Theme } from "app/providers/ThemeProvider";
 import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
+import { StoreDecorator } from "resources/config/storybook/StoreDecorator/StoreDecorator";
 import BooksListPage from "./BooksListPage";
 
 export default {
@@ -17,7 +18,12 @@ const Template: ComponentStory<typeof BooksListPage> = (args) => <BooksListPage 
 
 export const Light = Template.bind({});
 Light.args = {};
+Light.decorators = [StoreDecorator({
+  bookListPage: {}
+})];
 
 export const Dark = Template.bind({});
 Dark.args = {};
-Dark.decorators = [ThemeDecorator(Theme.DARK)];
+Dark.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({
+  bookListPage: {}
+})];

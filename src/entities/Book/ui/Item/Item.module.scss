@@ -8,8 +8,8 @@
   width: 95%;
 
   .bookImage {
-    max-width: 200px;
-    height: 260px;
+    min-width: 180px;
+    height: 272px;
     object-fit: fill;
   }
 
@@ -42,7 +42,7 @@
   justify-content: center;
   align-self: center;
   margin-top: 15px;
-  width: 200px;
+  width: 170px;
   transition: transform 0.3s, opacity 0.3s;
 
   &:hover {

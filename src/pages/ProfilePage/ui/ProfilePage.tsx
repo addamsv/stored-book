@@ -15,6 +15,7 @@ import { ECountry } from "entities/Country";
 import { Text } from "shared/ui/Text/Text";
 import { TextTheme } from "shared/ui/Text";
 import { useParams } from "react-router-dom";
+import { Page } from "shared/ui/Page/Page";
 import { Header } from "./Header/Header";
 import { Footer } from "./Footer/Footer";
 
@@ -85,7 +86,7 @@ const ProfilePage = () => {
 
   return (
     <AsyncModule reducers={reducers}>
-      <div>
+      <Page>
         <h1 className="App-link">{t("Профиль пользователя")}</h1>
         <Header />
 
@@ -109,7 +110,7 @@ const ProfilePage = () => {
 
         <Footer />
 
-      </div>
+      </Page>
     </AsyncModule>
   );
 };

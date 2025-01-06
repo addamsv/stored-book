@@ -10,7 +10,9 @@ describe("bookListPageSlice.test", () => {
     const state: IBookListPageStateSchema = {
       listView: EBookListView.COMPACT,
       ids: [],
-      entities: {}
+      entities: {},
+      page: 1,
+      hasMore: true
     };
 
     expect(
@@ -22,18 +24,22 @@ describe("bookListPageSlice.test", () => {
       .toEqual({
         listView: EBookListView.STANDARD,
         ids: [],
-        entities: {}
+        entities: {},
+        page: 1,
+        hasMore: true
       });
   });
 
   test("empty state", () => {
     expect(bookListPageReducer(undefined, bookListPageActions.setView(EBookListView.STANDARD)))
       .toEqual({
+        ids: [],
         entities: {},
         error: undefined,
-        ids: [],
         isLoading: false,
         listView: EBookListView.STANDARD,
+        page: 1,
+        hasMore: true
       });
   });
 
@@ -73,15 +79,19 @@ describe("bookListPageSlice.test", () => {
     }];
 
     const state: DeepPartial<IBookListPageStateSchema> = {
-      isLoading: true
+      isLoading: true,
+      hasMore: true,
+      ids: [],
+      entities: {},
     };
 
     expect(bookListPageReducer(
       state as IBookListPageStateSchema,
-      fetchBookList.fulfilled(data, "") // { bookId: 1 }
+      fetchBookList.fulfilled(data, "", { page: 1 })
     ))
       .toEqual({
         isLoading: false,
+        hasMore: true,
         ids: [1],
         entities: { 1: data[0] }
       });

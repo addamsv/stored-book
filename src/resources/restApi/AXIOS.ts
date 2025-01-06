@@ -17,6 +17,11 @@ AXIOS.interceptors.response.use(
       return Promise.resolve({ data: { isSuccess: false, message: "Please check your server/internet connection" } });
     }
 
+    if (error.response.data) {
+      console.log(error.response);
+      return Promise.resolve({ data: error.response.data });
+    }
+
     return Promise.reject(error);
   }
 );
