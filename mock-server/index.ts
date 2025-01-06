@@ -2,27 +2,12 @@ const fs = require("fs");
 const jsonServer = require("json-server");
 const path = require("path");
 const { createHmac } = require("node:crypto");
-const CustomReturnData = require("./model/CustomReturnData.ts");
 
+/** __ENV__ */
 const SECRET_KEY = "L16wsStHbN1V44K0f7xM4vJb3lvC3rrHGRCloTOD3f";
 
-/**
- * SHA-256 hash function reference implementation.
- *
- * This is an annotated direct implementation of FIPS 180-4, without any optimisations. It is
- * intended to aid understanding of the algorithm rather than for production use.
- *
- * While it could be used where performance is not critical, I would recommend using the ‘Web
- * Cryptography API’ (developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest) for the browser,
- * or the ‘crypto’ library (nodejs.org/api/crypto.html#crypto_class_hash) in Node.js.
- *
- * See csrc.nist.gov/groups/ST/toolkit/secure_hashing.html
- *     csrc.nist.gov/groups/ST/toolkit/examples.html
- */
-
-const decodeBase64 = (data) => {
-  return Buffer.from(data, "base64").toString("ascii");
-};
+/** __ENV__ */
+const IS_PROD = false;
 
 const server = jsonServer.create();
 
@@ -42,26 +27,112 @@ server.use(async (req, res, next) => {
   next();
 });
 
+/**
+ *
+ * Custom Return Errors
+ *
+ */
+const err500 = (res, data) => {
+  if (!IS_PROD) {
+    console.log(data);
+  }
+
+  res.status(500);
+
+  return res.json({
+    isSuccess: false,
+    statusCode: 500,
+    message: "Server Side Error",
+    data
+  });
+};
+
+const err403 = (res, unit) => {
+  res.status(403);
+
+  return res.json({
+    isSuccess: false,
+    statusCode: 403,
+    message: `${unit} not allowed`,
+  });
+};
+
+const err404 = (res, unit) => {
+  res.status(404);
+
+  return res.json({
+    isSuccess: false,
+    statusCode: 404,
+    message: `${unit} not found`
+  });
+};
+
+const err401 = (res) => {
+  res.status(401);
+
+  res.set({ "www-authenticate": "Basic realm=\"Realm\"" });
+
+  return res.json({
+    isSuccess: false,
+    statusCode: 401,
+    message: "Unauthorized"
+  });
+};
+
+const CustomReturnData = (res, message, data) => {
+  return res.json({
+    isSuccess: true,
+    statusCode: 200,
+    message,
+    data
+  });
+};
+
+/**
+ *
+ *
+ *
+ *          Persistence and JWT
+ *
+ *
+ *
+ *
+ */
+
+/**
+ * SHA-256 hash function reference implementation.
+ *
+ * This is an annotated direct implementation of FIPS 180-4, without any optimisations. It is
+ * intended to aid understanding of the algorithm rather than for production use.
+ *
+ * While it could be used where performance is not critical, I would recommend using the ‘Web
+ * Cryptography API’ (developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest) for the browser,
+ * or the ‘crypto’ library (nodejs.org/api/crypto.html#crypto_class_hash) in Node.js.
+ *
+ * See csrc.nist.gov/groups/ST/toolkit/secure_hashing.html
+ *     csrc.nist.gov/groups/ST/toolkit/examples.html
+ */
+
+const decodeBase64 = (data) => {
+  return Buffer.from(data, "base64").toString("ascii");
+};
+
 const getData = () => {
-  return JSON.parse(fs.readFileSync(path.resolve(__dirname, "db.json"), "UTF-8"));
+  try {
+    return JSON.parse(fs.readFileSync(path.resolve(__dirname, "db.json"), "UTF-8"));
+  } catch (e) {
+    throw new Error(`Error with getData: ${e.message}`);
+  }
 };
 
 const putData = (json) => {
-  const data = JSON.stringify(json);
-  fs.writeFileSync(path.resolve(__dirname, "db.json"), data, "UTF-8");
+  try {
+    const data = JSON.stringify(json);
+    fs.writeFileSync(path.resolve(__dirname, "db.json"), data, "UTF-8");
+  } catch (e) {
+    throw new Error(`Error with putData: ${e.message}`);
+  }
 };
-
-const serverSideErr500 = {
-  isSuccess: false,
-  statusCode: 500,
-  message: "Server Side Err" // e.message
-};
-
-const err403 = (unit) => ({
-  isSuccess: false,
-  statusCode: 403,
-  message: `${unit} not found`
-});
 
 const getIat = Math.round((new Date().getTime() / 1000));
 // in seconds from now:
@@ -69,7 +140,7 @@ const getIat = Math.round((new Date().getTime() / 1000));
 // 1 hour from now:
 const getExp = Math.round((new Date().getTime() + 60 * 60 * 1000) / 1000);
 
-const authFilterByUsernameAndPassword = (data) => {
+const basicAuthFilter = (data) => {
   try {
     const decode = decodeBase64(data);
 
@@ -83,10 +154,6 @@ const authFilterByUsernameAndPassword = (data) => {
 
     const signature = hmac.digest("hex");
 
-    console.log("pass signature:");
-
-    console.log(signature);
-
     const { users = [] } = getData();
 
     const candidate = users.find(
@@ -94,7 +161,9 @@ const authFilterByUsernameAndPassword = (data) => {
     );
 
     if (candidate) {
-      console.log("Auth by Basic");
+      if (!IS_PROD) {
+        console.log("BasicAuth");
+      }
 
       const { password, ...returnUserData } = candidate;
       return returnUserData;
@@ -102,7 +171,7 @@ const authFilterByUsernameAndPassword = (data) => {
 
     return false;
   } catch (e) {
-    throw new Error(e.message);
+    throw new Error(`basicAuthFilter: ${e.message}`);
   }
 };
 
@@ -114,19 +183,20 @@ const getCustomJWT = (sub) => {
   );
 
   if (!candidate) {
-    return "";
+    throw new Error("getCustomJWT: User Not found");
   }
 
   const jwtHeader = { alg: "RS256" };
 
   const authorities = candidate.roles;
-  console.log(authorities);
 
   const iat = getIat;
 
   const exp = getExp;
 
-  console.log(iat, exp);
+  if (!IS_PROD) {
+    console.log(authorities);
+  }
 
   const claims = {
     iss: "self",
@@ -146,18 +216,16 @@ const getCustomJWT = (sub) => {
 
   const signature = hmac.digest("hex");
 
-  console.log("jwt signature:");
-  // console.log("45c00f7a986fbab2099a8174605ec63f35fbb4127fb912414c308402d14e01bc");
-  console.log(signature);
   return `${data}.${signature}`;
 };
 
 const parseJwt = (token) => {
   try {
     const tokenParts = token.split(".");
+
     const payloadClaims = JSON.parse(atob(tokenParts[1]));
-    console.log(atob(tokenParts[0]));
-    console.log(atob(tokenParts[1]));
+    // console.log(atob(tokenParts[0]));
+    // console.log(atob(tokenParts[1]));
 
     const hmac = createHmac("sha256", SECRET_KEY);
 
@@ -167,30 +235,27 @@ const parseJwt = (token) => {
 
     const signature = hmac.digest("hex");
 
-    console.log("shouldExp: ", payloadClaims.exp, "curr: ", getIat, "isExp:", payloadClaims.exp < getIat);
+    if (!IS_PROD) {
+      console.log("isExp:", payloadClaims.exp < getIat);
+    }
 
     if (payloadClaims.exp < getIat) {
-      console.log("is JWT expired: ", true);
       return null;
     }
 
     if (signature === tokenParts[2]) {
-      console.log("is JWT valid:", true);
       return payloadClaims;
     }
 
-    console.log("is JWT valid:", false);
     return null;
   } catch (e) {
-    return null;
+    throw new Error("parseJwt err");
   }
 };
 
 const authFilterByToken = (data) => {
   try {
     const decode = parseJwt(data);
-
-    console.log(decode.sub);
 
     const { users = [] } = getData();
 
@@ -199,14 +264,23 @@ const authFilterByToken = (data) => {
     );
 
     if (candidate) {
-      console.log("Auth by Token");
+      if (!IS_PROD) {
+        console.log(`JWTAuth, User: "${decode.sub}", roles: "${decode.authorities}"`);
+      }
+
       const { password, ...returnUserData } = candidate;
       return returnUserData;
     }
 
+    if (!IS_PROD) {
+      console.log("authFilterByToken: No candidate");
+    }
     return false;
   } catch (e) {
-    throw new Error(e.message);
+    if (!IS_PROD) {
+      console.log(e.message);
+    }
+    return false;
   }
 };
 
@@ -237,14 +311,10 @@ const isAuth = (req) => {
   }
 
   if (type === "Basic") {
-    return authFilterByUsernameAndPassword(data);
+    return basicAuthFilter(data);
   }
 
   return false;
-};
-
-const getToken = (name) => {
-  return getCustomJWT(name);
 };
 
 /**
@@ -263,20 +333,20 @@ server.post("/api/v1/users/login", (req, res) => {
     const user = isAuth(req);
 
     if (!user) {
-      return res.status(403).json(err403("User"));
+      return err401(res);
     }
 
-    const token = getToken(user.name);
-
-    console.log(token);
+    const token = getCustomJWT(user.name);
 
     const data = { user, token };
 
-    return res.json(CustomReturnData("Login user info and JWT", data));
-  } catch (e) {
-    console.log(e);
+    if (!IS_PROD) {
+      console.log(data);
+    }
 
-    return res.status(500).json(serverSideErr500);
+    return CustomReturnData(res, "Login user info and JWT", data);
+  } catch (e) {
+    return err500(res, e.message);
   }
 });
 
@@ -298,7 +368,7 @@ server.get("/api/v1/profiles/:userId", (req, res) => {
     const user = isAuth(req);
 
     if (!user) {
-      return res.status(403).json(err403("User"));
+      return err401(res);
     }
 
     const { profiles = [] } = getData();
@@ -308,14 +378,12 @@ server.get("/api/v1/profiles/:userId", (req, res) => {
     );
 
     if (profileCandidate) {
-      console.log(profileCandidate);
-
-      return res.json(CustomReturnData(`Profile info for User: ${req.params.userId}`, profileCandidate));
+      return CustomReturnData(res, `Profile info for User: ${req.params.userId}`, profileCandidate);
     }
 
-    return res.status(403).json(err403("Profile"));
+    return err404(res, `Profile info for User: ${req.params.userId}`);
   } catch (e) {
-    return res.status(500).json(serverSideErr500);
+    return err500(res, e.message);
   }
 });
 
@@ -329,7 +397,7 @@ server.put("/api/v1/profiles/:profileId", (req, res) => {
     const user = isAuth(req);
 
     if (!user) {
-      return res.status(403).json(err403("User"));
+      return err401(res);
     }
 
     const data = getData();
@@ -351,14 +419,12 @@ server.put("/api/v1/profiles/:profileId", (req, res) => {
 
       putData(json);
 
-      return res.json(CustomReturnData(`Updated Profile for User: ${user.id}`, updatedProfile));
+      return CustomReturnData(res, `Updated Profile for User: ${user.id}`, updatedProfile);
     }
 
-    return res.status(403).json(err403("User"));
+    return err403(res, `Updated Profile for User: ${user.id}`);
   } catch (e) {
-    console.log(e);
-
-    return res.status(500).json(serverSideErr500);
+    return err500(res, e.message);
   }
 });
 
@@ -370,14 +436,26 @@ server.put("/api/v1/profiles/:profileId", (req, res) => {
 server.get("/api/v1/books", (req, res) => {
   try {
     if (!isAuth(req)) {
-      return res.status(403).json(err403("User"));
+      return err401(res);
     }
 
     const { books = [] } = getData();
 
-    return res.json(CustomReturnData("All books", books));
+    // _page = 1, _limit = 10, _sort = false, _order = "asc", first, prev, next, last, links
+    const {
+      _page = 1,
+      _limit = 10,
+      _sort = false,
+      _order = "asc",
+    } = req.query;
+
+    const offset = _limit * _page - _limit;
+
+    const result = books.filter((_, indx) => indx < _limit * _page && indx >= offset);
+
+    return CustomReturnData(res, `All books limit:${_limit}, page:${_page}`, result);
   } catch (e) {
-    return res.status(500).json(serverSideErr500);
+    return err500(res, e.message);
   }
 });
 
@@ -389,7 +467,7 @@ server.get("/api/v1/books", (req, res) => {
 server.get("/api/v1/books/:id", (req, res) => {
   try {
     if (!isAuth(req)) {
-      return res.status(403).json(err403("User"));
+      return err401(res);
     }
 
     const { books = [] } = getData();
@@ -399,14 +477,12 @@ server.get("/api/v1/books/:id", (req, res) => {
     );
 
     if (bookCandidate) {
-      return res.json(CustomReturnData(`Book Details with ID: ${req.params.id}`, bookCandidate));
+      return CustomReturnData(res, `Book Details with ID: ${req.params.id}`, bookCandidate);
     }
 
-    return res.status(404).json(CustomReturnData(`Book with id: ${req.params.id} not found`, null));
+    return err404(res, `Book Details with ID: ${req.params.id}`);
   } catch (e) {
-    console.log(e);
-
-    return res.status(500).json(serverSideErr500);
+    return err500(res, e.message);
   }
 });
 
@@ -418,7 +494,7 @@ server.get("/api/v1/books/:id", (req, res) => {
 server.get("/api/v1/comments/:bookId", (req, res) => {
   try {
     if (!isAuth(req)) {
-      return res.status(403).json(err403("User"));
+      return err401(res);
     }
 
     const { comments = [], profiles = [] } = getData();
@@ -433,15 +509,14 @@ server.get("/api/v1/comments/:bookId", (req, res) => {
 
         return { ...comment, owner: { id, name, image } };
       });
+
     // _expand "profile"
     // console.log("PARAMS: ", Number(req.params.bookId));
     // console.log("QUERY: ", req.query, Number(req.query.bookId), req.query._expand);
 
-    return res.json(CustomReturnData(`Comments for book: ${req.params.bookId}`, filteredCommentsByBookId || []));
+    return CustomReturnData(res, `Comments for book: ${req.params.bookId}`, filteredCommentsByBookId || []);
   } catch (e) {
-    console.log(e);
-
-    return res.status(500).json(serverSideErr500);
+    return err500(res, e.message);
   }
 });
 
@@ -455,7 +530,7 @@ server.post("/api/v1/comments", (req, res) => {
     const user = isAuth(req);
 
     if (!user) {
-      return res.status(403).json(err403("User"));
+      return err401(res);
     }
 
     const { comments = [] } = getData();
@@ -477,21 +552,15 @@ server.post("/api/v1/comments", (req, res) => {
       text: body.text
     };
 
-    // console.log(comment);
-    // console.log(user);
-    // console.log(body);
-
     const json = { ...getData() };
 
     json.comments.push(comment);
 
     putData(json);
 
-    return res.json(CustomReturnData("New comment", comment));
+    return CustomReturnData(res, "New comment", comment);
   } catch (e) {
-    console.log(e);
-
-    return res.status(500).json(serverSideErr500);
+    return err500(res, e.message);
   }
 });
 
@@ -502,12 +571,10 @@ server.post("/api/v1/comments", (req, res) => {
 server.use((req, res, next) => {
   try {
     if (!isAuth(req)) {
-      return res.status(403).json(err403("AUTH ERROR"));
+      return err401(res);
     }
   } catch (e) {
-    console.log(e);
-
-    return res.status(500).json(serverSideErr500);
+    return err500(res, e.message);
   }
 
   next();
@@ -519,15 +586,17 @@ server.use((req, res, next) => {
 server.use(router);
 
 // запуск сервера
-const API_SERVER_PORT = 8000;
+const API_SERVER_PORT = IS_PROD ? 80 : 8000;
 
 server.listen(API_SERVER_PORT, () => {
-  const d = new Date();
-  // eslint-disable-next-line max-len
-  console.log(`server is running on ${API_SERVER_PORT} port ${d.getDate()}.${Number(d.getMonth()) + 1}.${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`);
-  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/users/login`);
-  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/books`);
-  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/books/1`);
-  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/profiles/1`);
-  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/comments/1`);
+  if (!IS_PROD) {
+    const d = new Date();
+    // eslint-disable-next-line max-len
+    console.log(`server is running on ${API_SERVER_PORT} port ${d.getDate()}.${Number(d.getMonth()) + 1}.${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`);
+    console.log(`http://localhost:${API_SERVER_PORT}/api/v1/users/login`);
+    console.log(`http://localhost:${API_SERVER_PORT}/api/v1/books`);
+    console.log(`http://localhost:${API_SERVER_PORT}/api/v1/books/1`);
+    console.log(`http://localhost:${API_SERVER_PORT}/api/v1/profiles/1`);
+    console.log(`http://localhost:${API_SERVER_PORT}/api/v1/comments/1`);
+  }
 });

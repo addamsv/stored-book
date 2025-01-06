@@ -124,7 +124,7 @@
     {
       "id": 4,
       "owner": 4,
-      "title": "Lorem",
+      "title": "Lorem 4",
       "subTitle": "Lorem",
       "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
@@ -146,7 +146,7 @@
     {
       "id": 5,
       "owner": 5,
-      "title": "Lorem",
+      "title": "Lorem 5",
       "subTitle": "Lorem",
       "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
@@ -168,7 +168,7 @@
     {
       "id": 6,
       "owner": 6,
-      "title": "Lorem",
+      "title": "Lorem 6",
       "subTitle": "Lorem",
       "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
@@ -190,7 +190,7 @@
     {
       "id": 7,
       "owner": 7,
-      "title": "Lorem",
+      "title": "Lorem 7",
       "subTitle": "Lorem",
       "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
@@ -212,7 +212,7 @@
     {
       "id": 8,
       "owner": 8,
-      "title": "Lorem",
+      "title": "Lorem 8",
       "subTitle": "Lorem",
       "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
@@ -234,7 +234,7 @@
     {
       "id": 9,
       "owner": 9,
-      "title": "Lorem",
+      "title": "Lorem 9",
       "subTitle": "Lorem",
       "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
@@ -256,7 +256,7 @@
     {
       "id": 10,
       "owner": 10,
-      "title": "Lorem",
+      "title": "Lorem 10",
       "subTitle": "Lorem",
       "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
@@ -278,7 +278,7 @@
     {
       "id": 11,
       "owner": 11,
-      "title": "Lorem",
+      "title": "Lorem 11",
       "subTitle": "Lorem",
       "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
@@ -300,7 +300,7 @@
     {
       "id": 12,
       "owner": 12,
-      "title": "Lorem",
+      "title": "Lorem 12",
       "subTitle": "Lorem",
       "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
@@ -322,7 +322,7 @@
     {
       "id": 13,
       "owner": 13,
-      "title": "Lorem",
+      "title": "Lorem 13",
       "subTitle": "Lorem",
       "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
@@ -344,7 +344,7 @@
     {
       "id": 14,
       "owner": 14,
-      "title": "Lorem",
+      "title": "Lorem 14",
       "subTitle": "Lorem",
       "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
@@ -366,7 +366,7 @@
     {
       "id": 15,
       "owner": 15,
-      "title": "Lorem",
+      "title": "Lorem 15",
       "subTitle": "Lorem",
       "img": "http://localhost:3000/images/Fahrenheit451.jpg",
       "views": 1,
@@ -435,6 +435,13 @@
       "iat": "27.12.2024 16:35",
       "owner": 3,
       "text": "Comment"
+    },
+    {
+      "id": 8,
+      "bookId": 1,
+      "iat": "27.12.2024 23:34",
+      "owner": 3,
+      "text": "Awesome book"
     }
   ],
   "users": [
@@ -480,7 +487,7 @@
       "id": 3,
       "owner": 3,
       "firstname": "Guest",
-      "lastname": "Johnson",
+      "lastname": "Johnsons",
       "age": 20,
       "country": "Belarus",
       "city": "Minsk",

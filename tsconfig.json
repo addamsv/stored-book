@@ -17,7 +17,8 @@
   },
   "ts-node": {
     "compilerOptions": {
-      "module": "CommonJS"
+      "module": "CommonJS",
+      "target": "es5",
     }
   },
   "include": ["./config/jest/setupTest.ts", "./src/**/*.ts", "./src/**/*.tsx"]
