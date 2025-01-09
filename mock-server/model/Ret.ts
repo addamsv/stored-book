@@ -5,18 +5,19 @@ export const Ret = {
 
   _req: undefined as any,
 
-  err500: (data: string) => {
+  err500: (res: any, data: string) => {
     if (!IS_PROD) {
       console.log(data);
     }
 
-    if (!Ret._res) {
+    if (!res) {
+      console.log("_res is not Defined");
       throw new Error("_res is not Defined");
     }
 
-    Ret._res.status(500);
+    res.status(500);
 
-    return Ret._res.json({
+    return res.json({
       isSuccess: false,
       statusCode: 500,
       message: "Server Side Error",
@@ -24,40 +25,40 @@ export const Ret = {
     });
   },
 
-  err403: (unit: string) => {
-    Ret._res.status(403);
+  err403: (res: any, unit: string) => {
+    res.status(403);
 
-    return Ret._res.json({
+    return res.json({
       isSuccess: false,
       statusCode: 403,
       message: `${unit} not allowed`,
     });
   },
 
-  err404: (unit: string) => {
-    Ret._res.status(404);
+  err404: (res: any, unit: string) => {
+    res.status(404);
 
-    return Ret._res.json({
+    return res.json({
       isSuccess: false,
       statusCode: 404,
       message: `${unit} not found`
     });
   },
 
-  err401: () => {
-    Ret._res.status(401);
+  err401: (res: any) => {
+    res.status(401);
 
-    Ret._res.set({ "www-authenticate": "Basic realm=\"Realm\"" });
+    res.set({ "www-authenticate": "Basic realm=\"Realm\"" });
 
-    return Ret._res.json({
+    return res.json({
       isSuccess: false,
       statusCode: 401,
       message: "Unauthorized"
     });
   },
 
-  CustomReturnData: (message: string, data: any) => {
-    return Ret._res!.json({
+  CustomReturnData: (res: any, message: string, data: any) => {
+    return res!.json({
       isSuccess: true,
       statusCode: 200,
       message,

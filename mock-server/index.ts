@@ -22,12 +22,6 @@ server.use(jsonServer.bodyParser);
  *
  */
 server.use(async (req, res, next) => {
-  Auth._req = req;
-  Auth._res = res;
-
-  Ret._req = req;
-  Ret._res = res;
-
   /** задержка - как в реальном АПИ */
   await new Promise((res) => {
     setTimeout(res, 800);
@@ -49,10 +43,10 @@ server.use(async (req, res, next) => {
  */
 server.post("/api/v1/users/login", (req, res) => {
   try {
-    const user = Auth.isAuth();
+    const user = Auth.isAuth(req);
 
     if (!user) {
-      return Ret.err401();
+      return Ret.err401(res);
     }
 
     const token = Auth.getCustomJWT(user.name);
@@ -63,9 +57,9 @@ server.post("/api/v1/users/login", (req, res) => {
       console.log(data);
     }
 
-    return Ret.CustomReturnData("Login user info and JWT", data);
+    return Ret.CustomReturnData(res, "Login user info and JWT", data);
   } catch (e: unknown) {
-    return Ret.err500(`err: Login ${e instanceof Error ? e.message : ""}`);
+    return Ret.err500(res, `err: Login ${e instanceof Error ? e.message : ""}`);
   }
 });
 
@@ -82,10 +76,10 @@ server.post("/api/v1/users/login", (req, res) => {
  */
 server.get("/api/v1/profiles/:userId", (req, res) => {
   try {
-    const user = Auth.isAuth();
+    const user = Auth.isAuth(req);
 
     if (!user) {
-      return Ret.err401();
+      return Ret.err401(res);
     }
 
     const { profiles = [] } = Persistence.get();
@@ -95,12 +89,12 @@ server.get("/api/v1/profiles/:userId", (req, res) => {
     );
 
     if (profileCandidate) {
-      return Ret.CustomReturnData(`Profile info for User: ${req.params.userId}`, profileCandidate);
+      return Ret.CustomReturnData(res, `Profile info for User: ${req.params.userId}`, profileCandidate);
     }
 
-    return Ret.err404(`Profile info for User: ${req.params.userId}`);
+    return Ret.err404(res, `Profile info for User: ${req.params.userId}`);
   } catch (e) {
-    return Ret.err500(`err: profiles/{userId} ${e instanceof Error ? e.message : ""}`);
+    return Ret.err500(res, `err: profiles/{userId} ${e instanceof Error ? e.message : ""}`);
   }
 });
 
@@ -111,10 +105,10 @@ server.get("/api/v1/profiles/:userId", (req, res) => {
  */
 server.put("/api/v1/profiles/:profileId", (req, res) => {
   try {
-    const user = Auth.isAuth();
+    const user = Auth.isAuth(req);
 
     if (!user) {
-      return Ret.err401();
+      return Ret.err401(res);
     }
 
     const data = Persistence.get();
@@ -136,12 +130,12 @@ server.put("/api/v1/profiles/:profileId", (req, res) => {
 
       Persistence.put(json);
 
-      return Ret.CustomReturnData(`Updated Profile for User: ${user.id}`, updatedProfile);
+      return Ret.CustomReturnData(res, `Updated Profile for User: ${user.id}`, updatedProfile);
     }
 
-    return Ret.err403(`Updated Profile for User: ${user.id}`);
+    return Ret.err403(res, `Updated Profile for User: ${user.id}`);
   } catch (e) {
-    return Ret.err500(`err: profiles/{profileId} ${e instanceof Error ? e.message : ""}`);
+    return Ret.err500(res, `err: profiles/{profileId} ${e instanceof Error ? e.message : ""}`);
   }
 });
 
@@ -152,8 +146,8 @@ server.put("/api/v1/profiles/:profileId", (req, res) => {
  */
 server.get("/api/v1/books", (req, res) => {
   try {
-    if (!Auth.isAuth()) {
-      return Ret.err401();
+    if (!Auth.isAuth(req)) {
+      return Ret.err401(res);
     }
 
     const { books = [] } = Persistence.get();
@@ -164,9 +158,9 @@ server.get("/api/v1/books", (req, res) => {
     const offset = _limit * _page - _limit;
     const result = books.filter((_, indx) => indx < _limit * _page && indx >= offset);
 
-    return Ret.CustomReturnData(`All books limit:${_limit}, page:${_page}`, result);
+    return Ret.CustomReturnData(res, `All books limit:${_limit}, page:${_page}`, result);
   } catch (e) {
-    return Ret.err500(`err: books ${e instanceof Error ? e.message : ""}`);
+    return Ret.err500(res, `err: books ${e instanceof Error ? e.message : ""}`);
   }
 });
 
@@ -177,8 +171,8 @@ server.get("/api/v1/books", (req, res) => {
  */
 server.get("/api/v1/books/:id", (req, res) => {
   try {
-    if (!Auth.isAuth()) {
-      return Ret.err401();
+    if (!Auth.isAuth(req)) {
+      return Ret.err401(res);
     }
 
     const { books = [] } = Persistence.get();
@@ -186,14 +180,14 @@ server.get("/api/v1/books/:id", (req, res) => {
     const bookCandidate = books.find(
       (book) => book.id === Number(req.params.id)
     );
-
+    console.log("bookCandidate", bookCandidate);
     if (bookCandidate) {
-      return Ret.CustomReturnData(`Book Details with ID: ${req.params.id}`, bookCandidate);
+      return Ret.CustomReturnData(res, `Book Details with ID: ${req.params.id}`, bookCandidate);
     }
 
-    return Ret.err404(`Book Details with ID: ${req.params.id}`);
+    return Ret.err404(res, `Book Details with ID: ${req.params.id}`);
   } catch (e) {
-    return Ret.err500(`err: books/{id} ${e instanceof Error ? e.message : ""}`);
+    return Ret.err500(res, `err: books/{id} ${e instanceof Error ? e.message : ""}`);
   }
 });
 
@@ -204,8 +198,8 @@ server.get("/api/v1/books/:id", (req, res) => {
  */
 server.get("/api/v1/comments/:bookId", (req, res) => {
   try {
-    if (!Auth.isAuth()) {
-      return Ret.err401();
+    if (!Auth.isAuth(req)) {
+      return Ret.err401(res);
     }
 
     const { comments = [], profiles = [] } = Persistence.get();
@@ -228,9 +222,9 @@ server.get("/api/v1/comments/:bookId", (req, res) => {
     // console.log("PARAMS: ", Number(req.params.bookId));
     // console.log("QUERY: ", req.query, Number(req.query.bookId), req.query._expand);
 
-    return Ret.CustomReturnData(`Comments for book: ${req.params.bookId}`, filteredCommentsByBookId || []);
+    return Ret.CustomReturnData(res, `Comments for book: ${req.params.bookId}`, filteredCommentsByBookId || []);
   } catch (e) {
-    return Ret.err500(`err: comments/{bookId} ${e instanceof Error ? e.message : ""}`);
+    return Ret.err500(res, `err: comments/{bookId} ${e instanceof Error ? e.message : ""}`);
   }
 });
 
@@ -241,10 +235,10 @@ server.get("/api/v1/comments/:bookId", (req, res) => {
  */
 server.post("/api/v1/comments", (req, res) => {
   try {
-    const user = Auth.isAuth();
+    const user = Auth.isAuth(req);
 
     if (!user) {
-      return Ret.err401();
+      return Ret.err401(res);
     }
 
     const { comments = [] } = Persistence.get();
@@ -272,9 +266,9 @@ server.post("/api/v1/comments", (req, res) => {
 
     Persistence.put(json);
 
-    return Ret.CustomReturnData("New comment", comment);
+    return Ret.CustomReturnData(res, "New comment", comment);
   } catch (e) {
-    return Ret.err500(`err: comments ${e instanceof Error ? e.message : ""}`);
+    return Ret.err500(res, `err: comments ${e instanceof Error ? e.message : ""}`);
   }
 });
 
@@ -284,11 +278,11 @@ server.post("/api/v1/comments", (req, res) => {
 // eslint-disable-next-line consistent-return
 server.use((req, res, next) => {
   try {
-    if (!Auth.isAuth()) {
-      return Ret.err401();
+    if (!Auth.isAuth(req)) {
+      return Ret.err401(res);
     }
   } catch (e) {
-    return Ret.err500(`err: CHECK AUTH ${e instanceof Error ? e.message : ""}`);
+    return Ret.err500(res, `err: CHECK AUTH ${e instanceof Error ? e.message : ""}`);
   }
 
   next();

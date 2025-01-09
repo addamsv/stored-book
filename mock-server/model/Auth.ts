@@ -23,10 +23,6 @@ interface IUser {
 }
 
 export const Auth = {
-  _res: undefined as any,
-
-  _req: undefined as any,
-
   _getIat: Math.round((new Date().getTime() / 1000)),
   // in seconds from now:
   // (new Date().getTime() + seconds * 1000)/1000
@@ -150,12 +146,12 @@ export const Auth = {
     }
   },
 
-  _getAuthData: (): string[] => {
-    if (!Auth._req?.headers?.authorization) {
+  _getAuthData: (req: any): string[] => {
+    if (!req?.headers?.authorization) {
       return ["none"];
     }
 
-    const [type = "", data = ""] = Auth._req.headers.authorization.split(" ") || "";
+    const [type = "", data = ""] = req.headers.authorization.split(" ") || "";
 
     switch (type) {
       case "Basic":
@@ -213,8 +209,8 @@ export const Auth = {
     return `${data}.${signature}`;
   },
 
-  isAuth: (): IUser | false => {
-    const [type, data] = Auth._getAuthData();
+  isAuth: (req: any): IUser | false => {
+    const [type, data] = Auth._getAuthData(req);
 
     if (type === "Bearer") {
       return Auth._authFilterByToken(data);
