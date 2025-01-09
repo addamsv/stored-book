@@ -12,8 +12,9 @@ import { Text } from "shared/ui/Text/Text";
 import { TextTheme } from "shared/ui/Text";
 import { bookListPageActions, bookListPageReducer, getBooks } from "../model/slices";
 import cls from "./BooksListPage.module.scss";
-import { fetchBookList, fetchNextBookList } from "../model/services";
-import { getBooksListPageError, getBooksListPageHasMore, getBooksListPageListView, getBooksListPageLoading, getBooksListPageNum } from "../model/selectors";
+import { fetchNextBookList } from "../model/services";
+import { getBooksListPageError, getBooksListPageIsStateInit, getBooksListPageListView, getBooksListPageLoading } from "../model/selectors";
+import { initBookListPage } from "../model/services/initBookListPage";
 
 interface IBooksListPageProps {
   className?: string;
@@ -81,24 +82,25 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
   const isLoading = useSelector(getBooksListPageLoading);
   const error = useSelector(getBooksListPageError);
   const listView = useSelector(getBooksListPageListView);
+  const isStateInit = useSelector(getBooksListPageIsStateInit);
 
   const onNextChunk = useCallback(() => {
     dispatch(fetchNextBookList());
   }, [dispatch]);
 
+  /** FOR INIT STATE ONLY */
   useEffect(() => {
     if (__PROJECT_TYPE__ !== "storybook") {
-      dispatch(bookListPageActions.initState());
-      dispatch(fetchBookList({ page: 1 }));
+      dispatch(initBookListPage());
     }
-  }, [dispatch]);
+  }, [dispatch, isStateInit]);
 
   const onChangeViewHandler = useCallback((newListView: EBookListView) => {
     dispatch(bookListPageActions.setView(newListView));
   }, [dispatch]);
 
   return (
-    <AsyncModule reducers={reducers} isRemoveAfterUnmount>
+    <AsyncModule reducers={reducers} isRemoveAfterUnmount={false}>
       <Page
         onNextChunk={onNextChunk}
         className={classes(cls.BooksListPage, {}, [className])}

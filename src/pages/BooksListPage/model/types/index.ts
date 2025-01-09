@@ -11,4 +11,6 @@ export interface IBookListPageStateSchema extends EntityState<IBook> {
   page: number;
   limit?: number;
   hasMore: boolean;
+
+  _isStateInit: boolean;
 }

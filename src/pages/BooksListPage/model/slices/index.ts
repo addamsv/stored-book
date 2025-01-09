@@ -26,7 +26,8 @@ export const bookListPageSlice = createSlice({
     ],
     entities: {
       // 1: { id: "1", text: "Awesome" }, 2: { id: "2", text: "Whooooo-hoooo" }
-    }
+    },
+    _isStateInit: false
   }),
   reducers: {
     setView: (state, action: PayloadAction<EBookListView>) => {
@@ -40,6 +41,7 @@ export const bookListPageSlice = createSlice({
       const listView = localStorage.getItem(LIST_VIEW_LOCAL_STORAGE_KEY) as EBookListView;
       state.listView = listView;
       state.limit = listView === EBookListView.STANDARD ? 4 : 9;
+      state._isStateInit = true;
     }
   },
 

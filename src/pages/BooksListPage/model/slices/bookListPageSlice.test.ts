@@ -12,7 +12,8 @@ describe("bookListPageSlice.test", () => {
       ids: [],
       entities: {},
       page: 1,
-      hasMore: true
+      hasMore: true,
+      _isStateInit: true
     };
 
     expect(
@@ -26,7 +27,8 @@ describe("bookListPageSlice.test", () => {
         ids: [],
         entities: {},
         page: 1,
-        hasMore: true
+        hasMore: true,
+        _isStateInit: true
       });
   });
 
@@ -39,7 +41,8 @@ describe("bookListPageSlice.test", () => {
         isLoading: false,
         listView: EBookListView.STANDARD,
         page: 1,
-        hasMore: true
+        hasMore: true,
+        _isStateInit: false
       });
   });
 
