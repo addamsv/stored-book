@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { memo, useCallback, useEffect } from "react";
 import { BookList, ListViewSwitcher } from "entities/Book";
 import { EBookListView } from "entities/Book/model/types";
-import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
+import { AsyncModule, ReducerListT } from "shared/ui/AsyncModule/AsyncModule";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
 import { Page } from "shared/ui/Page/Page";

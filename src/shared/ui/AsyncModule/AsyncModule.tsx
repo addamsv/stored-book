@@ -1,6 +1,6 @@
 import { Reducer } from "@reduxjs/toolkit";
 import { IStoreManager } from "app/providers/StoreProvider";
-import { IStateSchemaKey } from "app/providers/StoreProvider/config/IStateSchema";
+import { IStateSchema, IStateSchemaKey } from "app/providers/StoreProvider/config/IStateSchema";
 import { PropsWithChildren, useEffect } from "react";
 import { useDispatch, useStore } from "react-redux";
 
@@ -29,17 +29,27 @@ export const AsyncModule = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    Object.entries(reducers).forEach(([reducerKey, reducer]) => {
-      store.reducerManager.add(reducerKey as IStateSchemaKey, reducer);
-      dispatch({ type: `@INIT ${reducerKey} rdcr` });
-    });
+    const alreadyMountedReducers = store.reducerManager.getReducerMap();
+
+    Object
+      .entries(reducers)
+      .forEach(([reducerKey, reducer]) => {
+        const isReducerExist = alreadyMountedReducers[reducerKey as IStateSchemaKey];
+
+        if (!isReducerExist) {
+          store.reducerManager.add(reducerKey as IStateSchemaKey, reducer);
+          dispatch({ type: `@INIT REDUCER ${reducerKey} ${Boolean(isReducerExist)}` });
+        }
+      });
 
     return () => {
       if (isRemoveAfterUnmount) {
-        Object.keys(reducers).forEach((reducerKey) => {
-          store.reducerManager.remove(reducerKey as IStateSchemaKey);
-          dispatch({ type: `@REM ${reducerKey} rdcr` });
-        });
+        Object
+          .keys(reducers)
+          .forEach((reducerKey) => {
+            store.reducerManager.remove(reducerKey as IStateSchemaKey);
+            dispatch({ type: `@REM REDUCER ${reducerKey}` });
+          });
       }
     };
 

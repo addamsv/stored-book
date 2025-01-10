@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { memo, useCallback, useEffect } from "react";
 import { Text } from "shared/ui/Text/Text";
 import { TextTheme } from "shared/ui/Text";
-import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
+import { AsyncModule, ReducerListT } from "shared/ui/AsyncModule/AsyncModule";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { getLoginUsername } from "../../model/selectors/getLoginUsername/getLoginUsername";
 import { getLoginPassword } from "../../model/selectors/getLoginPassword/getLoginPassword";

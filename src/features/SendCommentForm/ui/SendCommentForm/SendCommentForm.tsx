@@ -5,7 +5,7 @@ import { Input } from "shared/ui/Input/Input";
 import { Button } from "shared/ui/Button/Button";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
+import { AsyncModule, ReducerListT } from "shared/ui/AsyncModule/AsyncModule";
 // import { sendComment } from "../../model/services/sendComment";
 import { sendCommentFormActions, sendCommentFormReducer } from "../../model/slices";
 import { getErrorTextFromSendCommentForm, getTextFromSendCommentForm } from "../../model/selectors";

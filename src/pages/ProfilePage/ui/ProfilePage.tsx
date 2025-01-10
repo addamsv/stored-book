@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
+import { AsyncModule, ReducerListT } from "shared/ui/AsyncModule/AsyncModule";
 import {
   EnumValidateProfileErrs,
   fetchProfile, getProfile,
