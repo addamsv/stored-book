@@ -7,7 +7,7 @@ import { EBookListView } from "entities/Book/model/types";
 import { AsyncModule, ReducerListT } from "shared/ui/AsyncModule/AsyncModule";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
-import { Page } from "shared/ui/Page/Page";
+import { Page } from "widgets/Page/Page";
 import { Text } from "shared/ui/Text/Text";
 import { TextTheme } from "shared/ui/Text";
 import { bookListPageActions, bookListPageReducer, getBooks } from "../model/slices";

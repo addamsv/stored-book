@@ -15,7 +15,7 @@ import { ECountry } from "entities/Country";
 import { Text } from "shared/ui/Text/Text";
 import { TextTheme } from "shared/ui/Text";
 import { useParams } from "react-router-dom";
-import { Page } from "shared/ui/Page/Page";
+import { Page } from "widgets/Page/Page";
 import { Header } from "./Header/Header";
 import { Footer } from "./Footer/Footer";
 

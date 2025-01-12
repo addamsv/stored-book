@@ -4,7 +4,8 @@ import { userReducer } from "entities/User";
 
 import { AXIOS } from "resources/restApi/AXIOS";
 
-import { NavigateOptions, To } from "react-router";
+// import { NavigateOptions, To } from "react-router";
+import { scrollPointReducer } from "features/ScrollPoint";
 import { IStateSchema, IThunkExtra } from "./IStateSchema";
 import { reducerManager } from "./reducerManager";
 
@@ -19,6 +20,7 @@ export function createReduxStore(
     ...asyncReducers,
     counter: counterReducer,
     user: userReducer,
+    scrollPoint: scrollPointReducer
   };
 
   const rManager = reducerManager(rootReducers);
