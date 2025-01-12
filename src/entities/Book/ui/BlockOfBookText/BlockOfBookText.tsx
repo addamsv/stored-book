@@ -1,7 +1,8 @@
 import { classes } from "shared/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 import { memo } from "react";
-import { Text, TextAlign } from "shared/ui/Text/Text";
+import { Text } from "shared/ui/Text/Text";
+import { TextAlign } from "shared/ui/Text";
 import { IBlockOfBookText } from "../../model/types";
 import cls from "./BlockOfBookText.module.scss";
 

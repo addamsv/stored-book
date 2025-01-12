@@ -1,10 +1,11 @@
 import { classes } from "shared/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
+import { AsyncModule, ReducerListT } from "shared/ui/AsyncModule/AsyncModule";
 import { memo, useCallback, useEffect } from "react";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
-import { Text, TextAlign, TextSize } from "shared/ui/Text/Text";
+import { Text } from "shared/ui/Text/Text";
+import { TextAlign, TextSize } from "shared/ui/Text";
 import { Skeleton } from "shared/ui/Skeleton/Skeleton";
 import { ImageJpg } from "shared/ui/ImageJpg/ImageJpg";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
@@ -63,16 +64,14 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
 
   if (isLoading) {
     content = (
-      <>
-        <Skeleton className={cls.bookImage} width={300} height={160} />
-        <div style={{ margin: "20px auto", width: 300 }}>
+      <div style={{ margin: "20px auto", maxWidth: 800, textAlign: "left" }}>
+        <Skeleton className={cls.bookImage} width={200} height={300} />
+        <div style={{ margin: "20px" }}>
           <Skeleton className={cls.imageDescription} width={200} height={15} />
           <Skeleton className={cls.buttonSkeleton} width={50} height={20} />
         </div>
-        <div style={{ display: "inline-block", marginTop: 30 }}>
-          <Skeleton width={300} height={170} />
-        </div>
-      </>
+        <Skeleton width={300} height={170} />
+      </div>
     );
   } else if (error) {
     content = <Text title={t("ошибка")} />;

@@ -17,7 +17,7 @@ export default {
 } as ComponentMeta<typeof BookDetailsPage>;
 
 const data: IBook = {
-  id: "1",
+  id: 1,
   title: "Fahrenheit 451",
   subTitle: "Ray Bradbury",
   img: "http://localhost:3000/images/img2.png",

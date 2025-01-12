@@ -1,5 +1,6 @@
 .Navbar {
   height: var(--navbar-height);
+  position: relative;
   max-width: 800px;
   margin: 12px auto;
   padding: 20px;
@@ -7,6 +8,7 @@
   border-radius: 12px;
   background: #ffffff20;
   backdrop-filter: blur(16px) saturate(120%);
+  z-index: 1;
 }
 
 .loginSVG {

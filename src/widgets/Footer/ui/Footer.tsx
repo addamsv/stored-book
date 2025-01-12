@@ -17,7 +17,7 @@ export const Footer = memo(({ className }: FooterProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className={classes(cls.Footer, {}, [className])}>
+    <footer className={classes(cls.Footer, {}, [className])}>
       {/* <img src={GitLogoLight} alt="" width={15} /> */}
 
       <div className={cls.iconWrapper}><GitSVG className={cls.icons} /></div>
@@ -26,6 +26,6 @@ export const Footer = memo(({ className }: FooterProps) => {
       <div className={cls.iconWrapper}><LinkSVG className={cls.icons} /></div>
       <div className={cls.iconWrapper}><InstagramSVG className={cls.icons} /></div>
       <div className={cls.iconWrapper}><FacebookSVG className={cls.icons} /></div>
-    </div>
+    </footer>
   );
 });

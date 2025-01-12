@@ -1,0 +1,14 @@
+.Switcher {
+  display: flex;
+  justify-content: center;
+  max-width: 800px;
+  margin: 12px auto;
+  flex-wrap: wrap;
+
+  .selected {
+    background: rgba(#aaa, 0.7);
+    border-radius: 4px;
+    padding: 2px;
+    margin: 0 3px;
+  }
+}

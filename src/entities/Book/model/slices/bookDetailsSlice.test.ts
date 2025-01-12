@@ -29,7 +29,8 @@ describe("test Book Details Slice", () => {
 
   test("book details fetch fulfilled", () => {
     const data: IBook = {
-      id: "1",
+      id: 1,
+      owner: 1,
       title: "t",
       subTitle: "s",
       img: "i",

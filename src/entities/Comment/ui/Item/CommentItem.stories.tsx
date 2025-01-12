@@ -7,7 +7,7 @@ import { IComment } from "entities/Comment/model/types";
 import { CommentItem } from "./CommentItem";
 
 export default {
-  title: "entities/CommentItem",
+  title: "entities/Comment/Item",
   component: CommentItem,
   argTypes: {
     backgroundColor: { control: "color" },

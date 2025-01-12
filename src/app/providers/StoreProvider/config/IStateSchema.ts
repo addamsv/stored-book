@@ -5,13 +5,16 @@ import { ICounterSchema } from "entities/Counter";
 import { IProfileStateSchema } from "entities/Profile";
 import { IUserSchema } from "entities/User";
 import { ILoginSchema } from "features/AuthByUserName";
-import { ISendCommentFormStateSchema } from "features/SendCommentForm";
+import { ISendCommentFormStateSchema } from "widgets/SendCommentForm";
 import { IBooksDetailsCommentsStateSchema } from "pages/BookDetailsPage";
+import { IBookListPageStateSchema } from "pages/BooksListPage";
+import { IScrollPointStateSchema } from "features/ScrollPoint";
 // import { NavigateOptions, To } from "react-router";
 
 export interface IStateSchema {
   counter: ICounterSchema;
   user: IUserSchema;
+  scrollPoint: IScrollPointStateSchema;
 
   // Async
   loginForm?: ILoginSchema;
@@ -19,6 +22,7 @@ export interface IStateSchema {
   bookDetails?: IBookDetailsStateSchema;
   bookDetailsComments?: IBooksDetailsCommentsStateSchema;
   sendCommentForm?: ISendCommentFormStateSchema;
+  bookListPage?: IBookListPageStateSchema;
 }
 
 export type IStateSchemaKey = keyof IStateSchema;

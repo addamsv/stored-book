@@ -1,11 +1,9 @@
 export interface IUser {
   id: number;
   name: string;
+  iat?: string;
   roles?: string;
   enabled?: boolean;
-
-  // temp
-  image?: string;
 }
 
 export interface IUserData {

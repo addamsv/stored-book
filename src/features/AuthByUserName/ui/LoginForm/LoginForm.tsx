@@ -4,8 +4,9 @@ import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { Input, InputTheme } from "shared/ui/Input/Input";
 import { useSelector } from "react-redux";
 import { memo, useCallback, useEffect } from "react";
-import { Text, TextTheme } from "shared/ui/Text/Text";
-import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
+import { Text } from "shared/ui/Text/Text";
+import { TextTheme } from "shared/ui/Text";
+import { AsyncModule, ReducerListT } from "shared/ui/AsyncModule/AsyncModule";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { getLoginUsername } from "../../model/selectors/getLoginUsername/getLoginUsername";
 import { getLoginPassword } from "../../model/selectors/getLoginPassword/getLoginPassword";
@@ -44,7 +45,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 
   /** Temp */
   useEffect(() => {
-    onChangeName("admin");
+    onChangeName("guest");
     onChangePass("123");
   }, [onChangeName, onChangePass]);
 

@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
+import { AsyncModule, ReducerListT } from "shared/ui/AsyncModule/AsyncModule";
 import {
   EnumValidateProfileErrs,
   fetchProfile, getProfile,
@@ -12,8 +12,10 @@ import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
 import { ECurrency } from "entities/Currency";
 import { ECountry } from "entities/Country";
-import { Text, TextTheme } from "shared/ui/Text/Text";
+import { Text } from "shared/ui/Text/Text";
+import { TextTheme } from "shared/ui/Text";
 import { useParams } from "react-router-dom";
+import { Page } from "widgets/Page/Page";
 import { Header } from "./Header/Header";
 import { Footer } from "./Footer/Footer";
 
@@ -84,7 +86,7 @@ const ProfilePage = () => {
 
   return (
     <AsyncModule reducers={reducers}>
-      <div>
+      <Page>
         <h1 className="App-link">{t("Профиль пользователя")}</h1>
         <Header />
 
@@ -108,7 +110,7 @@ const ProfilePage = () => {
 
         <Footer />
 
-      </div>
+      </Page>
     </AsyncModule>
   );
 };
