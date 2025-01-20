@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IThunkConf } from "app/providers/StoreProvider";
+import { IThunkConf } from "resources/store/StoreProvider";
 
 import {
   getBooksListPageIsStateInit } from "../selectors";

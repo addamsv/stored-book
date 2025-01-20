@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 // import { StoreDecorator } from "resources/config/storybook/StoreDecorator/StoreDecorator";
 import { ECountry } from "entities/Country";
 import { ECurrency } from "entities/Currency";
-import image from "shared/assets/images/img.png";
+import image from "resources/assets/images/img.png";
 import { ProfileCard } from "./ProfileCard";
 
 export default {

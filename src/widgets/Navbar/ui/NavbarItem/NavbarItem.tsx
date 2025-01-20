@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { AppLink, AppLinkTheme } from "shared/ui/AppLink/AppLink";
+import { AppLink, AppLinkTheme } from "shared/AppLink/AppLink";
 import { memo } from "react";
 import { useSelector } from "react-redux";
 import { getUserAuthData } from "entities/User";
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { INavbarItem } from "widgets/Navbar/model/types";
 import cls from "./NavbarItem.module.scss";
 

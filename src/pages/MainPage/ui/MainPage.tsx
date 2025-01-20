@@ -1,9 +1,10 @@
 import React, { memo } from "react";
-import Logo from "shared/assets/icons/logo.svg";
-import { useTheme } from "app/providers/ThemeProvider";
+import Logo from "resources/assets/icons/logo.svg";
+import { useTheme } from "resources/store/ThemeProvider";
 import { useTranslation } from "react-i18next";
 import { Counter } from "entities/Counter";
 import { Page } from "widgets/Page/Page";
+import { ErrorBtn } from "shared/ErrorBtn/ErrorBtn";
 
 const MainPage = () => {
   const { theme } = useTheme();

@@ -1,7 +1,7 @@
-import { classes } from "shared/lib/classNames/classes";
-import { ModalWin } from "shared/ui/ModalWin/ModalWin";
+import { classes } from "resources/lib/classNames/classes";
+import { ModalWin } from "shared/ModalWin/ModalWin";
 import { Suspense } from "react";
-import { Loader } from "shared/ui/Loader/Loader";
+import { Loader } from "shared/Loader/Loader";
 import cls from "./LoginModal.module.scss";
 
 import { LoginFormAsync } from "../LoginForm/LoginForm.async";

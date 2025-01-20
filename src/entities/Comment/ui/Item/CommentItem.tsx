@@ -1,12 +1,12 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 import { memo } from "react";
-import { ImageJpg } from "shared/ui/ImageJpg/ImageJpg";
-import { Text } from "shared/ui/Text/Text";
-import { TextAlign, TextSize } from "shared/ui/Text";
-import { Skeleton } from "shared/ui/Skeleton/Skeleton";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { RoutePath } from "resources/config/routeConfig/routeConfig";
+import { ImageJpg } from "shared/ImageJpg/ImageJpg";
+import { Text } from "shared/Text/Text";
+import { TextAlign, TextSize } from "shared/Text";
+import { Skeleton } from "shared/Skeleton/Skeleton";
+import { AppLink } from "shared/AppLink/AppLink";
+import { RoutePath } from "resources/router/routeConfig/routeConfig";
 import cls from "./CommentItem.module.scss";
 import { IComment } from "../../model/types";
 

@@ -1,17 +1,17 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { AsyncModule, ReducerListT } from "shared/ui/AsyncModule/AsyncModule";
+import { AsyncModule, ReducerListT } from "shared/AsyncModule/AsyncModule";
 import { memo, useCallback, useEffect } from "react";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
-import { Text } from "shared/ui/Text/Text";
-import { TextAlign, TextSize } from "shared/ui/Text";
-import { Skeleton } from "shared/ui/Skeleton/Skeleton";
-import { ImageJpg } from "shared/ui/ImageJpg/ImageJpg";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
-import EyeIon from "shared/assets/icons/eye.svg";
-import CalendarIon from "shared/assets/icons/calendar.svg";
-import { IconSVG } from "shared/ui/IconSVG/IconSVG";
+import { Text } from "shared/Text/Text";
+import { TextAlign, TextSize } from "shared/Text";
+import { Skeleton } from "shared/Skeleton/Skeleton";
+import { ImageJpg } from "shared/ImageJpg/ImageJpg";
+import { Button, ButtonTheme } from "shared/Button/Button";
+import EyeIon from "resources/assets/icons/eye.svg";
+import CalendarIon from "resources/assets/icons/calendar.svg";
+import { IconSVG } from "shared/IconSVG/IconSVG";
 import { EBlockOfBookType, TBookBlock } from "../../model/types";
 import { getBookDetailsData,
   getBookDetailsError, getBookDetailsIsLoading

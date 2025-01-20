@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import { Button, ButtonTheme } from "shared/Button/Button";
 import { counterActions } from "entities/Counter/model/slices/counterSlice";
 
-import LikeSVG from "shared/assets/icons/like.svg";
-import DislikeSVG from "shared/assets/icons/dislike.svg";
+import LikeSVG from "resources/assets/icons/like.svg";
+import DislikeSVG from "resources/assets/icons/dislike.svg";
 
 import { memo, useCallback } from "react";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { getCounterValue } from "../model/selectors/getCounterValue/getCounterValue";
 import cls from "./Counter.module.scss";
 

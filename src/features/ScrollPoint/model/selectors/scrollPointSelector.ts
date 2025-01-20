@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { IStateSchema } from "app/providers/StoreProvider";
+import { IStateSchema } from "resources/store/StoreProvider";
 
 // silence is golden
 export const getScrollPoint = (state: IStateSchema) => state.scrollPoint.scroll;

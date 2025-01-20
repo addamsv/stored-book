@@ -1,12 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IThunkConf } from "app/providers/StoreProvider";
+import { IThunkConf } from "resources/store/StoreProvider";
 import { IBook } from "entities/Book";
-import { getCredentials } from "shared/lib/auth/getCredentials";
+import { getCredentials } from "resources/lib/auth/getCredentials";
 import { userActions } from "entities/User";
-import { getBooksListPageLimit } from "../selectors";
+import {
+  getBooksListPageLimit, getBooksListPageNum, getBooksListPageOrder, getBooksListPageSearch, getBooksListPageSort
+} from "../selectors";
 
 interface IArguments {
-  page: number | undefined;
+  page?: number;
+  shouldReplace?: boolean;
 }
 
 interface ICustomReturnedData {
@@ -28,9 +31,13 @@ export const fetchBookList = createAsyncThunk<
   ) => {
     const { extra, dispatch, rejectWithValue, getState } = thunkAPI;
 
-    const { page = 1 } = args;
+    // const { page = 1 } = args;
 
+    const page = getBooksListPageNum(getState());
     const limit = getBooksListPageLimit(getState());
+    const sort = getBooksListPageSort(getState());
+    const order = getBooksListPageOrder(getState());
+    const searchQuery = getBooksListPageSearch(getState());
 
     try {
       const response = await extra.axios.get<ICustomReturnedData>(
@@ -39,7 +46,10 @@ export const fetchBookList = createAsyncThunk<
           headers: { Authorization: `Bearer ${getCredentials()?.token || ""}` },
           params: {
             _limit: limit,
-            _page: page
+            _page: page,
+            _sort: sort,
+            _order: order,
+            q: searchQuery
           }
         }
       );

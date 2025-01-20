@@ -1,3 +1,10 @@
+export enum EBookListSortField {
+  VIEWS = "views",
+  TITLE = "title",
+  SUBTITLE = "subtitle",
+  CREATED_AT = "createdAt",
+}
+
 export enum EBookListView {
   STANDARD = "STANDARD",
   COMPACT = "COMPACT",

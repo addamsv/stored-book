@@ -1,4 +1,4 @@
-import { IStateSchema } from "app/providers/StoreProvider";
+import { IStateSchema } from "resources/store/StoreProvider";
 import { EBookListView } from "entities/Book";
 import { getBooksListPageLoading, getBooksListPageError, getBooksListPageListView } from ".";
 

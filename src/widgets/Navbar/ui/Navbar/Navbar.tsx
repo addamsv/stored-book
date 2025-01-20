@@ -1,12 +1,12 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 
 import { useTranslation } from "react-i18next";
 
 import { memo, useCallback, useState } from "react";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import { Button, ButtonTheme } from "shared/Button/Button";
 import { LoginModal } from "features/AuthByUserName";
 import { useDispatch, useSelector } from "react-redux";
-import UserProfileSVG from "shared/assets/icons/user-profile.svg";
+import UserProfileSVG from "resources/assets/icons/user-profile.svg";
 
 import { getUserAuthData, userActions } from "entities/User";
 import { INavbarItem } from "widgets/Navbar/model/types";

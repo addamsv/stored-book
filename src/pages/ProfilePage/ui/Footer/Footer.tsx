@@ -1,10 +1,10 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import { Button, ButtonTheme } from "shared/Button/Button";
 import { getProfile, getProfileIsReadOnly, profileActions, updateProfile } from "entities/Profile";
 import { useSelector } from "react-redux";
 import { useCallback } from "react";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { getUserAuthData } from "entities/User";
 
 interface FooterProps {

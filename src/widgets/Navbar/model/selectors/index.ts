@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { getUserAuthData } from "entities/User";
-import { RoutePath } from "resources/config/routeConfig/routeConfig";
+import { RoutePath } from "resources/router/routeConfig/routeConfig";
 import { INavbarItem } from "../types";
 
 export const getNavbarItemsArr = createSelector(

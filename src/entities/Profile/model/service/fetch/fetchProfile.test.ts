@@ -1,6 +1,6 @@
 import axios, { AxiosStatic } from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
-import { IStateSchema } from "app/providers/StoreProvider";
+import { IStateSchema } from "resources/store/StoreProvider";
 
 import { ECountry } from "entities/Country";
 import { ECurrency } from "entities/Currency";

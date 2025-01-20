@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { userActions } from "entities/User";
-import { encodeBase64 } from "shared/lib/encode/encode";
-import { IThunkConf } from "app/providers/StoreProvider";
+import { encodeBase64 } from "resources/lib/encode/encode";
+import { IThunkConf } from "resources/store/StoreProvider";
 import { IUserData } from "entities/User/model/types/IUserSchema";
 
 interface ILoginByUsernameProps {

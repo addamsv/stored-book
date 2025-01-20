@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { AsyncModule, ReducerListT } from "shared/ui/AsyncModule/AsyncModule";
+import { AsyncModule, ReducerListT } from "shared/AsyncModule/AsyncModule";
 import {
   EnumValidateProfileErrs,
   fetchProfile, getProfile,
@@ -8,12 +8,12 @@ import {
   getProfileErr, getProfileIsLoading,
   getProfileIsReadOnly, getProfileValidateErr, profileActions, ProfileCard, profileReducer
 } from "entities/Profile";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
 import { ECurrency } from "entities/Currency";
 import { ECountry } from "entities/Country";
-import { Text } from "shared/ui/Text/Text";
-import { TextTheme } from "shared/ui/Text";
+import { Text } from "shared/Text/Text";
+import { TextTheme } from "shared/Text";
 import { useParams } from "react-router-dom";
 import { Page } from "widgets/Page/Page";
 import { Header } from "./Header/Header";

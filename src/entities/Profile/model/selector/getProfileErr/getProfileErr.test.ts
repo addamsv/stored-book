@@ -1,4 +1,4 @@
-import { IStateSchema } from "app/providers/StoreProvider";
+import { IStateSchema } from "resources/store/StoreProvider";
 import { ECountry } from "entities/Country";
 import { ECurrency } from "entities/Currency";
 import { getProfileErr } from "./getProfileErr";

@@ -1,4 +1,4 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 import { memo } from "react";
 import { EBookListView, IBook } from "../../model/types";

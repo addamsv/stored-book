@@ -1,6 +1,6 @@
 import "./styles/index.scss";
 
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { Navbar } from "widgets/Navbar";
 import { Footer } from "widgets/Footer";
 
@@ -10,8 +10,8 @@ import { Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAuthDataMounted, userActions } from "entities/User";
 import { PageLoader } from "entities/PageLoader/PageLoader";
-import { AppRouter } from "./providers/router";
-import { useTheme } from "./providers/ThemeProvider";
+import { AppRouter } from "../resources/router";
+import { useTheme } from "../resources/store/ThemeProvider";
 
 const App = () => {
   const { theme } = useTheme();

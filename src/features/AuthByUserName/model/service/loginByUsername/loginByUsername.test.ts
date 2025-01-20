@@ -1,6 +1,6 @@
 import axios, { AxiosStatic } from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
-import { IStateSchema } from "app/providers/StoreProvider";
+import { IStateSchema } from "resources/store/StoreProvider";
 import { userActions } from "entities/User";
 import { loginByUsername } from "./loginByUsername";
 

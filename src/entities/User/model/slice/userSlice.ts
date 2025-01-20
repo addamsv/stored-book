@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getCredentials } from "shared/lib/auth/getCredentials";
-import { setCredentials } from "shared/lib/auth/setCredentials";
+import { getCredentials } from "resources/lib/auth/getCredentials";
+import { setCredentials } from "resources/lib/auth/setCredentials";
 import { IUserData, IUserSchema } from "../types/IUserSchema";
 
 const initialState: IUserSchema = {

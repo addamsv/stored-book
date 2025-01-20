@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IThunkConf } from "app/providers/StoreProvider";
-import { getCredentials } from "shared/lib/auth/getCredentials";
+import { IThunkConf } from "resources/store/StoreProvider";
+import { getCredentials } from "resources/lib/auth/getCredentials";
 import { IProfile } from "../../type/IProfile";
 import { profileActions } from "../../slice/profileSlice";
 

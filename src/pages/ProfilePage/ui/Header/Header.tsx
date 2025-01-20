@@ -1,9 +1,9 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { Text } from "shared/ui/Text/Text";
-import { TextAlign, TextTheme } from "shared/ui/Text";
-import { ImageJpg } from "shared/ui/ImageJpg/ImageJpg";
-// import src from "shared/assets/images/img2.png";
+import { Text } from "shared/Text/Text";
+import { TextAlign, TextTheme } from "shared/Text";
+import { ImageJpg } from "shared/ImageJpg/ImageJpg";
+// import src from "resources/assets/images/img2.png";
 import cls from "./Header.module.scss";
 
 interface HeaderProps {

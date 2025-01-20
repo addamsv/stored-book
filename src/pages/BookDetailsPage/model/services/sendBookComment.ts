@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IThunkConf } from "app/providers/StoreProvider";
+import { IThunkConf } from "resources/store/StoreProvider";
 import { IComment } from "entities/Comment";
-import { getCredentials } from "shared/lib/auth/getCredentials";
+import { getCredentials } from "resources/lib/auth/getCredentials";
 
 import { getBookDetailsData } from "entities/Book/model/selectors";
 

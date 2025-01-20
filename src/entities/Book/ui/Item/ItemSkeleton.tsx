@@ -1,8 +1,8 @@
 import { EBookListView } from "entities/Book/model/types";
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { memo } from "react";
-import { Card } from "shared/ui/Card/Card";
-import { Skeleton } from "shared/ui/Skeleton/Skeleton";
+import { Card } from "shared/Card/Card";
+import { Skeleton } from "shared/Skeleton/Skeleton";
 import cls from "./Item.module.scss";
 
 interface IItemProps {

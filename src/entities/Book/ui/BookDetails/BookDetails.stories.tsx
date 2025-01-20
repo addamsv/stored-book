@@ -1,11 +1,11 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 // import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
-import { Theme } from "app/providers/ThemeProvider";
+import { Theme } from "resources/store/ThemeProvider";
 import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
 // import BookDetails from "./BookDetails";
 import { StoreDecorator } from "resources/config/storybook/StoreDecorator/StoreDecorator";
-import img from "shared/assets/images/img.png";
+import img from "resources/assets/images/img.png";
 import { BookDetails } from "./BookDetails";
 import { EBookOfHashTagType, EBlockOfBookType, IBook } from "../../model/types";
 

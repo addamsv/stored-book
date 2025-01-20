@@ -1,6 +1,6 @@
-import { classes } from "shared/lib/classNames/classes";
-import { useTheme } from "app/providers/ThemeProvider";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import { classes } from "resources/lib/classNames/classes";
+import { useTheme } from "resources/store/ThemeProvider";
+import { Button, ButtonTheme } from "shared/Button/Button";
 import { useTranslation } from "react-i18next";
 import { memo } from "react";
 import cls from "./DarkThemeBtn.module.scss";

@@ -1,7 +1,9 @@
 import { createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IStateSchema } from "app/providers/StoreProvider";
+import { IStateSchema } from "resources/store/StoreProvider";
 import { EBookListView, IBook } from "entities/Book";
 import { LIST_VIEW_LOCAL_STORAGE_KEY } from "resources/application";
+import { EBookListSortField } from "entities/Book/model/types";
+import { TypeSortOrder } from "resources/types";
 import { IBookListPageStateSchema } from "../types";
 import { fetchBookList } from "../services";
 
@@ -19,14 +21,21 @@ export const bookListPageSlice = createSlice({
     isLoading: false,
     error: undefined,
     listView: EBookListView.COMPACT,
+
     page: 1,
+    limit: 10,
     hasMore: true,
+    order: "asc",
+    sort: EBookListSortField.CREATED_AT,
+    search: "",
+
     ids: [
       // "1", "2"
     ],
     entities: {
       // 1: { id: "1", text: "Awesome" }, 2: { id: "2", text: "Whooooo-hoooo" }
     },
+
     _isStateInit: false
   }),
   reducers: {
@@ -42,19 +51,38 @@ export const bookListPageSlice = createSlice({
       state.listView = listView;
       state.limit = listView === EBookListView.STANDARD ? 4 : 9;
       state._isStateInit = true;
-    }
+    },
+
+    // ORDER PARAMS
+    setOrder: (state, action: PayloadAction<TypeSortOrder>) => {
+      state.order = action.payload;
+    },
+    setSearch: (state, action: PayloadAction<string>) => {
+      state.search = action.payload;
+    },
+    setSort: (state, action: PayloadAction<EBookListSortField>) => {
+      state.sort = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
     builder
-      .addCase(fetchBookList.pending, (state) => {
+      .addCase(fetchBookList.pending, (state, action) => {
         state.error = undefined;
         state.isLoading = true;
+
+        if (action.meta.arg.shouldReplace) {
+          booksAdapter.removeAll(state);
+        }
       })
-      .addCase(fetchBookList.fulfilled, (state, action: PayloadAction<IBook[]>) => {
+      .addCase(fetchBookList.fulfilled, (state, action) => { // action: PayloadAction<IBook[]>
         state.isLoading = false;
-        // booksAdapter.setAll(state, action.payload);
-        booksAdapter.addMany(state, action.payload);
+
+        if (action.meta.arg.shouldReplace) {
+          booksAdapter.setAll(state, action.payload);
+        } else {
+          booksAdapter.addMany(state, action.payload);
+        }
 
         const hasMoreElements = action.payload.length > 0;
 

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IThunkConf } from "app/providers/StoreProvider";
-import { getCredentials } from "shared/lib/auth/getCredentials";
+import { IThunkConf } from "resources/store/StoreProvider";
+import { getCredentials } from "resources/lib/auth/getCredentials";
 import { EnumValidateProfileErrs, IProfile } from "../../type/IProfile";
 import { getProfileEdited } from "../../selector/getProfileEdited/getProfileEdited";
 import { validateProfile } from "../validate/validateProfile";

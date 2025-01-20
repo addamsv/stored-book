@@ -1,4 +1,4 @@
-import { IStateSchema } from "app/providers/StoreProvider";
+import { IStateSchema } from "resources/store/StoreProvider";
 import { getBookDetailsData, getBookDetailsError, getBookDetailsIsLoading } from ".";
 
 describe("test getBookDetails SELECTORS", () => {

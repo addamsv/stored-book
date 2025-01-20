@@ -1,12 +1,12 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { memo, MutableRefObject, ReactNode, UIEvent, useEffect, useRef } from "react";
-import { useInfiniteScroll } from "shared/lib/hooks/useInfiniteScroll";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { useInfiniteScroll } from "resources/hooks/useInfiniteScroll";
+import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { getScrollPosByPath, scrollPointActions } from "features/ScrollPoint";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { IStateSchema } from "app/providers/StoreProvider";
-import { useThrottle } from "shared/lib/hooks/useThrottle";
+import { IStateSchema } from "resources/store/StoreProvider";
+import { useThrottle } from "resources/hooks/useThrottle";
 import cls from "./Page.module.scss";
 
 interface IPageProps {
@@ -49,7 +49,8 @@ export const Page = memo(({ className, children, onNextChunk }: IPageProps) => {
       className={classes(cls.Page, {}, [className])}
     >
       {children}
-      <div ref={intersectInner} />
+
+      { onNextChunk ? <div ref={intersectInner} /> : null }
     </section>
   );
 });

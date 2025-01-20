@@ -1,6 +1,6 @@
 import axios, { AxiosStatic } from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
-import { IStateSchema } from "app/providers/StoreProvider";
+import { IStateSchema } from "resources/store/StoreProvider";
 
 import { fetchNextBookList } from "./fetchNextBookList";
 import { fetchBookList } from "./fetchBookList";
