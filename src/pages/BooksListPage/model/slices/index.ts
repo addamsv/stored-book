@@ -84,7 +84,7 @@ export const bookListPageSlice = createSlice({
           booksAdapter.addMany(state, action.payload);
         }
 
-        const hasMoreElements = action.payload.length > 0;
+        const hasMoreElements = action.payload.length >= state.limit;
 
         state.hasMore = hasMoreElements;
       })

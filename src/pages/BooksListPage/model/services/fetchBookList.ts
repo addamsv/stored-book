@@ -3,6 +3,7 @@ import { IThunkConf } from "resources/store/StoreProvider";
 import { IBook } from "entities/Book";
 import { getCredentials } from "resources/lib/auth/getCredentials";
 import { userActions } from "entities/User";
+import { addQueryParams } from "resources/lib/addQueryParams/addQueryParams";
 import {
   getBooksListPageLimit, getBooksListPageNum, getBooksListPageOrder, getBooksListPageSearch, getBooksListPageSort
 } from "../selectors";
@@ -40,6 +41,8 @@ export const fetchBookList = createAsyncThunk<
     const searchQuery = getBooksListPageSearch(getState());
 
     try {
+      addQueryParams({ sort, order, q: searchQuery });
+
       const response = await extra.axios.get<ICustomReturnedData>(
         "/books",
         {

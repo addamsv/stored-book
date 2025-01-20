@@ -11,6 +11,7 @@ import { Page } from "widgets/Page/Page";
 import { Text } from "shared/Text/Text";
 import { TextTheme } from "shared/Text";
 import { ErrorWidget } from "widgets/Error";
+import { useSearchParams } from "react-router-dom";
 import { bookListPageActions, bookListPageReducer, getBooks } from "../../model/slices";
 import cls from "./BooksListPage.module.scss";
 import { fetchNextBookList } from "../../model/services";
@@ -37,6 +38,7 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
   const error = useSelector(getBooksListPageError);
   const listView = useSelector(getBooksListPageListView);
   const isStateInit = useSelector(getBooksListPageIsStateInit);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const onNextChunk = useCallback(() => {
     dispatch(fetchNextBookList());
@@ -45,9 +47,9 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
   /** FOR INIT STATE ONLY */
   useEffect(() => {
     if (__PROJECT_TYPE__ !== "storybook") {
-      dispatch(initBookListPage());
+      dispatch(initBookListPage(searchParams));
     }
-  }, [dispatch, isStateInit]);
+  }, [dispatch, isStateInit, searchParams]);
 
   return (
     <AsyncModule reducers={reducers} isRemoveAfterUnmount={false}>
