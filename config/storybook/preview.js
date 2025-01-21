@@ -1,7 +1,7 @@
 import { addDecorator } from "@storybook/react";
 import { StyleDecorator } from "../../src/resources/config/storybook/StyleDecorator/StyleDecorator";
 import { ThemeDecorator } from "../../src/resources/config/storybook/ThemeDecorator/ThemeDecorator";
-import { Theme } from "../../src/app/providers/ThemeProvider";
+import { Theme } from "../../src/resources/store/ThemeProvider";
 import { RouterDecorator } from "../../src/resources/config/storybook/RouterDecorator/RouterDecorator";
 
 export const parameters = {

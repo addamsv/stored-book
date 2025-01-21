@@ -1,5 +1,5 @@
 import { EBookListView, IBook } from "entities/Book";
-import { EBookListSortField } from "entities/Book/model/types";
+import { EBookListSortField, EBookOfHashTagType } from "entities/Book/model/types";
 import { IBookListPageStateSchema } from "../types";
 import { bookListPageActions, bookListPageReducer } from ".";
 import { fetchBookList } from "../services";
@@ -16,6 +16,7 @@ describe("bookListPageSlice.test", () => {
       limit: 10,
       order: "asc",
       sort: EBookListSortField.CREATED_AT,
+      hashTag: EBookOfHashTagType.ALL,
       search: "",
       hasMore: true,
       _isStateInit: true

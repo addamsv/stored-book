@@ -1,6 +1,6 @@
 // silence is golden
 import { IStateSchema } from "resources/store/StoreProvider";
-import { EBookListView, EBookListSortField } from "entities/Book";
+import { EBookListView, EBookListSortField, EBookOfHashTagType } from "entities/Book";
 
 export const getBooksListPageLoading = (state: IStateSchema) => state.bookListPage?.isLoading || false;
 export const getBooksListPageError = (state: IStateSchema) => state.bookListPage?.error;
@@ -13,3 +13,4 @@ export const getBooksListPageIsStateInit = (state: IStateSchema) => state.bookLi
 export const getBooksListPageOrder = (state: IStateSchema) => state.bookListPage?.order ?? "asc";
 export const getBooksListPageSort = (state: IStateSchema) => state.bookListPage?.sort ?? EBookListSortField.CREATED_AT;
 export const getBooksListPageSearch = (state: IStateSchema) => state.bookListPage?.search ?? "";
+export const getBooksListPageHashTag = (state: IStateSchema) => state.bookListPage?.hashTag ?? EBookOfHashTagType.ALL;

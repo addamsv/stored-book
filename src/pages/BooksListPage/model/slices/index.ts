@@ -1,8 +1,7 @@
 import { createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IStateSchema } from "resources/store/StoreProvider";
-import { EBookListView, IBook } from "entities/Book";
+import { EBookListView, IBook, EBookListSortField, EBookOfHashTagType } from "entities/Book";
 import { LIST_VIEW_LOCAL_STORAGE_KEY } from "resources/application";
-import { EBookListSortField } from "entities/Book/model/types";
 import { TypeSortOrder } from "resources/types";
 import { IBookListPageStateSchema } from "../types";
 import { fetchBookList } from "../services";
@@ -28,6 +27,7 @@ export const bookListPageSlice = createSlice({
     order: "asc",
     sort: EBookListSortField.CREATED_AT,
     search: "",
+    hashTag: EBookOfHashTagType.ALL,
 
     ids: [
       // "1", "2"
@@ -62,6 +62,9 @@ export const bookListPageSlice = createSlice({
     },
     setSort: (state, action: PayloadAction<EBookListSortField>) => {
       state.sort = action.payload;
+    },
+    setHashTag: (state, action: PayloadAction<EBookOfHashTagType>) => {
+      state.hashTag = action.payload;
     },
   },
 

@@ -46,6 +46,7 @@ export interface IBlockOfBookCode extends IBlockOfBook {
 export type TBookBlock = IBlockOfBookImage | IBlockOfBookText | IBlockOfBookCode;
 
 export enum EBookOfHashTagType {
+  ALL = "ALL",
   IT = "IT",
   SCIFI = "SCIFI",
   POETRY = "POETRY",

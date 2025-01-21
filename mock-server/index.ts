@@ -154,16 +154,18 @@ server.get("/api/v1/books", (req, res) => {
 
     // q = "",  _page = 1, _limit = 10, _sort = false, _order = "asc", first, prev, next, last, links
     const {
-      _page = 1, _limit = 10, _order, q = "", _sort
+      q = "", _page = 1, _limit = 10, _order, hashTag, _sort
     }: {
       q?: string,
       _page?: number,
       _limit?: number,
       _sort?: boolean,
-      _order?: string
+      _order?: string,
+      hashTag?: string,
     } = req.query;
 
-    console.log(q, _sort, _order);
+    console.log(q, _sort, _order, hashTag);
+
     const offset = _limit * _page - _limit;
     const result = books
       .filter((_, indx) => indx < _limit * _page && indx >= offset);

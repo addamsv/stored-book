@@ -1,10 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IThunkConf } from "resources/store/StoreProvider";
-import { IBook } from "entities/Book";
+import { EBookOfHashTagType, IBook } from "entities/Book";
 import { getCredentials } from "resources/lib/auth/getCredentials";
 import { userActions } from "entities/User";
 import { addQueryParams } from "resources/lib/addQueryParams/addQueryParams";
 import {
+  getBooksListPageHashTag,
   getBooksListPageLimit, getBooksListPageNum, getBooksListPageOrder, getBooksListPageSearch, getBooksListPageSort
 } from "../selectors";
 
@@ -39,9 +40,10 @@ export const fetchBookList = createAsyncThunk<
     const sort = getBooksListPageSort(getState());
     const order = getBooksListPageOrder(getState());
     const searchQuery = getBooksListPageSearch(getState());
+    const hashTag = getBooksListPageHashTag(getState());
 
     try {
-      addQueryParams({ sort, order, q: searchQuery });
+      addQueryParams({ q: searchQuery, sort, order, hashTag });
 
       const response = await extra.axios.get<ICustomReturnedData>(
         "/books",
@@ -52,6 +54,7 @@ export const fetchBookList = createAsyncThunk<
             _page: page,
             _sort: sort,
             _order: order,
+            hashTag: hashTag === EBookOfHashTagType.ALL ? undefined : hashTag,
             q: searchQuery
           }
         }
