@@ -1,6 +1,7 @@
 import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 import { memo } from "react";
+import { Text } from "shared/Text";
 import { EBookListView, IBook } from "../../model/types";
 import cls from "./List.module.scss";
 import { Item } from "../Item/Item";
@@ -31,6 +32,14 @@ export const List = memo(({
   const render = (book: IBook) => (
     <Item key={book.id} book={book} listView={listView} />
   );
+
+  if (!isLoading && !bookArr.length) {
+    return (
+      <div className={classes(cls.List, {}, [className, cls[listView]])}>
+        <Text title={t("ничего не найдено")} />
+      </div>
+    );
+  }
 
   return (
     <div className={classes(cls.List, {}, [className, cls[listView]])}>

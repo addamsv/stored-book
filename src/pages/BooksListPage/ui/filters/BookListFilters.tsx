@@ -9,13 +9,12 @@ import {
   getBooksListPageListView, getBooksListPageOrder, getBooksListPageSearch, getBooksListPageSort
 } from "pages/BooksListPage/model/selectors";
 import { useAppDispatch } from "resources/hooks/useAppDispatch";
-import { Select } from "shared/Select/Select";
 import { Card } from "shared/Card/Card";
 import { Input } from "shared/Input/Input";
 import { TypeSortOrder } from "resources/types";
 import { fetchBookList } from "pages/BooksListPage/model/services";
 import { useDebounce } from "resources/hooks/useDebounce";
-import { ITabItem, Tabs } from "shared/Tabs/Tabs";
+import { HashTagTabs } from "features/HashTagTabs";
 import cls from "./BookListFilters.module.scss";
 import { Sort } from "./Sort/Sort";
 
@@ -63,22 +62,11 @@ export const BookListFilters = memo(({ className }: IBookListFiltersProps) => {
     debouncedFetch();
   }, [dispatch, debouncedFetch]);
 
-  const onHashTagChange = useCallback((tab: ITabItem) => {
-    dispatch(bookListPageActions.setHashTag(tab.value as EBookOfHashTagType));
+  const onHashTagChange = useCallback((tabVal: EBookOfHashTagType) => {
+    dispatch(bookListPageActions.setHashTag(tabVal));
     dispatch(bookListPageActions.setPage(1));
     debouncedFetch();
   }, [dispatch, debouncedFetch]);
-
-  const tabs = useMemo<ITabItem[]>(() => [
-    { value: EBookOfHashTagType.ALL, content: t("Все") },
-    { value: EBookOfHashTagType.IT, content: t("Айти") },
-    { value: EBookOfHashTagType.SCIFI, content: t("Сайфай") },
-    { value: EBookOfHashTagType.POETRY, content: t("Поэзия") },
-    { value: EBookOfHashTagType.POLITICS, content: t("Политика") },
-    { value: EBookOfHashTagType.ECONOMICS, content: t("Экономика") },
-    { value: EBookOfHashTagType.SCIENCE, content: t("Наука") },
-    { value: EBookOfHashTagType.ADVENTURE, content: t("Приключения") }
-  ], [t]);
 
   return (
     <div className={classes(cls.BookListFilters, {}, [className])}>
@@ -88,11 +76,9 @@ export const BookListFilters = memo(({ className }: IBookListFiltersProps) => {
           <ListViewSwitcher listView={listView} onViewIconClickHandler={onChangeViewHandler} />
         </div>
       </Card>
-      <Card>
+      <HashTagTabs activeHashTag={hashTag} onTagChange={onHashTagChange} />
+      <Card className={cls.cardStyle}>
         <Input className={cls.searchInput} value={searchQuery} onChange={onSearchQueryChange} />
-      </Card>
-      <Card>
-        <Tabs tabs={tabs} activeValue={hashTag} onClickHandler={onHashTagChange} />
       </Card>
     </div>
   );

@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IThunkConf } from "resources/store/StoreProvider";
 
 import { TypeSortOrder } from "resources/types";
-import { EBookListSortField } from "entities/Book";
+import { EBookListSortField, EBookOfHashTagType } from "entities/Book";
 import {
   getBooksListPageIsStateInit } from "../selectors";
 import { bookListPageActions } from "../slices";
@@ -30,6 +30,7 @@ export const initBookListPage = createAsyncThunk<
       const _order = queryParams.get("order") as TypeSortOrder;
       const _sort = queryParams.get("sort") as EBookListSortField;
       const _q = queryParams.get("q");
+      const hashTag = queryParams.get("hashTag") as EBookOfHashTagType;
 
       if (_order) {
         dispatch(bookListPageActions.setOrder(_order));
@@ -42,6 +43,11 @@ export const initBookListPage = createAsyncThunk<
       if (_q) {
         dispatch(bookListPageActions.setSearch(_q));
       }
+
+      if (hashTag) {
+        dispatch(bookListPageActions.setHashTag(hashTag));
+      }
+
       dispatch(bookListPageActions.initState());
       dispatch(fetchBookList({ page: 1 }));
     }
