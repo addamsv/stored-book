@@ -1,8 +1,8 @@
 import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 import { memo, useCallback, useEffect } from "react";
-import { BookDetails } from "entities/Book";
-import { useNavigate, useParams } from "react-router-dom";
+import { BookDetails, BookList, EBookListView } from "entities/Book";
+import { useParams } from "react-router-dom";
 import { Text } from "shared/Text/Text";
 import { TextSize } from "shared/Text";
 import { CommentList } from "entities/Comment";
@@ -10,20 +10,24 @@ import { AsyncModule, ReducerListT } from "shared/AsyncModule/AsyncModule";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { SendCommentForm } from "features/SendCommentForm";
-import { Button } from "shared/Button/Button";
-import { RoutePath } from "resources/router/routeConfig/routeConfig";
 import { Page } from "widgets/Page/Page";
-import { bookDetailsCommentsReducer, getBooksComments } from "../model/slices";
+import { bookDetailsCommentsReducer, getBooksComments } from "../model/slices/bookDetailsCommentsSlice";
 import cls from "./BookDetailsPage.module.scss";
 import { getBooksCommentsError, getBooksCommentsIsLoading } from "../model/selectors";
 import { fetchCommentsByBookId, sendBookComment } from "../model/services";
+import { getRecommendations, recommendationsReducer } from "../model/slices/recommendationSlice";
+import { getBooksRecommendationsError, getBooksRecommendationsIsLoading } from "../model/selectors/recommendations";
+import { fetchRecommendations } from "../model/services/fetchRecommendations";
+import { bookDetailsPageReducer } from "../model/slices";
 
 interface IBookDetailsPageProps {
   className?: string;
 }
 
 const reducerList: ReducerListT = {
-  bookDetailsComments: bookDetailsCommentsReducer
+  bookDetailsPage: bookDetailsPageReducer,
+  // bookDetailsComments: bookDetailsCommentsReducer,
+  // bookDetailsRecommendations: recommendationsReducer
 };
 
 const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
@@ -36,6 +40,9 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
   const comments = useSelector(getBooksComments.selectAll);
   const isLoading = useSelector(getBooksCommentsIsLoading);
   const error = useSelector(getBooksCommentsError);
+  const recommendations = useSelector(getRecommendations.selectAll);
+  const recommendationsIsLoading = useSelector(getBooksRecommendationsIsLoading);
+  const recommendationsError = useSelector(getBooksRecommendationsError);
 
   // const nav = useNavigate();
 
@@ -50,6 +57,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
   useEffect(() => {
     if (__PROJECT_TYPE__ !== "storybook") {
       dispatch(fetchCommentsByBookId({ bookId: Number(id) }));
+      dispatch(fetchRecommendations());
     }
   }, [dispatch, id]);
 
@@ -75,6 +83,15 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
         {/* <Button onClick={onBackListHandler}>{t("назад к списку")}</Button> */}
 
         <BookDetails bookId={Number(id)} />
+
+        <Text textSize={TextSize.L} title={t("рекомендасьён")} />
+
+        <BookList
+          target="_blank"
+          bookArr={recommendations}
+          isLoading={recommendationsIsLoading}
+          listView={EBookListView.COMPACT}
+        />
 
         <Text textSize={TextSize.L} title={t("комментарии")} />
 

@@ -1,12 +1,8 @@
-import { EntityState } from "@reduxjs/toolkit";
-import { IComment } from "entities/Comment";
+import { IBooksDetailsCommentsStateSchema } from "./IBooksDetailsCommentsStateSchema";
+import { IRecommendationsStateSchema } from "./IRecommendationsStateSchema";
 
-export interface IBooksDetailsCommentsStateSchema extends EntityState<IComment> {
-  isLoading?: boolean;
+export interface IBooksDetailsPageStateSchema {
+  comments: IBooksDetailsCommentsStateSchema;
 
-  error?: string;
-
-  // data: IComment[];
-  // ids: string[];
-  // entities: Dictionary<any, any>;
+  recommendations: IRecommendationsStateSchema;
 }

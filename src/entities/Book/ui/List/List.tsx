@@ -1,6 +1,6 @@
 import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { memo } from "react";
+import { HTMLAttributeAnchorTarget, memo } from "react";
 import { Text } from "shared/Text";
 import { EBookListView, IBook } from "../../model/types";
 import cls from "./List.module.scss";
@@ -12,13 +12,15 @@ interface IListProps {
   bookArr: IBook[];
   isLoading?: boolean;
   listView?: EBookListView;
+    target?: HTMLAttributeAnchorTarget;
 }
 
 export const List = memo(({
   className,
   bookArr,
   isLoading,
-  listView = EBookListView.STANDARD
+  listView = EBookListView.STANDARD,
+  target
 }: IListProps) => {
   const { t } = useTranslation();
 
@@ -30,7 +32,7 @@ export const List = memo(({
     ));
 
   const render = (book: IBook) => (
-    <Item key={book.id} book={book} listView={listView} />
+    <Item key={book.id} book={book} listView={listView} target={target} />
   );
 
   if (!isLoading && !bookArr.length) {

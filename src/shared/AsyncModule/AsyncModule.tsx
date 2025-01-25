@@ -5,7 +5,7 @@ import { PropsWithChildren, useEffect } from "react";
 import { useDispatch, useStore } from "react-redux";
 
 export type ReducerListT = {
-  [reducerKey in IStateSchemaKey]?: Reducer
+  [reducerKey in IStateSchemaKey]?: Reducer<NonNullable<IStateSchema[reducerKey]>>
 }
 
 type ReducerListNodeType = [IStateSchemaKey, Reducer];

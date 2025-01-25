@@ -6,9 +6,14 @@ import { IProfileStateSchema } from "entities/Profile";
 import { IUserSchema } from "entities/User";
 import { ILoginSchema } from "features/AuthByUserName";
 import { ISendCommentFormStateSchema } from "features/SendCommentForm";
-import { IBooksDetailsCommentsStateSchema } from "pages/BookDetailsPage";
+import {
+  IBooksDetailsCommentsStateSchema,
+  IBooksDetailsPageStateSchema,
+  IRecommendationsStateSchema
+} from "pages/BookDetailsPage";
 import { IBookListPageStateSchema } from "pages/BooksListPage";
 import { IScrollPointStateSchema } from "features/ScrollPoint";
+
 // import { NavigateOptions, To } from "react-router";
 
 export interface IStateSchema {
@@ -20,7 +25,9 @@ export interface IStateSchema {
   loginForm?: ILoginSchema;
   profile?: IProfileStateSchema;
   bookDetails?: IBookDetailsStateSchema;
-  bookDetailsComments?: IBooksDetailsCommentsStateSchema;
+  bookDetailsPage?: IBooksDetailsPageStateSchema;
+  // bookDetailsComments?: IBooksDetailsCommentsStateSchema;
+  // bookDetailsRecommendations?: IRecommendationsStateSchema;
   sendCommentForm?: ISendCommentFormStateSchema;
   bookListPage?: IBookListPageStateSchema;
 }

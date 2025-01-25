@@ -5,8 +5,9 @@ import { bookDetailsReducer } from "entities/Book/model/slices/bookDetailsSlice"
 import { profileReducer } from "entities/Profile";
 import { loginReducer } from "features/AuthByUserName/model/slice/loginSlice";
 import { sendCommentFormReducer } from "features/SendCommentForm/model/slices";
-import { bookDetailsCommentsReducer } from "pages/BookDetailsPage/model/slices";
+import { bookDetailsCommentsReducer } from "pages/BookDetailsPage/model/slices/bookDetailsCommentsSlice";
 import { ReducerListT } from "shared/AsyncModule/AsyncModule";
+import { bookDetailsPageReducer } from "pages/BookDetailsPage/model/slices";
 
 // const defaultReducer: DeepPartial<ReducersMapObject<IStateSchema>> = {
 const defaultReducer: ReducerListT = {
@@ -14,7 +15,7 @@ const defaultReducer: ReducerListT = {
   profile: profileReducer,
   bookDetails: bookDetailsReducer,
   sendCommentForm: sendCommentFormReducer,
-  bookDetailsComments: bookDetailsCommentsReducer
+  bookDetailsPage: bookDetailsPageReducer // bookDetailsComments: bookDetailsCommentsReducer
 };
 
 export const StoreDecorator = (

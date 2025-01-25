@@ -1,6 +1,6 @@
 import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { memo, useCallback } from "react";
+import { HTMLAttributeAnchorTarget, memo, useCallback } from "react";
 import { ImageJpg } from "shared/ImageJpg/ImageJpg";
 import { IconSVG } from "shared/IconSVG/IconSVG";
 import EyeIon from "resources/assets/icons/eye.svg";
@@ -20,15 +20,17 @@ interface IItemProps {
   className?: string;
   book: IBook;
   listView: EBookListView;
+  target?: HTMLAttributeAnchorTarget;
 }
 
-export const Item = memo(({ className, book, listView }: IItemProps) => {
+export const Item = memo(({ className, book, listView, target }: IItemProps) => {
   const { t } = useTranslation();
 
-  const nav = useNavigate();
-  const onLinkClickHandler = useCallback(() => {
-    nav(RoutePath.book_details + book.id);
-  }, [book.id, nav]);
+  // const nav = useNavigate();
+
+  // const onLinkClickHandler = useCallback(() => {
+  //   nav(RoutePath.book_details + book.id);
+  // }, [book.id, nav]);
 
   // const [isHover, bindHover] = useHover();
   // console.log(isHover);
@@ -38,31 +40,31 @@ export const Item = memo(({ className, book, listView }: IItemProps) => {
   if (listView === EBookListView.COMPACT) {
     return (
       <div className={classes(cls.Item, {}, [className, cls[listView]])}>
-        {/* <AppLink to={`${RoutePath.book_details}${book.id}`}> */}
-        <Card
-          onClick={onLinkClickHandler}
-          className={cls.card}
-        >
-          <div className={cls.imageWrapper}>
-            <img className={cls.img} src={book.img} alt="*" />
-            <p className={cls.createdAt}>{book.createdAt}</p>
-          </div>
+        <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
+          <Card
+          // onClick={onLinkClickHandler}
+            className={cls.card}
+          >
+            <div className={cls.imageWrapper}>
+              <img className={cls.img} src={book.img} alt="*" />
+              <p className={cls.createdAt}>{book.createdAt}</p>
+            </div>
 
-          <div className={cls.info}>
-            <Text
-              className={cls.hashTagType}
-              textAlign={TextAlign.LEFT}
-              textSize={TextSize.XS}
-              text={book.hashTagType.join(", ")}
-            />
+            <div className={cls.info}>
+              <Text
+                className={cls.hashTagType}
+                textAlign={TextAlign.LEFT}
+                textSize={TextSize.XS}
+                text={book.hashTagType.join(", ")}
+              />
 
-            <IconSVG className={cls.views} w={12} h={12} Svg={EyeIon} />
-            <Text textSize={TextSize.XS} text={String(book.views)} />
-          </div>
+              <IconSVG className={cls.views} w={12} h={12} Svg={EyeIon} />
+              <Text textSize={TextSize.XS} text={String(book.views)} />
+            </div>
 
-          <Text className={cls.title} textSize={TextSize.S} textAlign={TextAlign.LEFT} text={String(book.title)} />
-        </Card>
-        {/* </AppLink> */}
+            <Text className={cls.title} textSize={TextSize.S} textAlign={TextAlign.LEFT} text={String(book.title)} />
+          </Card>
+        </AppLink>
       </div>
     );
   }
@@ -106,15 +108,15 @@ export const Item = memo(({ className, book, listView }: IItemProps) => {
           )}
 
           <br />
-          {/* <AppLink to={`${RoutePath.book_details}${book.id}`}> */}
-          <Button
-            onClick={onLinkClickHandler}
-            className={cls.buttonSkeleton}
-            theme={ButtonTheme.GREEN}
-          >
-            {t("подробнее")}
-          </Button>
-          {/* </AppLink> */}
+          <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
+            <Button
+            // onClick={onLinkClickHandler}
+              className={cls.buttonSkeleton}
+              theme={ButtonTheme.GREEN}
+            >
+              {t("подробнее")}
+            </Button>
+          </AppLink>
         </div>
       </Card>
     </div>
