@@ -1,3 +1,20 @@
+export enum EBookListSortField {
+  VIEWS = "views",
+  TITLE = "title",
+  SUBTITLE = "subtitle",
+  CREATED_AT = "createdAt",
+}
+
+export enum EBookListView {
+  STANDARD = "STANDARD",
+  COMPACT = "COMPACT",
+}
+
+/**
+ *
+ *        BLOCKS
+ *
+ */
 export enum EBlockOfBookType {
   CODE = "CODE",
   IMAGE = "IMAGE",
@@ -29,14 +46,19 @@ export interface IBlockOfBookCode extends IBlockOfBook {
 export type TBookBlock = IBlockOfBookImage | IBlockOfBookText | IBlockOfBookCode;
 
 export enum EBookOfHashTagType {
+  ALL = "ALL",
   IT = "IT",
   SCIFI = "SCIFI",
   POETRY = "POETRY",
+  POLITICS = "POLITICS",
+  ECONOMICS = "ECONOMICS",
+  SCIENCE = "SCIENCE",
+  ADVENTURE = "ADVENTURE"
 }
 
 export interface IBook {
-  id: string;
-  // owner: string;
+  id: number;
+  owner?: number;
   title: string;
   subTitle: string;
   img: string;

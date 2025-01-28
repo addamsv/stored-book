@@ -18,6 +18,10 @@ export const build = (env: IEnv): webpack.Configuration => {
     build: path.resolve(__dirname, "..", "..", "..", "build"),
     html: path.resolve(__dirname, "..", "..", "..", "public", "index.html"),
     src: path.resolve(__dirname, "..", "..", "..", "src"),
+    i18localesFrom: path.resolve(__dirname, "..", "..", "..", "public", "locales"),
+    i18localesTo: path.resolve(__dirname, "..", "..", "..", "build", "locales"),
+    imagesFrom: path.resolve(__dirname, "..", "..", "..", "public", "images"),
+    imagesTo: path.resolve(__dirname, "..", "..", "..", "build", "images"),
   };
 
   const mode = env.mode || "development";

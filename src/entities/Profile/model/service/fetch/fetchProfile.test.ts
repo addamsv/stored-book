@@ -1,6 +1,6 @@
 import axios, { AxiosStatic } from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
-import { IStateSchema } from "app/providers/StoreProvider";
+import { IStateSchema } from "resources/store/StoreProvider";
 
 import { ECountry } from "entities/Country";
 import { ECurrency } from "entities/Currency";
@@ -43,7 +43,7 @@ describe("fetchProfile.test", () => {
 
     mockedAxios.get.mockReturnValue(Promise.resolve({ data }));
 
-    const asyncThunkAction = fetchProfile({ profileId: 1 });
+    const asyncThunkAction = fetchProfile({ userId: 1 });
 
     const resultData = await asyncThunkAction(dispatch, getState, { axios: api });
 
@@ -62,7 +62,7 @@ describe("fetchProfile.test", () => {
       })
     );
 
-    const asyncThunkAction = fetchProfile({ profileId: 1 });
+    const asyncThunkAction = fetchProfile({ userId: 1 });
 
     const resultData = await asyncThunkAction(dispatch, getState, { axios: api });
 

@@ -1,13 +1,13 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { memo, useState } from "react";
 import { DarkThemeBtn } from "features/DarkThemeBtn";
 
 import { ChangeLangBtn } from "features/ChangeLangBtn";
 
-import SettingsSVG from "shared/assets/icons/settings.svg";
-// import SettingsLogo from "shared/assets/images/settings-dark.png";
+import SettingsSVG from "resources/assets/icons/settings.svg";
+// import SettingsLogo from "resources/assets/images/settings-dark.png";
 
-import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
+import { Button, ButtonSize, ButtonTheme } from "shared/Button/Button";
 import { useTranslation } from "react-i18next";
 import cls from "./Sidebar.module.scss";
 
@@ -25,7 +25,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
   };
 
   return (
-    <div
+    <aside
       data-testid="sidebar"
       className={classes(cls.Sidebar, { [cls.collapsed]: collapsed }, [
         className
@@ -53,6 +53,6 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         <DarkThemeBtn className={cls.sidebarSpacing} />
         <ChangeLangBtn className={cls.sidebarSpacing} />
       </div>
-    </div>
+    </aside>
   );
 });

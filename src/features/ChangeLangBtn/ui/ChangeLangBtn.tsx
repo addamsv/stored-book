@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { classes } from "shared/lib/classNames/classes";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import { classes } from "resources/lib/classNames/classes";
+import { Button, ButtonTheme } from "shared/Button/Button";
 
 import { memo } from "react";
 import cls from "./ChangeLangBtn.module.scss";

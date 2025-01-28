@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 // import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
-import { Theme } from "app/providers/ThemeProvider";
+import { Theme } from "resources/store/ThemeProvider";
 import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
 import { IBook } from "entities/Book";
 import { EBookOfHashTagType, EBlockOfBookType } from "entities/Book/model/types";
@@ -17,7 +17,7 @@ export default {
 } as ComponentMeta<typeof BookDetailsPage>;
 
 const data: IBook = {
-  id: "1",
+  id: 1,
   title: "Fahrenheit 451",
   subTitle: "Ray Bradbury",
   img: "http://localhost:3000/images/img2.png",

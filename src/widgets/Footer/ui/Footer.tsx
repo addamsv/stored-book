@@ -1,11 +1,11 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import GitSVG from "shared/assets/icons/git.svg";
-import YouTubeSVG from "shared/assets/icons/youtube.svg";
-import WiFiSVG from "shared/assets/icons/wifi.svg";
-import LinkSVG from "shared/assets/icons/link.svg";
-import InstagramSVG from "shared/assets/icons/instagram.svg";
-import FacebookSVG from "shared/assets/icons/facebook.svg";
+import GitSVG from "resources/assets/icons/git.svg";
+import YouTubeSVG from "resources/assets/icons/youtube.svg";
+import WiFiSVG from "resources/assets/icons/wifi.svg";
+import LinkSVG from "resources/assets/icons/link.svg";
+import InstagramSVG from "resources/assets/icons/instagram.svg";
+import FacebookSVG from "resources/assets/icons/facebook.svg";
 import { memo } from "react";
 import cls from "./Footer.module.scss";
 
@@ -17,7 +17,7 @@ export const Footer = memo(({ className }: FooterProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className={classes(cls.Footer, {}, [className])}>
+    <footer className={classes(cls.Footer, {}, [className])}>
       {/* <img src={GitLogoLight} alt="" width={15} /> */}
 
       <div className={cls.iconWrapper}><GitSVG className={cls.icons} /></div>
@@ -26,6 +26,6 @@ export const Footer = memo(({ className }: FooterProps) => {
       <div className={cls.iconWrapper}><LinkSVG className={cls.icons} /></div>
       <div className={cls.iconWrapper}><InstagramSVG className={cls.icons} /></div>
       <div className={cls.iconWrapper}><FacebookSVG className={cls.icons} /></div>
-    </div>
+    </footer>
   );
 });

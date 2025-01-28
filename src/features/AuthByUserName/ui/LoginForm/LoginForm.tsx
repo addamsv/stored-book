@@ -1,12 +1,13 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
-import { Input, InputTheme } from "shared/ui/Input/Input";
+import { Button, ButtonTheme } from "shared/Button/Button";
+import { Input, InputTheme } from "shared/Input/Input";
 import { useSelector } from "react-redux";
 import { memo, useCallback, useEffect } from "react";
-import { Text, TextTheme } from "shared/ui/Text/Text";
-import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { Text } from "shared/Text/Text";
+import { TextTheme } from "shared/Text";
+import { AsyncModule, ReducerListT } from "shared/AsyncModule/AsyncModule";
+import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { getLoginUsername } from "../../model/selectors/getLoginUsername/getLoginUsername";
 import { getLoginPassword } from "../../model/selectors/getLoginPassword/getLoginPassword";
 import { getLoginError } from "../../model/selectors/getLoginError/getLoginError";
@@ -44,7 +45,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 
   /** Temp */
   useEffect(() => {
-    onChangeName("admin");
+    onChangeName("guest");
     onChangePass("123");
   }, [onChangeName, onChangePass]);
 
@@ -66,7 +67,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
         <Input
           placeholder={t("имя пользователя")}
           onChange={onChangeName}
-          className={cls.input}
+          className={cls.inputEntity}
           value={username}
           theme={InputTheme.LIGHT}
         />
@@ -74,6 +75,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
           placeholder={t("пароль")}
           onChange={onChangePass}
           type="password"
+          className={cls.inputEntity}
           value={password}
           theme={InputTheme.LIGHT}
         />

@@ -1,0 +1,15 @@
+.BookListFilters {
+  position: relative;
+  margin: 12px auto;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.filterWrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.searchInput {
+  width: 100%;
+}

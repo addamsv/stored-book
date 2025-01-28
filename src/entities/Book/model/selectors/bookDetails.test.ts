@@ -1,10 +1,10 @@
-import { IStateSchema } from "app/providers/StoreProvider";
+import { IStateSchema } from "resources/store/StoreProvider";
 import { getBookDetailsData, getBookDetailsError, getBookDetailsIsLoading } from ".";
 
 describe("test getBookDetails SELECTORS", () => {
   test("должно вернуть bookDetails", () => {
     const data = {
-      id: "1",
+      id: 1,
       title: "Title"
     };
 

@@ -1,4 +1,4 @@
-import { IStateSchema } from "app/providers/StoreProvider";
+import { IStateSchema } from "resources/store/StoreProvider";
 import { getCounter } from "./getCounter";
 
 describe("getCounter Selector test", () => {

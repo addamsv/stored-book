@@ -2,6 +2,7 @@ import HTMLWebpackPlugin from "html-webpack-plugin";
 import webpack from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import CopyPlugin from "copy-webpack-plugin";
 import { IOptions } from "../types";
 
 export function plugins({
@@ -26,7 +27,15 @@ export function plugins({
       __IS_DEV__: JSON.stringify(isDev),
       __REST_API__BASE_URL__: JSON.stringify(restBaseUrl),
       __PROJECT_TYPE__: JSON.stringify(projectType),
-    })
+    }),
+
+    new CopyPlugin({
+      patterns: [
+        { from: paths.i18localesFrom, to: paths.i18localesTo },
+        { from: paths.imagesFrom, to: paths.imagesTo },
+        // { from: "other", to: "public" },
+      ],
+    }),
   ];
 
   if (isDev) {

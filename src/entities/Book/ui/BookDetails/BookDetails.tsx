@@ -1,16 +1,17 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
+import { AsyncModule, ReducerListT } from "shared/AsyncModule/AsyncModule";
 import { memo, useCallback, useEffect } from "react";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
-import { Text, TextAlign, TextSize } from "shared/ui/Text/Text";
-import { Skeleton } from "shared/ui/Skeleton/Skeleton";
-import { ImageJpg } from "shared/ui/ImageJpg/ImageJpg";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
-import EyeIon from "shared/assets/icons/eye.svg";
-import CalendarIon from "shared/assets/icons/calendar.svg";
-import { IconSVG } from "shared/ui/IconSVG/IconSVG";
+import { Text } from "shared/Text/Text";
+import { TextAlign, TextSize } from "shared/Text";
+import { Skeleton } from "shared/Skeleton/Skeleton";
+import { ImageJpg } from "shared/ImageJpg/ImageJpg";
+import { Button, ButtonTheme } from "shared/Button/Button";
+import EyeIon from "resources/assets/icons/eye.svg";
+import CalendarIon from "resources/assets/icons/calendar.svg";
+import { IconSVG } from "shared/IconSVG/IconSVG";
 import { EBlockOfBookType, TBookBlock } from "../../model/types";
 import { getBookDetailsData,
   getBookDetailsError, getBookDetailsIsLoading
@@ -63,16 +64,14 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
 
   if (isLoading) {
     content = (
-      <>
-        <Skeleton className={cls.bookImage} width={200} height={160} />
-        <div style={{ display: "inline-block", marginLeft: 20 }}>
-          <Skeleton className={cls.imageDescriptionSkeleton} width={200} height={60} />
+      <div style={{ margin: "20px auto", maxWidth: 800, textAlign: "left" }}>
+        <Skeleton className={cls.bookImage} width={200} height={300} />
+        <div style={{ margin: "20px" }}>
+          <Skeleton className={cls.imageDescription} width={200} height={15} />
           <Skeleton className={cls.buttonSkeleton} width={50} height={20} />
         </div>
-        <div style={{ display: "inline-block", marginTop: 30 }}>
-          <Skeleton width={300} height={170} />
-        </div>
-      </>
+        <Skeleton width={300} height={170} />
+      </div>
     );
   } else if (error) {
     content = <Text title={t("ошибка")} />;
@@ -80,10 +79,11 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
     content = (
       <>
         <div className={cls.topWrapper}>
-          <ImageJpg className={cls.bookImage} size={200} alt={data?.title} src={data?.img} />
-          <div style={{ display: "inline-block", marginLeft: 20 }}>
+          <ImageJpg className={cls.bookImage} alt={data?.title} src={data?.img} />
+
+          <div style={{ margin: "20px auto", maxWidth: 800, width: "90%" }}>
             <Text
-              className={cls.imageDescriptionSkeleton}
+              className={cls.imageDescription}
               textAlign={TextAlign.LEFT}
               title={data?.title}
               text={data?.subTitle}
@@ -101,6 +101,7 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
             <Button className={cls.buttonSkeleton} theme={ButtonTheme.GREEN}>{t("скачать")}</Button>
           </div>
         </div>
+
         {data?.blocks.map(blocks)}
       </>
     );

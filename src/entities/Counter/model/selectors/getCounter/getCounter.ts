@@ -1,3 +1,3 @@
-import { IStateSchema } from "app/providers/StoreProvider";
+import { IStateSchema } from "resources/store/StoreProvider";
 
 export const getCounter = (state: IStateSchema) => state.counter;

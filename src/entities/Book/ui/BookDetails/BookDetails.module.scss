@@ -3,20 +3,21 @@
 }
 
 .topWrapper {
-  display: flex;
-  justify-content: center;
-  align-self: center;
+  position: relative;
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: left;
 }
 
 .bookImage {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-
-  // margin-left: 20px;
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  position: relative;
+  max-width: 300px;
+  margin: 20px;
 }
 
-.imageDescriptionSkeleton {
+.imageDescription {
   margin-top: 15px;
 }
 
@@ -32,5 +33,6 @@
 
 .block {
   margin: 26px auto 40px;
+  width: 90%;
   max-width: 800px;
 }

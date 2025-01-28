@@ -1,16 +1,12 @@
 .Footer {
   display: block;
-  position: fixed;
+  position: relative;
   bottom: 0;
-
-  // left: calc(50% - 400px);
   height: 50px;
   width: 100%;
   margin: 0 auto;
   padding: 15px;
   box-shadow: var(--shadow);
-
-  // border-radius: 8px;
   background: #111;
   backdrop-filter: blur(16px) saturate(120%);
 }
@@ -20,7 +16,8 @@
   position: relative;
   padding: 9px 3px 0;
   margin-left: 12px;
-  background-color: #222;
+
+  // background-color: #222;
   border-radius: 3px;
 }
 

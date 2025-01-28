@@ -1,17 +1,24 @@
 # STORED AUDIO BOOKS
 
+## Страница доступного списка книг
+
+(только для авторизированных пользователей)
+
+<img src="./.github/projectDescription/images/bookList.png" width="104px">
+
+## Страницы профиля пользователя и о книге подробнее с комментариями
+
+(только для авторизированных пользователей)
+
+<img src="./.github/projectDescription/images/userProfile.png" width="104px"><img src="./.github/projectDescription/images/bookDescription.png" width="104px">
+
 ## Basic и JSON Web Token аутентификация
+
+<img src="./.github/projectDescription/images/basicAuth.png" width="104px">
 
 ## Различные темы и интернационализация (RU, EN)
 
-<img src="./.github/projectDescription/images/darkBlue.png" width="104px">
-<img src="./.github/projectDescription/images/dark.png" width="104px">
-<img src="./.github/projectDescription/images/lightBlue.png" width="104px">
-
-## Страницы User Profile м Book Details
-
-<img src="./.github/projectDescription/images/userProfile.png" width="104px">
-<img src="./.github/projectDescription/images/bookDescription.png" width="104px">
+<img src="./.github/projectDescription/images/darkBlue.png" width="104px"><img src="./.github/projectDescription/images/dark.png" width="104px"><img src="./.github/projectDescription/images/lightBlue.png" width="104px">
 
 <br><br>
 
@@ -19,7 +26,13 @@
 
 Typescript, React, Redux Toolkit, Thunk (async), Webpack, FSD;
 <br>
-jest, integration, ui, screenshot tests, ts lint, style lint; Storybook; Nodejs mock-server.
+jest, integration, ui, screenshot tests, ts lint, style lint; Storybook;
+
+# Технологический стек BACK:
+
+Dev: Nodejs json-mock-server (смотри папку mock-server)
+<br>
+Prod: Java Spring Boot + (H2 | postgresql | mysql...) (смотри sb-lab-api repo)
 
 <br>
 

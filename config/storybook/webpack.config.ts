@@ -12,6 +12,10 @@ export default ({ config }: {config: webpack.Configuration}): webpack.Configurat
     html: "",
     entry: "",
     src: path.resolve(__dirname, "..", "..", "src"),
+    i18localesFrom: path.resolve(__dirname, "..", "..", "..", "public", "locales"),
+    i18localesTo: path.resolve(__dirname, "..", "..", "..", "build", "locales"),
+    imagesFrom: path.resolve(__dirname, "..", "..", "..", "public", "images"),
+    imagesTo: path.resolve(__dirname, "..", "..", "..", "build", "images"),
   };
 
   config!.resolve!.modules!.push(paths.src);

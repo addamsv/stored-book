@@ -1,8 +1,8 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 import { memo } from "react";
 import { IBlockOfBookImage } from "entities/Book/model/types";
-import { Text } from "shared/ui/Text/Text";
+import { Text } from "shared/Text/Text";
 import cls from "./BlockOfBookImage.module.scss";
 
 interface IBlockOfBookImageProps {

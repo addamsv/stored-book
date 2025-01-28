@@ -1,13 +1,15 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import { Button, ButtonTheme } from "shared/Button/Button";
+import { Text } from "shared/Text";
 import cls from "./ErrorWidget.module.scss";
 
 interface ErrorWidgetProps {
   className?: string;
+  text?: string;
 }
 
-export const ErrorWidget = ({ className }: ErrorWidgetProps) => {
+export const ErrorWidget = ({ className, text = "" }: ErrorWidgetProps) => {
   const { t } = useTranslation();
 
   const reload = () => {
@@ -17,7 +19,8 @@ export const ErrorWidget = ({ className }: ErrorWidgetProps) => {
 
   return (
     <div className={classes(cls.ErrorWidget, {}, [className])}>
-      <h1>{t("ошибка")}</h1>
+      <h1>{}</h1>
+      <Text title={t("ошибка")} text={text} />
       <Button theme={ButtonTheme.GREEN} onClick={reload}>{t("перезагрузить")}</Button>
     </div>
   );
