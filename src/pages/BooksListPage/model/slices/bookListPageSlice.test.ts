@@ -33,6 +33,11 @@ describe("bookListPageSlice.test", () => {
         ids: [],
         entities: {},
         page: 1,
+        limit: 10,
+        order: "asc",
+        sort: EBookListSortField.CREATED_AT,
+        hashTag: EBookOfHashTagType.ALL,
+        search: "",
         hasMore: true,
         _isStateInit: true
       });
@@ -41,20 +46,25 @@ describe("bookListPageSlice.test", () => {
   test("empty state", () => {
     expect(bookListPageReducer(undefined, bookListPageActions.setView(EBookListView.STANDARD)))
       .toEqual({
+        listView: EBookListView.STANDARD,
         ids: [],
         entities: {},
-        error: undefined,
-        isLoading: false,
-        listView: EBookListView.STANDARD,
         page: 1,
+        limit: 10,
+        order: "asc",
+        sort: EBookListSortField.CREATED_AT,
+        hashTag: EBookOfHashTagType.ALL,
+        search: "",
         hasMore: true,
-        _isStateInit: false
+        _isStateInit: false,
+        isLoading: false,
+        error: undefined
       });
   });
 
   test("fetch pending", () => {
     const state: DeepPartial<IBookListPageStateSchema> = {
-      isLoading: false
+      isLoading: false,
     };
 
     expect(bookListPageReducer(
@@ -100,7 +110,7 @@ describe("bookListPageSlice.test", () => {
     ))
       .toEqual({
         isLoading: false,
-        hasMore: true,
+        hasMore: false,
         ids: [1],
         entities: { 1: data[0] }
       });
