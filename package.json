@@ -9,7 +9,7 @@
     "server": "ts-node ./mock-server/index.ts",
     "test": "jest --config ./config/jest/jest.config.ts",
     "start:prod": "webpack serve --env port=3000 --env mode=production",
-    "build:prod": "webpack --env mode=production",
+    "build:prod": "webpack --env mode=production --env restBaseUrl=https://mock-server-gules.vercel.app/",
     "build:dev": "webpack --env mode=development",
     "lint": "npx eslint \"**/*.{ts,tsx}\"",
     "lint:fix": "npx eslint \"**/*.{ts,tsx}\" --fix",
