@@ -5,6 +5,10 @@ export interface IPaths {
   build: string;
   html: string;
   src: string;
+  i18localesFrom: string;
+  i18localesTo: string;
+  imagesFrom: string;
+  imagesTo: string;
 }
 
 export interface IEnv {

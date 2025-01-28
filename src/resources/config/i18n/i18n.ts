@@ -9,10 +9,13 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: "ru",
+
     debug: false, // __IS_DEV__,
+
     interpolation: {
       escapeValue: false,
     },
+
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json",
     },

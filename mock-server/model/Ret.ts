@@ -1,4 +1,4 @@
-const IS_PROD = false;
+import { IS_DEV } from "../mockEnv";
 
 export const Ret = {
   _res: undefined as any,
@@ -6,7 +6,7 @@ export const Ret = {
   _req: undefined as any,
 
   err500: (res: any, data: string) => {
-    if (!IS_PROD) {
+    if (IS_DEV) {
       console.log(data);
     }
 
