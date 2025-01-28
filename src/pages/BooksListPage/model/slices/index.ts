@@ -74,14 +74,14 @@ export const bookListPageSlice = createSlice({
         state.error = undefined;
         state.isLoading = true;
 
-        if (action.meta.arg.shouldReplace) {
+        if (action.meta && action.meta.arg.shouldReplace) {
           booksAdapter.removeAll(state);
         }
       })
       .addCase(fetchBookList.fulfilled, (state, action) => { // action: PayloadAction<IBook[]>
         state.isLoading = false;
 
-        if (action.meta.arg.shouldReplace) {
+        if (action.meta && action.meta.arg.shouldReplace) {
           booksAdapter.setAll(state, action.payload);
         } else {
           booksAdapter.addMany(state, action.payload);
