@@ -17,7 +17,7 @@
       "owner": 1,
       "title": "Fahrenheit 451",
       "subTitle": "Ray Bradbury",
-      "img": "/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -42,7 +42,7 @@
         {
           "id": "5",
           "type": "IMAGE",
-          "src": "/images/img3.jpg",
+          "src": "https://raw.githubusercontent.com/addamsv/addamsv/main/.github/audiobooks.png",
           "title": "Awesome Image ever seen"
         },
         {
@@ -60,7 +60,7 @@
       "owner": 1,
       "title": "Dandelion Wine",
       "subTitle": "Ray Bradbury",
-      "img": "/images/DandelionWine.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/4/44/Dandelion_wine_first.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -71,18 +71,12 @@
         {
           "id": "1",
           "type": "TEXT",
-          "title": "Description",
+          "title": "Звголовок",
           "paragraphs": [
             "Dandelion Wine is a 1957 novel by Ray Bradbury set in the summer of 1928 in the fictional town of Green Town, Illinois, based upon Bradbury's childhood home of Waukegan, Illinois, and serving as the first novel in his Green Town Trilogy. The novel developed from the short story \"Dandelion Wine\", which appeared in the June 1953 issue of Gourmet magazine.",
             "The title refers to a wine made with dandelion petals and other ingredients, commonly citrus fruit. In the story, dandelion wine, as made by the protagonist's grandfather, serves as a metaphor for distilling all of the joys of summer.",
             "The main character of the story is Douglas Spaulding, a 12-year-old boy loosely patterned after Bradbury. Most of the book is focused upon the routines of small-town America, and the simple joys of yesterday."
           ]
-        },
-        {
-          "id": "5",
-          "type": "IMAGE",
-          "src": "/images/img3.jpg",
-          "title": "Title Image"
         }
       ]
     },
@@ -91,7 +85,7 @@
       "owner": 3,
       "title": "White Fang",
       "subTitle": "Jack London",
-      "img": "/images/WhiteFang.png",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/JackLondonwhitefang1.jpg/220px-JackLondonwhitefang1.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -110,7 +104,7 @@
         {
           "id": "5",
           "type": "IMAGE",
-          "src": "/images/WhiteFang2.png",
+          "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/JackLondonwhitefang1.jpg/220px-JackLondonwhitefang1.jpg",
           "title": "Awesome Image ever seen"
         },
         {
@@ -128,7 +122,7 @@
       "owner": 4,
       "title": "Lorem 4",
       "subTitle": "Lorem",
-      "img": "/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -150,7 +144,7 @@
       "owner": 5,
       "title": "Lorem 5",
       "subTitle": "Lorem",
-      "img": "/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -172,7 +166,7 @@
       "owner": 6,
       "title": "Lorem 6",
       "subTitle": "Lorem",
-      "img": "/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -194,7 +188,7 @@
       "owner": 7,
       "title": "Lorem 7",
       "subTitle": "Lorem",
-      "img": "/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -216,7 +210,7 @@
       "owner": 8,
       "title": "Lorem 8",
       "subTitle": "Lorem",
-      "img": "/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -238,7 +232,7 @@
       "owner": 9,
       "title": "Lorem 9",
       "subTitle": "Lorem",
-      "img": "/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -260,7 +254,7 @@
       "owner": 10,
       "title": "Lorem 10",
       "subTitle": "Lorem",
-      "img": "/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -282,7 +276,7 @@
       "owner": 11,
       "title": "Lorem 11",
       "subTitle": "Lorem",
-      "img": "http://localhost:3000/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -304,7 +298,7 @@
       "owner": 12,
       "title": "Lorem 12",
       "subTitle": "Lorem",
-      "img": "http://localhost:3000/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -326,7 +320,7 @@
       "owner": 13,
       "title": "Lorem 13",
       "subTitle": "Lorem",
-      "img": "http://localhost:3000/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -348,7 +342,7 @@
       "owner": 14,
       "title": "Lorem 14",
       "subTitle": "Lorem",
-      "img": "http://localhost:3000/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -370,7 +364,7 @@
       "owner": 15,
       "title": "Lorem 15",
       "subTitle": "Lorem",
-      "img": "http://localhost:3000/images/Fahrenheit451.jpg",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Fahrenheit_451_1st_ed_cover.jpg/220px-Fahrenheit_451_1st_ed_cover.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -482,7 +476,7 @@
       "country": "Belarus",
       "city": "Minsk",
       "address": "Chyrlenisa 14-22",
-      "image": "http://localhost:3000/images/img2.png",
+      "image": "https://raw.githubusercontent.com/addamsv/addamsv/main/.github/game.png",
       "currency": "BYN"
     },
     {
@@ -494,7 +488,7 @@
       "country": "Belarus",
       "city": "Minsk",
       "address": "Pravda 14-22",
-      "image": "http://localhost:3000/images/img2.png",
+      "image": "https://avatars.githubusercontent.com/u/82575499?v=4",
       "currency": "BYN"
     },
     {
@@ -506,7 +500,7 @@
       "country": "Russia",
       "city": "Novosibirsk",
       "address": "Gorky 288-555",
-      "image": "http://localhost:3000/images/img3.jpg",
+      "image": "https://raw.githubusercontent.com/addamsv/addamsv/main/.github/audiobooks.png",
       "currency": "RUB"
     }
   ]

@@ -1,1 +1,3 @@
-// silence is golden
+const Index = () => <div />;
+
+export default Index;

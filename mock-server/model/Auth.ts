@@ -1,9 +1,7 @@
 import { Persistence } from "./Persistence";
+import { IS_DEV, SECRET_KEY } from "../mockEnv";
 
 const { createHmac } = require("node:crypto");
-
-const SECRET_KEY = "L16wsStHbN1V44K0f7xM4vJb3lvC3rrHGRCloTOD3f";
-const IS_PROD = false;
 
 interface IClaims {
   iss: string;
@@ -54,7 +52,7 @@ export const Auth = {
       );
 
       if (candidate) {
-        if (!IS_PROD) {
+        if (IS_DEV) {
           console.log("BasicAuth");
         }
 
@@ -97,7 +95,7 @@ export const Auth = {
 
       const signature = hmac.digest("hex");
 
-      if (!IS_PROD) {
+      if (IS_DEV) {
         console.log("isExp:", payloadClaims.exp < Auth._getIat);
       }
 
@@ -126,7 +124,7 @@ export const Auth = {
       );
 
       if (candidate) {
-        if (!IS_PROD) {
+        if (IS_DEV) {
           console.log(`JWTAuth, User: "${decode?.sub}", roles: "${decode?.authorities}"`);
         }
 
@@ -134,12 +132,12 @@ export const Auth = {
         return returnUserData as IUser;
       }
 
-      if (!IS_PROD) {
+      if (IS_DEV) {
         console.log("authFilterByToken: No candidate");
       }
       return false;
     } catch (e) {
-      if (!IS_PROD) {
+      if (IS_DEV) {
         console.log(e instanceof Error ? e.message : "err: _authFilterByToken");
       }
       return false;
@@ -184,7 +182,7 @@ export const Auth = {
 
     const exp = Auth._getExp;
 
-    if (!IS_PROD) {
+    if (IS_DEV) {
       console.log(authorities);
     }
 

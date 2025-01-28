@@ -5,9 +5,7 @@ import path from "path";
 import { Auth } from "./model/Auth";
 import { Persistence } from "./model/Persistence";
 import { Ret } from "./model/Ret";
-
-/** __ENV__ */
-const IS_PROD = false;
+import { IS_DEV } from "./mockEnv";
 
 const server = jsonServer.create();
 
@@ -23,9 +21,11 @@ server.use(jsonServer.bodyParser);
  */
 server.use(async (req, res, next) => {
   /** задержка - как в реальном АПИ */
-  await new Promise((res) => {
-    setTimeout(res, 800);
-  });
+  if (IS_DEV) {
+    await new Promise((res) => {
+      setTimeout(res, 800);
+    });
+  }
 
   next();
 });
@@ -53,7 +53,7 @@ server.post("/api/v1/users/login", (req, res) => {
 
     const data = { user, token };
 
-    if (!IS_PROD) {
+    if (IS_DEV) {
       console.log(data);
     }
 
@@ -308,10 +308,10 @@ server.use((req, res, next) => {
 server.use(router);
 
 // запуск сервера
-const API_SERVER_PORT = IS_PROD ? 80 : 8000;
+const API_SERVER_PORT = IS_DEV ? 8000 : 80;
 
 server.listen(API_SERVER_PORT, () => {
-  if (!IS_PROD) {
+  if (IS_DEV) {
     const d = new Date();
     // eslint-disable-next-line max-len
     console.log(`server is running on ${API_SERVER_PORT} port ${d.getDate()}.${Number(d.getMonth()) + 1}.${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`);
