@@ -31,3 +31,42 @@ export interface IPersist {
   users: any[]
   profiles: IProfile[]
 }
+
+export enum EBookOfHashTagType {
+  ALL = "ALL",
+  IT = "IT",
+  SCIFI = "SCIFI",
+  POETRY = "POETRY",
+  POLITICS = "POLITICS",
+  ECONOMICS = "ECONOMICS",
+  SCIENCE = "SCIENCE",
+  ADVENTURE = "ADVENTURE"
+}
+
+export type TBookBlock = {
+  type: "IMAGE";
+  src: string;
+  title: string;
+  id: string;
+} | {
+  type: "TEXT";
+  title: string | undefined;
+  paragraphs: string[];
+  id: string;
+} | {
+  type: "CODE";
+  code: string;
+  id: string;
+}
+
+export interface IBook {
+  id: number;
+  owner: number | undefined;
+  title: string;
+  subTitle: string;
+  img: string;
+  views: number;
+  createdAt: string;
+  hashTagType: EBookOfHashTagType[];
+  blocks: TBookBlock[];
+}

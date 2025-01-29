@@ -6,6 +6,7 @@ import { Auth } from "./model/Auth";
 import { Persistence } from "./model/Persistence";
 import { Ret } from "./model/Ret";
 import { IS_DEV } from "./mockEnv";
+import { IBook, TBookBlock } from "./types";
 
 const server = jsonServer.create();
 
@@ -166,11 +167,36 @@ server.get("/api/v1/books", (req, res) => {
 
     console.log(q, _sort, _order, hashTag);
 
+    const isTitleInc = (title: string) => title.toLowerCase().includes(q.toLowerCase());
+    const isBlockInc = (blocks: TBookBlock[]) => {
+      return blocks.some((block) => (block.type === "TEXT" ? block.paragraphs.some((par) => isTitleInc(par)) : false));
+    };
+
     const offset = _limit * _page - _limit;
+
+    if (_order === "desc") {
+      books.reverse();
+    }
+
     const result = books
+      // _sort
+      // books.sort((a, b) => a.createdAt - b.createdAt);
+      // hashTag
+      .filter((book: IBook) => {
+        if (hashTag) {
+          return book.hashTagType.some((tag) => tag === hashTag);
+        }
+        return true;
+      })
+      // query
+      .filter((book: IBook) => {
+        if (q) {
+          return isTitleInc(book.title) || isTitleInc(book.subTitle) || isBlockInc(book.blocks);
+        }
+        return true;
+      })
+      // paging | infinite scroll
       .filter((_, indx) => indx < _limit * _page && indx >= offset);
-      // _sort .sort((a, b) => a.createdAt - b.createdAt);
-      // _order .sort((a, b) => a.createdAt - b.createdAt);
 
     return Ret.CustomReturnData(res, `All books limit:${_limit}, page:${_page}`, result);
   } catch (e) {
