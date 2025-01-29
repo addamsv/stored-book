@@ -9,6 +9,8 @@ export interface IPaths {
   i18localesTo: string;
   imagesFrom: string;
   imagesTo: string;
+  faviconFrom: string;
+  faviconTo: string;
 }
 
 export interface IEnv {

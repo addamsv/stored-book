@@ -22,6 +22,8 @@ export const build = (env: IEnv): webpack.Configuration => {
     i18localesTo: path.resolve(__dirname, "..", "..", "..", "build", "locales"),
     imagesFrom: path.resolve(__dirname, "..", "..", "..", "public", "images"),
     imagesTo: path.resolve(__dirname, "..", "..", "..", "build", "images"),
+    faviconFrom: path.resolve(__dirname, "..", "..", "..", "public", "favicon"),
+    faviconTo: path.resolve(__dirname, "..", "..", "..", "build", "favicon")
   };
 
   const mode = env.mode || "development";
