@@ -43,7 +43,7 @@ export const Sort = memo(({ className, sort, order, onOrderChange, onSortChange 
 
   return (
     <div className={classes(cls.Sort, {}, [className])}>
-      <div>{t("сортировать")}</div>
+      {/* <div>{t("сортировать")}</div> */}
       <Select defaultValue={order} onChange={onOrderChange} optionsList={orderArr} />
       <Select defaultValue={sort} onChange={onSortChange} optionsList={sortArr} />
     </div>

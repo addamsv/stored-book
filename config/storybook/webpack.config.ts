@@ -1,6 +1,6 @@
 import webpack, { DefinePlugin, RuleSetRule } from "webpack";
 import path from "path";
-import { IPaths, cssLoader, svgLoader } from "../webpack";
+import { cssLoader, IPaths, svgLoader } from "../webpack";
 
 export default ({ config }: {config: webpack.Configuration}): webpack.Configuration => {
   if (!config.resolve?.modules || !config.resolve?.extensions || !config.module?.rules) {
@@ -16,6 +16,8 @@ export default ({ config }: {config: webpack.Configuration}): webpack.Configurat
     i18localesTo: path.resolve(__dirname, "..", "..", "..", "build", "locales"),
     imagesFrom: path.resolve(__dirname, "..", "..", "..", "public", "images"),
     imagesTo: path.resolve(__dirname, "..", "..", "..", "build", "images"),
+    faviconFrom: path.resolve(__dirname, "..", "..", "..", "public", "favicon"),
+    faviconTo: path.resolve(__dirname, "..", "..", "..", "build", "favicon"),
   };
 
   config!.resolve!.modules!.push(paths.src);
