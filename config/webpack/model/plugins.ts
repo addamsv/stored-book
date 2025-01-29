@@ -33,6 +33,7 @@ export function plugins({
       patterns: [
         { from: paths.i18localesFrom, to: paths.i18localesTo },
         { from: paths.imagesFrom, to: paths.imagesTo },
+        { from: paths.faviconFrom, to: paths.faviconTo },
         // { from: "other", to: "public" },
       ],
     }),
