@@ -18,7 +18,7 @@
       "title": "Fahrenheit 451",
       "subTitle": "Ray Bradbury",
       "img": "/images/Fahrenheit451.jpg",
-      "views": 1,
+      "views": 10,
       "createdAt": "1.12.2025",
       "hashTagType": [
         "IT",
@@ -61,7 +61,7 @@
       "title": "Dandelion Wine",
       "subTitle": "Ray Bradbury",
       "img": "/images/DandelionWine.jpg",
-      "views": 1,
+      "views": 101,
       "createdAt": "1.12.2025",
       "hashTagType": [
         "POETRY",
@@ -92,7 +92,7 @@
       "title": "White Fang",
       "subTitle": "Jack London",
       "img": "/images/WhiteFang.png",
-      "views": 1,
+      "views": 20,
       "createdAt": "1.12.2025",
       "hashTagType": [
         "ADVENTURE"
@@ -129,7 +129,7 @@
       "title": "Lorem 4",
       "subTitle": "Lorem",
       "img": "/images/Fahrenheit451.jpg",
-      "views": 1,
+      "views": 5,
       "createdAt": "1.12.2025",
       "hashTagType": [
         "IT"

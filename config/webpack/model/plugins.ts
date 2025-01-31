@@ -34,6 +34,7 @@ export function plugins({
         { from: paths.i18localesFrom, to: paths.i18localesTo },
         { from: paths.imagesFrom, to: paths.imagesTo },
         { from: paths.faviconFrom, to: paths.faviconTo },
+        { from: paths.robotTxtFrom, to: paths.robotTxtTo },
         // { from: "other", to: "public" },
       ],
     }),

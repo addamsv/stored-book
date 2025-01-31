@@ -7,6 +7,7 @@ import LinkSVG from "resources/assets/icons/link.svg";
 import InstagramSVG from "resources/assets/icons/instagram.svg";
 import FacebookSVG from "resources/assets/icons/facebook.svg";
 import { memo } from "react";
+import { AppLink } from "shared/AppLink/AppLink";
 import cls from "./Footer.module.scss";
 
 interface FooterProps {
@@ -20,12 +21,16 @@ export const Footer = memo(({ className }: FooterProps) => {
     <footer className={classes(cls.Footer, {}, [className])}>
       {/* <img src={GitLogoLight} alt="" width={15} /> */}
 
-      <div className={cls.iconWrapper}><GitSVG className={cls.icons} /></div>
-      <div className={cls.iconWrapper}><YouTubeSVG className={cls.icons} /></div>
-      <div className={cls.iconWrapper}><WiFiSVG className={cls.icons} /></div>
-      <div className={cls.iconWrapper}><LinkSVG className={cls.icons} /></div>
-      <div className={cls.iconWrapper}><InstagramSVG className={cls.icons} /></div>
-      <div className={cls.iconWrapper}><FacebookSVG className={cls.icons} /></div>
+      <div className={cls.iconWrapper}>
+        <AppLink target="blank" to="https://github.com/addamsv"><GitSVG className={cls.icons} /></AppLink>
+      </div>
+      {/* <div className={cls.iconWrapper}><YouTubeSVG className={cls.icons} /></div>
+      <div className={cls.iconWrapper}><WiFiSVG className={cls.icons} /></div> */}
+      <div className={cls.iconWrapper}>
+        <AppLink target="blank" to="https://www.linkedin.com/in/addamsv"><LinkSVG className={cls.icons} /></AppLink>
+      </div>
+      {/* <div className={cls.iconWrapper}><InstagramSVG className={cls.icons} /></div>
+      <div className={cls.iconWrapper}><FacebookSVG className={cls.icons} /></div> */}
     </footer>
   );
 });
