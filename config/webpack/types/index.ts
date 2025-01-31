@@ -11,6 +11,8 @@ export interface IPaths {
   imagesTo: string;
   faviconFrom: string;
   faviconTo: string;
+  robotTxtFrom: string;
+  robotTxtTo: string;
 }
 
 export interface IEnv {

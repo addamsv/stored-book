@@ -23,7 +23,9 @@ export const build = (env: IEnv): webpack.Configuration => {
     imagesFrom: path.resolve(__dirname, "..", "..", "..", "public", "images"),
     imagesTo: path.resolve(__dirname, "..", "..", "..", "build", "images"),
     faviconFrom: path.resolve(__dirname, "..", "..", "..", "public", "favicon"),
-    faviconTo: path.resolve(__dirname, "..", "..", "..", "build", "favicon")
+    faviconTo: path.resolve(__dirname, "..", "..", "..", "build", "favicon"),
+    robotTxtFrom: path.resolve(__dirname, "..", "..", "..", "public", "robot.txt"),
+    robotTxtTo: path.resolve(__dirname, "..", "..", "..", "build", "robot.txt")
   };
 
   const mode = env.mode || "development";

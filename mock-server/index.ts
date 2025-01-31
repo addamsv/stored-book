@@ -154,33 +154,29 @@ server.get("/api/v1/books", (req, res) => {
     const { books = [] } = Persistence.get();
 
     // q = "",  _page = 1, _limit = 10, _sort = false, _order = "asc", first, prev, next, last, links
+
     const {
       q = "", _page = 1, _limit = 10, _order, hashTag, _sort
     }: {
       q?: string,
       _page?: number,
       _limit?: number,
-      _sort?: boolean,
-      _order?: string,
+      _sort?: "title" | "subtitle" | "views" | "createdAt",
+      _order?: "asc" | "desc",
       hashTag?: string,
     } = req.query;
 
     console.log(q, _sort, _order, hashTag);
 
     const isTitleInc = (title: string) => title.toLowerCase().includes(q.toLowerCase());
+
     const isBlockInc = (blocks: TBookBlock[]) => {
       return blocks.some((block) => (block.type === "TEXT" ? block.paragraphs.some((par) => isTitleInc(par)) : false));
     };
 
     const offset = _limit * _page - _limit;
 
-    if (_order === "desc") {
-      books.reverse();
-    }
-
     const result = books
-      // _sort
-      // books.sort((a, b) => a.createdAt - b.createdAt);
       // hashTag
       .filter((book: IBook) => {
         if (hashTag) {
@@ -194,6 +190,15 @@ server.get("/api/v1/books", (req, res) => {
           return isTitleInc(book.title) || isTitleInc(book.subTitle) || isBlockInc(book.blocks);
         }
         return true;
+      })
+      // _sort
+      .sort((a, b) => {
+        if (_sort && a[_sort]) {
+          console.log(a[_sort], b[_sort]);
+          // _order
+          return _order === "desc" ? a[_sort] - b[_sort] : b[_sort] - a[_sort];
+        }
+        return 0;
       })
       // paging | infinite scroll
       .filter((_, indx) => indx < _limit * _page && indx >= offset);
