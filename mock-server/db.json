@@ -282,7 +282,7 @@
       "owner": 11,
       "title": "Lorem 11",
       "subTitle": "Lorem",
-      "img": "http://localhost:3000/images/Fahrenheit451.jpg",
+      "img": "/images/Fahrenheit451.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -304,7 +304,7 @@
       "owner": 12,
       "title": "Lorem 12",
       "subTitle": "Lorem",
-      "img": "http://localhost:3000/images/Fahrenheit451.jpg",
+      "img": "/images/Fahrenheit451.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -326,7 +326,7 @@
       "owner": 13,
       "title": "Lorem 13",
       "subTitle": "Lorem",
-      "img": "http://localhost:3000/images/Fahrenheit451.jpg",
+      "img": "/images/Fahrenheit451.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -348,7 +348,7 @@
       "owner": 14,
       "title": "Lorem 14",
       "subTitle": "Lorem",
-      "img": "http://localhost:3000/images/Fahrenheit451.jpg",
+      "img": "/images/Fahrenheit451.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -370,7 +370,7 @@
       "owner": 15,
       "title": "Lorem 15",
       "subTitle": "Lorem",
-      "img": "http://localhost:3000/images/Fahrenheit451.jpg",
+      "img": "/images/Fahrenheit451.jpg",
       "views": 1,
       "createdAt": "1.12.2025",
       "hashTagType": [
@@ -482,7 +482,7 @@
       "country": "Belarus",
       "city": "Minsk",
       "address": "Chyrlenisa 14-22",
-      "image": "http://localhost:3000/images/img2.png",
+      "image": "/images/img2.png",
       "currency": "BYN"
     },
     {
@@ -494,7 +494,7 @@
       "country": "Belarus",
       "city": "Minsk",
       "address": "Pravda 14-22",
-      "image": "http://localhost:3000/images/img2.png",
+      "image": "/images/img2.png",
       "currency": "BYN"
     },
     {
@@ -506,7 +506,7 @@
       "country": "Russia",
       "city": "Novosibirsk",
       "address": "Gorky 288-555",
-      "image": "http://localhost:3000/images/img3.jpg",
+      "image": "/images/img3.jpg",
       "currency": "RUB"
     }
   ]
