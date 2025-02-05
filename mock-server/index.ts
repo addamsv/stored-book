@@ -5,7 +5,7 @@ import path from "path";
 import { Auth } from "./model/Auth";
 import { Persistence } from "./model/Persistence";
 import { Ret } from "./model/Ret";
-import { IS_DEV } from "./mockEnv";
+import { DEV_PORT, IS_DEV } from "./conf";
 import { IBook, TBookBlock } from "./types";
 
 const server = jsonServer.create();
@@ -22,12 +22,11 @@ server.use(jsonServer.bodyParser);
  */
 server.use(async (req, res, next) => {
   /** задержка - как в реальном АПИ */
-  if (IS_DEV) {
-    await new Promise((res) => {
-      setTimeout(res, 800);
-    });
-  }
-
+  // if (IS_DEV) {
+  //   await new Promise((res) => {
+  //     setTimeout(res, 800);
+  //   });
+  // }
   next();
 });
 
@@ -339,7 +338,7 @@ server.use((req, res, next) => {
 server.use(router);
 
 // запуск сервера
-const API_SERVER_PORT = IS_DEV ? 8000 : 80;
+const API_SERVER_PORT = process.env.PORT || DEV_PORT;
 
 server.listen(API_SERVER_PORT, () => {
   if (IS_DEV) {

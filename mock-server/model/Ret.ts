@@ -1,4 +1,4 @@
-import { IS_DEV } from "../mockEnv";
+import { IS_DEV } from "../conf";
 
 export const Ret = {
   _res: undefined as any,
