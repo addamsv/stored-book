@@ -10,6 +10,8 @@ import UserProfileSVG from "resources/assets/icons/user-profile.svg";
 
 import { getUserAuthData, userActions } from "entities/User";
 import { INavbarItem } from "widgets/Navbar/model/types";
+import { useNavigate } from "react-router-dom";
+import { RoutePath } from "resources/router/routeConfig/routeConfig";
 import { getNavbarItemsArr } from "../../model/selectors";
 import cls from "./Navbar.module.scss";
 import { NavbarItem } from "../NavbarItem/NavbarItem";
@@ -25,6 +27,9 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 
   const authData = useSelector(getUserAuthData);
   const navbarArr = useSelector(getNavbarItemsArr);
+  const user = useSelector(getUserAuthData);
+
+  const nav = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -40,6 +45,10 @@ export const Navbar = memo(({ className }: NavbarProps) => {
     dispatch(userActions.logout());
   }, [dispatch]);
 
+  const onAddBook = useCallback(() => {
+    nav(RoutePath.book_add);
+  }, [nav]);
+
   const NavbarItemList = navbarArr.map((item: INavbarItem) => (
     <NavbarItem
       key={item.path}
@@ -54,6 +63,17 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           <div style={{ display: "flex", justifyContent: "flex-start" }}>
             { NavbarItemList }
           </div>
+
+          {user?.user.roles?.includes("ROLE_ADMIN")
+          && (
+          <Button
+            theme={ButtonTheme.ACCENT_OUTLINE}
+            className={classes(cls.DarkThemeBtn, {}, [className])}
+            onClick={onAddBook}
+          >
+            {t("добавить")}
+          </Button>
+          )}
 
           <Button
             theme={ButtonTheme.ACCENT_OUTLINE}
@@ -78,16 +98,19 @@ export const Navbar = memo(({ className }: NavbarProps) => {
         <Button
           data-testid="toggle-navbar-btn"
           className={classes(cls.sidebarBtn)}
-          theme={ButtonTheme.CLEAR_PAD}
+          // theme={ButtonTheme.CLEAR_PAD}
+          theme={ButtonTheme.ACCENT_OUTLINE}
           type="button"
           onClick={onAuthModalOpen}
         >
-          <UserProfileSVG
+          {/* <UserProfileSVG
             width={22}
             height={22}
             className={cls.loginSVG}
             // fill={theme === Theme.DARK ? "#fff" : "#000"}
-          />
+          /> */}
+
+          {t("войти")}
         </Button>
 
         {isAuthModalWinOpen && <LoginModal isOpen={isAuthModalWinOpen} onClose={onAuthModalClose} />}

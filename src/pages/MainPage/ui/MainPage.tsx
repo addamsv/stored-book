@@ -15,7 +15,7 @@ const MainPage = () => {
     <Page>
       <h2 className="App-link">{t("главная страница")}</h2>
       <Logo width="300px" fill="#61DAFB" transform="scale(0.20 0.20)" />
-      <Counter />
+      {__IS_DEV__ && <Counter />}
     </Page>
   );
 };
