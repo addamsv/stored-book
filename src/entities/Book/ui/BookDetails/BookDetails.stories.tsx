@@ -23,6 +23,7 @@ const data: IBook = {
   id: 1,
   title: "Fahrenheit 451",
   subTitle: "Ray Bradbury",
+  link: "https://fake.url",
   img,
   views: 1,
   createdAt: "1.12.2025",

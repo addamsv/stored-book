@@ -61,6 +61,7 @@ export interface IBook {
   owner?: number;
   title: string;
   subTitle: string;
+  link: string;
   img: string;
   views: number;
   createdAt: string;

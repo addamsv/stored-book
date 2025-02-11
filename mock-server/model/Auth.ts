@@ -1,5 +1,7 @@
 import { Persistence } from "./Persistence";
-import { IS_DEV, SECRET_KEY } from "../mockEnv";
+import { IS_DEV } from "../conf";
+
+export const SECRET_KEY = process.env.SECRET_KEY || "L16wsStHbN1V44K0f7xM4vJb3lvC3rrHGRCloTOD3f";
 
 const { createHmac } = require("node:crypto");
 

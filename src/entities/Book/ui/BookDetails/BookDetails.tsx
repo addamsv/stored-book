@@ -12,6 +12,7 @@ import { Button, ButtonTheme } from "shared/Button/Button";
 import EyeIon from "resources/assets/icons/eye.svg";
 import CalendarIon from "resources/assets/icons/calendar.svg";
 import { IconSVG } from "shared/IconSVG/IconSVG";
+import { AppLink } from "shared/AppLink/AppLink";
 import { EBlockOfBookType, TBookBlock } from "../../model/types";
 import { getBookDetailsData,
   getBookDetailsError, getBookDetailsIsLoading
@@ -98,7 +99,15 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
                 <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={`${String(data?.createdAt)}`} />
               </span>
             </div>
-            <Button className={cls.buttonSkeleton} theme={ButtonTheme.GREEN}>{t("скачать")}</Button>
+
+            <AppLink target="_blank" to={`${data?.link}`}>
+              <Button
+                className={cls.buttonSkeleton}
+                theme={ButtonTheme.GREEN}
+              >
+                {t("скачать")}
+              </Button>
+            </AppLink>
           </div>
         </div>
 

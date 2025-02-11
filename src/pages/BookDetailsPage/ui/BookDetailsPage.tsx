@@ -19,6 +19,7 @@ import { getRecommendations, recommendationsReducer } from "../model/slices/reco
 import { getBooksRecommendationsError, getBooksRecommendationsIsLoading } from "../model/selectors/recommendations";
 import { fetchRecommendations } from "../model/services/fetchRecommendations";
 import { bookDetailsPageReducer } from "../model/slices";
+import { BookDetailsHeader } from "./BookDetailsHeader/BookDetailsHeader";
 
 interface IBookDetailsPageProps {
   className?: string;
@@ -43,12 +44,6 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
   const recommendations = useSelector(getRecommendations.selectAll);
   const recommendationsIsLoading = useSelector(getBooksRecommendationsIsLoading);
   const recommendationsError = useSelector(getBooksRecommendationsError);
-
-  // const nav = useNavigate();
-
-  // const onBackListHandler = useCallback(() => {
-  //   nav(RoutePath.books);
-  // }, [nav]);
 
   const onSendCommentHandler = useCallback((text: string) => {
     dispatch(sendBookComment(text));
@@ -80,7 +75,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
   return (
     <AsyncModule reducers={reducerList} isRemoveAfterUnmount>
       <Page className={classes(cls.BookDetailsPage, {}, [className])}>
-        {/* <Button onClick={onBackListHandler}>{t("назад к списку")}</Button> */}
+        <BookDetailsHeader />
 
         <BookDetails bookId={Number(id)} />
 
