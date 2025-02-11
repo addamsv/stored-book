@@ -1,7 +1,10 @@
 .Navbar {
   height: var(--navbar-height);
-  position: relative;
+  position: fixed;
   max-width: 800px;
+  width: 100%;
+  left: 50%;
+  transform: translate(-50%, 0%);
   margin: 12px auto;
   padding: 20px;
   box-shadow: var(--shadow);

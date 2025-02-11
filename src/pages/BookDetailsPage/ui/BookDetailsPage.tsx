@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { SendCommentForm } from "features/SendCommentForm";
 import { Page } from "widgets/Page/Page";
+import { getUserAuthData } from "entities/User";
 import { bookDetailsCommentsReducer, getBooksComments } from "../model/slices/bookDetailsCommentsSlice";
 import cls from "./BookDetailsPage.module.scss";
 import { getBooksCommentsError, getBooksCommentsIsLoading } from "../model/selectors";
@@ -19,6 +20,7 @@ import { getRecommendations, recommendationsReducer } from "../model/slices/reco
 import { getBooksRecommendationsError, getBooksRecommendationsIsLoading } from "../model/selectors/recommendations";
 import { fetchRecommendations } from "../model/services/fetchRecommendations";
 import { bookDetailsPageReducer } from "../model/slices";
+import { BookDetailsHeader } from "./BookDetailsHeader/BookDetailsHeader";
 
 interface IBookDetailsPageProps {
   className?: string;
@@ -37,18 +39,13 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
 
   const dispatch = useAppDispatch();
 
+  const user = useSelector(getUserAuthData);
   const comments = useSelector(getBooksComments.selectAll);
   const isLoading = useSelector(getBooksCommentsIsLoading);
   const error = useSelector(getBooksCommentsError);
   const recommendations = useSelector(getRecommendations.selectAll);
   const recommendationsIsLoading = useSelector(getBooksRecommendationsIsLoading);
   const recommendationsError = useSelector(getBooksRecommendationsError);
-
-  // const nav = useNavigate();
-
-  // const onBackListHandler = useCallback(() => {
-  //   nav(RoutePath.books);
-  // }, [nav]);
 
   const onSendCommentHandler = useCallback((text: string) => {
     dispatch(sendBookComment(text));
@@ -80,7 +77,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
   return (
     <AsyncModule reducers={reducerList} isRemoveAfterUnmount>
       <Page className={classes(cls.BookDetailsPage, {}, [className])}>
-        {/* <Button onClick={onBackListHandler}>{t("назад к списку")}</Button> */}
+        <BookDetailsHeader />
 
         <BookDetails bookId={Number(id)} />
 
@@ -94,9 +91,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
         />
 
         <Text textSize={TextSize.L} title={t("комментарии")} />
-
-        <SendCommentForm onSendCommentHandler={onSendCommentHandler} />
-
+        {user && <SendCommentForm onSendCommentHandler={onSendCommentHandler} />}
         <CommentList isLoading={isLoading} comments={comments} />
         <br />
         <br />

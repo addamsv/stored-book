@@ -8,9 +8,13 @@ export const getNavbarItemsArr = createSelector(
   (data) => {
     const itemsArr: INavbarItem[] = [
       {
-        path: RoutePath.main,
-        text: "Главная"
+        path: RoutePath.books,
+        text: "Книги"
       },
+      // {
+      //   path: RoutePath.main,
+      //   text: "Главная"
+      // },
       // {
       //   path: RoutePath.about,
       //   text: "О проекте"
@@ -23,11 +27,11 @@ export const getNavbarItemsArr = createSelector(
 
     if (data?.user) {
       itemsArr.push(
-        {
-          path: RoutePath.books,
-          text: "Книги",
-          authOnly: true
-        },
+        // {
+        //   path: RoutePath.books,
+        //   text: "Книги",
+        //   authOnly: true
+        // },
         {
           path: RoutePath.profile + data.user.id,
           text: "Профиль",

@@ -10,7 +10,8 @@ export function RequireAuth({ children }: {children: JSX.Element}) {
 
   if (!auth) {
     // redirect
-    return <Navigate to={RoutePath.main} state={{ from: location }} replace />;
+    // return <Navigate to={RoutePath.main} state={{ from: location }} replace />;
+    return <Navigate to={RoutePath.books} state={{ from: location }} replace />;
   }
 
   return children;

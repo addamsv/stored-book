@@ -2,16 +2,18 @@
 
 import jsonServer from "json-server";
 import path from "path";
+// import cors from "cors";
 import { Auth } from "./model/Auth";
 import { Persistence } from "./model/Persistence";
 import { Ret } from "./model/Ret";
-import { IS_DEV } from "./mockEnv";
+import { DEV_PORT, IS_DEV } from "./conf";
 import { IBook, TBookBlock } from "./types";
 
 const server = jsonServer.create();
 
 const router = jsonServer.router(path.resolve(__dirname, "db.json"));
 
+// server.use(cors());
 server.use(jsonServer.defaults({}));
 server.use(jsonServer.bodyParser);
 
@@ -20,16 +22,15 @@ server.use(jsonServer.bodyParser);
  *        SET RET AND REQ
  *
  */
-server.use(async (req, res, next) => {
-  /** задержка - как в реальном АПИ */
-  if (IS_DEV) {
-    await new Promise((res) => {
-      setTimeout(res, 800);
-    });
-  }
-
-  next();
-});
+// server.use(async (req, res, next) => {
+//   /** задержка - как в реальном АПИ */
+//   // if (IS_DEV) {
+//   //   await new Promise((res) => {
+//   //     setTimeout(res, 800);
+//   //   });
+//   // }
+//   next();
+// });
 
 /**
  *
@@ -142,14 +143,14 @@ server.put("/api/v1/profiles/:profileId", (req, res) => {
 
 /** Get All books
  *
- *  GET /api/v1/books (authOnly)
+ *  GET /api/v1/books (NOT_Auth_Only)
  *
  */
 server.get("/api/v1/books", (req, res) => {
   try {
-    if (!Auth.isAuth(req)) {
-      return Ret.err401(res);
-    }
+    // if (!Auth.isAuth(req)) {
+    //   return Ret.err401(res);
+    // }
 
     const { books = [] } = Persistence.get();
 
@@ -211,14 +212,14 @@ server.get("/api/v1/books", (req, res) => {
 
 /** Get book by ID
  *
- *  GET /api/v1/books/{id} (authOnly)
+ *  GET /api/v1/books/{id} (NOT_Auth_Only)
  *
  */
 server.get("/api/v1/books/:id", (req, res) => {
   try {
-    if (!Auth.isAuth(req)) {
-      return Ret.err401(res);
-    }
+    // if (!Auth.isAuth(req)) {
+    //   return Ret.err401(res);
+    // }
 
     const { books = [] } = Persistence.get();
 
@@ -238,14 +239,14 @@ server.get("/api/v1/books/:id", (req, res) => {
 
 /** Get Comments for Book with certain ID with User Profiles in it
  *
- *  GET /api/v1/comments/{bookId} (authOnly)
+ *  GET /api/v1/comments/{bookId} (NOT_Auth_Only)
  *
  */
 server.get("/api/v1/comments/:bookId", (req, res) => {
   try {
-    if (!Auth.isAuth(req)) {
-      return Ret.err401(res);
-    }
+    // if (!Auth.isAuth(req)) {
+    //   return Ret.err401(res);
+    // }
 
     const { comments = [], profiles = [] } = Persistence.get();
 
@@ -339,7 +340,7 @@ server.use((req, res, next) => {
 server.use(router);
 
 // запуск сервера
-const API_SERVER_PORT = IS_DEV ? 8000 : 80;
+const API_SERVER_PORT = process.env.PORT || DEV_PORT;
 
 server.listen(API_SERVER_PORT, () => {
   if (IS_DEV) {
