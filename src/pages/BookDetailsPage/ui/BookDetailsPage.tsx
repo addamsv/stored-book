@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { SendCommentForm } from "features/SendCommentForm";
 import { Page } from "widgets/Page/Page";
+import { getUserAuthData } from "entities/User";
 import { bookDetailsCommentsReducer, getBooksComments } from "../model/slices/bookDetailsCommentsSlice";
 import cls from "./BookDetailsPage.module.scss";
 import { getBooksCommentsError, getBooksCommentsIsLoading } from "../model/selectors";
@@ -38,6 +39,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
 
   const dispatch = useAppDispatch();
 
+  const user = useSelector(getUserAuthData);
   const comments = useSelector(getBooksComments.selectAll);
   const isLoading = useSelector(getBooksCommentsIsLoading);
   const error = useSelector(getBooksCommentsError);
@@ -89,9 +91,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
         />
 
         <Text textSize={TextSize.L} title={t("комментарии")} />
-
-        <SendCommentForm onSendCommentHandler={onSendCommentHandler} />
-
+        {user && <SendCommentForm onSendCommentHandler={onSendCommentHandler} />}
         <CommentList isLoading={isLoading} comments={comments} />
         <br />
         <br />

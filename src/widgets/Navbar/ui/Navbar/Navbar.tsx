@@ -64,7 +64,8 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             { NavbarItemList }
           </div>
 
-          {user?.user.roles?.includes("ROLE_ADMIN")
+          <div style={{ display: "flex", justifyContent: "flex-end", gap: "15px" }}>
+            {user?.user.roles?.includes("ROLE_ADMIN")
           && (
           <Button
             theme={ButtonTheme.ACCENT_OUTLINE}
@@ -75,13 +76,14 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           </Button>
           )}
 
-          <Button
-            theme={ButtonTheme.ACCENT_OUTLINE}
-            className={classes(cls.DarkThemeBtn, {}, [className])}
-            onClick={onLogout}
-          >
-            {t("Выйти")}
-          </Button>
+            <Button
+              theme={ButtonTheme.ACCENT_OUTLINE}
+              className={classes(cls.DarkThemeBtn, {}, [className])}
+              onClick={onLogout}
+            >
+              {t("Выйти")}
+            </Button>
+          </div>
 
         </nav>
       </menu>

@@ -13,7 +13,7 @@ export type AppRoutesPropsT = RouteProps & {
 }
 
 export enum AppRoutes {
-  MAIN = "main",
+  // MAIN = "main",
   ABOUT = "about",
   AUTH = "auth",
   PROFILE = "profile",
@@ -25,10 +25,10 @@ export enum AppRoutes {
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
-  [AppRoutes.MAIN]: "/",
+  // [AppRoutes.MAIN]: "/",
   [AppRoutes.ABOUT]: "/about",
   [AppRoutes.PROFILE]: "/profile/", // + {id}
-  [AppRoutes.BOOKS]: "/books",
+  [AppRoutes.BOOKS]: "/", // "/books",
   [AppRoutes.BOOK_DETAILS]: "/books/", // + {id}
   [AppRoutes.BOOK_ADD]: "/books/add",
   [AppRoutes.BOOK_EDIT]: "/books/:id/edit",
@@ -37,7 +37,7 @@ export const RoutePath: Record<AppRoutes, string> = {
 };
 
 export const routeConfig: Record<AppRoutes, AppRoutesPropsT> = {
-  [AppRoutes.MAIN]: { path: RoutePath.main, element: <MainPage /> },
+  // [AppRoutes.MAIN]: { path: RoutePath.main, element: <MainPage /> },
   [AppRoutes.AUTH]: { path: RoutePath.auth, element: <AuthPage /> },
   [AppRoutes.ABOUT]: { path: RoutePath.about, element: <AboutPage /> },
   [AppRoutes.PROFILE]: {
@@ -45,10 +45,15 @@ export const routeConfig: Record<AppRoutes, AppRoutesPropsT> = {
     authOnly: true,
     element: <ProfilePage />
   },
-  [AppRoutes.BOOKS]: { path: RoutePath.books, authOnly: true, element: <BooksListPage /> },
+  // [AppRoutes.BOOKS]: { path: RoutePath.books, authOnly: true, element: <BooksListPage /> },
+  [AppRoutes.BOOKS]: { path: RoutePath.books, element: <BooksListPage /> },
+  // [AppRoutes.BOOK_DETAILS]: {
+  //   path: `${RoutePath.book_details}:id`,
+  //   authOnly: true,
+  //   element: <BookDetailsPage />
+  // },
   [AppRoutes.BOOK_DETAILS]: {
     path: `${RoutePath.book_details}:id`,
-    authOnly: true,
     element: <BookDetailsPage />
   },
   [AppRoutes.BOOK_ADD]: {

@@ -7,6 +7,8 @@ import { TextAlign, TextSize } from "shared/Text";
 import { Skeleton } from "shared/Skeleton/Skeleton";
 import { AppLink } from "shared/AppLink/AppLink";
 import { RoutePath } from "resources/router/routeConfig/routeConfig";
+import { useSelector } from "react-redux";
+import { getUserAuthData } from "entities/User";
 import cls from "./CommentItem.module.scss";
 import { IComment } from "../../model/types";
 
@@ -18,6 +20,8 @@ interface ICommentItemProps {
 
 export const CommentItem = memo(({ className, comment, isLoading = false }: ICommentItemProps) => {
   const { t } = useTranslation();
+
+  const user = useSelector(getUserAuthData);
 
   if (isLoading) {
     return (
@@ -36,9 +40,11 @@ export const CommentItem = memo(({ className, comment, isLoading = false }: ICom
     return null;
   }
 
+  const path = user ? `${RoutePath.profile}${comment.owner.id}` : "";
+
   return (
     <div className={classes(cls.CommentItem, {}, [className])}>
-      <AppLink to={`${RoutePath.profile}${comment.owner.id}`} className={cls.commentHeader}>
+      <AppLink to={path} className={cls.commentHeader}>
         {comment.owner.image ? <ImageJpg className={cls.image} size={20} alt="*" src={comment.owner.image} /> : null}
         <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={comment.owner.name} />
       </AppLink>
