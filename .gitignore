@@ -1,20 +1,5 @@
-# See https://help.github.com/books/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-node_modules
-package-lock.json
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
+.vercel
 .DS_Store
-.idea
-
-/storybook-static
+node_modules
+build
+storybook-static

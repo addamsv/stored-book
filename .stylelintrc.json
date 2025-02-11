@@ -1,8 +1,0 @@
-{
-  "extends": "stylelint-config-standard-scss",
-  "rules": {
-    "indentation": [2],
-    "value-list-comma-newline-after": "never-multi-line",
-    "selector-class-pattern": null
-  }
-}

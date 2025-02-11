@@ -1,97 +1,57 @@
-# STORED AUDIO BOOKS
+# MOCK-JSON-SERVER V1
 
-## Страница доступного списка книг
+- Basic Auth
+- JWT Auth
 
-(только для авторизированных пользователей)
+<br />
 
-<img src="./.github/projectDescription/images/bookList.png" width="104px">
+<h2>Auth</h2>
+<details>
+  <summary> POST /users/login </summary>
+  POST /api/v1/users/login
+</details>
 
-## Страницы профиля пользователя и о книге подробнее с комментариями
+<h2>profiles</h2>
+<details>
+  <summary> GET /profiles/{profileId} (authOnly) </summary>
+  GET /api/v1/profiles/{profileId}
+</details>
 
-(только для авторизированных пользователей)
+<details>
+  <summary> PUT /profiles/{profileId} (authOnly) </summary>
+  PUT /api/v1/profiles/{profileId}
+</details>
 
-<img src="./.github/projectDescription/images/userProfile.png" width="104px"><img src="./.github/projectDescription/images/bookDescription.png" width="104px">
+<h2>Books</h2>
+<details>
+  <summary> GET /books (authOnly) </summary>
+  GET /api/v1/books
+</details>
 
-## Basic и JSON Web Token аутентификация
+<details>
+  <summary> GET /books/{id} (authOnly) </summary>
+  GET /api/v1/books/{id}
+</details>
 
-<img src="./.github/projectDescription/images/basicAuth.png" width="104px">
+<h2>comments</h2>
+<details>
+  <summary> GET /comments/{bookId} (authOnly) </summary>
+  GET /api/v1/comments/{bookId}
+</details>
 
-## Различные темы и интернационализация (RU, EN)
+<details>
+  <summary> POST /comments (authOnly) </summary>
+  POST /api/v1/comments
+</details>
 
-<img src="./.github/projectDescription/images/darkBlue.png" width="104px"><img src="./.github/projectDescription/images/dark.png" width="104px"><img src="./.github/projectDescription/images/lightBlue.png" width="104px">
+<br />
 
-<br><br>
-
-# Технологический стек FRONT:
-
-Typescript, React, Redux Toolkit, Thunk (async), Webpack, FSD;
-<br>
-jest, integration, ui, screenshot tests, ts lint, style lint; Storybook;
-
-# Технологический стек BACK:
-
-Dev: Nodejs json-mock-server (смотри папку mock-server)
-<br>
-Prod: Java Spring Boot + (H2 | postgresql | mysql...) (смотри sb-lab-api repo)
-
-<br>
-
-# Install APP
-
-### разрабатывалось с node version: v16.14.0
-
-clone the repo then (sudo)
-
-```bash
-npm install
-```
-
-build storybook: (sudo)
-
-```bash
-npm run sb:build
-```
-
-в node_modules/entities удалил поля "module" и "exports" и всё заработало
-
-# Запуск App:
+<details>
+<summary> launch the server </summary>
 
 ```bash
-npm start
-```
-
-# Запуск Mock-Server:
-
-#### и просматривать его изменения в папке ./mock-server/db.json
-
-```bash
+# launch the server
 npm run server
 ```
 
-# Запуск Storybook:
-
-```bash
-npm run sb
-```
-
-# ТEST:
-
-```bash
-npm run lint
-npm run stylelint
-npm run test
-```
-
-# Loki (screenshot test):
-
-### убедиться, что Docker и Storybook запущен и подключен инет
-
-```bash
-npm run loki
-```
-
-### если всё устраивает:
-
-```bash
-npm run loki:ok
-```
+</details>
