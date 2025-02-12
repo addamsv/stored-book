@@ -31,7 +31,9 @@ export const BookDetailsHeader = memo(({ className }: IBookDetailsHeaderProps) =
 
   return (
     <div className={classes(cls.BookDetailsHeader, {}, [className])}>
+
       <Button onClick={onBackListHandler}>{`${t("назад")}`}</Button>
+
       {isEditable && <Button onClick={onBookEditHandler}>{`${t("редактировать")}`}</Button>}
     </div>
   );

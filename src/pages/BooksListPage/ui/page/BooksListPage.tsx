@@ -58,7 +58,7 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
         className={classes(cls.BooksListPage, {}, [className])}
       >
 
-        <h1 data-testid="BooksListPage">{t("Книги")}</h1>
+        {/* <h1 data-testid="BooksListPage">{t("Книги")}</h1> */}
 
         {error ? (
           <ErrorWidget text={error} />

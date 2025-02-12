@@ -22,3 +22,9 @@
   display: flex;
   justify-content: space-around;
 }
+
+@media (max-width: 670px) {
+  .links {
+    justify-content: space-between;
+  }
+}

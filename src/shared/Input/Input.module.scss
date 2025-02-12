@@ -1,6 +1,7 @@
 .Input {
   display: block;
   padding: 5px;
+  width: 100%;
 }
 
 .placeholder {
@@ -13,7 +14,7 @@
 
 .inputEntity {
   color: var(--primary-color);
-  width: 180px;
+  width: 100%;
   border-radius: 4px;
   padding-left: 6px;
   border: solid 2px rgba(255 255 255 / 30%);

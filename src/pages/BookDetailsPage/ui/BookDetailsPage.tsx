@@ -81,7 +81,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
 
         <BookDetails bookId={Number(id)} />
 
-        <Text textSize={TextSize.L} title={t("рекомендасьён")} />
+        <Text className={cls.mgnTop} textSize={TextSize.L} title={t("рекомендасьён")} />
 
         <BookList
           target="_blank"
@@ -90,7 +90,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
           listView={EBookListView.COMPACT}
         />
 
-        <Text textSize={TextSize.L} title={t("комментарии")} />
+        <Text className={cls.mgnTop} textSize={TextSize.L} title={t("комментарии")} />
         {user && <SendCommentForm onSendCommentHandler={onSendCommentHandler} />}
         <CommentList isLoading={isLoading} comments={comments} />
         <br />
