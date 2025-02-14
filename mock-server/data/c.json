@@ -1,0 +1,76 @@
+{
+  "books": [
+    {
+      "title": "The Wrong Quarterback",
+      "book": "The Wrong Player Series, Book 1",
+      "series": "The Wrong Player, Book 1",
+      "by": "C.R. Jane",
+      "narratedBy": "Lucas Webley, Alexis Paige",
+      "Length": "10 hrs and 55 mins",
+      "date": "Release date: 02-11-25"
+    },
+    {
+      "title": "The Alchemist 4",
+      "book": "The Alchemist, Book 4",
+      "series": "The Alchemist, Book 4",
+      "by": "Roman Romanovich",
+      "narratedBy": "Nick Flesher",
+      "Length": "9 hrs and 6 mins",
+      "date": "Release date: 02-11-25"
+    },
+    {
+      "title": "We Would Never",
+      "book": "",
+      "series": "",
+      "by": " Rachel F. Hirsch",
+      "narratedBy": "Nick Flesher",
+      "Length": "11 hrs and 38 mins",
+      "date": "Release date: 02-11-25"
+    },
+    {
+      "Title": "The Alchemist 4",
+      "Series": "The Alchemist",
+      "Author": [
+        "Roman Romanovich"
+      ],
+      "Translator": [
+        "Roman Romanovich"
+      ],
+      "Narrated": [
+        "Nick Flesher"
+      ],
+      "Length": "9 hrs 6 mins",
+      "ReleaseDate": "mm-dd-yy",
+      "PublicationDate": "02-11-25 ",
+      "Icon": "URL",
+      "Language": "English",
+      "Genres": [
+        "Science Fiction",
+        "Fantasy"
+      ],
+      "Format": "Unabridged Audiobook | Podcast | Audio Drama",
+      "Publisher": "Recorded Books",
+      "id": 1,
+      "owner": 1,
+      "title": "Fahrenheit 451",
+      "subTitle": "Ray Bradbury",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 10,
+      "createdAt": "02-11-25",
+      "hashTagType": [],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Description",
+          "paragraphs": [
+            "Ed is living life to the fullest. Having been given a second chance, he's determined to seize every opportunity.",
+            "The freshman year at the Lyceum has ended, and a much-anticipated vacation has finally started. Tempting offers from classmates promise a dream of a perfect summer filled with relaxation and seaside adventures.",
+            "However, Ed still has work to do."
+          ]
+        }
+      ]
+    }
+  ]
+}

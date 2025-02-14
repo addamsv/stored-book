@@ -86,19 +86,26 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
             <Text
               className={cls.imageDescription}
               textAlign={TextAlign.LEFT}
-              title={data?.title}
-              text={data?.subTitle}
+              title={data?.Title}
+              text={data?.Author?.join(", ")}
             />
             <div className={cls.info}>
               <span style={{ display: "flex", width: 40, justifyContent: "space-around" }}>
                 <IconSVG Svg={EyeIon} />
                 <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={`${String(data?.views)}`} />
               </span>
-              <span style={{ display: "flex", width: 80, justifyContent: "space-around", marginLeft: 11 }}>
+              <span style={{ display: "flex", justifyContent: "space-around", marginLeft: 11 }}>
                 <IconSVG Svg={CalendarIon} />
-                <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={`${String(data?.createdAt)}`} />
+                <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={`${String(data?.PublicationDate)}`} />
               </span>
             </div>
+            <Text
+              className={cls.hashTagType}
+              textSize={TextSize.S}
+              textAlign={TextAlign.LEFT}
+              // text={data?.hashTagType.join(", ")}
+              text={data?.Genres?.join(", ")}
+            />
 
             <AppLink target="_blank" to={`${data?.link}`}>
               <Button

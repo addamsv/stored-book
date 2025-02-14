@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { memo, useCallback } from "react";
 import { RoutePath } from "resources/router/routeConfig/routeConfig";
 import { useNavigate } from "react-router-dom";
-import { Button } from "shared/Button/Button";
+import { Button, ButtonTheme } from "shared/Button/Button";
 import { useSelector } from "react-redux";
 import { getUserAuthData } from "entities/User";
 import { getBookDetailsData } from "entities/Book";
@@ -25,6 +25,10 @@ export const BookDetailsHeader = memo(({ className }: IBookDetailsHeaderProps) =
     nav(RoutePath.books);
   }, [nav]);
 
+  const onBookDellHandler = useCallback(() => {
+    nav(`${RoutePath.book_details}${book?.id}/edit`);
+  }, [book?.id, nav]);
+
   const onBookEditHandler = useCallback(() => {
     nav(`${RoutePath.book_details}${book?.id}/edit`);
   }, [book?.id, nav]);
@@ -34,7 +38,12 @@ export const BookDetailsHeader = memo(({ className }: IBookDetailsHeaderProps) =
 
       <Button onClick={onBackListHandler}>{`${t("назад")}`}</Button>
 
-      {isEditable && <Button onClick={onBookEditHandler}>{`${t("редактировать")}`}</Button>}
+      {isEditable && (
+        <>
+          <Button onClick={onBookEditHandler}>{`${t("редактировать")}`}</Button>
+          <Button theme={ButtonTheme.RED} onClick={onBookDellHandler}>{`${t("удалить")}`}</Button>
+        </>
+      )}
     </div>
   );
 });

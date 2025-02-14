@@ -47,7 +47,7 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
           >
             <div className={cls.imageWrapper}>
               <img className={cls.img} src={book.img} alt="*" />
-              <p className={cls.createdAt}>{book.createdAt}</p>
+              <p className={cls.createdAt}>{book.PublicationDate}</p>
             </div>
 
             <div className={cls.info}>
@@ -55,14 +55,15 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
                 className={cls.hashTagType}
                 textAlign={TextAlign.LEFT}
                 textSize={TextSize.XS}
-                text={book.hashTagType.join(", ")}
+                // text={book.hashTagType.join(", ")}
+                text={book?.Genres?.join(", ")}
               />
 
               <IconSVG className={cls.views} w={12} h={12} Svg={EyeIon} />
               <Text textSize={TextSize.XS} text={String(book.views)} />
             </div>
 
-            <Text className={cls.title} textSize={TextSize.S} textAlign={TextAlign.LEFT} text={String(book.title)} />
+            <Text className={cls.title} textSize={TextSize.S} textAlign={TextAlign.LEFT} text={String(book.Title)} />
           </Card>
         </AppLink>
       </div>
@@ -82,17 +83,18 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
           <Text
             className={cls.imageDescription}
             textAlign={TextAlign.LEFT}
-            title={book.title} // t("Fahrenheit 451")
-            text={book.subTitle}
+            title={book.Title} // t("Fahrenheit 451")
+            // text={book.subTitle}
+            text={book?.Author?.join(", ")}
           />
           <div className={cls.info}>
             <span style={{ display: "flex", width: 40, justifyContent: "space-around" }}>
               <IconSVG Svg={EyeIon} />
               <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={String(book.views)} />
             </span>
-            <span style={{ display: "flex", width: 80, justifyContent: "space-around", marginLeft: 11 }}>
+            <span style={{ display: "flex", justifyContent: "space-around", marginLeft: 11 }}>
               <IconSVG Svg={CalendarIon} />
-              <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={book.createdAt} />
+              <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={book.PublicationDate} />
             </span>
           </div>
 
@@ -100,7 +102,8 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
             className={cls.hashTagType}
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
-            text={book.hashTagType.join(", ")}
+            // text={book.hashTagType.join(", ")}
+            text={book.Genres?.join(", ")}
           />
 
           {paragraph && (

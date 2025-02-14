@@ -26,10 +26,10 @@ const book: IBook = {
   views: 1,
   createdAt: "1.12.2025",
   hashTagType: [
-    EBookOfHashTagType.IT,
-    EBookOfHashTagType.ECONOMICS,
-    EBookOfHashTagType.POETRY,
-    EBookOfHashTagType.SCIENCE,
+    EBookOfHashTagType["Arts & Entertainment"],
+    EBookOfHashTagType["Comedy & Humor"],
+    EBookOfHashTagType["Science & Engineering"],
+    EBookOfHashTagType["Science Fiction & Fantasy"],
   ],
   blocks: [
     {

@@ -1,7 +1,5 @@
-// // @ts-nocheck
-
 import jsonServer from "json-server";
-import path from "path";
+
 // import cors from "cors";
 import { Auth } from "./model/Auth";
 import { Persistence } from "./model/Persistence";
@@ -11,7 +9,7 @@ import { IBook, TBookBlock } from "./types";
 
 const server = jsonServer.create();
 
-const router = jsonServer.router(path.resolve(__dirname, "db.json"));
+// const router = jsonServer.router(path.resolve(__dirname, "db.json"));
 
 // server.use(cors());
 server.use(jsonServer.defaults({}));
@@ -162,14 +160,26 @@ server.get("/api/v1/books", (req, res) => {
       q?: string,
       _page?: number,
       _limit?: number,
-      _sort?: "title" | "subtitle" | "views" | "createdAt",
+      _sort?: "Title" | "Author" | "views" | "PublicationDate",
       _order?: "asc" | "desc",
       hashTag?: string,
     } = req.query;
 
     console.log(q, _sort, _order, hashTag);
 
-    const isTitleInc = (title: string) => title.toLowerCase().includes(q.toLowerCase());
+    const isTitleInc = (title?: string) => {
+      if (!title) {
+        return false;
+      }
+      return title.toLowerCase().includes(q.toLowerCase());
+    };
+
+    const isAuthorInc = (authors?: string[]) => {
+      if (!authors) {
+        return false;
+      }
+      return authors.some((author) => isTitleInc(author));
+    };
 
     const isBlockInc = (blocks: TBookBlock[]) => {
       return blocks.some((block) => (block.type === "TEXT" ? block.paragraphs.some((par) => isTitleInc(par)) : false));
@@ -181,14 +191,14 @@ server.get("/api/v1/books", (req, res) => {
       // hashTag
       .filter((book: IBook) => {
         if (hashTag) {
-          return book.hashTagType.some((tag) => tag === hashTag);
+          return book.Genres?.some((tag) => tag === hashTag);
         }
         return true;
       })
       // query
       .filter((book: IBook) => {
         if (q) {
-          return isTitleInc(book.title) || isTitleInc(book.subTitle) || isBlockInc(book.blocks);
+          return isTitleInc(book.Title) || isAuthorInc(book.Author) || isBlockInc(book.blocks);
         }
         return true;
       })
@@ -196,8 +206,44 @@ server.get("/api/v1/books", (req, res) => {
       .sort((a, b) => {
         if (_sort && a[_sort]) {
           console.log(a[_sort], b[_sort]);
-          // _order
-          return _order === "desc" ? a[_sort] - b[_sort] : b[_sort] - a[_sort];
+          // _order PublicationDate
+          if (_sort === "PublicationDate") {
+            const arrDateA = a[_sort].split("-");
+            const arrDateB = b[_sort].split("-");
+
+            const dateA = `${arrDateA[2]}${arrDateA[0]}${arrDateA[1]}`;
+            const dateB = `${arrDateB[2]}${arrDateB[0]}${arrDateB[1]}`;
+
+            if (dateA < dateB) {
+              return _order === "desc" ? 1 : -1;
+            }
+
+            if (dateA > dateB) {
+              return _order === "desc" ? -1 : 1;
+            }
+
+            return 0;
+          }
+          // _order views
+          if (_sort === "views") {
+            return _order === "desc" ? a[_sort] - b[_sort] : b[_sort] - a[_sort];
+          }
+          // _order title subTitle
+          if (_sort === "Title") { // || _sort === "subTitle"
+            const nameA = a[_sort].toUpperCase();
+
+            const nameB = b[_sort].toUpperCase();
+
+            if (nameA < nameB) {
+              return _order === "desc" ? 1 : -1;
+            }
+
+            if (nameA > nameB) {
+              return _order === "desc" ? -1 : 1;
+            }
+
+            return 0;
+          }
         }
         return 0;
       })
@@ -337,7 +383,7 @@ server.use((req, res, next) => {
 /**
  *      OTHER ENDPOINTS
  */
-server.use(router);
+// server.use(router);
 
 // запуск сервера
 const API_SERVER_PORT = process.env.PORT || DEV_PORT;

@@ -31,7 +31,7 @@ export const Sort = memo(({ className, sort, order, onOrderChange, onSortChange 
       content: t("дате")
     },
     { value: EBookListSortField.SUBTITLE,
-      content: t("подзаголовку")
+      content: t("автору")
     },
     { value: EBookListSortField.VIEWS,
       content: t("просмотрам")

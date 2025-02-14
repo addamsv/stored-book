@@ -28,7 +28,7 @@ const data: IBook = {
   views: 1,
   createdAt: "1.12.2025",
   hashTagType: [
-    EBookOfHashTagType.IT
+    EBookOfHashTagType["Education & Learning"]
   ],
   blocks: [
     {
