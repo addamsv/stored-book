@@ -205,7 +205,6 @@ server.get("/api/v1/books", (req, res) => {
       // _sort
       .sort((a, b) => {
         if (_sort && a[_sort]) {
-          console.log(a[_sort], b[_sort]);
           // _order PublicationDate
           if (_sort === "PublicationDate") {
             const arrDateA = a[_sort].split("-");

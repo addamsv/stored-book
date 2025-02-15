@@ -81,15 +81,16 @@ export enum EBookOfHashTagType {
 }
 
 export interface IBook {
-  title: string;
-  subTitle: string;
-  createdAt: string;
-  hashTagType: EBookOfHashTagType[];
+  // title: string;
+  // subTitle: string;
+  // createdAt: string;
+  // hashTagType: EBookOfHashTagType[];
 
   id: number;
   owner?: number;
   views: number;
   link: string;
+  linEx?: string;
   blocks: TBookBlock[];
 
   img: string;

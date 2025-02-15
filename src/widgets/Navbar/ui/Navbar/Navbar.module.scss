@@ -1,6 +1,6 @@
 .Navbar {
-  height: var(--navbar-height);
   position: fixed;
+  height: var(--navbar-height);
   max-width: 800px;
   width: 100%;
   left: 50%;
@@ -12,10 +12,6 @@
   background: #ffffff20;
   backdrop-filter: blur(16px) saturate(120%);
   z-index: 1;
-}
-
-.loginSVG {
-  fill: var(--primary-color);
 }
 
 .links {

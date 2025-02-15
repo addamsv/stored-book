@@ -1,14 +1,15 @@
 .Footer {
-  display: block;
-  position: relative;
-  bottom: 0;
-  height: 50px;
+  display: flex;
+  justify-content: center;
   width: 100%;
-  margin: 0 auto;
-  padding: 15px;
+  height: 50px;
   box-shadow: var(--shadow);
   background: #111;
   backdrop-filter: blur(16px) saturate(120%);
+}
+
+.footerWrapper {
+  max-width: 800px;
 }
 
 .iconWrapper {
@@ -16,8 +17,6 @@
   position: relative;
   padding: 9px 3px 0;
   margin-left: 12px;
-
-  // background-color: #222;
   border-radius: 3px;
 }
 

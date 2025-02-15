@@ -31,13 +31,9 @@ describe("test Book Details Slice", () => {
     const data: IBook = {
       id: 1,
       owner: 1,
-      title: "t",
-      subTitle: "s",
       link: "s",
       img: "i",
       views: 1,
-      createdAt: "c",
-      hashTagType: [],
       blocks: [],
     };
 

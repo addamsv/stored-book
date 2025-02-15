@@ -20,13 +20,13 @@ const books: IBook[] = [
   {
     id: 1,
     owner: 1,
-    title: "Fahrenheit 451",
-    subTitle: "Ray Bradbury",
+    Title: "Fahrenheit 451",
+    Author: ["Ray Bradbury"],
     link: "https://fake.url",
     img: "http://localhost:3000/images/Fahrenheit451.jpg",
     views: 1,
-    createdAt: "1.12.2025",
-    hashTagType: [
+    PublicationDate: "1.12.2025",
+    Genres: [
       EBookOfHashTagType["Arts & Entertainment"],
       EBookOfHashTagType["Comedy & Humor"],
       EBookOfHashTagType["Science & Engineering"],
@@ -66,13 +66,13 @@ const books: IBook[] = [
   {
     id: 2,
     owner: 1,
-    title: "Dandelion Wine",
-    subTitle: "Ray Bradbury",
+    Title: "Dandelion Wine",
+    Author: ["Ray Bradbury"],
     link: "https://fake.url",
     img: "http://localhost:3000/images/DandelionWine.jpg",
     views: 1,
-    createdAt: "1.12.2025",
-    hashTagType: [
+    PublicationDate: "1.12.2025",
+    Genres: [
       EBookOfHashTagType["Literature & Fiction"],
     ],
     blocks: [
@@ -97,13 +97,13 @@ const books: IBook[] = [
   {
     id: 3,
     owner: 1,
-    title: "Dandelion Wine",
-    subTitle: "Ray Bradbury",
+    Title: "Dandelion Wine",
+    Author: ["Ray Bradbury"],
     link: "https://fake.url",
     img: "http://localhost:3000/images/DandelionWine.jpg",
     views: 1,
-    createdAt: "1.12.2025",
-    hashTagType: [
+    PublicationDate: "1.12.2025",
+    Genres: [
       EBookOfHashTagType["Education & Learning"],
     ],
     blocks: [
@@ -128,13 +128,13 @@ const books: IBook[] = [
   {
     id: 4,
     owner: 1,
-    title: "Dandelion Wine",
-    subTitle: "Ray Bradbury",
+    Title: "Dandelion Wine",
+    Author: ["Ray Bradbury"],
     link: "https://fake.url",
     img: "http://localhost:3000/images/DandelionWine.jpg",
     views: 1,
-    createdAt: "1.12.2025",
-    hashTagType: [
+    PublicationDate: "1.12.2025",
+    Genres: [
       EBookOfHashTagType["Business & Careers"],
     ],
     blocks: [

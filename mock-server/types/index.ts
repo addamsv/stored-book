@@ -72,6 +72,7 @@ export interface IBook {
     owner?: number;
     views: number;
     link: string;
+    linkEx: string;
     blocks: TBookBlock[];
 
     img: string;

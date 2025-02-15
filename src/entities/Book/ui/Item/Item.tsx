@@ -12,6 +12,8 @@ import { RoutePath } from "resources/router/routeConfig/routeConfig";
 import { AppLink } from "shared/AppLink/AppLink";
 import { Card } from "shared/Card/Card";
 import { useNavigate } from "react-router-dom";
+import { VFlex } from "shared/Flex/VFlex";
+import { HFlex } from "shared/Flex/HFlex";
 import { EBlockOfBookType, EBookListView, IBlockOfBookText, IBook } from "../../model/types";
 import cls from "./Item.module.scss";
 import BlockOfBookText from "../BlockOfBookText/BlockOfBookText";
@@ -79,7 +81,7 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
       <Card className={classes(cls.card, {}, [className, cls[listView]])}>
         <ImageJpg className={cls.bookImage} alt="*" src={book.img} />
 
-        <div style={{ display: "inline-block", marginLeft: 20 }}>
+        <VFlex className={cls.contentWrapper}>
           <Text
             className={cls.imageDescription}
             textAlign={TextAlign.LEFT}
@@ -87,16 +89,16 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
             // text={book.subTitle}
             text={book?.Author?.join(", ")}
           />
-          <div className={cls.info}>
-            <span style={{ display: "flex", width: 40, justifyContent: "space-around" }}>
+          <HFlex gap="8" className={cls.info}>
+            <HFlex gap="4">
               <IconSVG Svg={EyeIon} />
               <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={String(book.views)} />
-            </span>
-            <span style={{ display: "flex", justifyContent: "space-around", marginLeft: 11 }}>
+            </HFlex>
+            <HFlex gap="4">
               <IconSVG Svg={CalendarIon} />
               <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={book.PublicationDate} />
-            </span>
-          </div>
+            </HFlex>
+          </HFlex>
 
           <Text
             className={cls.hashTagType}
@@ -120,7 +122,7 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
               {t("подробнее")}
             </Button>
           </AppLink>
-        </div>
+        </VFlex>
       </Card>
     </div>
   );
