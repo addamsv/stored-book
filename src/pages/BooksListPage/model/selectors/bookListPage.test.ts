@@ -13,10 +13,10 @@ describe("test getBooksListPage SELECTORS", () => {
     expect(getBooksListPageListView(state as IStateSchema)).toEqual(EBookListView.COMPACT);
   });
 
-  test("test getBooksListPageListView с пустым state должно вернуть COMPACT", () => {
+  test("test getBooksListPageListView с пустым state должно вернуть STANDARD", () => {
     const state: DeepPartial<IStateSchema> = {};
 
-    expect(getBooksListPageListView(state as IStateSchema)).toEqual(EBookListView.COMPACT);
+    expect(getBooksListPageListView(state as IStateSchema)).toEqual(EBookListView.STANDARD);
   });
 
   test("getBooksListPageError должно вернуть ошибка", () => {
