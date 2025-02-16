@@ -1,12 +1,11 @@
 .Navbar {
-  height: var(--navbar-height);
   position: fixed;
+  height: var(--navbar-height);
   max-width: 800px;
   width: 100%;
   left: 50%;
   transform: translate(-50%, 0%);
-  margin: 12px auto;
-  padding: 20px;
+  padding: 8px;
   box-shadow: var(--shadow);
   border-radius: 12px;
   background: #ffffff20;
@@ -14,11 +13,13 @@
   z-index: 1;
 }
 
-.loginSVG {
-  fill: var(--primary-color);
-}
-
 .links {
   display: flex;
   justify-content: space-around;
+}
+
+@media (max-width: 670px) {
+  .links {
+    justify-content: space-between;
+  }
 }

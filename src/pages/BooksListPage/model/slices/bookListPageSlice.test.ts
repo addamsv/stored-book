@@ -88,13 +88,13 @@ describe("bookListPageSlice.test", () => {
     const data: IBook[] = [{
       id: 1,
       owner: 1,
-      title: "t",
-      subTitle: "s",
+      // title: "t",
+      // subTitle: "s",
       link: "s",
       img: "i",
       views: 1,
-      createdAt: "c",
-      hashTagType: [],
+      // createdAt: "c",
+      // hashTagType: [],
       blocks: [],
     }];
 

@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "iat": "1.12.2025",
+      "name": "admin",
+      "password": "d86baf75db00c390f8e032081412a272ae7c5e0188f0db483248c152eab32566",
+      "roles": "ROLE_ADMIN",
+      "enabled": true
+    },
+    {
+      "id": 3,
+      "iat": "1.12.2025",
+      "name": "guest",
+      "password": "d86baf75db00c390f8e032081412a272ae7c5e0188f0db483248c152eab32566",
+      "roles": "ROLE_GUEST",
+      "enabled": true
+    },
+    {
+      "id": 2,
+      "iat": "1.12.2025",
+      "name": "user",
+      "password": "d86baf75db00c390f8e032081412a272ae7c5e0188f0db483248c152eab32566",
+      "roles": "ROLE_USER",
+      "enabled": true
+    }
+  ]
+}

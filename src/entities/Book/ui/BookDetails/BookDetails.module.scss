@@ -5,7 +5,8 @@
 .topWrapper {
   position: relative;
   max-width: 800px;
-  margin: 20px auto;
+  margin: 16px auto;
+  padding-left: 32px;
   text-align: left;
 }
 
@@ -14,11 +15,11 @@
   box-shadow: var(--shadow);
   position: relative;
   max-width: 300px;
-  margin: 20px;
+  margin: 16px 0;
 }
 
 .imageDescription {
-  margin-top: 15px;
+  margin-top: 0;
 }
 
 .buttonSkeleton {
@@ -27,7 +28,6 @@
 }
 
 .info {
-  display: flex;
   font-size: 12px;
 }
 

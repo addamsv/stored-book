@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { AsyncModule, ReducerListT } from "shared/AsyncModule/AsyncModule";
 // import { sendComment } from "../../model/services/sendComment";
+import { Text } from "shared/Text";
 import { sendCommentFormActions, sendCommentFormReducer } from "../../model/slices";
 import { getErrorTextFromSendCommentForm, getTextFromSendCommentForm } from "../../model/selectors";
 import cls from "./SendCommentForm.module.scss";
@@ -41,13 +42,13 @@ const SendCommentForm = memo(({ className, onSendCommentHandler }: ISendCommentF
   return (
     <AsyncModule reducers={reducers} isRemoveAfterUnmount>
       <div className={classes(cls.SendCommentForm, {}, [className])}>
+        <Text text={t("отпрвить комментарий")} />
         <Input
           className={cls.textArea}
-          placeholder={t("комментарий")}
           value={comment}
           onChange={onChangeHandler}
         />
-        <Button onClick={onSendHandler}>{t("отправить")}</Button>
+        <Button className={cls.sendCommentButton} onClick={onSendHandler}>{t("отправить")}</Button>
       </div>
     </AsyncModule>
   );

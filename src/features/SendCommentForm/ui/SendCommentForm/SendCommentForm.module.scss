@@ -1,6 +1,7 @@
 .SendCommentForm {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   align-items: start;
   box-shadow: var(--shadow);
   padding: 20px;
@@ -12,4 +13,8 @@
 .textArea {
   flex-grow: 1;
   text-align: left;
+}
+
+.sendCommentButton {
+  margin-top: 10px;
 }

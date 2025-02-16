@@ -10,6 +10,8 @@ import { Loader } from "shared/Loader/Loader";
 import { ImageJpg } from "shared/ImageJpg/ImageJpg";
 import { Currency, ECurrency } from "entities/Currency/";
 import { Country, ECountry } from "entities/Country";
+import { VFlex } from "shared/Flex/VFlex";
+import { HFlex } from "shared/Flex/HFlex";
 import cls from "./ProfileCard.module.scss";
 
 interface ProfileCardProps {
@@ -50,10 +52,10 @@ export const ProfileCard = ({
   }
 
   return (
-    <div className={classes(cls.ProfileCard, {}, [className])}>
-      <div className={cls.data}>
+    <HFlex max className={classes(cls.ProfileCard, {}, [className])}>
+      <VFlex max className={cls.ProfileWrapper}>
 
-        {profileCardData?.image && <ImageJpg src={profileCardData?.image} size={150} />}
+        {profileCardData?.image && <ImageJpg src={profileCardData?.image} size={320} />}
 
         <Input
           value={profileCardData?.image}
@@ -110,7 +112,7 @@ export const ProfileCard = ({
           isReadOnly={isReadOnly}
           onChange={onChangeCurrency}
         />
-      </div>
-    </div>
+      </VFlex>
+    </HFlex>
   );
 };

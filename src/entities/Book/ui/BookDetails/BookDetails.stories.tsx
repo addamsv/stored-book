@@ -21,14 +21,14 @@ const Template: ComponentStory<typeof BookDetails> = (args) => <BookDetails {...
 
 const data: IBook = {
   id: 1,
-  title: "Fahrenheit 451",
-  subTitle: "Ray Bradbury",
+  Title: "Fahrenheit 451",
+  Author: ["Ray Bradbury"],
   link: "https://fake.url",
   img,
   views: 1,
-  createdAt: "1.12.2025",
-  hashTagType: [
-    EBookOfHashTagType.IT
+  PublicationDate: "1.12.2025",
+  Genres: [
+    EBookOfHashTagType["Education & Learning"]
   ],
   blocks: [
     {

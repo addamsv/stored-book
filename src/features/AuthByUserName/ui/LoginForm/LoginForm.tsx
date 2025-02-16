@@ -44,10 +44,10 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   }, [dispatch]);
 
   /** Temp */
-  useEffect(() => {
-    onChangeName("guest");
-    onChangePass("123");
-  }, [onChangeName, onChangePass]);
+  // useEffect(() => {
+  //   onChangeName("guest");
+  //   onChangePass("123");
+  // }, [onChangeName, onChangePass]);
 
   const onFormCommit = useCallback(async () => {
     const result = await dispatch(loginByUsername({ username, password }));

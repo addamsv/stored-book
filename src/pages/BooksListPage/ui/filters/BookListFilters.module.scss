@@ -1,15 +1,30 @@
 .BookListFilters {
-  position: relative;
-  margin: 12px auto;
+  position: fixed;
   max-width: 800px;
-  padding: 20px;
-}
-
-.filterWrapper {
-  display: flex;
-  justify-content: space-around;
+  width: 100%;
+  left: 50%;
+  top: 60px;
+  transform: translate(-50%, 0%);
+  padding: 8px;
+  box-shadow: var(--shadow);
+  border-radius: 12px;
+  backdrop-filter: blur(16px) saturate(120%);
+  z-index: 1;
 }
 
 .searchInput {
   width: 100%;
+}
+
+.cardStyle {
+  padding: 0 20px;
+}
+
+.sortFilter {
+  padding: 0;
+  font-size: 12px;
+}
+
+.switcher {
+  height: 17px;
 }

@@ -12,6 +12,7 @@ import { getUserAuthData, userActions } from "entities/User";
 import { INavbarItem } from "widgets/Navbar/model/types";
 import { useNavigate } from "react-router-dom";
 import { RoutePath } from "resources/router/routeConfig/routeConfig";
+import { HFlex } from "shared/Flex/HFlex";
 import { getNavbarItemsArr } from "../../model/selectors";
 import cls from "./Navbar.module.scss";
 import { NavbarItem } from "../NavbarItem/NavbarItem";
@@ -60,15 +61,15 @@ export const Navbar = memo(({ className }: NavbarProps) => {
     return (
       <menu className={classes(cls.Navbar, {}, [className])}>
         <nav className={cls.links}>
-          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+          <HFlex>
             { NavbarItemList }
-          </div>
+          </HFlex>
 
-          <div style={{ display: "flex", justifyContent: "flex-end", gap: "15px" }}>
+          <HFlex justify="end" gap="16">
             {user?.user.roles?.includes("ROLE_ADMIN")
           && (
           <Button
-            theme={ButtonTheme.ACCENT_OUTLINE}
+            theme={ButtonTheme.GREEN}
             className={classes(cls.DarkThemeBtn, {}, [className])}
             onClick={onAddBook}
           >
@@ -83,7 +84,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             >
               {t("Выйти")}
             </Button>
-          </div>
+          </HFlex>
 
         </nav>
       </menu>
@@ -93,9 +94,9 @@ export const Navbar = memo(({ className }: NavbarProps) => {
   return (
     <menu className={classes(cls.Navbar, {}, [className])}>
       <nav className={cls.links}>
-        <div style={{ display: "flex", justifyContent: "flex-start" }}>
+        <HFlex justify="start">
           { NavbarItemList }
-        </div>
+        </HFlex>
 
         <Button
           data-testid="toggle-navbar-btn"

@@ -87,7 +87,6 @@ const ProfilePage = () => {
   return (
     <AsyncModule reducers={reducers}>
       <Page>
-        <h1 className="App-link">{t("Профиль пользователя")}</h1>
         <Header />
 
         {validateErr?.length && validateErr.map((err) => (

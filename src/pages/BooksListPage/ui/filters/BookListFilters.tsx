@@ -15,6 +15,9 @@ import { TypeSortOrder } from "resources/types";
 import { fetchBookList } from "pages/BooksListPage/model/services";
 import { useDebounce } from "resources/hooks/useDebounce";
 import { HashTagTabs } from "features/HashTagTabs";
+import LensIcon from "resources/assets/icons/lens.svg";
+import { IconSVG } from "shared/IconSVG/IconSVG";
+import { HFlex } from "shared/Flex/HFlex";
 import cls from "./BookListFilters.module.scss";
 import { Sort } from "./Sort/Sort";
 
@@ -70,15 +73,26 @@ export const BookListFilters = memo(({ className }: IBookListFiltersProps) => {
 
   return (
     <div className={classes(cls.BookListFilters, {}, [className])}>
-      <Card>
-        <div className={cls.filterWrapper}>
-          <Sort order={order} sort={sort} onOrderChange={onOrderChange} onSortChange={onSortChange} />
-          <ListViewSwitcher listView={listView} onViewIconClickHandler={onChangeViewHandler} />
-        </div>
-      </Card>
-      <HashTagTabs activeHashTag={hashTag} onTagChange={onHashTagChange} />
       <Card className={cls.cardStyle}>
-        <Input className={cls.searchInput} value={searchQuery} onChange={onSearchQueryChange} />
+        <HFlex justify="around">
+          <Sort
+            order={order}
+            sort={sort}
+            onOrderChange={onOrderChange}
+            onSortChange={onSortChange}
+            className={cls.sortFilter}
+          />
+          <ListViewSwitcher
+            className={cls.switcher}
+            listView={listView}
+            onViewIconClickHandler={onChangeViewHandler}
+          />
+        </HFlex>
+        <HFlex>
+          <IconSVG Svg={LensIcon} />
+          <Input className={cls.searchInput} value={searchQuery} onChange={onSearchQueryChange} />
+        </HFlex>
+        <HashTagTabs activeHashTag={hashTag} onTagChange={onHashTagChange} />
       </Card>
     </div>
   );

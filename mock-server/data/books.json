@@ -1,0 +1,394 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "owner": 1,
+      "title": "Fahrenheit 451",
+      "subTitle": "Ray Bradbury",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 10,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT",
+        "ECONOMICS"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Description",
+          "paragraphs": [
+            "Fahrenheit 451 is a 1953 dystopian novel by American writer Ray Bradbury. It presents a future American society where books have been outlawed and \"firemen\" burn any that are found. The novel follows in the viewpoint of Guy Montag, a fireman who soon becomes disillusioned with his role of censoring literature and destroying knowledge, eventually quitting his job and committing himself to the preservation of literary and cultural writings.",
+            "Fahrenheit 451 was written by Bradbury during the Second Red Scare and the McCarthy era, inspired by the book burnings in Nazi Germany and by ideological repression in the Soviet Union. Bradbury's claimed motivation for writing the novel has changed multiple times. In a 1956 radio interview, Bradbury said that he wrote the book because of his concerns about the threat of burning books in the United States. In later years, he described the book as a commentary on how mass media reduces interest in reading literature. In a 1994 interview, Bradbury cited political correctness as an allegory for the censorship in the book, calling it \"the real enemy these days\" and labeling it as \"thought control and freedom of speech control.\""
+          ]
+        },
+        {
+          "id": "2",
+          "type": "CODE",
+          "code": "<div>\n  <p>hi</p>\n</div>"
+        },
+        {
+          "id": "5",
+          "type": "IMAGE",
+          "src": "/images/img3.jpg",
+          "title": "Awesome Image ever seen"
+        },
+        {
+          "id": "11",
+          "type": "TEXT",
+          "title": "",
+          "paragraphs": [
+            "The writing and theme within Fahrenheit 451 was explored by Bradbury in some of his previous short stories. Between 1947 and 1948, Bradbury wrote \"Bright Phoenix\", a short story about a librarian who confronts a \"Chief Censor\", who burns books. An encounter Bradbury had in 1949 with the police inspired him to write the short story \"The Pedestrian\" in 1951. In \"The Pedestrian\", a man going for a nighttime walk in his neighborhood is harassed and detained by the police. In the society of \"The Pedestrian\", citizens are expected to watch television as a leisurely activity, a detail that would be included in Fahrenheit 451. Elements of both \"Bright Phoenix\" and \"The Pedestrian\" would be combined into The Fireman, a novella published in Galaxy Science Fiction in 1951. Bradbury was urged by Stanley Kauffmann, an editor at Ballantine Books, to make The Fireman into a full novel. Bradbury finished the manuscript for Fahrenheit 451 in 1953, and the novel was published later that year."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "owner": 1,
+      "title": "Dandelion Wine",
+      "subTitle": "Ray Bradbury",
+      "link": "https://fake.url",
+      "img": "/images/DandelionWine.jpg",
+      "views": 101,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "POETRY",
+        "SCIENCE"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Description",
+          "paragraphs": [
+            "Dandelion Wine is a 1957 novel by Ray Bradbury set in the summer of 1928 in the fictional town of Green Town, Illinois, based upon Bradbury's childhood home of Waukegan, Illinois, and serving as the first novel in his Green Town Trilogy. The novel developed from the short story \"Dandelion Wine\", which appeared in the June 1953 issue of Gourmet magazine.",
+            "The title refers to a wine made with dandelion petals and other ingredients, commonly citrus fruit. In the story, dandelion wine, as made by the protagonist's grandfather, serves as a metaphor for distilling all of the joys of summer.",
+            "The main character of the story is Douglas Spaulding, a 12-year-old boy loosely patterned after Bradbury. Most of the book is focused upon the routines of small-town America, and the simple joys of yesterday."
+          ]
+        },
+        {
+          "id": "5",
+          "type": "IMAGE",
+          "src": "/images/img3.jpg",
+          "title": "Title Image"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "owner": 3,
+      "title": "White Fang",
+      "subTitle": "Jack London",
+      "link": "https://fake.url",
+      "img": "/images/WhiteFang.jpg",
+      "views": 20,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "ADVENTURE"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Description",
+          "paragraphs": [
+            "White Fang is a novel by American author Jack London (1876–1916) about a wild wolfdog's journey to domestication in Yukon Territory and the Northwest Territories during the 1890s Klondike Gold Rush. First serialized in Outing magazine between May and October 1906, it was published in book form in October 1906. It is a companion novel (and a thematic mirror) to London's best-known work, The Call of the Wild (1903), which is about a kidnapped, domesticated dog embracing his wild ancestry to survive and thrive in the wild",
+            "Much of White Fang is written from the viewpoint of the titular canine character, enabling London to explore how animals view their world and how they view humans. White Fang examines the violent world of wild animals and the equally violent world of humans. The book also explores complex themes including morality and redemption."
+          ]
+        },
+        {
+          "id": "5",
+          "type": "IMAGE",
+          "src": "/images/WhiteFang2.jpg",
+          "title": "Awesome Image ever seen"
+        },
+        {
+          "id": "11",
+          "type": "TEXT",
+          "title": "",
+          "paragraphs": [
+            "As early as 1925, the story was adapted to film, and it has since seen several more cinematic adaptations, including a 1991 film starring Ethan Hawke and a 2018 original film for Netflix."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "owner": 4,
+      "title": "Lorem 4",
+      "subTitle": "Lorem",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 5,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Lorem",
+          "paragraphs": [
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "owner": 5,
+      "title": "Lorem 5",
+      "subTitle": "Lorem",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 1,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Lorem",
+          "paragraphs": [
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "owner": 6,
+      "title": "Lorem 6",
+      "subTitle": "Lorem",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 1,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Lorem",
+          "paragraphs": [
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "owner": 7,
+      "title": "Lorem 7",
+      "subTitle": "Lorem",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 1,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Lorem",
+          "paragraphs": [
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "owner": 8,
+      "title": "Lorem 8",
+      "subTitle": "Lorem",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 1,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Lorem",
+          "paragraphs": [
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "owner": 9,
+      "title": "Lorem 9",
+      "subTitle": "Lorem",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 1,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Lorem",
+          "paragraphs": [
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "owner": 10,
+      "title": "Lorem 10",
+      "subTitle": "Lorem",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 1,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Lorem",
+          "paragraphs": [
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "owner": 11,
+      "title": "Lorem 11",
+      "subTitle": "Lorem",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 1,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Lorem",
+          "paragraphs": [
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "owner": 12,
+      "title": "Lorem 12",
+      "subTitle": "Lorem",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 1,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Lorem",
+          "paragraphs": [
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "owner": 13,
+      "title": "Lorem 13",
+      "subTitle": "Lorem",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 1,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Lorem",
+          "paragraphs": [
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "owner": 14,
+      "title": "Lorem 14",
+      "subTitle": "Lorem",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 1,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Lorem",
+          "paragraphs": [
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "owner": 15,
+      "title": "Lorem 15",
+      "subTitle": "Lorem",
+      "link": "https://fake.url",
+      "img": "/images/Fahrenheit451.jpg",
+      "views": 1,
+      "createdAt": "1.12.2025",
+      "hashTagType": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Lorem",
+          "paragraphs": [
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+          ]
+        }
+      ]
+    }
+  ]
+}

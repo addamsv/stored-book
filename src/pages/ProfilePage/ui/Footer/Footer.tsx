@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 import { useCallback } from "react";
 import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { getUserAuthData } from "entities/User";
+import { HFlex } from "shared/Flex/HFlex";
+
+import cls from "./Footer.module.scss";
 
 interface FooterProps {
   className?: string;
@@ -35,34 +38,26 @@ export const Footer = ({ className }: FooterProps) => {
 
   if (isReadOnly) {
     return (
-      <div style={{ display: "flex",
-        width: 300,
-        justifyContent: "right",
-        marginBottom: 100,
-        marginRight: "auto",
-        marginLeft: "auto" }}
-      >
-        {isEditable && (
+      <HFlex max justify="center">
+        <HFlex max justify="end" className={cls.FooterWrapper}>
+          {isEditable && (
           <Button onClick={onEditClickHandler} theme={ButtonTheme.GREEN}>{t("Редактировать")}</Button>
-        )}
-      </div>
+          )}
+        </HFlex>
+      </HFlex>
     );
   }
 
   return (
-    <div style={{ display: "flex",
-      width: 300,
-      justifyContent: "right",
-      marginBottom: 100,
-      marginRight: "auto",
-      marginLeft: "auto" }}
-    >
-      {isEditable && (
+    <HFlex max justify="center">
+      <HFlex max justify="end" gap="8" className={cls.FooterWrapper}>
+        {isEditable && (
         <>
           <Button onClick={onSaveClickHandler} theme={ButtonTheme.GREEN}>{t("Сохранить")}</Button>
           <Button onClick={onCancelClickHandler} theme={ButtonTheme.RED}>{t("Отмена")}</Button>
         </>
-      )}
-    </div>
+        )}
+      </HFlex>
+    </HFlex>
   );
 };

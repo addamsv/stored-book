@@ -19,17 +19,17 @@ const Template: ComponentStory<typeof Item> = (args) => <Item {...args} />;
 const book: IBook = {
   id: 1,
   owner: 1,
-  title: "Fahrenheit 451",
-  subTitle: "Ray Bradbury",
+  Title: "Fahrenheit 451",
+  Author: ["Ray Bradbury"],
   link: "https://fake.url",
   img: "http://localhost:3000/images/Fahrenheit451.jpg",
   views: 1,
-  createdAt: "1.12.2025",
-  hashTagType: [
-    EBookOfHashTagType.IT,
-    EBookOfHashTagType.ECONOMICS,
-    EBookOfHashTagType.POETRY,
-    EBookOfHashTagType.SCIENCE,
+  PublicationDate: "1.12.2025",
+  Genres: [
+    EBookOfHashTagType["Arts & Entertainment"],
+    EBookOfHashTagType["Comedy & Humor"],
+    EBookOfHashTagType["Science & Engineering"],
+    EBookOfHashTagType["Science Fiction & Fantasy"],
   ],
   blocks: [
     {
