@@ -1,6 +1,10 @@
 .BookDetailsHeader {
-  display: flex;
   max-width: 800px;
   margin: 0 auto;
-  gap: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.editBar {
+  flex-grow: 1;
 }

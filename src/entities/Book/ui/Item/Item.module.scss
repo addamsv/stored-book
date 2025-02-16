@@ -3,37 +3,67 @@
   justify-content: center;
   align-self: center;
   border-radius: 8px;
-  padding: 20px;
+  padding: 10px;
   margin: 15px auto;
   width: 95%;
 
   .bookImage {
-    min-width: 180px;
-    height: 272px;
-    object-fit: fill;
+    width: 320px;
+    height: 320px;
+    object-fit: contain;
+    margin: auto 0;
+  }
+
+  @media (max-width: 660px) {
+    .bookImage {
+      max-width: 180px;
+      max-height: 180px;
+    }
+  }
+
+  @media (max-width: 365px) {
+    .bookImage {
+      max-width: 120px;
+      max-height: 120px;
+    }
+  }
+
+  .contentWrapper {
+    margin-left: 20px;
+    max-width: 193px;
+    overflow-x: hidden;
   }
 
   .imageDescription {
-    margin-top: 15px;
+    margin-top: 16px;
   }
 
   .info {
-    display: flex;
     font-size: 12px;
   }
 
   .paragraph {
-    max-height: 65px;
+    max-height: 95px;
     overflow-y: hidden;
     max-width: 400px;
-    margin-top: 15px;
+    margin: 16px 0;
 
     // text-overflow: ellipsis;
     // white-space: wrap;
   }
 
+  @media (max-width: 660px) {
+    .paragraph {
+      display: none;
+    }
+  }
+
   .paragraph div {
     text-align: left;
+  }
+
+  .linkWrapper {
+    flex-wrap: wrap;
   }
 }
 
@@ -59,7 +89,7 @@
 
   .imageWrapper {
     width: 130px;
-    height: 190px;
+    height: 130px;
     border-radius: 8px;
     box-shadow: var(--shadow);
     overflow: hidden;
@@ -68,7 +98,7 @@
 
   .img {
     width: 130px;
-    height: 190px;
+    height: 130px;
     object-fit: fill;
   }
 

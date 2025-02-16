@@ -1,0 +1,40 @@
+{
+  "profiles": [
+    {
+      "id": 1,
+      "owner": 1,
+      "firstname": "John",
+      "lastname": "Smith",
+      "age": 20,
+      "country": "Belarus",
+      "city": "Minsk",
+      "address": "Chyrlenisa 14-22",
+      "image": "/images/img2.jpg",
+      "currency": "BYN"
+    },
+    {
+      "id": 3,
+      "owner": 3,
+      "firstname": "Guest",
+      "lastname": "Johnsons",
+      "age": 20,
+      "country": "Belarus",
+      "city": "Minsk",
+      "address": "Pravda 14-22",
+      "image": "/images/img2.jpg",
+      "currency": "BYN"
+    },
+    {
+      "id": 2,
+      "owner": 2,
+      "firstname": "Michael",
+      "lastname": "Last",
+      "age": 50,
+      "country": "Russia",
+      "city": "Novosibirsk",
+      "address": "Gorky 288-555",
+      "image": "/images/img3.jpg",
+      "currency": "RUB"
+    }
+  ]
+}

@@ -13,6 +13,7 @@ import EyeIon from "resources/assets/icons/eye.svg";
 import CalendarIon from "resources/assets/icons/calendar.svg";
 import { IconSVG } from "shared/IconSVG/IconSVG";
 import { AppLink } from "shared/AppLink/AppLink";
+import { HFlex } from "shared/Flex/HFlex";
 import { EBlockOfBookType, TBookBlock } from "../../model/types";
 import { getBookDetailsData,
   getBookDetailsError, getBookDetailsIsLoading
@@ -80,35 +81,39 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
     content = (
       <>
         <div className={cls.topWrapper}>
-          <ImageJpg className={cls.bookImage} alt={data?.title} src={data?.img} />
+          <ImageJpg className={cls.bookImage} alt={data?.Title} src={data?.img} />
 
-          <div style={{ margin: "20px auto", maxWidth: 800, width: "90%" }}>
-            <Text
-              className={cls.imageDescription}
-              textAlign={TextAlign.LEFT}
-              title={data?.title}
-              text={data?.subTitle}
-            />
-            <div className={cls.info}>
-              <span style={{ display: "flex", width: 40, justifyContent: "space-around" }}>
-                <IconSVG Svg={EyeIon} />
-                <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={`${String(data?.views)}`} />
-              </span>
-              <span style={{ display: "flex", width: 80, justifyContent: "space-around", marginLeft: 11 }}>
-                <IconSVG Svg={CalendarIon} />
-                <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={`${String(data?.createdAt)}`} />
-              </span>
-            </div>
+          <Text
+            className={cls.imageDescription}
+            textAlign={TextAlign.LEFT}
+            title={data?.Title}
+            text={data?.Author?.join(", ")}
+          />
+          <HFlex gap="8" className={cls.info}>
+            <HFlex gap="4">
+              <IconSVG Svg={EyeIon} />
+              <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={`${String(data?.views)}`} />
+            </HFlex>
+            <HFlex gap="4">
+              <IconSVG Svg={CalendarIon} />
+              <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={`${String(data?.PublicationDate)}`} />
+            </HFlex>
+          </HFlex>
+          <Text
+            className={cls.hashTagType}
+            textSize={TextSize.S}
+            textAlign={TextAlign.LEFT}
+            text={data?.Genres?.join(", ")}
+          />
 
-            <AppLink target="_blank" to={`${data?.link}`}>
-              <Button
-                className={cls.buttonSkeleton}
-                theme={ButtonTheme.GREEN}
-              >
-                {t("скачать")}
-              </Button>
-            </AppLink>
-          </div>
+          <AppLink target="_blank" to={`${data?.link}`}>
+            <Button
+              className={cls.buttonSkeleton}
+              theme={ButtonTheme.GREEN}
+            >
+              {t("скачать")}
+            </Button>
+          </AppLink>
         </div>
 
         {data?.blocks.map(blocks)}

@@ -57,9 +57,6 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
         onNextChunk={onNextChunk}
         className={classes(cls.BooksListPage, {}, [className])}
       >
-
-        <h1 data-testid="BooksListPage">{t("Книги")}</h1>
-
         {error ? (
           <ErrorWidget text={error} />
         ) : (

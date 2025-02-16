@@ -1,0 +1,60 @@
+{
+  "comments": [
+    {
+      "id": 1,
+      "bookId": 1,
+      "owner": 1,
+      "iat": "1.12.2025",
+      "text": "Awesome Comment"
+    },
+    {
+      "id": 2,
+      "bookId": 1,
+      "owner": 2,
+      "iat": "1.12.2025",
+      "text": "The comment I've never heard  before"
+    },
+    {
+      "id": 3,
+      "bookId": 2,
+      "owner": 1,
+      "iat": "1.12.2025",
+      "text": "Whoo-hooo"
+    },
+    {
+      "id": 4,
+      "bookId": 1,
+      "owner": 1,
+      "iat": "1.12.2025",
+      "text": "hey"
+    },
+    {
+      "id": 5,
+      "bookId": 1,
+      "owner": 2,
+      "iat": "1.12.2025",
+      "text": "hey from user"
+    },
+    {
+      "id": 6,
+      "bookId": 1,
+      "owner": 2,
+      "iat": "1.12.2025",
+      "text": "cin-cin"
+    },
+    {
+      "id": 7,
+      "bookId": 1,
+      "iat": "27.12.2024 16:35",
+      "owner": 3,
+      "text": "Comment"
+    },
+    {
+      "id": 8,
+      "bookId": 1,
+      "iat": "27.12.2024 23:34",
+      "owner": 3,
+      "text": "Awesome book"
+    }
+  ]
+}

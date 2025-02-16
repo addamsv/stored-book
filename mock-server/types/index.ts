@@ -24,14 +24,6 @@ export interface IProfile {
   currency?: string;
 }
 
-export interface IPersist {
-  posts: any[]
-  books: any[]
-  comments: IComment[]
-  users: any[]
-  profiles: IProfile[]
-}
-
 export enum EBookOfHashTagType {
   ALL = "ALL",
   IT = "IT",
@@ -60,14 +52,51 @@ export type TBookBlock = {
 }
 
 export interface IBook {
-  id: number;
-  owner: number | undefined;
-  title: string;
-  subTitle: string;
-  link: string;
-  img: string;
-  views: number;
-  createdAt: string;
-  hashTagType: EBookOfHashTagType[];
-  blocks: TBookBlock[];
+  // id: number;
+  // owner: number | undefined;
+  // title: string;
+  // subTitle: string;
+  // link: string;
+  // img: string;
+  // views: number;
+  // createdAt: string;
+  // hashTagType: EBookOfHashTagType[];
+  // blocks: TBookBlock[];
+
+    // title: string;
+    // subTitle: string;
+    // createdAt: string;
+    // hashTagType: EBookOfHashTagType[];
+
+    id: number;
+    owner?: number;
+    views: number;
+    link: string;
+    linkEx: string;
+    blocks: TBookBlock[];
+
+    img: string;
+    Icon?: string;
+
+    Title: string;
+    Series?: string;
+    Author?: string[];
+    Translator?: string[];
+    Narrated?: string[];
+    Length?: string,
+    ReleaseDate?: string;
+    PublicationDate: string;
+    Language?: string;
+    Genres?: EBookOfHashTagType[];
+    Format?: "Unabridged Audiobook" | "Podcast" | "Audio Drama";
+    Publisher?: string;
+
+    enabled?: boolean;
+}
+export interface IPersist {
+  posts: any[];
+  books: IBook[];
+  comments: IComment[];
+  users: any[];
+  profiles: IProfile[];
 }

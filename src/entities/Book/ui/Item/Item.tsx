@@ -4,6 +4,7 @@ import { HTMLAttributeAnchorTarget, memo, useCallback } from "react";
 import { ImageJpg } from "shared/ImageJpg/ImageJpg";
 import { IconSVG } from "shared/IconSVG/IconSVG";
 import EyeIon from "resources/assets/icons/eye.svg";
+import DownloadIon from "resources/assets/icons/download.svg";
 import CalendarIon from "resources/assets/icons/calendar.svg";
 import { Text } from "shared/Text/Text";
 import { TextAlign, TextSize } from "shared/Text";
@@ -12,6 +13,8 @@ import { RoutePath } from "resources/router/routeConfig/routeConfig";
 import { AppLink } from "shared/AppLink/AppLink";
 import { Card } from "shared/Card/Card";
 import { useNavigate } from "react-router-dom";
+import { VFlex } from "shared/Flex/VFlex";
+import { HFlex } from "shared/Flex/HFlex";
 import { EBlockOfBookType, EBookListView, IBlockOfBookText, IBook } from "../../model/types";
 import cls from "./Item.module.scss";
 import BlockOfBookText from "../BlockOfBookText/BlockOfBookText";
@@ -47,7 +50,7 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
           >
             <div className={cls.imageWrapper}>
               <img className={cls.img} src={book.img} alt="*" />
-              <p className={cls.createdAt}>{book.createdAt}</p>
+              <p className={cls.createdAt}>{book.PublicationDate}</p>
             </div>
 
             <div className={cls.info}>
@@ -55,14 +58,15 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
                 className={cls.hashTagType}
                 textAlign={TextAlign.LEFT}
                 textSize={TextSize.XS}
-                text={book.hashTagType.join(", ")}
+                // text={book.hashTagType.join(", ")}
+                text={book?.Genres?.join(", ")}
               />
 
               <IconSVG className={cls.views} w={12} h={12} Svg={EyeIon} />
               <Text textSize={TextSize.XS} text={String(book.views)} />
             </div>
 
-            <Text className={cls.title} textSize={TextSize.S} textAlign={TextAlign.LEFT} text={String(book.title)} />
+            <Text className={cls.title} textSize={TextSize.S} textAlign={TextAlign.LEFT} text={String(book.Title)} />
           </Card>
         </AppLink>
       </div>
@@ -70,7 +74,6 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
   }
 
   const paragraph = book.blocks.find((block) => block.type === EBlockOfBookType.TEXT) as IBlockOfBookText | undefined;
-  // paragraph!.title = "";
 
   // STANDARD
   return (
@@ -78,46 +81,58 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
       <Card className={classes(cls.card, {}, [className, cls[listView]])}>
         <ImageJpg className={cls.bookImage} alt="*" src={book.img} />
 
-        <div style={{ display: "inline-block", marginLeft: 20 }}>
+        <VFlex gap="8" className={cls.contentWrapper}>
           <Text
             className={cls.imageDescription}
             textAlign={TextAlign.LEFT}
-            title={book.title} // t("Fahrenheit 451")
-            text={book.subTitle}
+            title={book.Title} // t("Fahrenheit 451")
+            // text={book.subTitle}
+            text={book?.Author?.join(", ")}
           />
-          <div className={cls.info}>
-            <span style={{ display: "flex", width: 40, justifyContent: "space-around" }}>
+          <HFlex gap="8" className={cls.info}>
+            <HFlex gap="4">
               <IconSVG Svg={EyeIon} />
               <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={String(book.views)} />
-            </span>
-            <span style={{ display: "flex", width: 80, justifyContent: "space-around", marginLeft: 11 }}>
+            </HFlex>
+            <HFlex gap="4">
               <IconSVG Svg={CalendarIon} />
-              <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={book.createdAt} />
-            </span>
-          </div>
+              <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={book.PublicationDate} />
+            </HFlex>
+          </HFlex>
 
           <Text
             className={cls.hashTagType}
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
-            text={book.hashTagType.join(", ")}
+            // text={book.hashTagType.join(", ")}
+            text={book.Genres?.join(", ")}
           />
 
           {paragraph && (
             <Text className={cls.paragraph} text={paragraph.paragraphs[0]} />
           )}
 
-          <br />
-          <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
-            <Button
+          <HFlex gap="8" className={cls.linkWrapper}>
+            <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
+              <Button
             // onClick={onLinkClickHandler}
-              className={cls.buttonSkeleton}
-              theme={ButtonTheme.GREEN}
-            >
-              {t("подробнее")}
-            </Button>
-          </AppLink>
-        </div>
+                className={cls.buttonSkeleton}
+                theme={ButtonTheme.GREEN}
+              >
+                {t("подробнее")}
+              </Button>
+            </AppLink>
+
+            <AppLink target="_blank" to={`${book?.link}`}>
+              <Button
+                className={cls.buttonSskeleton}
+                theme={ButtonTheme.GREEN}
+              >
+                <IconSVG Svg={DownloadIon} />
+              </Button>
+            </AppLink>
+          </HFlex>
+        </VFlex>
       </Card>
     </div>
   );
