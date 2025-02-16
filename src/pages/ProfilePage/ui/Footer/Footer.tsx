@@ -50,7 +50,7 @@ export const Footer = ({ className }: FooterProps) => {
 
   return (
     <HFlex max justify="center">
-      <HFlex max justify="end" className={cls.FooterWrapper}>
+      <HFlex max justify="end" gap="8" className={cls.FooterWrapper}>
         {isEditable && (
         <>
           <Button onClick={onSaveClickHandler} theme={ButtonTheme.GREEN}>{t("Сохранить")}</Button>

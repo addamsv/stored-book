@@ -1,3 +1,11 @@
-.cardStyle {
-  margin-top: 10px;
+.genres {
+  font-size: 12px;
+  padding-left: 20px;
+}
+
+.genresTab {
+  padding: 0 10px;
+  border-radius: 4px;
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
 }

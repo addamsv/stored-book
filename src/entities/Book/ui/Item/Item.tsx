@@ -4,6 +4,7 @@ import { HTMLAttributeAnchorTarget, memo, useCallback } from "react";
 import { ImageJpg } from "shared/ImageJpg/ImageJpg";
 import { IconSVG } from "shared/IconSVG/IconSVG";
 import EyeIon from "resources/assets/icons/eye.svg";
+import DownloadIon from "resources/assets/icons/download.svg";
 import CalendarIon from "resources/assets/icons/calendar.svg";
 import { Text } from "shared/Text/Text";
 import { TextAlign, TextSize } from "shared/Text";
@@ -73,7 +74,6 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
   }
 
   const paragraph = book.blocks.find((block) => block.type === EBlockOfBookType.TEXT) as IBlockOfBookText | undefined;
-  // paragraph!.title = "";
 
   // STANDARD
   return (
@@ -81,7 +81,7 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
       <Card className={classes(cls.card, {}, [className, cls[listView]])}>
         <ImageJpg className={cls.bookImage} alt="*" src={book.img} />
 
-        <VFlex className={cls.contentWrapper}>
+        <VFlex gap="8" className={cls.contentWrapper}>
           <Text
             className={cls.imageDescription}
             textAlign={TextAlign.LEFT}
@@ -112,16 +112,26 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
             <Text className={cls.paragraph} text={paragraph.paragraphs[0]} />
           )}
 
-          <br />
-          <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
-            <Button
+          <HFlex gap="8" className={cls.linkWrapper}>
+            <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
+              <Button
             // onClick={onLinkClickHandler}
-              className={cls.buttonSkeleton}
-              theme={ButtonTheme.GREEN}
-            >
-              {t("подробнее")}
-            </Button>
-          </AppLink>
+                className={cls.buttonSkeleton}
+                theme={ButtonTheme.GREEN}
+              >
+                {t("подробнее")}
+              </Button>
+            </AppLink>
+
+            <AppLink target="_blank" to={`${book?.link}`}>
+              <Button
+                className={cls.buttonSskeleton}
+                theme={ButtonTheme.GREEN}
+              >
+                <IconSVG Svg={DownloadIon} />
+              </Button>
+            </AppLink>
+          </HFlex>
         </VFlex>
       </Card>
     </div>

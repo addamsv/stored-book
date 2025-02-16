@@ -5,6 +5,7 @@ import ListStdSVG from "resources/assets/icons/listStandard.svg";
 import ListComSVG from "resources/assets/icons/listCompact.svg";
 import { Button, ButtonTheme } from "shared/Button/Button";
 import { IconSVG } from "shared/IconSVG/IconSVG";
+import { HFlex } from "shared/Flex/HFlex";
 import { EBookListView } from "../../model/types";
 import cls from "./ListViewSwitcher.module.scss";
 
@@ -27,12 +28,17 @@ export const ListViewSwitcher = memo(({ className, listView, onViewIconClickHand
   };
 
   return (
-    <div className={classes(cls.Switcher, {}, [className])}>
+    <HFlex className={classes(cls.Switcher, {}, [className])}>
       {listViewSwitchTypesArr.map((view) => (
-        <Button key={view.listView} theme={ButtonTheme.CLEAR} onClick={onClickHandler(view.listView)}>
+        <Button
+          key={view.listView}
+          className={cls.button}
+          theme={ButtonTheme.CLEAR}
+          onClick={onClickHandler(view.listView)}
+        >
           <IconSVG className={classes("", { [cls.selected]: view.listView === listView })} Svg={view.icon} />
         </Button>
       ))}
-    </div>
+    </HFlex>
   );
 });

@@ -4,6 +4,7 @@ import { memo, useMemo } from "react";
 import { ISelectOptions, Select } from "shared/Select/Select";
 import { EBookListSortField } from "entities/Book/model/types";
 import { TypeSortOrder } from "resources/types";
+import { HFlex } from "shared/Flex/HFlex";
 import cls from "./Sort.module.scss";
 
 interface ISortProps {
@@ -42,10 +43,9 @@ export const Sort = memo(({ className, sort, order, onOrderChange, onSortChange 
   ], [t]);
 
   return (
-    <div className={classes(cls.Sort, {}, [className])}>
-      {/* <div>{t("сортировать")}</div> */}
-      <Select defaultValue={order} onChange={onOrderChange} optionsList={orderArr} />
-      <Select defaultValue={sort} onChange={onSortChange} optionsList={sortArr} />
-    </div>
+    <HFlex className={classes(cls.Sort, {}, [className])}>
+      <Select className={cls.sortFilter} defaultValue={order} onChange={onOrderChange} optionsList={orderArr} />
+      <Select className={cls.sortFilter} defaultValue={sort} onChange={onSortChange} optionsList={sortArr} />
+    </HFlex>
   );
 });

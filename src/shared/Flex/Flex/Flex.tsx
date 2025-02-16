@@ -2,7 +2,7 @@ import { classes, Mods } from "resources/lib/classNames/classes";
 import { ReactNode } from "react";
 import cls from "./Flex.module.scss";
 
-export type FlexJustify = "start" | "center" | "end" | "between";
+export type FlexJustify = "start" | "center" | "end" | "between" | "around";
 export type FlexAlign = "start" | "center" | "end";
 export type FlexDirection = "row" | "column";
 export type FlexGap = "4" | "8" | "16" | "32" | "64" | "128";
@@ -11,7 +11,8 @@ const justifyClasses: Record<FlexJustify, string> = {
   start: cls.justifyStart,
   center: cls.justifyCenter,
   end: cls.justifyEnd,
-  between: cls.justifyBetween
+  between: cls.justifyBetween,
+  around: cls.justifyAround
 };
 
 const alignClasses: Record<FlexAlign, string> = {

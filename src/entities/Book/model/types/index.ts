@@ -65,7 +65,6 @@ export enum EBookOfHashTagType {
   "Health & Wellness" = "Health & Wellness",
   "History" = "History",
   "Home & Garden" = "Home & Garden",
-  "LGBTQ+" = "LGBTQ+",
   "Literature & Fiction" = "Literature & Fiction",
   "Money & Finance" = "Money & Finance",
   "Mystery, Thriller & Suspense" = "Mystery, Thriller & Suspense",

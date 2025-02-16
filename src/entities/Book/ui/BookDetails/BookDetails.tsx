@@ -103,7 +103,6 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
             className={cls.hashTagType}
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
-              // text={data?.hashTagType.join(", ")}
             text={data?.Genres?.join(", ")}
           />
 
