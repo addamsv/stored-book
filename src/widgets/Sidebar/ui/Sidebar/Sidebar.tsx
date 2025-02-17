@@ -1,12 +1,9 @@
 import { classes } from "resources/lib/classNames/classes";
 import { memo, useState } from "react";
 import { DarkThemeBtn } from "features/DarkThemeBtn";
-
 import { ChangeLangBtn } from "features/ChangeLangBtn";
-
 import SettingsSVG from "resources/assets/icons/settings.svg";
 // import SettingsLogo from "resources/assets/images/settings-dark.png";
-
 import { Button, ButtonSize, ButtonTheme } from "shared/Button/Button";
 import { useTranslation } from "react-i18next";
 import cls from "./Sidebar.module.scss";

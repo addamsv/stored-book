@@ -84,6 +84,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
         <Text className={cls.mgnTop} textSize={TextSize.L} title={t("рекомендасьён")} />
 
         <BookList
+          className={cls.recommendations}
           target="_blank"
           bookArr={recommendations}
           isLoading={recommendationsIsLoading}
