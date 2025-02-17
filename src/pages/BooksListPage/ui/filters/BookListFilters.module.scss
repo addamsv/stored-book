@@ -5,7 +5,7 @@
   left: 50%;
   top: 60px;
   transform: translate(-50%, 0%);
-  padding: 8px;
+  padding: 0 16px;
   box-shadow: var(--shadow);
   border-radius: 12px;
   backdrop-filter: blur(16px) saturate(120%);
@@ -14,10 +14,6 @@
 
 .searchInput {
   width: 100%;
-}
-
-.cardStyle {
-  padding: 0 20px;
 }
 
 .sortFilter {

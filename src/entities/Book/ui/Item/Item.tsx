@@ -1,6 +1,6 @@
 import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { HTMLAttributeAnchorTarget, memo, useCallback } from "react";
+import { HTMLAttributeAnchorTarget, memo } from "react";
 import { ImageJpg } from "shared/ImageJpg/ImageJpg";
 import { IconSVG } from "shared/IconSVG/IconSVG";
 import EyeIon from "resources/assets/icons/eye.svg";
@@ -12,12 +12,10 @@ import { Button, ButtonTheme } from "shared/Button/Button";
 import { RoutePath } from "resources/router/routeConfig/routeConfig";
 import { AppLink } from "shared/AppLink/AppLink";
 import { Card } from "shared/Card/Card";
-import { useNavigate } from "react-router-dom";
 import { VFlex } from "shared/Flex/VFlex";
 import { HFlex } from "shared/Flex/HFlex";
 import { EBlockOfBookType, EBookListView, IBlockOfBookText, IBook } from "../../model/types";
 import cls from "./Item.module.scss";
-import BlockOfBookText from "../BlockOfBookText/BlockOfBookText";
 
 interface IItemProps {
   className?: string;
@@ -79,14 +77,16 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
   return (
     <div className={cls.Item}>
       <Card className={classes(cls.card, {}, [className, cls[listView]])}>
-        <ImageJpg className={cls.bookImage} alt="*" src={book.img} />
+
+        <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
+          <ImageJpg className={cls.bookImage} alt="*" src={book.img} />
+        </AppLink>
 
         <VFlex gap="8" className={cls.contentWrapper}>
           <Text
             className={cls.imageDescription}
             textAlign={TextAlign.LEFT}
-            title={book.Title} // t("Fahrenheit 451")
-            // text={book.subTitle}
+            title={book.Title}
             text={book?.Author?.join(", ")}
           />
           <HFlex gap="8" className={cls.info}>
@@ -104,7 +104,6 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
             className={cls.hashTagType}
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
-            // text={book.hashTagType.join(", ")}
             text={book.Genres?.join(", ")}
           />
 

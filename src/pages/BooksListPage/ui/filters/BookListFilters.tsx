@@ -73,27 +73,25 @@ export const BookListFilters = memo(({ className }: IBookListFiltersProps) => {
 
   return (
     <div className={classes(cls.BookListFilters, {}, [className])}>
-      <Card className={cls.cardStyle}>
-        <HFlex justify="around">
-          <Sort
-            order={order}
-            sort={sort}
-            onOrderChange={onOrderChange}
-            onSortChange={onSortChange}
-            className={cls.sortFilter}
-          />
-          <ListViewSwitcher
-            className={cls.switcher}
-            listView={listView}
-            onViewIconClickHandler={onChangeViewHandler}
-          />
-        </HFlex>
-        <HFlex>
-          <IconSVG Svg={LensIcon} />
-          <Input className={cls.searchInput} value={searchQuery} onChange={onSearchQueryChange} />
-        </HFlex>
-        <HashTagTabs activeHashTag={hashTag} onTagChange={onHashTagChange} />
-      </Card>
+      <HFlex justify="around">
+        <Sort
+          order={order}
+          sort={sort}
+          onOrderChange={onOrderChange}
+          onSortChange={onSortChange}
+          className={cls.sortFilter}
+        />
+        <ListViewSwitcher
+          className={cls.switcher}
+          listView={listView}
+          onViewIconClickHandler={onChangeViewHandler}
+        />
+      </HFlex>
+      <HFlex>
+        <IconSVG Svg={LensIcon} />
+        <Input className={cls.searchInput} value={searchQuery} onChange={onSearchQueryChange} />
+      </HFlex>
+      <HashTagTabs activeHashTag={hashTag} onTagChange={onHashTagChange} />
     </div>
   );
 });
