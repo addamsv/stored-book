@@ -9,7 +9,8 @@ export function plugins({
   paths,
   isDev,
   restBaseUrl,
-  projectType
+  projectType,
+  contactUsEmail
 }: IOptions): webpack.WebpackPluginInstance[] {
   const plugins = [
     new HTMLWebpackPlugin({
@@ -26,6 +27,7 @@ export function plugins({
     new webpack.DefinePlugin({
       __IS_DEV__: JSON.stringify(isDev),
       __REST_API__BASE_URL__: JSON.stringify(restBaseUrl),
+      __CONTACT_US_EMAIL__: JSON.stringify(contactUsEmail),
       __PROJECT_TYPE__: JSON.stringify(projectType),
     }),
 

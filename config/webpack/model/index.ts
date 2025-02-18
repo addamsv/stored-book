@@ -10,7 +10,7 @@ import { plugins } from "./plugins";
 import { loaders } from "./loaders";
 import { resolvers } from "./resolvers";
 import { devServer } from "./devServer";
-import { API_ENDPOINT_HOST, API_ENDPOINT_HOST_PORT } from "../../../src/resources/application";
+import { API_ENDPOINT_HOST, API_ENDPOINT_HOST_PORT, CONTACT_US_EMAIL } from "../../../src/resources/application";
 
 export const build = (env: IEnv): webpack.Configuration => {
   const paths: IPaths = {
@@ -32,8 +32,9 @@ export const build = (env: IEnv): webpack.Configuration => {
   const isDev = mode === "development";
   const port = env.port || 3000;
   const restBaseUrl = env.restBaseUrl || `${API_ENDPOINT_HOST}:${API_ENDPOINT_HOST_PORT}`;
+  const contactUsEmail = env.contactUsEmail || `${CONTACT_US_EMAIL}`;
   const projectType = "frontend";
-  const options: IOptions = { paths, mode, isDev, port, restBaseUrl, projectType };
+  const options: IOptions = { paths, mode, isDev, port, restBaseUrl, contactUsEmail, projectType };
 
   // const config: webpack.Configuration = build(options);
 

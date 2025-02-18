@@ -1,0 +1,35 @@
+.BookBottomNavbar {
+  position: fixed;
+  max-width: 800px;
+  width: 100%;
+  left: 50%;
+  bottom: 2px;
+  transform: translate(-50%, 0%);
+  padding: 0 16px;
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  background: #121212;
+  z-index: 1;
+}
+
+// .links {
+//   display: flex;
+//   justify-content: space-around;
+// }
+
+// @media (max-width: 670px) {
+//   .links {
+//     justify-content: space-between;
+//   }
+// }
+
+.contactUsLink {
+  font-size: 11px;
+  font-weight: 100;
+  flood-color: var(--secondary-color);
+  cursor: pointer;
+}
+
+.itemWrapper {
+  flex-wrap: wrap;
+}

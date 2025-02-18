@@ -87,6 +87,15 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
             className={cls.imageDescription}
             textAlign={TextAlign.LEFT}
             title={data?.Title}
+          />
+          <Text
+            className={cls.imageDescription}
+            textAlign={TextAlign.LEFT}
+            text={data?.Series}
+          />
+          <Text
+            className={cls.imageDescription}
+            textAlign={TextAlign.LEFT}
             text={data?.Author?.join(", ")}
           />
           <HFlex gap="8" className={cls.info}>
@@ -104,6 +113,36 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
             text={data?.Genres?.join(", ")}
+          />
+          <Text
+            className={cls.hashTagType}
+            textSize={TextSize.S}
+            textAlign={TextAlign.LEFT}
+            text={data?.Format}
+          />
+          <Text
+            className={cls.hashTagType}
+            textSize={TextSize.S}
+            textAlign={TextAlign.LEFT}
+            text={data?.Language}
+          />
+          <Text
+            className={cls.hashTagType}
+            textSize={TextSize.S}
+            textAlign={TextAlign.LEFT}
+            text={data?.Length}
+          />
+          <Text
+            className={cls.hashTagType}
+            textSize={TextSize.S}
+            textAlign={TextAlign.LEFT}
+            text={data?.Narrated?.join(", ")}
+          />
+          <Text
+            className={cls.hashTagType}
+            textSize={TextSize.S}
+            textAlign={TextAlign.LEFT}
+            text={data?.Publisher}
           />
 
           <AppLink target="_blank" to={`${data?.link}`}>

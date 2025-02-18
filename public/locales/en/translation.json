@@ -13,7 +13,7 @@
   "Главная": "Main",
   "Книги": "Books",
   "Наука": "SCIENCE",
-  "О проекте": "About",
+  "Контакты": "Contact Us",
   "Политика": "POLITICS",
   "Поэзия": "POETRY",
   "Приключения": "ADVENTURE",
@@ -48,5 +48,7 @@
   "тема": "theme",
   "убыванию": "desc",
   "удалить": "remove",
-  "язык": "lang"
+  "язык": "lang",
+  "DMCA_Rep": "DMCA Report",
+  "Помощь": "Help"
 }

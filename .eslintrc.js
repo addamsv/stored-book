@@ -47,6 +47,7 @@ module.exports = {
   globals: {
     __IS_DEV__: true,
     __REST_API__BASE_URL__: true,
+    __CONTACT_US_EMAIL__: true,
     __PROJECT_TYPE__: true
   },
   overrides: [

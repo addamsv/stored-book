@@ -12,6 +12,7 @@ import { Text } from "shared/Text/Text";
 import { TextTheme } from "shared/Text";
 import { ErrorWidget } from "widgets/Error";
 import { useSearchParams } from "react-router-dom";
+import { BookBottomNavbar } from "widgets/BookBottomNavbar";
 import { bookListPageActions, bookListPageReducer, getBooks } from "../../model/slices";
 import cls from "./BooksListPage.module.scss";
 import { fetchNextBookList } from "../../model/services";
@@ -58,15 +59,19 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
         className={classes(cls.BooksListPage, {}, [className])}
       >
         {error ? (
-          <ErrorWidget text={error} />
+          <ErrorWidget key="ErrorWidget" text={error} />
         ) : (
           <>
-            <BookListFilters />
+            <BookListFilters key="BookListFilters" />
+
             <BookList
+              key="BookList"
               isLoading={isLoading}
               bookArr={bookArr}
               listView={listView}
             />
+
+            <BookBottomNavbar key="BookBottomNavbar" />
           </>
         )}
       </Page>

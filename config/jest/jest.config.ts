@@ -5,6 +5,7 @@ export default {
   globals: {
     __IS_DEV__: true,
     __REST_API__BASE_URL__: "",
+    __CONTACT_US_EMAIL__: "",
     __PROJECT_TYPE__: "jest"
   },
 
