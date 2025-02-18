@@ -19,6 +19,7 @@ export interface IEnv {
   mode: IMode;
   port: number;
   restBaseUrl: string;
+  contactUsEmail: string;
 }
 
 export interface IOptions {
@@ -27,5 +28,6 @@ export interface IOptions {
   port: number;
   isDev: boolean;
   restBaseUrl: string;
+  contactUsEmail: string;
   projectType: "frontend" | "storybook" | "jest";
 }

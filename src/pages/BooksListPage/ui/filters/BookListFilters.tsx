@@ -87,10 +87,12 @@ export const BookListFilters = memo(({ className }: IBookListFiltersProps) => {
           onViewIconClickHandler={onChangeViewHandler}
         />
       </HFlex>
+
       <HFlex>
         <IconSVG Svg={LensIcon} />
         <Input className={cls.searchInput} value={searchQuery} onChange={onSearchQueryChange} />
       </HFlex>
+
       <HashTagTabs activeHashTag={hashTag} onTagChange={onHashTagChange} />
     </div>
   );

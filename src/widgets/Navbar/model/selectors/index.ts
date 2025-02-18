@@ -11,34 +11,30 @@ export const getNavbarItemsArr = createSelector(
         path: RoutePath.books,
         text: "Книги"
       },
-      // {
-      //   path: RoutePath.main,
-      //   text: "Главная"
-      // },
-      // {
-      //   path: RoutePath.about,
-      //   text: "О проекте"
-      // },
+      {
+        path: RoutePath.help,
+        text: "Помощь"
+      },
       // {
       //   path: RoutePath.auth,
       //   text: "Зарегистрироваться"
       // },
     ];
 
-    if (data?.user) {
-      itemsArr.push(
-        // {
-        //   path: RoutePath.books,
-        //   text: "Книги",
-        //   authOnly: true
-        // },
-        {
-          path: RoutePath.profile + data.user.id,
-          text: "Профиль",
-          authOnly: true
-        }
-      );
-    }
+    // if (data?.user) {
+    //   itemsArr.push(
+    //     // {
+    //     //   path: RoutePath.books,
+    //     //   text: "Книги",
+    //     //   authOnly: true
+    //     // },
+    //     // {
+    //     //   path: RoutePath.profile + data.user.id,
+    //     //   text: "Профиль",
+    //     //   authOnly: true
+    //     // }
+    //   );
+    // }
 
     return itemsArr;
   }

@@ -1,54 +1,48 @@
 import { classes } from "resources/lib/classNames/classes";
 
-import { useTranslation } from "react-i18next";
+import { memo } from "react";
+import { useSelector } from "react-redux";
 
-import { memo, useCallback, useState } from "react";
-import { Button, ButtonTheme } from "shared/Button/Button";
-import { LoginModal } from "features/AuthByUserName";
-import { useDispatch, useSelector } from "react-redux";
-import UserProfileSVG from "resources/assets/icons/user-profile.svg";
-
-import { getUserAuthData, userActions } from "entities/User";
 import { INavbarItem } from "widgets/Navbar/model/types";
-import { useNavigate } from "react-router-dom";
-import { RoutePath } from "resources/router/routeConfig/routeConfig";
-import { HFlex } from "shared/Flex/HFlex";
+
 import { getNavbarItemsArr } from "../../model/selectors";
 import cls from "./Navbar.module.scss";
 import { NavbarItem } from "../NavbarItem/NavbarItem";
 
-interface NavbarProps {
+interface INavbarProps {
   className?: string;
 }
 
-export const Navbar = memo(({ className }: NavbarProps) => {
-  const { t } = useTranslation();
+export const Navbar = memo(({ className }: INavbarProps) => {
+  // const { t } = useTranslation();
 
-  const [isAuthModalWinOpen, setAuthModalWin] = useState(false);
+  // const [isAuthModalWinOpen, setAuthModalWin] = useState(false);
 
-  const authData = useSelector(getUserAuthData);
+  // const authData = useSelector(getUserAuthData);
+
   const navbarArr = useSelector(getNavbarItemsArr);
-  const user = useSelector(getUserAuthData);
 
-  const nav = useNavigate();
+  // const user = useSelector(getUserAuthData);
 
-  const dispatch = useDispatch();
+  // const nav = useNavigate();
 
-  const onAuthModalClose = useCallback(() => {
-    setAuthModalWin(false);
-  }, []);
+  // const dispatch = useAppDispatch();
 
-  const onAuthModalOpen = useCallback(() => {
-    setAuthModalWin(true);
-  }, []);
+  // const onAuthModalClose = useCallback(() => {
+  //   setAuthModalWin(false);
+  // }, []);
 
-  const onLogout = useCallback(() => {
-    dispatch(userActions.logout());
-  }, [dispatch]);
+  // const onAuthModalOpen = useCallback(() => {
+  //   setAuthModalWin(true);
+  // }, []);
 
-  const onAddBook = useCallback(() => {
-    nav(RoutePath.book_add);
-  }, [nav]);
+  // const onLogout = useCallback(() => {
+  //   dispatch(userActions.logout());
+  // }, [dispatch]);
+
+  // const onAddBook = useCallback(() => {
+  //   nav(RoutePath.book_add);
+  // }, [nav]);
 
   const NavbarItemList = navbarArr.map((item: INavbarItem) => (
     <NavbarItem
@@ -57,48 +51,46 @@ export const Navbar = memo(({ className }: NavbarProps) => {
     />
   ));
 
-  if (authData) {
-    return (
-      <menu className={classes(cls.Navbar, {}, [className])}>
-        <nav className={cls.links}>
-          <HFlex>
-            { NavbarItemList }
-          </HFlex>
+  // if (authData) {
+  //   return (
+  //     <menu className={classes(cls.Navbar, {}, [className])}>
+  //       <nav className={cls.links}>
+  //         <HFlex>
+  //           { NavbarItemList }
+  //         </HFlex>
 
-          <HFlex justify="end" gap="16">
-            {user?.user.roles?.includes("ROLE_ADMIN")
-          && (
-          <Button
-            theme={ButtonTheme.GREEN}
-            className={classes(cls.DarkThemeBtn, {}, [className])}
-            onClick={onAddBook}
-          >
-            {t("добавить")}
-          </Button>
-          )}
+  //         <HFlex justify="end" gap="16">
+  //           {user?.user.roles?.includes("ROLE_ADMIN")
+  //         && (
+  //         <Button
+  //           theme={ButtonTheme.GREEN}
+  //           className={classes(cls.DarkThemeBtn, {}, [className])}
+  //           onClick={onAddBook}
+  //         >
+  //           {t("добавить")}
+  //         </Button>
+  //         )}
 
-            <Button
-              theme={ButtonTheme.ACCENT_OUTLINE}
-              className={classes(cls.DarkThemeBtn, {}, [className])}
-              onClick={onLogout}
-            >
-              {t("Выйти")}
-            </Button>
-          </HFlex>
+  //           <Button
+  //             theme={ButtonTheme.ACCENT_OUTLINE}
+  //             className={classes(cls.DarkThemeBtn, {}, [className])}
+  //             onClick={onLogout}
+  //           >
+  //             {t("Выйти")}
+  //           </Button>
+  //         </HFlex>
 
-        </nav>
-      </menu>
-    );
-  }
+  //       </nav>
+  //     </menu>
+  //   );
+  // }
 
   return (
     <menu className={classes(cls.Navbar, {}, [className])}>
       <nav className={cls.links}>
-        <HFlex justify="start">
-          { NavbarItemList }
-        </HFlex>
+        { NavbarItemList }
 
-        <Button
+        {/* <Button
           data-testid="toggle-navbar-btn"
           className={classes(cls.sidebarBtn)}
           // theme={ButtonTheme.CLEAR_PAD}
@@ -106,17 +98,17 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           type="button"
           onClick={onAuthModalOpen}
         >
-          {/* <UserProfileSVG
+          <UserProfileSVG
             width={22}
             height={22}
             className={cls.loginSVG}
             // fill={theme === Theme.DARK ? "#fff" : "#000"}
-          /> */}
+          />
 
           {t("войти")}
-        </Button>
+        </Button> */}
 
-        {isAuthModalWinOpen && <LoginModal isOpen={isAuthModalWinOpen} onClose={onAuthModalClose} />}
+        {/* {isAuthModalWinOpen && <LoginModal isOpen={isAuthModalWinOpen} onClose={onAuthModalClose} />} */}
 
       </nav>
     </menu>
