@@ -11,7 +11,7 @@ interface ITabsProps {
   className?: string;
   tabs: ITabItem[];
   activeValue: string;
-  onClickHandler: (tab: ITabItem) => void;
+  onClickHandler: (tab: string) => void;
 }
 
 export const Tabs = memo(({
@@ -21,7 +21,7 @@ export const Tabs = memo(({
   onClickHandler }: ITabsProps) => {
   const onTabClick = (tab: ITabItem) => {
     return () => {
-      onClickHandler(tab);
+      onClickHandler(tab.value);
     };
   };
 

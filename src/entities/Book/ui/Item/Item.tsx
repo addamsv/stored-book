@@ -1,6 +1,6 @@
 import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { HTMLAttributeAnchorTarget, memo } from "react";
+import { HTMLAttributeAnchorTarget, memo, useCallback, useMemo } from "react";
 import { ImageJpg } from "shared/ImageJpg/ImageJpg";
 import { IconSVG } from "shared/IconSVG/IconSVG";
 import EyeIon from "resources/assets/icons/eye.svg";
@@ -14,7 +14,9 @@ import { AppLink } from "shared/AppLink/AppLink";
 import { Card } from "shared/Card/Card";
 import { VFlex } from "shared/Flex/VFlex";
 import { HFlex } from "shared/Flex/HFlex";
-import { EBlockOfBookType, EBookListView, IBlockOfBookText, IBook } from "../../model/types";
+import { useAppDispatch } from "resources/hooks/useAppDispatch";
+import { bookListPageActions } from "pages/BooksListPage/model/slices";
+import { EBlockOfBookType, EBookListView, EBookOfHashTagType, IBlockOfBookText, IBook } from "../../model/types";
 import cls from "./Item.module.scss";
 
 interface IItemProps {
@@ -22,9 +24,11 @@ interface IItemProps {
   book: IBook;
   listView: EBookListView;
   target?: HTMLAttributeAnchorTarget;
+
+  onGenreChange?: (genre: EBookOfHashTagType) => void;
 }
 
-export const Item = memo(({ className, book, listView, target }: IItemProps) => {
+export const Item = memo(({ className, book, listView, target, onGenreChange }: IItemProps) => {
   const { t } = useTranslation();
 
   // const nav = useNavigate();
@@ -37,36 +41,58 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
   // console.log(isHover);
   // <div {...bindHover}>hover</div>
 
+  const onGenreClick = useCallback((genre: EBookOfHashTagType) => {
+    return () => {
+      onGenreChange?.(genre);
+    };
+  }, [onGenreChange]);
+
+  const Genres = useMemo(() => {
+    return book.Genres?.map((genre) => (
+      <div key={genre} onClick={onGenreClick(genre)} className={cls.hashTagType}>
+        {genre}
+      </div>
+      // <Text
+      //   textAlign={TextAlign.LEFT}
+      //   textSize={TextSize.S}
+      //   text={genre}
+      // />
+    ));
+  }, [book.Genres, onGenreClick]);
+
   // COMPACT
   if (listView === EBookListView.COMPACT) {
     return (
       <div className={classes(cls.Item, {}, [className, cls[listView]])}>
-        <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
-          <Card
+        <Card
           // onClick={onLinkClickHandler}
-            className={cls.card}
-          >
+          className={cls.card}
+        >
+          <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
             <div className={cls.imageWrapper}>
               <img className={cls.img} src={book.img} alt="*" />
               <p className={cls.createdAt}>{book.PublicationDate}</p>
             </div>
+          </AppLink>
 
-            <div className={cls.info}>
-              <Text
+          <div className={cls.info}>
+
+            {Genres}
+
+            {/* <Text
                 className={cls.hashTagType}
                 textAlign={TextAlign.LEFT}
                 textSize={TextSize.XS}
                 // text={book.hashTagType.join(", ")}
                 text={book?.Genres?.join(", ")}
-              />
+              /> */}
 
-              <IconSVG className={cls.views} w={12} h={12} Svg={EyeIon} />
-              <Text textSize={TextSize.XS} text={String(book.views)} />
-            </div>
+            <IconSVG className={cls.views} w={12} h={12} Svg={EyeIon} />
+            <Text textSize={TextSize.XS} text={String(book.views)} />
+          </div>
 
-            <Text className={cls.title} textSize={TextSize.S} textAlign={TextAlign.LEFT} text={String(book.Title)} />
-          </Card>
-        </AppLink>
+          <Text className={cls.title} textSize={TextSize.S} textAlign={TextAlign.LEFT} text={String(book.Title)} />
+        </Card>
       </div>
     );
   }
@@ -100,12 +126,13 @@ export const Item = memo(({ className, book, listView, target }: IItemProps) => 
             </HFlex>
           </HFlex>
 
-          <Text
+          {Genres}
+          {/* <Text
             className={cls.hashTagType}
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
             text={book.Genres?.join(", ")}
-          />
+          /> */}
 
           {paragraph && (
             <Text className={cls.paragraph} text={paragraph.paragraphs[0]} />

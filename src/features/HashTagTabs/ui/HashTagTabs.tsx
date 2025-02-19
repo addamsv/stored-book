@@ -5,6 +5,9 @@ import { ITabItem, Tabs } from "shared/Tabs/Tabs";
 import { EBookOfHashTagType } from "entities/Book";
 import { HFlex } from "shared/Flex/HFlex";
 import { Button, ButtonTheme } from "shared/Button/Button";
+
+import CloseIcon from "resources/assets/icons/close.svg";
+import { IconSVG } from "shared/IconSVG/IconSVG";
 import cls from "./HashTagTabs.module.scss";
 
 interface IHashTagTabsProps {
@@ -48,8 +51,8 @@ export const HashTagTabs = memo(({ className, activeHashTag, onTagChange }: IHas
     { value: EBookOfHashTagType["Travel & Tourism"], content: "Travel & Tourism" },
   ], [t]);
 
-  const onHashTagChange = useCallback((tab: ITabItem) => {
-    onTagChange(tab.value as EBookOfHashTagType);
+  const onHashTagChange = useCallback((value: string) => {
+    onTagChange(value as EBookOfHashTagType);
     setVisibility(false);
   }, [onTagChange]);
 
@@ -64,7 +67,14 @@ export const HashTagTabs = memo(({ className, activeHashTag, onTagChange }: IHas
   return (
     <HFlex gap="8" className={cls.genres}>
       <b>{`${t("genres filter")}:`}</b>
+
       <div onClick={onGenresClick} className={cls.genresTab}>{activeHashTag}</div>
+
+      {activeHashTag !== "ALL" && (
+      <div onClick={() => onHashTagChange("ALL")}>
+        <IconSVG className={cls.closeIcon} Svg={CloseIcon} />
+      </div>
+      )}
     </HFlex>
   );
 });

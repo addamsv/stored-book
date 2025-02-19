@@ -49,7 +49,7 @@ export const bookListPageSlice = createSlice({
     initState: (state) => {
       const listView = localStorage.getItem(LIST_VIEW_LOCAL_STORAGE_KEY) as EBookListView;
       state.listView = listView;
-      state.limit = listView === EBookListView.STANDARD ? 4 : 9;
+      state.limit = listView === EBookListView.STANDARD ? 40 : 20;
       state._isStateInit = true;
     },
 
