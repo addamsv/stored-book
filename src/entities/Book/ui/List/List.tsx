@@ -2,7 +2,7 @@ import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 import { HTMLAttributeAnchorTarget, memo } from "react";
 import { Text } from "shared/Text";
-import { EBookListView, IBook } from "../../model/types";
+import { EBookListView, EBookOfHashTagType, IBook } from "../../model/types";
 import cls from "./List.module.scss";
 import { Item } from "../Item/Item";
 import { ItemSkeleton } from "../Item/ItemSkeleton";
@@ -12,7 +12,8 @@ interface IListProps {
   bookArr: IBook[];
   isLoading?: boolean;
   listView?: EBookListView;
-    target?: HTMLAttributeAnchorTarget;
+  target?: HTMLAttributeAnchorTarget;
+  onGenreChange?: (genre: EBookOfHashTagType) => void;
 }
 
 export const List = memo(({
@@ -20,7 +21,8 @@ export const List = memo(({
   bookArr,
   isLoading,
   listView = EBookListView.STANDARD,
-  target
+  target,
+  onGenreChange
 }: IListProps) => {
   const { t } = useTranslation();
 
@@ -32,7 +34,7 @@ export const List = memo(({
     ));
 
   const render = (book: IBook) => (
-    <Item key={book.id} book={book} listView={listView} target={target} />
+    <Item key={book.id} book={book} listView={listView} target={target} onGenreChange={onGenreChange} />
   );
 
   if (!isLoading && !bookArr.length) {

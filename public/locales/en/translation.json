@@ -1,6 +1,7 @@
 {
   "404": "404",
   "Add Book": "Add Book",
+  "DMCA_Rep": "DMCA Report",
   "Edit Book": "Edit Book",
   "error": "error",
   "genres filter": "genres filter",
@@ -12,9 +13,10 @@
   "Выйти": "logout",
   "Главная": "Main",
   "Книги": "Books",
-  "Наука": "SCIENCE",
   "Контакты": "Contact Us",
+  "Наука": "SCIENCE",
   "Политика": "POLITICS",
+  "Помощь": "Help",
   "Поэзия": "POETRY",
   "Приключения": "ADVENTURE",
   "Профиль": "Profile",
@@ -48,7 +50,5 @@
   "тема": "theme",
   "убыванию": "desc",
   "удалить": "remove",
-  "язык": "lang",
-  "DMCA_Rep": "DMCA Report",
-  "Помощь": "Help"
+  "язык": "lang"
 }

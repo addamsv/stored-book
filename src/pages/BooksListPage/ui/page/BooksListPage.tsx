@@ -3,7 +3,7 @@ import { classes } from "resources/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 import { memo, useCallback, useEffect } from "react";
 import { BookList, ListViewSwitcher } from "entities/Book";
-import { EBookListView } from "entities/Book/model/types";
+import { EBookListView, EBookOfHashTagType } from "entities/Book/model/types";
 import { AsyncModule, ReducerListT } from "shared/AsyncModule/AsyncModule";
 import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
@@ -15,7 +15,7 @@ import { useSearchParams } from "react-router-dom";
 import { BookBottomNavbar } from "widgets/BookBottomNavbar";
 import { bookListPageActions, bookListPageReducer, getBooks } from "../../model/slices";
 import cls from "./BooksListPage.module.scss";
-import { fetchNextBookList } from "../../model/services";
+import { fetchBookList, fetchNextBookList } from "../../model/services";
 import { getBooksListPageError, getBooksListPageIsStateInit, getBooksListPageListView, getBooksListPageLoading } from "../../model/selectors";
 import { initBookListPage } from "../../model/services/initBookListPage";
 import { BookListFilters } from "../filters/BookListFilters";
@@ -52,6 +52,16 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
     }
   }, [dispatch, isStateInit, searchParams]);
 
+  const fetch = useCallback(() => {
+    dispatch(fetchBookList({ shouldReplace: true }));
+  }, [dispatch]);
+
+  const onGenreChange = useCallback((genre: EBookOfHashTagType) => {
+    dispatch(bookListPageActions.setHashTag(genre));
+    dispatch(bookListPageActions.setPage(1));
+    fetch();
+  }, [dispatch, fetch]);
+
   return (
     <AsyncModule reducers={reducers} isRemoveAfterUnmount={false}>
       <Page
@@ -69,6 +79,7 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
               isLoading={isLoading}
               bookArr={bookArr}
               listView={listView}
+              onGenreChange={onGenreChange}
             />
 
             <BookBottomNavbar key="BookBottomNavbar" />
