@@ -26,9 +26,10 @@ interface IItemProps {
   target?: HTMLAttributeAnchorTarget;
 
   onGenreChange?: (genre: EBookOfHashTagType) => void;
+  onSearchQueryChange?: (query: string) => void;
 }
 
-export const Item = memo(({ className, book, listView, target, onGenreChange }: IItemProps) => {
+export const Item = memo(({ className, book, listView, target, onGenreChange, onSearchQueryChange }: IItemProps) => {
   const { t } = useTranslation();
 
   // const nav = useNavigate();
@@ -47,6 +48,12 @@ export const Item = memo(({ className, book, listView, target, onGenreChange }: 
     };
   }, [onGenreChange]);
 
+  const onAuthorClick = useCallback((query: string) => {
+    return () => {
+      onSearchQueryChange?.(query);
+    };
+  }, [onSearchQueryChange]);
+
   const Genres = useMemo(() => {
     return book.Genres?.map((genre) => (
       <div key={genre} onClick={onGenreClick(genre)} className={cls.hashTagType}>
@@ -59,6 +66,19 @@ export const Item = memo(({ className, book, listView, target, onGenreChange }: 
       // />
     ));
   }, [book.Genres, onGenreClick]);
+
+  const Authors = useMemo(() => {
+    return book.Author?.map((author) => (
+      <div key={author} onClick={onAuthorClick(author)} className={cls.hashTagType}>
+        {author}
+      </div>
+      // <Text
+      //   textAlign={TextAlign.LEFT}
+      //   textSize={TextSize.S}
+      //   text={genre}
+      // />
+    ));
+  }, [book.Author, onAuthorClick]);
 
   // COMPACT
   if (listView === EBookListView.COMPACT) {
@@ -110,11 +130,12 @@ export const Item = memo(({ className, book, listView, target, onGenreChange }: 
 
         <VFlex gap="8" className={cls.contentWrapper}>
           <Text
-            className={cls.imageDescription}
             textAlign={TextAlign.LEFT}
             title={book.Title}
-            text={book?.Author?.join(", ")}
           />
+
+          {Authors}
+
           <HFlex gap="8" className={cls.info}>
             <HFlex gap="4">
               <IconSVG Svg={EyeIon} />
