@@ -31,10 +31,6 @@ const itemsArr: IBookBottomNavbarItem[] = [
     path: RoutePath.terms_of_use,
     text: "Terms of Use"
   },
-  // {
-  //   path: RoutePath.about,
-  //   text: "Контакты"
-  // },
 ];
 
 const NavbarItemList = itemsArr.map((item: INavbarItem) => (
@@ -47,15 +43,16 @@ const NavbarItemList = itemsArr.map((item: INavbarItem) => (
 export const BookBottomNavbar = memo(({ className }: IBookBottomNavbarProps) => {
   const { t } = useTranslation();
 
-  const onContactHandler = () => {
-    window.location.href = `mailto:${__CONTACT_US_EMAIL__}`;
-  };
+  // const onContactHandler = () => {
+  //   window.location.href = `mailto:${__CONTACT_US_EMAIL__}`;
+  // };
 
   return (
     <menu className={classes(cls.BookBottomNavbar, {}, [className])}>
       <HFlex className={cls.itemWrapper} justify="center">
-        { NavbarItemList }
-        <div onClick={onContactHandler} className={cls.contactUsLink}>{t("Контакты")}</div>
+        <div className={cls.warnings}>{t("warnings")}</div>
+        {/* { NavbarItemList } */}
+        {/* <div onClick={onContactHandler} className={cls.contactUsLink}>{t("Контакты")}</div> */}
       </HFlex>
     </menu>
   );
