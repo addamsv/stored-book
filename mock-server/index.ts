@@ -165,7 +165,9 @@ server.get("/api/v1/books", (req, res) => {
       hashTag?: string,
     } = req.query;
 
-    console.log(q, _order, _sort, hashTag);
+    if (IS_DEV) {
+      console.log(q, _order, _sort, hashTag);
+    }
 
     const isTitleInc = (title?: string) => {
       if (!title) {
@@ -287,7 +289,11 @@ server.get("/api/v1/books/:id", (req, res) => {
     const bookCandidate = books.find(
       (book) => book.id === Number(req.params.id)
     );
-    console.log("bookCandidate", bookCandidate);
+
+    if (IS_DEV) {
+      console.log("bookCandidate", bookCandidate);
+    }
+
     if (bookCandidate) {
       return Ret.CustomReturnData(res, `Book Details with ID: ${req.params.id}`, bookCandidate);
     }

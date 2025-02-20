@@ -32,7 +32,7 @@ const App = () => {
           <Sidebar />
           {isAuthDataMounted && <AppRouter />}
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </Suspense>
     </div>
   );
