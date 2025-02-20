@@ -14,6 +14,7 @@ interface IListProps {
   listView?: EBookListView;
   target?: HTMLAttributeAnchorTarget;
   onGenreChange?: (genre: EBookOfHashTagType) => void;
+  onSearchQueryChange?: (query: string) => void;
 }
 
 export const List = memo(({
@@ -22,7 +23,8 @@ export const List = memo(({
   isLoading,
   listView = EBookListView.STANDARD,
   target,
-  onGenreChange
+  onGenreChange,
+  onSearchQueryChange
 }: IListProps) => {
   const { t } = useTranslation();
 
@@ -34,7 +36,14 @@ export const List = memo(({
     ));
 
   const render = (book: IBook) => (
-    <Item key={book.id} book={book} listView={listView} target={target} onGenreChange={onGenreChange} />
+    <Item
+      key={book.id}
+      book={book}
+      listView={listView}
+      target={target}
+      onGenreChange={onGenreChange}
+      onSearchQueryChange={onSearchQueryChange}
+    />
   );
 
   if (!isLoading && !bookArr.length) {

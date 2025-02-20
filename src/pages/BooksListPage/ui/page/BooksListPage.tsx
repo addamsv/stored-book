@@ -13,6 +13,7 @@ import { TextTheme } from "shared/Text";
 import { ErrorWidget } from "widgets/Error";
 import { useSearchParams } from "react-router-dom";
 import { BookBottomNavbar } from "widgets/BookBottomNavbar";
+import { useDebounce } from "resources/hooks/useDebounce";
 import { bookListPageActions, bookListPageReducer, getBooks } from "../../model/slices";
 import cls from "./BooksListPage.module.scss";
 import { fetchBookList, fetchNextBookList } from "../../model/services";
@@ -56,11 +57,19 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
     dispatch(fetchBookList({ shouldReplace: true }));
   }, [dispatch]);
 
+  const debouncedFetch = useDebounce(fetch, 500);
+
   const onGenreChange = useCallback((genre: EBookOfHashTagType) => {
     dispatch(bookListPageActions.setHashTag(genre));
     dispatch(bookListPageActions.setPage(1));
     fetch();
   }, [dispatch, fetch]);
+
+  const onSearchQueryChange = useCallback((query: string) => {
+    dispatch(bookListPageActions.setSearch(query));
+    dispatch(bookListPageActions.setPage(1));
+    debouncedFetch();
+  }, [dispatch, debouncedFetch]);
 
   return (
     <AsyncModule reducers={reducers} isRemoveAfterUnmount={false}>
@@ -72,7 +81,7 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
           <ErrorWidget key="ErrorWidget" text={error} />
         ) : (
           <>
-            <BookListFilters key="BookListFilters" />
+            <BookListFilters key="BookListFilters" onGenreChange={onGenreChange} onSearchQueryChange={onSearchQueryChange} />
 
             <BookList
               key="BookList"
@@ -80,6 +89,7 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
               bookArr={bookArr}
               listView={listView}
               onGenreChange={onGenreChange}
+              onSearchQueryChange={onSearchQueryChange}
             />
 
             <BookBottomNavbar key="BookBottomNavbar" />

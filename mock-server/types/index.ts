@@ -80,11 +80,11 @@ export interface IBook {
 
     Title: string;
     Series?: string;
-    Author?: string[];
+    Author: string[];
     Translator?: string[];
     Narrated?: string[];
     Length?: string,
-    ReleaseDate?: string;
+    ReleaseDate: string;
     PublicationDate: string;
     Language?: string;
     Genres?: EBookOfHashTagType[];

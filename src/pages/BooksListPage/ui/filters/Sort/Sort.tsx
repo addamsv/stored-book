@@ -29,17 +29,20 @@ export const Sort = memo(({ className, sort, order, onOrderChange, onSortChange 
 
   const sortArr = useMemo<ISelectOptions<EBookListSortField>[]>(() => [
     { value: EBookListSortField.CREATED_AT,
-      content: t("дате")
+      content: t("публикация")
+    },
+    { value: EBookListSortField.RELEASE,
+      content: t("выпуск")
     },
     { value: EBookListSortField.SUBTITLE,
       content: t("автору")
     },
+    { value: EBookListSortField.TITLE,
+      content: t("заголовку")
+    },
     { value: EBookListSortField.VIEWS,
       content: t("просмотрам")
     },
-    { value: EBookListSortField.TITLE,
-      content: t("заголовку")
-    }
   ], [t]);
 
   return (

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 import { INavbarItem } from "widgets/Navbar/model/types";
 
+import { useTranslation } from "react-i18next";
 import { getNavbarItemsArr } from "../../model/selectors";
 import cls from "./Navbar.module.scss";
 import { NavbarItem } from "../NavbarItem/NavbarItem";
@@ -14,6 +15,7 @@ interface INavbarProps {
 }
 
 export const Navbar = memo(({ className }: INavbarProps) => {
+  const { t } = useTranslation();
   // const { t } = useTranslation();
 
   // const [isAuthModalWinOpen, setAuthModalWin] = useState(false);
@@ -43,6 +45,10 @@ export const Navbar = memo(({ className }: INavbarProps) => {
   // const onAddBook = useCallback(() => {
   //   nav(RoutePath.book_add);
   // }, [nav]);
+
+  const onContactHandler = () => {
+    window.location.href = `mailto:${__CONTACT_US_EMAIL__}`;
+  };
 
   const NavbarItemList = navbarArr.map((item: INavbarItem) => (
     <NavbarItem
@@ -109,6 +115,8 @@ export const Navbar = memo(({ className }: INavbarProps) => {
         </Button> */}
 
         {/* {isAuthModalWinOpen && <LoginModal isOpen={isAuthModalWinOpen} onClose={onAuthModalClose} />} */}
+
+        <div onClick={onContactHandler} className={cls.contactUsLink}>{t("Контакты")}</div>
 
       </nav>
     </menu>

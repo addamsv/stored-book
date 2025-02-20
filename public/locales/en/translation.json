@@ -26,7 +26,8 @@
   "автору": "author",
   "возрастанию": "asc",
   "войти": "login",
-  "дате": "date",
+  "публикация": "publication",
+  "выпуск": "release",
   "добавить": "add",
   "заголовку": "title",
   "имя пользователя": "user name",
@@ -50,5 +51,6 @@
   "тема": "theme",
   "убыванию": "desc",
   "удалить": "remove",
-  "язык": "lang"
+  "язык": "lang",
+  "warnings": "No files are stored on our server. We only provide links obtained from public forums where users share these links. Users are responsible for their actions when using these links!"
 }

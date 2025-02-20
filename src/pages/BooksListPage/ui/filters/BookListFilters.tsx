@@ -1,6 +1,5 @@
 import { classes } from "resources/lib/classNames/classes";
-import { useTranslation } from "react-i18next";
-import { memo, useCallback, useMemo } from "react";
+import { memo, useCallback } from "react";
 import { EBookListSortField, EBookListView, EBookOfHashTagType, ListViewSwitcher } from "entities/Book";
 import { bookListPageActions } from "pages/BooksListPage/model/slices";
 import { useSelector } from "react-redux";
@@ -9,7 +8,6 @@ import {
   getBooksListPageListView, getBooksListPageOrder, getBooksListPageSearch, getBooksListPageSort
 } from "pages/BooksListPage/model/selectors";
 import { useAppDispatch } from "resources/hooks/useAppDispatch";
-import { Card } from "shared/Card/Card";
 import { Input } from "shared/Input/Input";
 import { TypeSortOrder } from "resources/types";
 import { fetchBookList } from "pages/BooksListPage/model/services";
@@ -23,11 +21,11 @@ import { Sort } from "./Sort/Sort";
 
 interface IBookListFiltersProps {
   className?: string;
+  onGenreChange: (genre: EBookOfHashTagType) => void;
+  onSearchQueryChange: (query: string) => void;
 }
 
-export const BookListFilters = memo(({ className }: IBookListFiltersProps) => {
-  const { t } = useTranslation();
-
+export const BookListFilters = memo(({ className, onGenreChange, onSearchQueryChange }: IBookListFiltersProps) => {
   const listView = useSelector(getBooksListPageListView);
 
   const sort = useSelector(getBooksListPageSort);
@@ -59,18 +57,6 @@ export const BookListFilters = memo(({ className }: IBookListFiltersProps) => {
     fetch();
   }, [dispatch, fetch]);
 
-  const onSearchQueryChange = useCallback((query: string) => {
-    dispatch(bookListPageActions.setSearch(query));
-    dispatch(bookListPageActions.setPage(1));
-    debouncedFetch();
-  }, [dispatch, debouncedFetch]);
-
-  const onHashTagChange = useCallback((tabVal: EBookOfHashTagType) => {
-    dispatch(bookListPageActions.setHashTag(tabVal));
-    dispatch(bookListPageActions.setPage(1));
-    debouncedFetch();
-  }, [dispatch, debouncedFetch]);
-
   return (
     <div className={classes(cls.BookListFilters, {}, [className])}>
       <HFlex justify="around">
@@ -93,7 +79,7 @@ export const BookListFilters = memo(({ className }: IBookListFiltersProps) => {
         <Input className={cls.searchInput} value={searchQuery} onChange={onSearchQueryChange} />
       </HFlex>
 
-      <HashTagTabs activeHashTag={hashTag} onTagChange={onHashTagChange} />
+      <HashTagTabs activeHashTag={hashTag} onTagChange={onGenreChange} />
     </div>
   );
 });

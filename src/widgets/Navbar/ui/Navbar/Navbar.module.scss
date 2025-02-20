@@ -27,8 +27,8 @@
   }
 }
 
-// @media (max-width: 670px) {
-//   .links {
-//     justify-content: space-between;
-//   }
-// }
+@media (max-width: 400px) {
+  .links {
+    padding-left: 8px;
+  }
+}
