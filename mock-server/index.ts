@@ -160,12 +160,12 @@ server.get("/api/v1/books", (req, res) => {
       q?: string,
       _page?: number,
       _limit?: number,
-      _sort?: "Title" | "Author" | "views" | "PublicationDate",
+      _sort?: "Title" | "Author" | "views" | "PublicationDate" | "ReleaseDate",
       _order?: "asc" | "desc",
       hashTag?: string,
     } = req.query;
 
-    console.log(q, _sort, _order, hashTag);
+    console.log(q, _order, _sort, hashTag);
 
     const isTitleInc = (title?: string) => {
       if (!title) {
@@ -206,7 +206,7 @@ server.get("/api/v1/books", (req, res) => {
       .sort((a, b) => {
         if (_sort && a[_sort]) {
           // _order PublicationDate
-          if (_sort === "PublicationDate") {
+          if (_sort === "PublicationDate" || _sort === "ReleaseDate") {
             const arrDateA = a[_sort].split("-");
             const arrDateB = b[_sort].split("-");
 

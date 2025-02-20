@@ -3,6 +3,7 @@ export enum EBookListSortField {
   TITLE = "Title",
   SUBTITLE = "Author",
   CREATED_AT = "PublicationDate",
+  RELEASE = "ReleaseDate",
 }
 
 export enum EBookListView {

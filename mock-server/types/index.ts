@@ -84,7 +84,7 @@ export interface IBook {
     Translator?: string[];
     Narrated?: string[];
     Length?: string,
-    ReleaseDate?: string;
+    ReleaseDate: string;
     PublicationDate: string;
     Language?: string;
     Genres?: EBookOfHashTagType[];
