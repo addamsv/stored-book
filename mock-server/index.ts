@@ -227,11 +227,27 @@ server.get("/api/v1/books", (req, res) => {
           if (_sort === "views") {
             return _order === "desc" ? a[_sort] - b[_sort] : b[_sort] - a[_sort];
           }
-          // _order title subTitle
-          if (_sort === "Title") { // || _sort === "subTitle"
+          // _order Title
+          if (_sort === "Title") {
             const nameA = a[_sort].toUpperCase();
 
             const nameB = b[_sort].toUpperCase();
+
+            if (nameA < nameB) {
+              return _order === "desc" ? 1 : -1;
+            }
+
+            if (nameA > nameB) {
+              return _order === "desc" ? -1 : 1;
+            }
+
+            return 0;
+          }
+          // _order Author
+          if (_sort === "Author") { //
+            const nameA = a[_sort].join(", ").toUpperCase();
+
+            const nameB = b[_sort].join(", ").toUpperCase();
 
             if (nameA < nameB) {
               return _order === "desc" ? 1 : -1;

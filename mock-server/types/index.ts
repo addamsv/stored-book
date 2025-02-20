@@ -80,7 +80,7 @@ export interface IBook {
 
     Title: string;
     Series?: string;
-    Author?: string[];
+    Author: string[];
     Translator?: string[];
     Narrated?: string[];
     Length?: string,

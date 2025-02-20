@@ -23,9 +23,10 @@ import { Sort } from "./Sort/Sort";
 
 interface IBookListFiltersProps {
   className?: string;
+  onGenreChange: (genre: EBookOfHashTagType) => void;
 }
 
-export const BookListFilters = memo(({ className }: IBookListFiltersProps) => {
+export const BookListFilters = memo(({ className, onGenreChange }: IBookListFiltersProps) => {
   const { t } = useTranslation();
 
   const listView = useSelector(getBooksListPageListView);
@@ -93,7 +94,7 @@ export const BookListFilters = memo(({ className }: IBookListFiltersProps) => {
         <Input className={cls.searchInput} value={searchQuery} onChange={onSearchQueryChange} />
       </HFlex>
 
-      <HashTagTabs activeHashTag={hashTag} onTagChange={onHashTagChange} />
+      <HashTagTabs activeHashTag={hashTag} onTagChange={onGenreChange} />
     </div>
   );
 });

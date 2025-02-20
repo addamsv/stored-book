@@ -72,7 +72,7 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
           <ErrorWidget key="ErrorWidget" text={error} />
         ) : (
           <>
-            <BookListFilters key="BookListFilters" />
+            <BookListFilters key="BookListFilters" onGenreChange={onGenreChange} />
 
             <BookList
               key="BookList"
