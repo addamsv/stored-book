@@ -3,6 +3,6 @@
 
 npm run lint
 npm run stylelint
-# npm run test
+npm run test
 # npm run sb
 # npm run ui
