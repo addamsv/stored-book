@@ -48,12 +48,12 @@ export const BookBottomNavbar = memo(({ className }: IBookBottomNavbarProps) => 
   // };
 
   return (
-    <menu className={classes(cls.BookBottomNavbar, {}, [className])}>
+    <footer className={classes(cls.BookBottomNavbar, {}, [className])}>
       <HFlex className={cls.itemWrapper} justify="center">
         <div className={cls.warnings}>{t("warnings")}</div>
         {/* { NavbarItemList } */}
         {/* <div onClick={onContactHandler} className={cls.contactUsLink}>{t("Контакты")}</div> */}
       </HFlex>
-    </menu>
+    </footer>
   );
 });

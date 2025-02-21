@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { INavbarItem } from "widgets/Navbar/model/types";
 
 import { useTranslation } from "react-i18next";
+import { HFlex } from "shared/Flex/HFlex";
 import { getNavbarItemsArr } from "../../model/selectors";
 import cls from "./Navbar.module.scss";
 import { NavbarItem } from "../NavbarItem/NavbarItem";
@@ -46,9 +47,9 @@ export const Navbar = memo(({ className }: INavbarProps) => {
   //   nav(RoutePath.book_add);
   // }, [nav]);
 
-  const onContactHandler = () => {
-    window.location.href = `mailto:${__CONTACT_US_EMAIL__}`;
-  };
+  // const onContactHandler = () => {
+  //   window.location.href = `mailto:${__CONTACT_US_EMAIL__}`;
+  // };
 
   const NavbarItemList = navbarArr.map((item: INavbarItem) => (
     <NavbarItem
@@ -93,7 +94,7 @@ export const Navbar = memo(({ className }: INavbarProps) => {
 
   return (
     <menu className={classes(cls.Navbar, {}, [className])}>
-      <nav className={cls.links}>
+      <HFlex Tag="nav" role="navigation" className={cls.links}>
         { NavbarItemList }
 
         {/* <Button
@@ -116,9 +117,9 @@ export const Navbar = memo(({ className }: INavbarProps) => {
 
         {/* {isAuthModalWinOpen && <LoginModal isOpen={isAuthModalWinOpen} onClose={onAuthModalClose} />} */}
 
-        <div onClick={onContactHandler} className={cls.contactUsLink}>{t("Контакты")}</div>
+        {/* <div onClick={onContactHandler} className={cls.contactUsLink}>{t("Контакты")}</div> */}
 
-      </nav>
+      </HFlex>
     </menu>
   );
 });

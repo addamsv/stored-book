@@ -9,7 +9,7 @@ export const getNavbarItemsArr = createSelector(
     const itemsArr: INavbarItem[] = [
       {
         path: RoutePath.books,
-        text: "Книги"
+        text: "Главная"
       },
       {
         path: RoutePath.help,

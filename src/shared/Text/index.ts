@@ -12,6 +12,7 @@ export enum TextAlign {
 }
 
 export enum TextSize {
+  XXS = "smallest",
   XS = "extraSmall",
   S = "small",
   M = "middle",

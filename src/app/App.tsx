@@ -2,7 +2,6 @@ import "./styles/index.scss";
 
 import { classes } from "resources/lib/classNames/classes";
 import { Navbar } from "widgets/Navbar";
-import { Footer } from "widgets/Footer";
 
 import { Sidebar } from "widgets/Sidebar";
 import { Suspense, useEffect } from "react";
@@ -10,6 +9,7 @@ import { Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAuthDataMounted, userActions } from "entities/User";
 import { PageLoader } from "entities/PageLoader/PageLoader";
+import { VFlex } from "shared/Flex/VFlex";
 import { AppRouter } from "../resources/router";
 import { useTheme } from "../resources/store/ThemeProvider";
 
@@ -28,11 +28,14 @@ const App = () => {
     <div className={classes("app", {}, [theme])}>
       <Suspense fallback={<PageLoader />}>
         <Navbar />
-        <main className="content-page">
-          <Sidebar />
+
+        <Sidebar />
+
+        <VFlex Tag="main">
           {isAuthDataMounted && <AppRouter />}
-        </main>
-        <Footer />
+        </VFlex>
+
+        {/* <Footer /> */}
       </Suspense>
     </div>
   );

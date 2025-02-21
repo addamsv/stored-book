@@ -12,6 +12,7 @@ import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { SendCommentForm } from "features/SendCommentForm";
 import { Page } from "widgets/Page/Page";
 import { getUserAuthData } from "entities/User";
+import { BookBottomNavbar } from "widgets/BookBottomNavbar";
 import { bookDetailsCommentsReducer, getBooksComments } from "../model/slices/bookDetailsCommentsSlice";
 import cls from "./BookDetailsPage.module.scss";
 import { getBooksCommentsError, getBooksCommentsIsLoading } from "../model/selectors";
@@ -84,6 +85,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
         <Text className={cls.mgnTop} textSize={TextSize.L} title={t("рекомендасьён")} />
 
         <BookList
+          key="recommendations"
           className={cls.recommendations}
           target="_blank"
           bookArr={recommendations}
@@ -92,10 +94,12 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
         />
 
         <Text className={cls.mgnTop} textSize={TextSize.L} title={t("комментарии")} />
+
         {user && <SendCommentForm onSendCommentHandler={onSendCommentHandler} />}
+
         <CommentList isLoading={isLoading} comments={comments} />
-        <br />
-        <br />
+
+        <BookBottomNavbar />
       </Page>
     </AsyncModule>
   );
