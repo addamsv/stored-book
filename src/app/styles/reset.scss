@@ -2,6 +2,30 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  border: 0;
+  vertical-align: baseline;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+  content: "";
+  content: none;
 }
 
 input,
@@ -9,5 +33,4 @@ button,
 textarea,
 select {
   margin: 0;
-  font: inherit;
 }

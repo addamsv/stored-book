@@ -19,9 +19,10 @@ const BlockOfBookText = ({ className, block }: IBlockOfBookTextProps) => {
       {block.title && (
         <Text title={block.title} className={cls.title} />
       )}
-      {block.paragraphs.map((paragraph) => (
+      {block.paragraphs.map((paragraph, id) => (
         <Text
-          key={paragraph}
+          // eslint-disable-next-line react/no-array-index-key
+          key={id}
           text={paragraph}
           textAlign={TextAlign.LEFT}
           className={cls.paragraph}

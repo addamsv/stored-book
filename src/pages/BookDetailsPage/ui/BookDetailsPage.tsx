@@ -85,6 +85,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
         <Text className={cls.mgnTop} textSize={TextSize.L} title={t("рекомендасьён")} />
 
         <BookList
+          key="recommendations"
           className={cls.recommendations}
           target="_blank"
           bookArr={recommendations}
@@ -93,7 +94,9 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
         />
 
         <Text className={cls.mgnTop} textSize={TextSize.L} title={t("комментарии")} />
+
         {user && <SendCommentForm onSendCommentHandler={onSendCommentHandler} />}
+
         <CommentList isLoading={isLoading} comments={comments} />
 
         <BookBottomNavbar />

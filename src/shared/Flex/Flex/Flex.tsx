@@ -35,7 +35,9 @@ const gapClasses: Record<FlexGap, string> = {
   128: cls.gap128,
 };
 
-export interface IFlexProps {
+type TDivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+
+export interface IFlexProps extends TDivProps {
   className?: string;
   children: ReactNode;
   justify?: FlexJustify;
@@ -43,15 +45,19 @@ export interface IFlexProps {
   direction?: FlexDirection;
   gap?: FlexGap;
   max?: boolean;
+  Tag?: "div" | "nav" | "aside"
+  | "main" | "footer" | "header" | "section"
+  | "article" | "details" | "figcaption"
+  | "figure" | "mark" | "summary" | "time";
 }
-
 export const Flex = ({ className,
   children,
   justify = "start",
   align = "center",
   direction = "row",
   gap,
-  max
+  max,
+  Tag = "div"
 }: IFlexProps) => {
   const classesArr = [
     className,
@@ -66,8 +72,8 @@ export const Flex = ({ className,
   };
 
   return (
-    <div className={classes(cls.Flex, mods, classesArr)}>
+    <Tag className={classes(cls.Flex, mods, classesArr)}>
       {children}
-    </div>
+    </Tag>
   );
 };

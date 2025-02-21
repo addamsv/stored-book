@@ -69,35 +69,39 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
       <div style={{ margin: "20px auto", maxWidth: 800, textAlign: "left" }}>
         <Skeleton className={cls.bookImage} width={200} height={300} />
         <div style={{ margin: "20px" }}>
-          <Skeleton className={cls.imageDescription} width={200} height={15} />
-          <Skeleton className={cls.buttonSkeleton} width={50} height={20} />
+          <Skeleton key="1" className={cls.imageDescription} width={200} height={15} />
+          <Skeleton key="2" className={cls.buttonSkeleton} width={50} height={20} />
         </div>
         <Skeleton width={300} height={170} />
       </div>
     );
   } else if (error) {
-    content = <Text title={t("ошибка")} />;
+    content = <Text key="error" title={t("ошибка")} />;
   } else {
     content = (
       <>
         <div className={cls.topWrapper}>
-          <ImageJpg className={cls.bookImage} alt={data?.Title} src={data?.img} />
+          <ImageJpg
+            key="Image"
+            className={cls.bookImage}
+            alt={data?.Title}
+            src={data?.img}
+          />
 
           <Text
+            key="TitleSeries"
             className={cls.imageDescription}
             textAlign={TextAlign.LEFT}
             title={data?.Title}
-          />
-          <Text
-            className={cls.imageDescription}
-            textAlign={TextAlign.LEFT}
             text={data?.Series}
           />
           <Text
+            key="Author"
             className={cls.imageDescription}
             textAlign={TextAlign.LEFT}
             text={data?.Author?.join(", ")}
           />
+
           <HFlex gap="8" className={cls.info}>
             <HFlex gap="4">
               <IconSVG Svg={EyeIon} />
@@ -109,36 +113,42 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
             </HFlex>
           </HFlex>
           <Text
+            key="Genres"
             className={cls.hashTagType}
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
             text={data?.Genres?.join(", ")}
           />
           <Text
+            key="Format"
             className={cls.hashTagType}
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
             text={data?.Format}
           />
           <Text
+            key="Language"
             className={cls.hashTagType}
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
             text={data?.Language}
           />
           <Text
+            key="Length"
             className={cls.hashTagType}
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
             text={data?.Length}
           />
           <Text
+            key="Narrated"
             className={cls.hashTagType}
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
             text={data?.Narrated?.join(", ")}
           />
           <Text
+            key="Publisher"
             className={cls.hashTagType}
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
@@ -168,5 +178,3 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
     </AsyncModule>
   );
 });
-
-// export default memo(BookDetails);

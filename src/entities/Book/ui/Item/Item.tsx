@@ -59,11 +59,6 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
       <div key={genre} onClick={onGenreClick(genre)} className={cls.hashTagType}>
         {genre}
       </div>
-      // <Text
-      //   textAlign={TextAlign.LEFT}
-      //   textSize={TextSize.S}
-      //   text={genre}
-      // />
     ));
   }, [book.Genres, onGenreClick]);
 
@@ -72,34 +67,25 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
       <div key={author} onClick={onAuthorClick(author)} className={cls.hashTagType}>
         {author}
       </div>
-      // <Text
-      //   textAlign={TextAlign.LEFT}
-      //   textSize={TextSize.S}
-      //   text={genre}
-      // />
     ));
   }, [book.Author, onAuthorClick]);
 
   // COMPACT
   if (listView === EBookListView.COMPACT) {
     return (
-      <div className={classes(cls.Item, {}, [className, cls[listView]])}>
-        <Card
-          // onClick={onLinkClickHandler}
-          className={cls.card}
-        >
-          <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
-            <div className={cls.imageWrapper}>
-              <img className={cls.img} src={book.img} alt="*" />
-              <p className={cls.createdAt}>{book.PublicationDate}</p>
-            </div>
-          </AppLink>
+      <VFlex className={classes("", {}, [className, cls[listView]])}>
+        <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
+          <div className={cls.imageWrapper}>
+            <img className={cls.img} src={book.img} alt="*" />
+            <p className={cls.createdAt}>{book.PublicationDate}</p>
+          </div>
+        </AppLink>
 
-          <div className={cls.info}>
+        <HFlex max className={cls.info}>
 
-            {Genres}
+          {Genres}
 
-            {/* <Text
+          {/* <Text
                 className={cls.hashTagType}
                 textAlign={TextAlign.LEFT}
                 textSize={TextSize.XS}
@@ -107,13 +93,12 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
                 text={book?.Genres?.join(", ")}
               /> */}
 
-            <IconSVG className={cls.views} w={12} h={12} Svg={EyeIon} />
-            <Text textSize={TextSize.XS} text={String(book.views)} />
-          </div>
+          <IconSVG className={cls.views} w={12} h={12} Svg={EyeIon} />
+          <Text textSize={TextSize.XS} text={String(book.views)} />
+        </HFlex>
 
-          <Text className={cls.title} textSize={TextSize.S} textAlign={TextAlign.LEFT} text={String(book.Title)} />
-        </Card>
-      </div>
+        <Text className={cls.title} textSize={TextSize.S} textAlign={TextAlign.LEFT} text={String(book.Title)} />
+      </VFlex>
     );
   }
 
@@ -121,66 +106,65 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
 
   // STANDARD
   return (
-    <div className={cls.Item}>
-      <Card className={classes(cls.card, {}, [className, cls[listView]])}>
+    <Card className={classes(cls.card, {}, [className, cls[listView]])}>
 
-        <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
-          <ImageJpg className={cls.bookImage} alt="*" src={book.img} />
-        </AppLink>
+      <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
+        <ImageJpg className={cls.bookImage} alt="*" src={book.img} />
+      </AppLink>
 
-        <VFlex gap="8" className={cls.contentWrapper}>
-          <Text
-            textAlign={TextAlign.LEFT}
-            title={book.Title}
-          />
+      <VFlex gap="8" justify="center" className={cls.contentWrapper}>
+        <Text
+          key="TitleSTD"
+          textAlign={TextAlign.LEFT}
+          title={book.Title}
+        />
 
-          {Authors}
+        {Authors}
 
-          <HFlex gap="8" className={cls.info}>
-            <HFlex gap="4">
-              <IconSVG Svg={EyeIon} />
-              <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={String(book.views)} />
-            </HFlex>
-            <HFlex gap="4">
-              <IconSVG Svg={CalendarIon} />
-              <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={book.PublicationDate} />
-            </HFlex>
+        <HFlex gap="8" className={cls.info}>
+          <HFlex gap="4">
+            <IconSVG Svg={EyeIon} />
+            <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={String(book.views)} />
           </HFlex>
+          <HFlex gap="4">
+            <IconSVG Svg={CalendarIon} />
+            <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={book.PublicationDate} />
+          </HFlex>
+        </HFlex>
 
-          {Genres}
-          {/* <Text
+        {Genres}
+        {/* <Text
             className={cls.hashTagType}
             textSize={TextSize.S}
             textAlign={TextAlign.LEFT}
             text={book.Genres?.join(", ")}
           /> */}
 
-          {paragraph && (
-            <Text className={cls.paragraph} text={paragraph.paragraphs[0]} />
-          )}
+        {paragraph && (
+        <Text textAlign={TextAlign.LEFT} className={cls.paragraph} text={paragraph.paragraphs[0]} />
+        )}
 
-          <HFlex gap="8" className={cls.linkWrapper}>
-            <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
-              <Button
+        <HFlex gap="8" className={cls.linkWrapper}>
+          <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
+            <Button
             // onClick={onLinkClickHandler}
-                className={cls.buttonSkeleton}
-                theme={ButtonTheme.GREEN}
-              >
-                {t("подробнее")}
-              </Button>
-            </AppLink>
+              className={cls.buttonSkeleton}
+              theme={ButtonTheme.GREEN}
+            >
+              {t("подробнее")}
+            </Button>
+          </AppLink>
 
-            <AppLink target="_blank" to={`${book?.link}`}>
-              <Button
-                className={cls.buttonSskeleton}
-                theme={ButtonTheme.GREEN}
-              >
-                <IconSVG Svg={DownloadIon} />
-              </Button>
-            </AppLink>
-          </HFlex>
-        </VFlex>
-      </Card>
-    </div>
+          <AppLink target="_blank" to={`${book?.link}`}>
+            <Button
+              className={cls.buttonSskeleton}
+              theme={ButtonTheme.GREEN}
+            >
+              <IconSVG Svg={DownloadIon} />
+            </Button>
+          </AppLink>
+        </HFlex>
+      </VFlex>
+    </Card>
   );
 });
