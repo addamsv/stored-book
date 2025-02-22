@@ -9,11 +9,12 @@ import cls from "./NavbarItem.module.scss";
 
 interface INavbarItemProps {
   item: INavbarItem;
-  collapsed?: boolean;
+  isCollapsed?: boolean;
+  isActive?: boolean;
   authOnly?: boolean;
 }
 
-export const NavbarItem = memo(({ item, collapsed, authOnly }: INavbarItemProps) => {
+export const NavbarItem = memo(({ item, isCollapsed, isActive = false, authOnly }: INavbarItemProps) => {
   const { t } = useTranslation();
 
   const isAuth = useSelector(getUserAuthData);
@@ -23,7 +24,7 @@ export const NavbarItem = memo(({ item, collapsed, authOnly }: INavbarItemProps)
   }
 
   return (
-    <AppLink theme={AppLinkTheme.SECONDARY} className={classes(cls.NavbarItem, {}, [cls.appLink])} to={item.path}>
+    <AppLink theme={AppLinkTheme.PRIMARY} className={classes(cls.NavbarItem, {}, [cls.appLink])} to={item.path}>
       {t(item.text)}
     </AppLink>
   );

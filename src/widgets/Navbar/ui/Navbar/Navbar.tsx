@@ -60,7 +60,7 @@ export const Navbar = memo(({ className }: INavbarProps) => {
 
   // if (authData) {
   //   return (
-  //     <menu className={classes(cls.Navbar, {}, [className])}>
+  //     <header className={classes(cls.Navbar, {}, [className])}>
   //       <nav className={cls.links}>
   //         <HFlex>
   //           { NavbarItemList }
@@ -88,12 +88,12 @@ export const Navbar = memo(({ className }: INavbarProps) => {
   //         </HFlex>
 
   //       </nav>
-  //     </menu>
+  //     </header>
   //   );
   // }
 
   return (
-    <menu className={classes(cls.Navbar, {}, [className])}>
+    <header className={classes(cls.Navbar, {}, [className])}>
       <HFlex Tag="nav" role="navigation" className={cls.links}>
         { NavbarItemList }
 
@@ -120,6 +120,6 @@ export const Navbar = memo(({ className }: INavbarProps) => {
         {/* <div onClick={onContactHandler} className={cls.contactUsLink}>{t("Контакты")}</div> */}
 
       </HFlex>
-    </menu>
+    </header>
   );
 });
