@@ -14,11 +14,6 @@
     margin: auto 0;
   }
 
-  .hashTagType {
-    font-size: 12px;
-    cursor: pointer;
-  }
-
   @media (max-width: 660px) {
     .bookImage {
       max-width: 180px;
@@ -33,24 +28,46 @@
     }
   }
 
+  .hashTagType {
+    font: var(--font-m); // 12px;
+    cursor: pointer;
+  }
+
   .contentWrapper {
     margin-left: 20px;
     max-width: 193px;
     overflow: hidden;
+    gap: 4px;
+  }
+
+  @media (max-width: 390px) {
+    .contentWrapper {
+      margin-left: 8px;
+    }
   }
 
   .info {
     font-size: 12px;
   }
 
-  .paragraph {
-    max-height: 95px;
-    overflow-y: hidden;
-    max-width: 400px;
+  // .paragraph {
+  //   max-height: 195px;
+  //   overflow-y: hidden;
+  //   max-width: 400px;
+  // }
+
+  // @media (max-width: 660px) {
+  //   .paragraph {
+  //     display: none;
+  //   }
+  // }
+
+  .extraInfo {
+    min-width: 220px;
   }
 
   @media (max-width: 660px) {
-    .paragraph {
+    .extraInfo {
       display: none;
     }
   }
@@ -58,6 +75,12 @@
   .linkWrapper {
     flex-wrap: wrap;
     margin-top: 8px;
+  }
+}
+
+@media (max-width: 390px) {
+  .STANDARD {
+    padding: 6px;
   }
 }
 

@@ -14,9 +14,7 @@ import { AppLink } from "shared/AppLink/AppLink";
 import { Card } from "shared/Card/Card";
 import { VFlex } from "shared/Flex/VFlex";
 import { HFlex } from "shared/Flex/HFlex";
-import { useAppDispatch } from "resources/hooks/useAppDispatch";
-import { bookListPageActions } from "pages/BooksListPage/model/slices";
-import { EBlockOfBookType, EBookListView, EBookOfHashTagType, IBlockOfBookText, IBook } from "../../model/types";
+import { EBookListView, EBookOfHashTagType, IBook } from "../../model/types";
 import cls from "./Item.module.scss";
 
 interface IItemProps {
@@ -102,17 +100,17 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
     );
   }
 
-  const paragraph = book.blocks.find((block) => block.type === EBlockOfBookType.TEXT) as IBlockOfBookText | undefined;
+  // const paragraph = book.blocks.find((block) => block.type === EBlockOfBookType.TEXT) as IBlockOfBookText | undefined;
 
   // STANDARD
   return (
     <Card className={classes(cls.card, {}, [className, cls[listView]])}>
 
-      <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
+      <AppLink className={cls.bookImage} target={target} to={`${RoutePath.book_details}${book.id}`}>
         <ImageJpg className={cls.bookImage} alt="*" src={book.img} />
       </AppLink>
 
-      <VFlex gap="8" justify="center" className={cls.contentWrapper}>
+      <VFlex justify="center" className={cls.contentWrapper}>
         <Text
           key="TitleSTD"
           textAlign={TextAlign.LEFT}
@@ -140,9 +138,41 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
             text={book.Genres?.join(", ")}
           /> */}
 
-        {paragraph && (
-        <Text textAlign={TextAlign.LEFT} className={cls.paragraph} text={paragraph.paragraphs[0]} />
-        )}
+        {/* {paragraph && (
+        <Text textAlign={TextAlign.LEFT}  className={cls.paragraph} text={paragraph.paragraphs[0]} />
+        )} */}
+        <VFlex gap="4" className={cls.extraInfo}>
+          <Text
+            key="Format"
+            textSize={TextSize.S}
+            textAlign={TextAlign.LEFT}
+            text={book.Format}
+          />
+          <Text
+            key="Language"
+            textSize={TextSize.S}
+            textAlign={TextAlign.LEFT}
+            text={book.Language}
+          />
+          <Text
+            key="Length"
+            textSize={TextSize.S}
+            textAlign={TextAlign.LEFT}
+            text={book.Length}
+          />
+          <Text
+            key="Narrated"
+            textSize={TextSize.S}
+            textAlign={TextAlign.LEFT}
+            text={book.Narrated?.join(", ")}
+          />
+          <Text
+            key="Publisher"
+            textSize={TextSize.S}
+            textAlign={TextAlign.LEFT}
+            text={book.Publisher}
+          />
+        </VFlex>
 
         <HFlex gap="8" className={cls.linkWrapper}>
           <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>

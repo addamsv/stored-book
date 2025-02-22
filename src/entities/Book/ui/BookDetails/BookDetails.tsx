@@ -81,88 +81,96 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
     content = (
       <>
         <div className={cls.topWrapper}>
-          <ImageJpg
+          <div className={cls.image}>
+            <div
+              className={classes(cls.imageBgImg, {}, [cls.imageBackgroundAnimation])}
+              style={{ backgroundImage: `url("${data?.img}")` }}
+            />
+          </div>
+          {/* <ImageJpg
             key="Image"
             className={cls.bookImage}
             alt={data?.Title}
             src={data?.img}
-          />
+          /> */}
 
-          <Text
-            key="TitleSeries"
-            className={cls.imageDescription}
-            textAlign={TextAlign.LEFT}
-            title={data?.Title}
-            text={data?.Series}
-          />
-          <Text
-            key="Author"
-            className={cls.imageDescription}
-            textAlign={TextAlign.LEFT}
-            text={data?.Author?.join(", ")}
-          />
+          <div className={cls.descriptionInfo}>
+            <Text
+              key="TitleSeries"
+              className={cls.imageDescription}
+              textAlign={TextAlign.LEFT}
+              title={data?.Title}
+              text={data?.Series}
+            />
+            <Text
+              key="Author"
+              className={cls.imageDescription}
+              textAlign={TextAlign.LEFT}
+              text={`${t("By")}: ${data?.Author?.join(", ")}`}
+            />
 
-          <HFlex gap="8" className={cls.info}>
-            <HFlex gap="4">
-              <IconSVG Svg={EyeIon} />
-              <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={`${String(data?.views)}`} />
+            <HFlex gap="8" className={cls.info}>
+              <HFlex gap="4">
+                <IconSVG Svg={EyeIon} />
+                <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={`${String(data?.views)}`} />
+              </HFlex>
+              <HFlex gap="4">
+                <IconSVG Svg={CalendarIon} />
+                <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={`${String(data?.PublicationDate)}`} />
+              </HFlex>
             </HFlex>
-            <HFlex gap="4">
-              <IconSVG Svg={CalendarIon} />
-              <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={`${String(data?.PublicationDate)}`} />
-            </HFlex>
-          </HFlex>
-          <Text
-            key="Genres"
-            className={cls.hashTagType}
-            textSize={TextSize.S}
-            textAlign={TextAlign.LEFT}
-            text={data?.Genres?.join(", ")}
-          />
-          <Text
-            key="Format"
-            className={cls.hashTagType}
-            textSize={TextSize.S}
-            textAlign={TextAlign.LEFT}
-            text={data?.Format}
-          />
-          <Text
-            key="Language"
-            className={cls.hashTagType}
-            textSize={TextSize.S}
-            textAlign={TextAlign.LEFT}
-            text={data?.Language}
-          />
-          <Text
-            key="Length"
-            className={cls.hashTagType}
-            textSize={TextSize.S}
-            textAlign={TextAlign.LEFT}
-            text={data?.Length}
-          />
-          <Text
-            key="Narrated"
-            className={cls.hashTagType}
-            textSize={TextSize.S}
-            textAlign={TextAlign.LEFT}
-            text={data?.Narrated?.join(", ")}
-          />
-          <Text
-            key="Publisher"
-            className={cls.hashTagType}
-            textSize={TextSize.S}
-            textAlign={TextAlign.LEFT}
-            text={data?.Publisher}
-          />
+            <Text
+              key="Genres"
+              className={cls.hashTagType}
+              textSize={TextSize.S}
+              textAlign={TextAlign.LEFT}
+              text={`${t("Genres")}: ${data?.Genres?.join(", ")}`}
+            />
+            <Text
+              key="Format"
+              className={cls.hashTagType}
+              textSize={TextSize.S}
+              textAlign={TextAlign.LEFT}
+              text={`${t("Format")}: ${data?.Format}`}
+            />
+            <Text
+              key="Language"
+              className={cls.hashTagType}
+              textSize={TextSize.S}
+              textAlign={TextAlign.LEFT}
+              text={`${t("Language")}: ${data?.Language}`}
+            />
+            <Text
+              key="Length"
+              className={cls.hashTagType}
+              textSize={TextSize.S}
+              textAlign={TextAlign.LEFT}
+              text={`${t("Length")}: ${data?.Length}`}
+            />
+            <Text
+              key="Narrated"
+              className={cls.hashTagType}
+              textSize={TextSize.S}
+              textAlign={TextAlign.LEFT}
+              text={`${t("Narrated by")}: ${data?.Narrated?.join(", ")}`}
+            />
+            <Text
+              key="Publisher"
+              className={cls.hashTagType}
+              textSize={TextSize.S}
+              textAlign={TextAlign.LEFT}
+              text={`${t("Publisher")}: ${data?.Publisher}`}
+            />
 
-          <AppLink target="_blank" to={`${data?.link}`}>
-            <Button
-              className={cls.buttonSkeleton}
-              theme={ButtonTheme.GREEN}
-            >
-              {t("скачать")}
-            </Button>
-          </AppLink>
+            <AppLink target="_blank" to={`${data?.link}`}>
+              <Button
+                className={cls.buttonSkeleton}
+                theme={ButtonTheme.GREEN}
+              >
+                {t("скачать")}
+              </Button>
+            </AppLink>
+          </div>
         </div>
 
         {data?.blocks.map(blocks)}

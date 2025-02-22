@@ -3,11 +3,25 @@
 }
 
 .topWrapper {
+  display: flex;
+  gap: 32px;
   position: relative;
   max-width: 800px;
   margin: 16px auto;
   padding-left: 32px;
   text-align: left;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 380px) {
+  .topWrapper {
+    padding-left: 16px;
+  }
+}
+
+.descriptionInfo {
+  width: 100%;
+  max-width: 302px;
 }
 
 .bookImage {
@@ -35,4 +49,61 @@
   margin: 26px auto 40px;
   width: 90%;
   max-width: 800px;
+}
+
+/* Background */
+@keyframes image-background-animation-keyframes {
+  0% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+
+  30% {
+    opacity: 1;
+  }
+}
+
+.imageBackgroundAnimation {
+  animation-name: image-background-animation-keyframes;
+  animation-duration: 6.24s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+}
+
+/* image */
+
+.image {
+  display: block;
+  position: relative;
+  width: 400px;
+  height: 400px;
+  color: #fff;
+  overflow: hidden;
+}
+
+@media (max-width: 470px) {
+  .image {
+    height: 300px;
+    width: 300px;
+  }
+}
+
+@media (max-width: 380px) {
+  .image {
+    height: 250px;
+    width: 250px;
+  }
+}
+
+.imageBgImg {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center 56%;
+  background-size: cover;
+  background-color: #252525;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
 }

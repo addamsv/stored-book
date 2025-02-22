@@ -1,10 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { memo, useCallback, useMemo, useState } from "react";
-import { Card } from "shared/Card/Card";
 import { ITabItem, Tabs } from "shared/Tabs/Tabs";
 import { EBookOfHashTagType } from "entities/Book";
 import { HFlex } from "shared/Flex/HFlex";
-import { Button, ButtonTheme } from "shared/Button/Button";
 
 import CloseIcon from "resources/assets/icons/close.svg";
 import { IconSVG } from "shared/IconSVG/IconSVG";
@@ -68,13 +66,16 @@ export const HashTagTabs = memo(({ className, activeHashTag, onTagChange }: IHas
     <HFlex gap="8" className={cls.genres}>
       <b>{`${t("genres filter")}:`}</b>
 
-      <div onClick={onGenresClick} className={cls.genresTab}>{activeHashTag}</div>
+      <div onClick={onGenresClick} className={cls.genresTab}>
+        {activeHashTag}
+      </div>
 
       {activeHashTag !== "ALL" && (
-      <div onClick={() => onHashTagChange("ALL")}>
-        <IconSVG className={cls.closeIcon} Svg={CloseIcon} />
-      </div>
+        <div onClick={() => onHashTagChange("ALL")}>
+          <IconSVG className={cls.closeIcon} Svg={CloseIcon} />
+        </div>
       )}
+
     </HFlex>
   );
 });

@@ -43,7 +43,7 @@ export const Page = memo(({ className, children, onNextChunk }: IPageProps) => {
   }, 500);
 
   return (
-    <section
+    <div
       ref={intersectWrap}
       onScroll={onScrollHandler}
       className={classes(cls.Page, {}, [className])}
@@ -51,6 +51,6 @@ export const Page = memo(({ className, children, onNextChunk }: IPageProps) => {
       {children}
 
       { onNextChunk ? <div ref={intersectInner} /> : null }
-    </section>
+    </div>
   );
 });

@@ -14,8 +14,10 @@ import { fetchBookList } from "pages/BooksListPage/model/services";
 import { useDebounce } from "resources/hooks/useDebounce";
 import { HashTagTabs } from "features/HashTagTabs";
 import LensIcon from "resources/assets/icons/lens.svg";
+import CloseIcon from "resources/assets/icons/close.svg";
 import { IconSVG } from "shared/IconSVG/IconSVG";
 import { HFlex } from "shared/Flex/HFlex";
+import { Button, ButtonTheme } from "shared/Button/Button";
 import cls from "./BookListFilters.module.scss";
 import { Sort } from "./Sort/Sort";
 
@@ -57,6 +59,10 @@ export const BookListFilters = memo(({ className, onGenreChange, onSearchQueryCh
     fetch();
   }, [dispatch, fetch]);
 
+  const onClearSearchInput = () => {
+    onSearchQueryChange("");
+  };
+
   return (
     <div className={classes(cls.BookListFilters, {}, [className])}>
       <HFlex justify="around">
@@ -77,6 +83,13 @@ export const BookListFilters = memo(({ className, onGenreChange, onSearchQueryCh
       <HFlex>
         <IconSVG Svg={LensIcon} />
         <Input className={cls.searchInput} value={searchQuery} onChange={onSearchQueryChange} />
+        <Button
+          onClick={onClearSearchInput}
+          theme={ButtonTheme.CLEAR}
+          className={cls.inputClearBtn}
+        >
+          <IconSVG Svg={CloseIcon} />
+        </Button>
       </HFlex>
 
       <HashTagTabs activeHashTag={hashTag} onTagChange={onGenreChange} />

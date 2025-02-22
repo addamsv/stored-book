@@ -39,23 +39,10 @@ export const Text = memo(({
     [cls[textSize]]: true,
   };
 
-  if (title && text) {
-    return (
-      <section className={classes("", mods, [className])}>
-        <Header className={cls.title}>{title}</Header>
-
-        <p className={cls.text}>{text}</p>
-      </section>
-    );
-  }
-
-  if (!title && text) {
-    return <p className={classes(cls.text, mods, [className])}>{text}</p>;
-  }
-
-  if (!text && title) {
-    return <Header className={classes(cls.title, mods, [className])}>{title}</Header>;
-  }
-
-  return null;
+  return (
+    <>
+      {title && <Header className={classes(cls.title, mods, [className])}>{title}</Header>}
+      {text && <p className={classes(cls.text, mods, [className])}>{text}</p>}
+    </>
+  );
 });
