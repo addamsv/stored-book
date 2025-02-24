@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { getBookDetailsData } from "entities/Book";
 import { getBookDetailsEditAbility } from "pages/BookDetailsPage/model/selectors/bookDetailsEditAbility";
 import { HFlex } from "shared/Flex/HFlex";
+import { IconSVG } from "shared/IconSVG/IconSVG";
+import BackSVG from "resources/assets/icons/back.svg";
 import cls from "./BookDetailsHeader.module.scss";
 
 interface IBookDetailsHeaderProps {
@@ -36,7 +38,9 @@ export const BookDetailsHeader = memo(({ className }: IBookDetailsHeaderProps) =
   return (
     <HFlex className={classes(cls.BookDetailsHeader, {}, [className])}>
 
-      <Button onClick={onBackListHandler}>{`${t("назад")}`}</Button>
+      <div className={cls.backToListWrap} onClick={onBackListHandler}>
+        <IconSVG className={cls.backToList} Svg={BackSVG} />
+      </div>
 
       {isEditable && (
         <HFlex gap="16" justify="end" className={cls.editBar}>

@@ -1,4 +1,6 @@
 .BookDetailsHeader {
+  display: block;
+  position: relative;
   max-width: 800px;
   margin: 0 auto;
   padding-left: 20px;
@@ -7,4 +9,20 @@
 
 .editBar {
   flex-grow: 1;
+}
+
+.backToListWrap {
+  position: fixed;
+  display: block;
+  transform: translate(-40%, -49%);
+  top: 50%;
+  z-index: 5;
+}
+
+.backToList {
+  height: 50px;
+  width: 50px;
+  fill: green;
+  background: rgb(255 255 255);
+  border-radius: 50%;
 }

@@ -1,0 +1,45 @@
+.listBox {
+  position: relative;
+}
+
+.listBoxBtn {
+  color: var(--primary-color);
+  padding: 8px 31px;
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  background: #ffffff20;
+  backdrop-filter: blur(16px) saturate(120%);
+  cursor: pointer;
+}
+
+.listBoxOptions {
+  position: absolute;
+  width: 100%;
+  padding: 8px 31px;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  background: #ffffff20;
+  backdrop-filter: blur(16px) saturate(120%);
+  z-index: 1;
+}
+
+.listBoxItem {
+  position: relative;
+  cursor: pointer;
+
+  // &:hover {
+  //   opacity: 0.8;
+  // }
+}
+
+.active {
+  color: #fff;
+  padding: 0 16px;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  background: #ffffff50;
+}
+
+.unavailable {
+  color: #999;
+}

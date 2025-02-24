@@ -187,10 +187,11 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
 
           <AppLink target="_blank" to={`${book?.link}`}>
             <Button
-              className={cls.buttonSskeleton}
+              key="downloadBtn"
+              className={cls.buttonSkeleton}
               theme={ButtonTheme.GREEN}
             >
-              <IconSVG Svg={DownloadIon} />
+              <IconSVG className={cls.downloadBtn} Svg={DownloadIon} />
             </Button>
           </AppLink>
         </HFlex>
