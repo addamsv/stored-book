@@ -10,23 +10,29 @@ export interface IListBoxItem {
   unavailable?: boolean;
 }
 
+type DropdownDirection = "top" | "bottom";
+
 interface IListBoxProps {
   items?: IListBoxItem[]
   value?: string;
   defValue?: string;
   onChange: (val: string) => void;
   className?: string;
+  readonly?: boolean;
+  direction?: DropdownDirection;
 }
 
-const people = [
-  { id: 1, name: "Durward Reynolds", unavailable: false },
-  { id: 2, name: "Kenton Towne", unavailable: false },
-  { id: 3, name: "Therese Wunsch", unavailable: false },
-  { id: 4, name: "Benedict Kessler", unavailable: true },
-  { id: 5, name: "Katelyn Rohan", unavailable: false },
-];
+// const people = [
+//   { id: 1, name: "Durward Reynolds", unavailable: false },
+//   { id: 2, name: "Kenton Towne", unavailable: false },
+//   { id: 3, name: "Therese Wunsch", unavailable: false },
+//   { id: 4, name: "Benedict Kessler", unavailable: true },
+//   { id: 5, name: "Katelyn Rohan", unavailable: false },
+// ];
 
-export const ListBox = ({ className, items, value, defValue, onChange }: IListBoxProps) => {
+export const ListBox = ({
+  className, items, value, defValue, readonly, direction = "bottom", onChange
+}: IListBoxProps) => {
   // const [selectedPerson, setSelectedPerson] = useState(people[0]);
 
   return (
@@ -37,14 +43,15 @@ export const ListBox = ({ className, items, value, defValue, onChange }: IListBo
       // onChange={setSelectedPerson}
       value={value}
       onChange={onChange}
+      disabled={readonly}
     >
 
-      <LBox.Button className={cls.listBoxBtn}>
+      <LBox.Button disabled={readonly} className={cls.listBoxBtn}>
         {/* {selectedPerson.name} */}
         {value ?? defValue}
       </LBox.Button>
 
-      <LBox.Options className={cls.listBoxOptions}>
+      <LBox.Options className={classes(cls.listBoxOptions, {}, [cls[direction]])}>
 
         {/* {people.map((person) => ( */}
         {items?.map((item) => (
@@ -60,9 +67,13 @@ export const ListBox = ({ className, items, value, defValue, onChange }: IListBo
           >
             {({ active, selected }: any) => (
               <li
-                className={classes(cls.listBoxItem, { [cls.active]: active, [cls.unavailable]: item.unavailable }, [])}
+                className={classes(cls.listBoxItem, {
+                  [cls.active]: active,
+                  [cls.unavailable]: item.unavailable,
+                  [cls.selected]: selected
+                }, [])}
               >
-                {selected && "> "}
+                {/* {selected && "> "} */}
                 {/* {person.name} */}
                 {item.content}
               </li>
