@@ -43,7 +43,7 @@ export const ListBox = ({
       // onChange={setSelectedPerson}
       value={value}
       onChange={onChange}
-      disabled={readonly}
+      // disabled={readonly}
     >
 
       <LBox.Button disabled={readonly} className={cls.listBoxBtn}>
