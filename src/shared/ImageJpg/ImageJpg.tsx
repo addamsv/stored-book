@@ -6,16 +6,17 @@ interface ImageJpgProps {
   className?: string;
   src?: string;
   alt?: string;
-  size?: number;
+  w?: number;
+  h?: number;
 }
 
-export const ImageJpg = ({ className, src, alt, size }: ImageJpgProps) => {
+export const ImageJpg = ({ className, src, alt, w, h }: ImageJpgProps) => {
   const mods: Mods = {};
 
   const styles = useMemo<CSSProperties>(() => ({
-    width: size,
-    height: "auto"
-  }), [size]);
+    width: w,
+    height: h || "auto"
+  }), [h, w]);
 
   return (
     <img src={src} style={styles} className={classes(cls.ImageJpg, {}, [className])} alt={alt} />

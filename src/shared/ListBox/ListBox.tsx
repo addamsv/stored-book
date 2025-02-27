@@ -10,7 +10,8 @@ export interface IListBoxItem {
   unavailable?: boolean;
 }
 
-type DropdownDirection = "top" | "bottom";
+export type TMenuDropdownDirection = "top" | "right" | "bottom" | "left" | "topRight"
+| "topLeft" | "bottomLeft" | "bottomRight";
 
 interface IListBoxProps {
   items?: IListBoxItem[]
@@ -19,7 +20,7 @@ interface IListBoxProps {
   onChange: (val: string) => void;
   className?: string;
   readonly?: boolean;
-  direction?: DropdownDirection;
+  direction?: TMenuDropdownDirection;
 }
 
 // const people = [

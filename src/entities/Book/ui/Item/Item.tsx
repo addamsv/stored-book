@@ -188,7 +188,7 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
           <AppLink target="_blank" to={`${book?.link}`}>
             <Button
               key="downloadBtn"
-              className={cls.buttonSkeleton}
+              className={cls.downloadBtnWrap}
               theme={ButtonTheme.GREEN}
             >
               <IconSVG className={cls.downloadBtn} Svg={DownloadIon} />

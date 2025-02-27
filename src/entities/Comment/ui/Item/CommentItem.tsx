@@ -45,7 +45,7 @@ export const CommentItem = memo(({ className, comment, isLoading = false }: ICom
   return (
     <div className={classes(cls.CommentItem, {}, [className])}>
       <AppLink to={path} className={cls.commentHeader}>
-        {comment.owner.image ? <ImageJpg className={cls.image} size={20} alt="*" src={comment.owner.image} /> : null}
+        {comment.owner.image ? <ImageJpg className={cls.image} w={20} alt="*" src={comment.owner.image} /> : null}
         <Text textAlign={TextAlign.LEFT} textSize={TextSize.S} text={comment.owner.name} />
       </AppLink>
 

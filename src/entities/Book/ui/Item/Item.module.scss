@@ -50,8 +50,14 @@
     font-size: 12px;
   }
 
+  .downloadBtnWrap {
+    max-width: 30px;
+    padding: 0 5px;
+  }
+
   .downloadBtn {
     fill: #fff;
+    stroke: #fff;
   }
 
   // .paragraph {

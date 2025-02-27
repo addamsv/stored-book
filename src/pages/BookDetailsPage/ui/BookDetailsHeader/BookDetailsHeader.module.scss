@@ -23,6 +23,18 @@
   height: 50px;
   width: 50px;
   fill: green;
-  background: rgb(255 255 255);
+
+  // background: rgb(255 255 255);
   border-radius: 50%;
+
+  &:hover {
+    fill-opacity: 90%;
+    stroke-opacity: 90%;
+  }
+
+  &:active {
+    opacity: 0.9;
+  }
+
+  cursor: pointer;
 }

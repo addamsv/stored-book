@@ -51,7 +51,13 @@ server.post("/api/v1/users/login", (req, res) => {
 
     const token = Auth.getCustomJWT(user.name);
 
-    const data = { user, token };
+    const { profiles = [] } = Persistence.get();
+
+    const profileCandidate = profiles.find(
+      (profile) => profile.owner === Number(user.id)
+    );
+
+    const data = { user, token, avatar: profileCandidate?.image };
 
     if (IS_DEV) {
       console.log(data);

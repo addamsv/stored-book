@@ -1,5 +1,7 @@
 .listBox {
   position: relative;
+  width: min-content;
+  white-space: nowrap;
 }
 
 .listBoxBtn {
@@ -14,9 +16,6 @@
 
 .listBoxOptions {
   position: absolute;
-
-  // width: 100%;
-  // padding: 8px 31px;
   box-shadow: var(--shadow);
   border-radius: 4px;
   background: #ffffff20;
@@ -28,10 +27,44 @@
   bottom: 100%;
 }
 
+// .listBoxOptions.bottom {
+//   top: 100%;
+// }
+
+.listBoxOptions.left {
+  right: 100%;
+}
+
+.listBoxOptions.right {
+  left: 100%;
+}
+
+.listBoxOptions.topRight {
+  bottom: 100%;
+  left: 100%;
+}
+
+.listBoxOptions.topLeft {
+  bottom: 100%;
+  right: 100%;
+}
+
+.listBoxOptions.bottomLeft {
+  top: 100%;
+  right: 100%;
+}
+
+.listBoxOptions.bottomRight {
+  top: 100%;
+  left: 100%;
+}
+
 .listBoxItem {
   position: relative;
+  padding: 0 16px;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
   cursor: pointer;
-  padding: 0 31px;
 
   // &:hover {
   //   opacity: 0.8;
@@ -40,19 +73,11 @@
 
 .active {
   color: #fff;
-
-  // padding: 0 16px;
-  box-shadow: var(--shadow);
-  border-radius: 4px;
   background: #ffffff50;
 }
 
 .selected {
   color: #fff;
-
-  // padding: 0 16px;
-  box-shadow: var(--shadow);
-  border-radius: 4px;
   background: #ffffff80;
 }
 

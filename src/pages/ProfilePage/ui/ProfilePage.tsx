@@ -93,6 +93,8 @@ const ProfilePage = () => {
           <Text key={err} theme={TextTheme.ERROR} title={t("Ошибка")} text={errTranslateMapping[err]} />
         ))}
 
+        <Footer />
+
         <ProfileCard
           profileCardData={profileCardData}
           error={error}
@@ -106,8 +108,6 @@ const ProfilePage = () => {
           onChangeCurrency={onChangeCurrency}
           onChangeCity={onChangeCity}
         />
-
-        <Footer />
 
       </Page>
     </AsyncModule>

@@ -1,0 +1,84 @@
+.Menu {
+  position: relative;
+  width: min-content;
+  white-space: nowrap;
+}
+
+.menuButton {
+  background: none;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.menuItems {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  background: #ffffff20;
+  backdrop-filter: blur(16px) saturate(120%);
+  z-index: 1;
+}
+
+.menuItem {
+  position: relative;
+  background: var(--bg-color);
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  padding: 4px 32px;
+  color: var(--primary-color);
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.active {
+  opacity: 1;
+}
+
+.selected {
+  color: var(--secondary-color);
+}
+
+.unavailable {
+  color: var();
+  cursor: initial;
+}
+
+.menuItems.top {
+  bottom: 100%;
+}
+
+// .menuItems.bottom {
+//   top: 100%;
+// }
+
+.menuItems.left {
+  right: 100%;
+}
+
+.menuItems.right {
+  left: 100%;
+}
+
+.menuItems.topRight {
+  bottom: 100%;
+  left: 100%;
+}
+
+.menuItems.topLeft {
+  bottom: 100%;
+  right: 100%;
+}
+
+.menuItems.bottomLeft {
+  top: 100%;
+  right: 100%;
+}
+
+.menuItems.bottomRight {
+  top: 100%;
+  left: 100%;
+}
