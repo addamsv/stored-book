@@ -20,7 +20,8 @@
     "ui": "npx loki --requireReference --reactUri file:./storybook-static",
     "sb": "start-storybook -p 6006 -c ./config/storybook",
     "sb:build": "build-storybook -c ./config/storybook",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "mk": "ts-node ./config/scripts/index.ts"
   },
   "keywords": [],
   "author": "Serge",
