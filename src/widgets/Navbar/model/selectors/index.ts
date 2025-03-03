@@ -15,10 +15,10 @@ export const getNavbarItemsArr = createSelector(
         path: RoutePath.help,
         text: "Помощь"
       },
-      {
-        path: RoutePath.dmca_report,
-        text: "DMCA_Rep"
-      },
+      // {
+      //   path: RoutePath.dmca_report,
+      //   text: "DMCA_Rep"
+      // },
     ];
 
     // if (data?.user) {

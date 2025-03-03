@@ -23,16 +23,20 @@
 //   }
 // }
 .warnings {
+  display: inline-block;
   font-size: 12px;
   line-height: normal;
-  color: var(--secondary-color);
+  color: #ccc;
 }
 
 .contactUsLink {
-  font-size: 12px;
-  font-weight: 100;
-  color: var(--secondary-color);
+  font-weight: bold;
+  color: #fff;
   cursor: pointer;
+
+  :hover {
+    color: #ccc;
+  }
 }
 
 .itemWrapper {

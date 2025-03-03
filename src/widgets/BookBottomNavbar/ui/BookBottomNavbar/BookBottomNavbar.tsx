@@ -43,16 +43,30 @@ const NavbarItemList = itemsArr.map((item: INavbarItem) => (
 export const BookBottomNavbar = memo(({ className }: IBookBottomNavbarProps) => {
   const { t } = useTranslation();
 
-  // const onContactHandler = () => {
-  //   window.location.href = `mailto:${__CONTACT_US_EMAIL__}`;
-  // };
+  const onContactHandler = () => {
+    window.location.href = `mailto:${__CONTACT_US_EMAIL__}`;
+  };
 
   return (
     <footer className={classes(cls.BookBottomNavbar, {}, [className])}>
       <HFlex className={cls.itemWrapper} justify="center">
-        <div className={cls.warnings}>{t("warnings")}</div>
+        <div className={cls.warnings}>
+          {`${t("warnings")} `}
+
+          <NavbarItem item={{ path: RoutePath.dmca_report,
+            text: "DMCA_Rep" }}
+          />
+
+          {/* <div
+            className={classes(cls.warnings, {}, [cls.contactUsLink])}
+            onClick={onContactHandler}
+          >
+            {t("DMCA_Rep")}
+          </div> */}
+        </div>
+
         {/* { NavbarItemList } */}
-        {/* <div onClick={onContactHandler} className={cls.contactUsLink}>{t("Контакты")}</div> */}
+
       </HFlex>
     </footer>
   );

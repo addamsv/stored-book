@@ -14,27 +14,7 @@ const Help = () => {
       <Card className={cls.helpWrapper}>
         <VFlex gap="8">
           <Text textAlign={TextAlign.LEFT} textSize={TextSize.L} title="FAQ" />
-          <Text textAlign={TextAlign.LEFT} text="How to find a link?" />
-          {/* <div>sdf</div>
-          <div>sdf</div>
-          <HFlex>
-            <div>sdf</div>
-            <ListBox
-              onChange={() => console.log()}
-              defValue="lang"
-              value={undefined}
-              items={[
-                { value: "1", content: "en", unavailable: false },
-                { value: "2", content: "ru", unavailable: false },
-                { value: "3", content: "sp", unavailable: false },
-                { value: "4", content: "fr", unavailable: true },
-                { value: "5", content: "gr", unavailable: false },
-              ]}
-            />
-          </HFlex>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div> */}
+          <Text textAlign={TextAlign.LEFT} text="How to download a link?" />
         </VFlex>
       </Card>
     </Page>

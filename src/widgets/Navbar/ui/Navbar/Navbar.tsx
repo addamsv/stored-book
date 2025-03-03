@@ -9,12 +9,9 @@ import { useTranslation } from "react-i18next";
 import { HFlex } from "shared/Flex/HFlex";
 import { getUserAuthData, userActions } from "entities/User";
 import UserProfile from "resources/assets/icons/user-profile.svg";
-import { Button, ButtonTheme } from "shared/Button/Button";
 import { useAppDispatch } from "resources/hooks/useAppDispatch";
 import { IMenuItem, Menu } from "shared/Menu/Menu";
 import { ImageJpg } from "shared/ImageJpg/ImageJpg";
-import { getProfileEdited } from "entities/Profile";
-import { useNavigate } from "react-router-dom";
 import { RoutePath } from "resources/router/routeConfig/routeConfig";
 import { LoginModal } from "features/AuthByUserName";
 import { useTheme } from "resources/store/ThemeProvider";
@@ -42,7 +39,7 @@ export const Navbar = memo(({ className }: INavbarProps) => {
 
   const user = useSelector(getUserAuthData);
 
-  const nav = useNavigate();
+  // const nav = useNavigate();
 
   const dispatch = useAppDispatch();
 
@@ -57,13 +54,13 @@ export const Navbar = memo(({ className }: INavbarProps) => {
     dispatch(userActions.logout());
   }, [dispatch]);
 
-  const onAddBook = useCallback(() => {
-    nav(RoutePath.book_add);
-  }, [nav]);
+  // const onAddBook = useCallback(() => {
+  //   nav(RoutePath.book_add);
+  // }, [nav]);
 
-  const onProfileCLick = useCallback(() => {
-    nav(`${RoutePath.profile}${user?.user.id}`);
-  }, [nav, user?.user.id]);
+  // const onProfileCLick = useCallback(() => {
+  //   nav(`${RoutePath.profile}${user?.user.id}`);
+  // }, [nav, user?.user.id]);
 
   // const onContactHandler = () => {
   //   window.location.href = `mailto:${__CONTACT_US_EMAIL__}`;
