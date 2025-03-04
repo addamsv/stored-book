@@ -1,4 +1,6 @@
 .Navbar {
+  display: flex;
+  justify-content: space-between;
   position: fixed;
   height: var(--navbar-height);
   max-width: 800px;
@@ -10,12 +12,27 @@
   border-radius: 12px;
   background: #ffffff20;
   backdrop-filter: blur(16px) saturate(120%);
-  z-index: 1;
+  z-index: 2;
+}
+
+.avatar {
+  border-radius: 50%;
 }
 
 .links {
   padding-left: 64px;
   gap: 32px;
+}
+
+.loginSVG {
+  fill: var(--primary-color);
+}
+
+.menuBtn {
+  height: 11px;
+  width: 11px;
+  padding-top: 3px;
+  margin-right: 32px;
 }
 
 @media (max-width: 670px) {
@@ -28,5 +45,9 @@
 @media (max-width: 400px) {
   .links {
     padding-left: 8px;
+  }
+
+  .menuBtn {
+    margin-right: 8px;
   }
 }

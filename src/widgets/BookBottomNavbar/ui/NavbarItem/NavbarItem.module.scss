@@ -1,7 +1,12 @@
 .NavbarItem {
   margin-right: 48px;
   font-size: 12px;
-  font-weight: 100;
+  font-weight: bold;
+  color: #ccc;
+
+  :hover {
+    color: #fff;
+  }
 }
 
 @media (max-width: 670px) {

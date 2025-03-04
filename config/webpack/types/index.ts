@@ -13,6 +13,8 @@ export interface IPaths {
   faviconTo: string;
   robotTxtFrom: string;
   robotTxtTo: string;
+  sitemapFrom: string;
+  sitemapTo: string;
 }
 
 export interface IEnv {

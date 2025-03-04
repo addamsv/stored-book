@@ -39,7 +39,6 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
   const onToggle = () => {
     setCollapsed((prev) => !prev);
   };
-
   const onAuthModalOpen = useCallback(() => {
     setAuthModalWin(true);
   }, []);
@@ -104,15 +103,15 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
             </Button>
           )}
 
-          {user?.user && (
-            <Button
-              theme={ButtonTheme.GREEN}
-              className={classes(cls.DarkThemeBtn, {}, [className])}
-              onClick={onProfileCLick}
-            >
-              {t("Профиль")}
-            </Button>
-          )}
+          {/* {user?.user && ( */}
+          <Button
+            theme={ButtonTheme.GREEN}
+            className={classes(cls.DarkThemeBtn, {}, [className])}
+            onClick={onProfileCLick}
+          >
+            {t("Профиль")}
+          </Button>
+          {/* )} */}
 
           <Button
             theme={ButtonTheme.RED}

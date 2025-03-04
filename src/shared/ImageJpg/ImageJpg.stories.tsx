@@ -18,7 +18,7 @@ export default {
 const Template: ComponentStory<typeof ImageJpg> = (args) => <ImageJpg {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = { size: 150, src: jpg };
+Primary.args = { w: 150, src: jpg };
 
 export const Small = Template.bind({});
-Small.args = { size: 50, src: jpg };
+Small.args = { w: 50, src: jpg };

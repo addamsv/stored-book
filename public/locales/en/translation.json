@@ -1,9 +1,9 @@
 {
   "404": "404",
   "Add Book": "Add Book",
+  "By": "By",
   "DMCA_Rep": "DMCA Report",
   "Edit Book": "Edit Book",
-  "By": "By",
   "Format": "Format",
   "Genres": "Genres",
   "Language": "Language",
@@ -13,6 +13,7 @@
   "error": "error",
   "genres filter": "genres filter",
   "lorem": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est.",
+  "menu": "menu",
   "warnings": "No files are stored on our server. We only provide links obtained from public forums where users share these links. Users are responsible for their actions when using these links!",
   "Айти": "IT",
   "Аутентификация": "Authentication",

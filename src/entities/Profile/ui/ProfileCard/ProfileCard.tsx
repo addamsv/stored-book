@@ -55,7 +55,7 @@ export const ProfileCard = ({
     <HFlex max className={classes(cls.ProfileCard, {}, [className])}>
       <VFlex max className={cls.ProfileWrapper}>
 
-        {profileCardData?.image && <ImageJpg src={profileCardData?.image} size={320} />}
+        {profileCardData?.image && <ImageJpg src={profileCardData?.image} w={320} />}
 
         <Input
           value={profileCardData?.image}

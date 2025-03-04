@@ -37,6 +37,7 @@ export function plugins({
         { from: paths.imagesFrom, to: paths.imagesTo },
         { from: paths.faviconFrom, to: paths.faviconTo },
         { from: paths.robotTxtFrom, to: paths.robotTxtTo },
+        { from: paths.sitemapFrom, to: paths.sitemapTo },
         // { from: "other", to: "public" },
       ],
     }),

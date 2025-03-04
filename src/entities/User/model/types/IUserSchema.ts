@@ -9,6 +9,7 @@ export interface IUser {
 export interface IUserData {
   user: IUser;
   token: string;
+  avatar?: string;
 }
 
 export interface IUserSchema {

@@ -29,7 +29,7 @@ const App = () => {
       <Suspense fallback={<PageLoader />}>
         <Navbar />
 
-        <Sidebar />
+        {/* <Sidebar /> */}
 
         <VFlex Tag="main">
           {isAuthDataMounted && <AppRouter />}

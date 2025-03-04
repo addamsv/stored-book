@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { memo } from "react";
 import { Page } from "widgets/Page/Page";
 import { useParams } from "react-router-dom";
+import { Card } from "shared/Card/Card";
+import { VFlex } from "shared/Flex/VFlex";
 import cls from "./EditBookPage.module.scss";
 
 interface IEditBookPageProps {
@@ -18,7 +20,11 @@ const EditBookPage = memo(({ className }: IEditBookPageProps) => {
 
   return (
     <Page className={classes(cls.EditBookPage, {}, [className])}>
-      {isPageEdit ? <h1>{`${t("Edit Book")} ${id}`}</h1> : <h1>{t("Add Book")}</h1>}
+      <Card className={cls.wrapper}>
+        <VFlex gap="8">
+          {isPageEdit ? <h1>{`${t("Edit Book")} ${id}`}</h1> : <h1>{t("Add Book")}</h1>}
+        </VFlex>
+      </Card>
     </Page>
   );
 });

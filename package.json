@@ -20,7 +20,8 @@
     "ui": "npx loki --requireReference --reactUri file:./storybook-static",
     "sb": "start-storybook -p 6006 -c ./config/storybook",
     "sb:build": "build-storybook -c ./config/storybook",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "mk": "ts-node ./config/scripts/index.ts"
   },
   "keywords": [],
   "author": "Serge",
@@ -86,6 +87,7 @@
     "webpack-dev-server": "^4.15.2"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "@reduxjs/toolkit": "^1.8.0",
     "axios": "^0.26.1",
     "concurrently": "^7.6.0",

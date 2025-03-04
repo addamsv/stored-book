@@ -1,0 +1,86 @@
+.listBox {
+  position: relative;
+  width: min-content;
+  white-space: nowrap;
+}
+
+.listBoxBtn {
+  color: var(--primary-color);
+  padding: 4px 31px;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  background: #ffffff20;
+  backdrop-filter: blur(16px) saturate(120%);
+  cursor: pointer;
+}
+
+.listBoxOptions {
+  position: absolute;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  background: #ffffff20;
+  backdrop-filter: blur(16px) saturate(120%);
+  z-index: 1;
+}
+
+.listBoxOptions.top {
+  bottom: 100%;
+}
+
+// .listBoxOptions.bottom {
+//   top: 100%;
+// }
+
+.listBoxOptions.left {
+  right: 100%;
+}
+
+.listBoxOptions.right {
+  left: 100%;
+}
+
+.listBoxOptions.topRight {
+  bottom: 100%;
+  left: 100%;
+}
+
+.listBoxOptions.topLeft {
+  bottom: 100%;
+  right: 100%;
+}
+
+.listBoxOptions.bottomLeft {
+  top: 100%;
+  right: 100%;
+}
+
+.listBoxOptions.bottomRight {
+  top: 100%;
+  left: 100%;
+}
+
+.listBoxItem {
+  position: relative;
+  padding: 0 16px;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  cursor: pointer;
+
+  // &:hover {
+  //   opacity: 0.8;
+  // }
+}
+
+.active {
+  color: #fff;
+  background: #ffffff50;
+}
+
+.selected {
+  color: #fff;
+  background: #ffffff80;
+}
+
+.unavailable {
+  color: #999;
+}
