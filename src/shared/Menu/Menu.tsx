@@ -13,6 +13,7 @@ export interface IMenuItem {
   href?: string;
   disabled?: boolean;
   content?: ReactNode;
+  id: number;
 }
 
 interface IMenuProps {className?: string;
@@ -40,14 +41,14 @@ export function Menu({ className, items, trigger, direction = "bottom" }: IMenuP
 
           if (item.href) {
             return (
-              <M.Item as={AppLink} to={item.href} disabled={item.disabled}>
+              <M.Item key={item.id} as={AppLink} to={item.href} disabled={item.disabled}>
                 {itemFn}
               </M.Item>
             );
           }
 
           return (
-            <M.Item as={Fragment} disabled={item.disabled}>
+            <M.Item key={item.id} as={Fragment} disabled={item.disabled}>
               {itemFn}
             </M.Item>
           );
