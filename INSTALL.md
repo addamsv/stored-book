@@ -1,18 +1,7 @@
-<br>
-запуск сервера локально
-
-```bash
-npm run server
-```
-
-<br>
-установить vercel globaly
-
 ```bash
 npm i -g vercel
 ```
 
-<br>
 создать файлик vercel.json
 
 ```json
@@ -25,6 +14,7 @@ npm i -g vercel
     }
   ],
   "routes": [
+    { "handle": "filesystem" },
     {
       "src": "/(.*)",
       "dest": "/"
@@ -33,7 +23,25 @@ npm i -g vercel
 }
 ```
 
-<br>
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "./dist/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/index.js"
+    }
+  ]
+}
+```
+
 для деплоя:
 
 ```bash
@@ -44,8 +52,6 @@ pick the account
 link to existing project [Y/n] n
 What's your project's name? your-proj-name
 ```
-
-<br>
 
 # ENV
 

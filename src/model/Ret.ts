@@ -1,4 +1,4 @@
-import { IS_DEV } from "../conf";
+import { IS_PROD } from "../../conf";
 
 export const Ret = {
   _res: undefined as any,
@@ -6,7 +6,7 @@ export const Ret = {
   _req: undefined as any,
 
   err500: (res: any, data: string) => {
-    if (IS_DEV) {
+    if (!IS_PROD) {
       console.log(data);
     }
 

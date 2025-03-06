@@ -1,10 +1,16 @@
 import { Persistence } from "./Persistence";
-import { IS_DEV } from "../conf";
-
-export const SECRET_KEY = process.env.SECRET_KEY || "L16wsStHbN1V44K0f7xM4vJb3lvC3rrHGRCloTOD3f";
+import { IS_PROD, SECRET_KEY } from "../../conf";
 
 const { createHmac } = require("node:crypto");
-
+      /*
+      iss — (issuer) издатель токена
+      sub — (subject) "тема", назначение токена
+      aud — (audience) аудитория, получатели токена
+      exp — (expire time) срок действия токена
+      nbf — (not before) срок, до которого токен не действителен
+      iat — (issued at) время создания токена 30d (days), 1h (hour)
+      jti — (JWT id) идентификатор токена
+      */
 interface IClaims {
   iss: string;
   sub: string;
@@ -54,7 +60,7 @@ export const Auth = {
       );
 
       if (candidate) {
-        if (IS_DEV) {
+        if (!IS_PROD) {
           console.log("BasicAuth");
         }
 
@@ -97,7 +103,7 @@ export const Auth = {
 
       const signature = hmac.digest("hex");
 
-      if (IS_DEV) {
+      if (!IS_PROD) {
         console.log("isExp:", payloadClaims.exp < Auth._getIat);
       }
 
@@ -126,7 +132,7 @@ export const Auth = {
       );
 
       if (candidate) {
-        if (IS_DEV) {
+        if (!IS_PROD) {
           console.log(`JWTAuth, User: "${decode?.sub}", roles: "${decode?.authorities}"`);
         }
 
@@ -134,12 +140,12 @@ export const Auth = {
         return returnUserData as IUser;
       }
 
-      if (IS_DEV) {
+      if (!IS_PROD) {
         console.log("authFilterByToken: No candidate");
       }
       return false;
     } catch (e) {
-      if (IS_DEV) {
+      if (!IS_PROD) {
         console.log(e instanceof Error ? e.message : "err: _authFilterByToken");
       }
       return false;
@@ -184,7 +190,7 @@ export const Auth = {
 
     const exp = Auth._getExp;
 
-    if (IS_DEV) {
+    if (!IS_PROD) {
       console.log(authorities);
     }
 
