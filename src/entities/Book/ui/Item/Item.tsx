@@ -74,7 +74,11 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
   if (listView === EBookListView.COMPACT) {
     return (
       <VFlex className={classes("", {}, [className, cls[listView]])}>
-        <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
+        <AppLink
+          title={book.Title}
+          target={target}
+          to={`${RoutePath.book_details}${book.id}`}
+        >
           <div className={cls.imageWrapper}>
             <img className={cls.img} src={`${baseURL}${book.img}`} alt="*" />
             <p className={cls.createdAt}>{book.PublicationDate}</p>
@@ -108,7 +112,12 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
   return (
     <Card className={classes(cls.card, {}, [className, cls[listView]])}>
 
-      <AppLink className={cls.bookImage} target={target} to={`${RoutePath.book_details}${book.id}`}>
+      <AppLink
+        title={book.Title}
+        className={cls.bookImage}
+        target={target}
+        to={`${RoutePath.book_details}${book.id}`}
+      >
         <ImageJpg className={cls.bookImage} alt="*" src={`${baseURL}${book.img}`} />
       </AppLink>
 
@@ -177,7 +186,11 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
         </VFlex>
 
         <HFlex gap="8" className={cls.linkWrapper}>
-          <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
+          <AppLink
+            title={`${t("подробнее")} ${book.Title}`}
+            target={target}
+            to={`${RoutePath.book_details}${book.id}`}
+          >
             <Button
             // onClick={onLinkClickHandler}
               className={cls.buttonSkeleton}
@@ -187,7 +200,11 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
             </Button>
           </AppLink>
 
-          <AppLink target="_blank" to={`${book?.link}`}>
+          <AppLink
+            title={`${t("скачать")} ${book.Title}`}
+            target="_blank"
+            to={`${book?.link}`}
+          >
             <Button
               key="downloadBtn"
               className={cls.downloadBtnWrap}
