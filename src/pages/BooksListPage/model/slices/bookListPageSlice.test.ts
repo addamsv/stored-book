@@ -51,7 +51,7 @@ describe("bookListPageSlice.test", () => {
         entities: {},
         page: 1,
         limit: 10,
-        order: "asc",
+        order: "desc",
         sort: EBookListSortField.CREATED_AT,
         hashTag: EBookOfHashTagType.ALL,
         search: "",
