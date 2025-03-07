@@ -3295,6 +3295,49 @@
           ]
         }
       ]
+    },
+    {
+      "id": 101,
+      "owner": 1,
+      "Title": "Heartless Beloved",
+      "Series": "North Shore Stories, Book 2",
+      "Author": [
+        "Lola King"
+      ],
+      "Narrated": [
+        "Corvin King",
+        "Heather Firth"
+      ],
+      "Translator": [
+        "Roman Romanovich"
+      ],
+      "Length": "15 hrs and 43 mins",
+      "ReleaseDate": "02-25-25",
+      "PublicationDate": "03-07-25",
+      "img": "/images/alchemist.jpg",
+      "Language": "English",
+      "Genres": [
+        "Literature & Fiction"
+      ],
+      "Format": "Unabridged Audiobook",
+      "Publisher": "Podium Audio",
+      "link": "https://uploda.sh/6ZEyqVIDW2s6",
+      "linkEx": "",
+      "views": 40,
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "",
+          "paragraphs": [
+            "in common. Nothing but the secrets we keep.",
+            "And before I know it, my priorities change.",
+            "Before I know it… Alexandra Delacroix is my new obsession.",
+            "This is book two in a series of interconnected standalones. For mature listeners.",
+            "A complete list of content warnings can be found on the author's website."
+          ]
+        }
+      ]
     }
   ],
   "comments": [

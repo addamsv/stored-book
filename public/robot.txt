@@ -8,4 +8,4 @@
 # User-agent: Googlebot
 # Allow: /includes/
 
-Sitemap: https://stored-books.netlify.app/sitemap.xml
+Sitemap: https://mock-server-gules.vercel.app/sitemap.xml

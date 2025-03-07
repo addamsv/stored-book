@@ -74,24 +74,24 @@ export const Navbar = memo(({ className }: INavbarProps) => {
   ));
 
   const menuProfileList: IMenuItem[] = [
-    { content: t("тема"), onClick: toggleTheme },
-    { content: t("язык"), onClick: changeLang },
+    { content: t("тема"), onClick: toggleTheme, id: 1 },
+    { content: t("язык"), onClick: changeLang, id: 2 },
   ];
 
   if (authData) {
     menuProfileList.push(
-      { content: t("Профиль"), href: `${RoutePath.profile}${user?.user.id}` }, //  onClick: onProfileCLick },
-      { content: t("Выйти"), onClick: onLogout }
+      { content: t("Профиль"), href: `${RoutePath.profile}${user?.user.id}`, id: 3 }, //  onClick: onProfileCLick },
+      { content: t("Выйти"), onClick: onLogout, id: 4 }
     );
 
     if (user?.user.roles?.includes("ROLE_ADMIN")) {
       menuProfileList.push(
-        { content: t("добавить"), href: RoutePath.book_add } // , onClick: onAddBook }
+        { content: t("добавить"), href: RoutePath.book_add, id: 5 } // , onClick: onAddBook }
       );
     }
   } else {
     menuProfileList.push(
-      { content: t("войти"), onClick: onAuthModalOpen }
+      { content: t("войти"), onClick: onAuthModalOpen, id: 6 }
     );
   }
 

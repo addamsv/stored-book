@@ -68,13 +68,15 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
     ));
   }, [book.Author, onAuthorClick]);
 
+  const baseURL = `${__REST_API__BASE_URL__}`;
+
   // COMPACT
   if (listView === EBookListView.COMPACT) {
     return (
       <VFlex className={classes("", {}, [className, cls[listView]])}>
         <AppLink target={target} to={`${RoutePath.book_details}${book.id}`}>
           <div className={cls.imageWrapper}>
-            <img className={cls.img} src={book.img} alt="*" />
+            <img className={cls.img} src={`${baseURL}${book.img}`} alt="*" />
             <p className={cls.createdAt}>{book.PublicationDate}</p>
           </div>
         </AppLink>
@@ -107,7 +109,7 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
     <Card className={classes(cls.card, {}, [className, cls[listView]])}>
 
       <AppLink className={cls.bookImage} target={target} to={`${RoutePath.book_details}${book.id}`}>
-        <ImageJpg className={cls.bookImage} alt="*" src={book.img} />
+        <ImageJpg className={cls.bookImage} alt="*" src={`${baseURL}${book.img}`} />
       </AppLink>
 
       <VFlex justify="center" className={cls.contentWrapper}>

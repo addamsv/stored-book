@@ -24,7 +24,7 @@ export const bookListPageSlice = createSlice({
     page: 1,
     limit: 10,
     hasMore: true,
-    order: "asc",
+    order: "desc",
     sort: EBookListSortField.CREATED_AT,
     search: "",
     hashTag: EBookOfHashTagType.ALL,
