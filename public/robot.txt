@@ -1,1 +1,4 @@
+user-agent: *
+disallow: /downloads/
+
 sitemap: https://mock-server-gules.vercel.app/sitemap.xml
