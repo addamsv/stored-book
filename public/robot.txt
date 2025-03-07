@@ -1,4 +1,0 @@
-User-Agent: *
-Allow: /
-
-Sitemap: https://mock-server-gules.vercel.app/sitemap.xml
