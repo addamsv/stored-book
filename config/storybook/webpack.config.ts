@@ -18,8 +18,8 @@ export default ({ config }: {config: webpack.Configuration}): webpack.Configurat
     imagesTo: path.resolve(__dirname, "..", "..", "..", "build", "images"),
     faviconFrom: path.resolve(__dirname, "..", "..", "..", "public", "favicon"),
     faviconTo: path.resolve(__dirname, "..", "..", "..", "build", "favicon"),
-    robotTxtFrom: path.resolve(__dirname, "..", "..", "..", "public", "robot.txt"),
-    robotTxtTo: path.resolve(__dirname, "..", "..", "..", "build", "robot.txt"),
+    robotTxtFrom: path.resolve(__dirname, "..", "..", "..", "public", "robots.txt"),
+    robotTxtTo: path.resolve(__dirname, "..", "..", "..", "build", "robots.txt"),
     sitemapFrom: path.resolve(__dirname, "..", "..", "..", "public", "sitemap.xml"),
     sitemapTo: path.resolve(__dirname, "..", "..", "..", "build", "sitemap.xml")
   };
