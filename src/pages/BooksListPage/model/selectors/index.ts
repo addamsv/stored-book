@@ -10,7 +10,7 @@ export const getBooksListPageLimit = (state: IStateSchema) => state.bookListPage
 export const getBooksListPageHasMore = (state: IStateSchema) => state.bookListPage?.hasMore;
 export const getBooksListPageIsStateInit = (state: IStateSchema) => state.bookListPage?._isStateInit;
 
-export const getBooksListPageOrder = (state: IStateSchema) => state.bookListPage?.order ?? "asc";
+export const getBooksListPageOrder = (state: IStateSchema) => state.bookListPage?.order ?? "desc";
 export const getBooksListPageSort = (state: IStateSchema) => state.bookListPage?.sort ?? EBookListSortField.CREATED_AT;
 export const getBooksListPageSearch = (state: IStateSchema) => state.bookListPage?.search ?? "";
 export const getBooksListPageHashTag = (state: IStateSchema) => state.bookListPage?.hashTag ?? EBookOfHashTagType.ALL;
