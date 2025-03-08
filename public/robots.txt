@@ -1,4 +1,5 @@
 User-Agent: *
 Allow: /
+Disallow: /**.html$
 
-Sitemap: https://stored-books.netlify.app/sitemap.xml
+Sitemap: https://stored-books.netlify.app/sitemap2.xml
