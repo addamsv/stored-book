@@ -13,6 +13,7 @@ import { SendCommentForm } from "features/SendCommentForm";
 import { Page } from "widgets/Page/Page";
 import { getUserAuthData } from "entities/User";
 import { BookBottomNavbar } from "widgets/BookBottomNavbar";
+import { BookRecommendationsList } from "features/BookRecommendationsList";
 import { bookDetailsCommentsReducer, getBooksComments } from "../model/slices/bookDetailsCommentsSlice";
 import cls from "./BookDetailsPage.module.scss";
 import { getBooksCommentsError, getBooksCommentsIsLoading } from "../model/selectors";
@@ -55,7 +56,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
   useEffect(() => {
     if (__PROJECT_TYPE__ !== "storybook") {
       dispatch(fetchCommentsByBookId({ bookId: Number(id) }));
-      dispatch(fetchRecommendations());
+      // dispatch(fetchRecommendations());
     }
   }, [dispatch, id]);
 
@@ -82,7 +83,8 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
 
         <BookDetails bookId={Number(id)} />
 
-        <Text className={cls.mgnTop} textSize={TextSize.L} title={t("рекомендасьён")} />
+        <BookRecommendationsList />
+        {/* <Text className={cls.mgnTop} textSize={TextSize.L} title={t("рекомендасьён")} />
 
         <BookList
           key="recommendations"
@@ -91,7 +93,7 @@ const BookDetailsPage = ({ className }: IBookDetailsPageProps) => {
           bookArr={recommendations}
           isLoading={recommendationsIsLoading}
           listView={EBookListView.COMPACT}
-        />
+        /> */}
 
         <Text className={cls.mgnTop} textSize={TextSize.L} title={t("комментарии")} />
 

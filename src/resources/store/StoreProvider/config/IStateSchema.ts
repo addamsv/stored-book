@@ -13,6 +13,7 @@ import {
 } from "pages/BookDetailsPage";
 import { IBookListPageStateSchema } from "pages/BooksListPage";
 import { IScrollPointStateSchema } from "features/ScrollPoint";
+import { RTK } from "resources/lib/restApi/RTK";
 
 // import { NavigateOptions, To } from "react-router";
 
@@ -20,6 +21,8 @@ export interface IStateSchema {
   counter: ICounterSchema;
   user: IUserSchema;
   scrollPoint: IScrollPointStateSchema;
+
+  [RTK.reducerPath]: ReturnType<typeof RTK.reducer>
 
   // Async
   loginForm?: ILoginSchema;
