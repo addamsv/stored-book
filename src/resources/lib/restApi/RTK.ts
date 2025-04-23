@@ -6,8 +6,10 @@ const baseUrl = `${__REST_API__BASE_URL__}${API_ENDPOINT_BASE_URL}`;
 
 export const RTK = createApi({
   reducerPath: "api",
+
   baseQuery: fetchBaseQuery({
     baseUrl,
+
     prepareHeaders: (headers) => {
       const token = getCredentials()?.token;
 
@@ -18,5 +20,6 @@ export const RTK = createApi({
       return headers;
     }
   }),
-  endpoints: (builder) => ({})
+
+  endpoints: () => ({})
 });

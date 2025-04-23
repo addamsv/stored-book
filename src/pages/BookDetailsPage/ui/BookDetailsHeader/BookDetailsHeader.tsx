@@ -38,9 +38,11 @@ export const BookDetailsHeader = memo(({ className }: IBookDetailsHeaderProps) =
   return (
     <HFlex className={classes(cls.BookDetailsHeader, {}, [className])}>
 
-      <div className={cls.backToListWrap} onClick={onBackListHandler}>
-        <IconSVG className={cls.backToList} Svg={BackSVG} />
-      </div>
+      {/* Holly War Component!!! Should I leave it here???
+        <div className={cls.backToListWrap} onClick={onBackListHandler}>
+          <IconSVG className={cls.backToList} Svg={BackSVG} />
+        </div>
+      */}
 
       {isEditable && (
         <HFlex gap="16" justify="end" className={cls.editBar}>

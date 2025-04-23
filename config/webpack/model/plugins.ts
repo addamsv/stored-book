@@ -53,5 +53,8 @@ export function plugins({
     }));
   }
 
+  // plugins.push(new BundleAnalyzerPlugin({
+  //   openAnalyzer: true
+  // }));
   return plugins;
 }

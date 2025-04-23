@@ -35,7 +35,7 @@ const Help = () => {
 
   return (
     <Page>
-      <Card className={cls.helpWrapper}>
+      <Card className={cls.contentWrapper}>
         <VFlex gap="8">
           <Text textAlign={TextAlign.LEFT} textSize={TextSize.L} title="FAQ" />
           <Text textAlign={TextAlign.LEFT} text="How to download a link?" />

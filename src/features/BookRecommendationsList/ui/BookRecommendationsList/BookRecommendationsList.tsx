@@ -4,28 +4,14 @@ import { memo } from "react";
 import { Text, TextSize } from "shared/Text";
 import { BookList, EBookListView } from "entities/Book";
 import { VFlex } from "shared/Flex/VFlex";
-import { RTK } from "resources/lib/restApi/RTK";
-// import cls from "./BookRecommendationsList.module.scss";
+import { Card } from "shared/Card/Card";
+import { useBooksRecommendationsList } from "../../api/bookRecommendsAPI";
+
+import cls from "./BookRecommendationsList.module.scss";
 
 interface IProps {
   className?: string;
 }
-
-const api = RTK.injectEndpoints({
-  endpoints: (build) => ({
-    getBooksRecommendationsList: build.query({
-      query: (limit) => ({
-        url: "/books",
-        params: {
-          _limit: limit
-        }
-      })
-    })
-
-  })
-});
-
-const useBooksRecommendationsList = api.useGetBooksRecommendationsListQuery;
 
 export const BookRecommendationsList = memo(({ className }: IProps) => {
   const { t } = useTranslation("book");
@@ -35,19 +21,22 @@ export const BookRecommendationsList = memo(({ className }: IProps) => {
   if (isLoading || error) {
     return null;
   }
-  console.log(data);
 
   return (
-    <VFlex gap="8" className={classes("", {}, [className])}>
-      <Text textSize={TextSize.L} title={t("рекомендасьён")} />
+    <VFlex gap="8" align="center" className={classes("", {}, [className])}>
 
-      <BookList
-        key="recommendations"
-        target="_blank"
-        // bookArr={recommendations}
-        bookArr={data.data}
-        listView={EBookListView.COMPACT}
-      />
+      <Card className={cls.contentWrapper}>
+        <Text className={cls.mgnTop} textSize={TextSize.L} title={t("рекомендасьён")} />
+
+        <BookList
+          key="recommendations"
+          target="_blank"
+          className={cls.recommendations}
+          bookArr={data.data}
+          listView={EBookListView.COMPACT}
+        />
+      </Card>
+
     </VFlex>
   );
 });
