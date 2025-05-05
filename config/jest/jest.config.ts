@@ -28,7 +28,19 @@ export default {
   moduleNameMapper: {
     "\\.s?css$": "identity-obj-proxy",
     "\\.(png|svg)": path.resolve(__dirname, "JestEmptyComponent.tsx")
-  }
+  },
+  reporters: [
+    "default",
+    [
+      "jest-html-reporters",
+      {
+        publicPath: "<rootDir>/reports/unittest",
+        filename: "report.html",
+        openReport: true,
+        inlineSource: true
+      }
+    ]
+  ],
   /*
   * For a detailed explanation regarding each configuration property and type check, visit:
   * https://jestjs.io/docs/configuration
