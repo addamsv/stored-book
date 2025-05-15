@@ -19,7 +19,8 @@ import cls from "./BooksListPage.module.scss";
 import { fetchBookList, fetchNextBookList } from "../../model/services";
 import { getBooksListPageError, getBooksListPageIsStateInit, getBooksListPageListView, getBooksListPageLoading } from "../../model/selectors";
 import { initBookListPage } from "../../model/services/initBookListPage";
-import { BookListFilters } from "../filters/BookListFilters";
+import { BookListFilters } from "../Filter/BookListFilters";
+import { BooksList } from "../BooksList/BooksList";
 
 interface IBooksListPageProps {
   className?: string;
@@ -35,10 +36,6 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
   const dispatch = useAppDispatch();
 
   // SELECTORS
-  const bookArr = useSelector(getBooks.selectAll);
-  const isLoading = useSelector(getBooksListPageLoading);
-  const error = useSelector(getBooksListPageError);
-  const listView = useSelector(getBooksListPageListView);
   const isStateInit = useSelector(getBooksListPageIsStateInit);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -77,24 +74,12 @@ const BooksListPage = ({ className }: IBooksListPageProps) => {
         onNextChunk={onNextChunk}
         className={classes(cls.BooksListPage, {}, [className])}
       >
-        {error ? (
-          <ErrorWidget key="ErrorWidget" text={error} />
-        ) : (
-          <>
-            <BookListFilters key="BookListFilters" onGenreChange={onGenreChange} onSearchQueryChange={onSearchQueryChange} />
+        <BookListFilters key="BookListFilters" onGenreChange={onGenreChange} onSearchQueryChange={onSearchQueryChange} />
 
-            <BookList
-              key="BookList"
-              isLoading={isLoading}
-              bookArr={bookArr}
-              listView={listView}
-              onGenreChange={onGenreChange}
-              onSearchQueryChange={onSearchQueryChange}
-            />
+        <BooksList onGenreChange={onGenreChange} onSearchQueryChange={onSearchQueryChange} />
 
-            <BookBottomNavbar key="BookBottomNavbar" />
-          </>
-        )}
+        <BookBottomNavbar key="BookBottomNavbar" />
+
       </Page>
     </AsyncModule>
   );
