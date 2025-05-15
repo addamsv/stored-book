@@ -1,16 +1,40 @@
 # STORED AUDIO BOOKS
 
-## Страница доступного списка книг
+<br><br>
 
-(только для авторизированных пользователей)
+## Пример Опубликован:
+
+https://stored-books.netlify.app/
+
+<img src="./.github/projectDescription/images/app.png">
+
+<br><br>
+
+## доступно в Google:
+
+<img src="./.github/projectDescription/images/SearchEngineGoogle.png">
+
+## проиндексировано несмотря на то, что сделано на React
+
+<img src="./.github/projectDescription/images/EmailSearchEngineGoogle.png">
+
+<br><br><br>
+
+# КРАТКО О ПРИЛОЖЕНИИ:
+
+## Страница доступного списка книг
 
 <img src="./.github/projectDescription/images/bookList.png" width="104px">
 
-## Страницы профиля пользователя и о книге подробнее с комментариями
+## о книге подробнее с комментариями
+
+<img src="./.github/projectDescription/images/bookDescription.png" width="104px">
+
+## Страницы профиля пользователя
 
 (только для авторизированных пользователей)
 
-<img src="./.github/projectDescription/images/userProfile.png" width="104px"><img src="./.github/projectDescription/images/bookDescription.png" width="104px">
+<img src="./.github/projectDescription/images/userProfile.png" width="104px">
 
 ## Basic и JSON Web Token аутентификация
 

@@ -86,8 +86,9 @@ export const BookDetails = memo(({ className, bookId }: IBookDetailsProps) => {
           <div className={cls.image}>
             <div
               className={classes(cls.imageBgImg, {}, [cls.imageBackgroundAnimation])}
-              style={{ backgroundImage: `url("${baseURL}${data?.img}")` }}
+              style={{ backgroundImage: `url("${data?.img}")` }}
             />
+            {/* ${baseURL} */}
           </div>
           {/* <ImageJpg
             key="Image"

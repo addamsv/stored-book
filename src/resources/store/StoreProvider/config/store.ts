@@ -6,6 +6,7 @@ import { AXIOS } from "resources/lib/restApi/AXIOS";
 
 // import { NavigateOptions, To } from "react-router";
 import { scrollPointReducer } from "features/ScrollPoint";
+import { RTK } from "resources/lib/restApi/RTK";
 import { IStateSchema, IThunkExtra } from "./IStateSchema";
 import { reducerManager } from "./reducerManager";
 
@@ -20,7 +21,8 @@ export function createReduxStore(
     ...asyncReducers,
     counter: counterReducer,
     user: userReducer,
-    scrollPoint: scrollPointReducer
+    scrollPoint: scrollPointReducer,
+    [RTK.reducerPath]: RTK.reducer
   };
 
   const rManager = reducerManager(rootReducers);
@@ -36,7 +38,7 @@ export function createReduxStore(
     devTools: __IS_DEV__,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
       thunk: { extraArgument }
-    }),
+    }).concat(RTK.middleware),
 
   });
 

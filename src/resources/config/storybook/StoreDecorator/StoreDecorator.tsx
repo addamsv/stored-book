@@ -2,12 +2,13 @@
 import { Story } from "@storybook/react";
 import { IStateSchema, StoreProvider } from "resources/store/StoreProvider";
 import { bookDetailsReducer } from "entities/Book/model/slices/bookDetailsSlice";
-import { profileReducer } from "entities/Profile";
 import { loginReducer } from "features/AuthByUserName/model/slice/loginSlice";
 import { sendCommentFormReducer } from "features/SendCommentForm/model/slices";
 import { bookDetailsCommentsReducer } from "pages/BookDetailsPage/model/slices/bookDetailsCommentsSlice";
 import { ReducerListT } from "shared/AsyncModule/AsyncModule";
 import { bookDetailsPageReducer } from "pages/BookDetailsPage/model/slices";
+// import { profileReducer } from "entities/Profile";
+import { profileReducer } from "features/EditProfileCard/model/slice/profileSlice";
 
 // const defaultReducer: DeepPartial<ReducersMapObject<IStateSchema>> = {
 const defaultReducer: ReducerListT = {

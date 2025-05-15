@@ -80,9 +80,10 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
           to={`${RoutePath.book_details}${book.id}`}
         >
           <div className={cls.imageWrapper}>
-            <img className={cls.img} src={`${baseURL}${book.img}`} alt="*" />
+            <img className={cls.img} src={`${book.img}`} alt="*" />
             <p className={cls.createdAt}>{book.PublicationDate}</p>
           </div>
+          {/* ${baseURL} */}
         </AppLink>
 
         <HFlex max className={cls.info}>
@@ -118,7 +119,8 @@ export const Item = memo(({ className, book, listView, target, onGenreChange, on
         target={target}
         to={`${RoutePath.book_details}${book.id}`}
       >
-        <ImageJpg className={cls.bookImage} alt="*" src={`${baseURL}${book.img}`} />
+        <ImageJpg className={cls.bookImage} alt="*" src={`${book.img}`} />
+        {/* ${baseURL} */}
       </AppLink>
 
       <VFlex justify="center" className={cls.contentWrapper}>

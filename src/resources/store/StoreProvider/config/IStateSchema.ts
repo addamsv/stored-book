@@ -2,7 +2,6 @@ import { AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject } f
 import { AxiosInstance } from "axios";
 import { IBookDetailsStateSchema } from "entities/Book";
 import { ICounterSchema } from "entities/Counter";
-import { IProfileStateSchema } from "entities/Profile";
 import { IUserSchema } from "entities/User";
 import { ILoginSchema } from "features/AuthByUserName";
 import { ISendCommentFormStateSchema } from "features/SendCommentForm";
@@ -13,6 +12,8 @@ import {
 } from "pages/BookDetailsPage";
 import { IBookListPageStateSchema } from "pages/BooksListPage";
 import { IScrollPointStateSchema } from "features/ScrollPoint";
+import { RTK } from "resources/lib/restApi/RTK";
+import { IProfileStateSchema } from "features/EditProfileCard";
 
 // import { NavigateOptions, To } from "react-router";
 
@@ -20,6 +21,8 @@ export interface IStateSchema {
   counter: ICounterSchema;
   user: IUserSchema;
   scrollPoint: IScrollPointStateSchema;
+
+  [RTK.reducerPath]: ReturnType<typeof RTK.reducer>
 
   // Async
   loginForm?: ILoginSchema;
