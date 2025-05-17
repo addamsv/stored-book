@@ -1,12 +1,16 @@
 # SIMPLE VERCEL NODEJS SERVER
 
-## DEPLOY:
+</br>
 
-https://stored-books.netlify.app/
+# DEPLOY:
 
-## INSTALL:
+### API example: get all books:
 
-<a href=".github/INSTALL.md">install...</a>
+https://mock-server-gules.vercel.app/api/v1/books/
+
+</br>
+
+# INSTALL:
 
 ## ЗАПУСК:
 
@@ -23,6 +27,8 @@ npm run build
 # deploy the server to vercel
 npm run deploy
 ```
+
+<a href=".github/INSTALL.md">see more...</a>
 
 <br />
 
