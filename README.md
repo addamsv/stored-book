@@ -1,57 +1,55 @@
-# MOCK-JSON-SERVER V1
+# SIMPLE VERCEL NODEJS SERVER
+
+## DEPLOY:
+
+https://stored-books.netlify.app/
+
+## INSTALL:
+
+<a href=".github/INSTALL.md">install...</a>
+
+## ЗАПУСК:
+
+```bash
+# launch the nodemon server
+npm start
+
+# launch the original server
+npm run server
+
+# build the server for prod
+npm run build
+
+# deploy the server to vercel
+npm run deploy
+```
+
+<br />
+
+## РЕАЛИЗОВАННЫЕ ФИЧИ:
 
 - Basic Auth
 - JWT Auth
 
 <br />
 
-<h2>Auth</h2>
-<details>
-  <summary> POST /users/login </summary>
-  POST /api/v1/users/login
-</details>
+## РЕАЛИЗОВАННЫЕ ЭНДПОИНТЫ:
 
-<h2>profiles</h2>
-<details>
-  <summary> GET /profiles/{profileId} (authOnly) </summary>
-  GET /api/v1/profiles/{profileId}
-</details>
+## Auth
 
-<details>
-  <summary> PUT /profiles/{profileId} (authOnly) </summary>
-  PUT /api/v1/profiles/{profileId}
-</details>
+- POST /api/v1/users/login
 
-<h2>Books</h2>
-<details>
-  <summary> GET /books (authOnly) </summary>
-  GET /api/v1/books
-</details>
+## profiles
 
-<details>
-  <summary> GET /books/{id} (authOnly) </summary>
-  GET /api/v1/books/{id}
-</details>
+- GET /api/v1/profiles/{profileId} (authOnly)
+- PUT /api/v1/profiles/{profileId} (authOnly)
 
-<h2>comments</h2>
-<details>
-  <summary> GET /comments/{bookId} (authOnly) </summary>
-  GET /api/v1/comments/{bookId}
-</details>
+## Books
 
-<details>
-  <summary> POST /comments (authOnly) </summary>
-  POST /api/v1/comments
-</details>
+- GET /api/v1/books
+- GET /api/v1/books/{id}
 
-<br />
+## comments
 
-<details>
-<summary> launch the server </summary>
-
-```bash
-# launch the server
-npm run server
-```
-
-</details>
+- GET /api/v1/comments/{bookId}
+- POST /api/v1/comments

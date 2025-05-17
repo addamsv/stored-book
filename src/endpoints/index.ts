@@ -1,21 +1,23 @@
 import express from "express";
 import cors from "cors";
-import { getUsersRouts } from "./users/users";
-import { getProfilesRouts } from "./profiles/profiles";
-import { getBooksRouts } from "./books/books";
-import { getCommentsRouts } from "./comments/comments";
+import { Users } from "./sbUsers/UserController";
+import { getProfilesRouts } from "./profiles/profilesController";
+import { Books } from "./books/BooksController";
+import { getCommentsRouts } from "./comments/commentsController";
 import bodyParser from "body-parser";
 import path from "path";
+import { HelpSteps } from "./helpSteps/HelpStepsController";
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
 /* API | ROUTES */
-app.use("/api/v1/users", getUsersRouts());
+app.use("/api/v1/users", Users());
 app.use("/api/v1/profiles", getProfilesRouts());
-app.use("/api/v1/books", getBooksRouts());
+app.use("/api/v1/books", Books());
 app.use("/api/v1/comments", getCommentsRouts());
+app.use("/api/v1/helpSteps", HelpSteps());
 
 /* PUBLIC | STATIC VIEW */
 app.use(express.static(path.join(__dirname, "..", "..", "public")));

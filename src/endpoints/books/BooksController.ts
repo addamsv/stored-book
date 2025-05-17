@@ -73,10 +73,10 @@ router.get('/', async (req, res) => {
           if (_sort === "PublicationDate" || _sort === "ReleaseDate") {
             const arrDateA = a[_sort].split("-");
             const arrDateB = b[_sort].split("-");
-
-            const dateA = `${arrDateA[2]}${arrDateA[0]}${arrDateA[1]}`;
-            const dateB = `${arrDateB[2]}${arrDateB[0]}${arrDateB[1]}`;
-
+            // 0 - mm; 1 - dd; 3 - yy
+            const dateA = Number(`${arrDateA[2]}${arrDateA[0]}${arrDateA[1]}`);
+            const dateB = Number(`${arrDateB[2]}${arrDateB[0]}${arrDateB[1]}`);
+            // console.log(dateA, dateA > dateB ? ">" : "<", dateB)
             if (dateA < dateB) {
               return _order === "desc" ? 1 : -1;
             }
@@ -162,6 +162,6 @@ router.get('/:id', async (req, res) => {
 });
 
 
-export const getBooksRouts = () => {
+export const Books = () => {
   return router;
 }

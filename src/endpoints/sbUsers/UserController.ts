@@ -34,6 +34,19 @@ router.post('/login', async (req, res) => {
   }
 });
 
-export const getUsersRouts = () => {
+router.post('/signin', async (req, res) => {
+  return Ret.err401(res);
+});
+
+router.post('/recovery', async (req, res) => {
+  return Ret.err401(res);
+});
+
+/** reset pass */
+router.post('/reset', async (req, res) => {
+  return Ret.err401(res);
+});
+
+export const Users = () => {
   return router;
 }

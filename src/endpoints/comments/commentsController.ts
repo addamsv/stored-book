@@ -2,41 +2,15 @@ import * as express from 'express';
 import { Auth } from '../../model/Auth';
 import { Ret } from '../../model/Ret';
 import { Persistence } from '../../model/Persistence';
+import { getCommentsByBookID } from './commentsService';
 
 const router = express.Router();
 
 router.get('/:bookId', async (req, res) => {
-  try {
-    // if (!Auth.isAuth(req)) {
-    //   return Ret.err401(res);
-    // }
-
-    const { comments = [], profiles = [] } = Persistence.get();
-
-    const filteredCommentsByBookId = comments
-      .filter((comment) => comment.bookId === Number(req.params.bookId))
-      .map((comment) => {
-        const profileCandidate = profiles
-          .find((profile) => profile.owner === comment.owner);
-
-        if (profileCandidate) {
-          const { id, firstname: name, image } = profileCandidate;
-          return { ...comment, owner: { id, name, image } };
-        }
-
-        return { ...comment, owner: undefined };
-      });
-
-    // _expand "profile"
-    // console.log("PARAMS: ", Number(req.params.bookId));
-    // console.log("QUERY: ", req.query, Number(req.query.bookId), req.query._expand);
-
-    return Ret.CustomReturnData(res, `Comments for book: ${req.params.bookId}`, filteredCommentsByBookId || []);
-  } catch (e) {
-    return Ret.err500(res, `err: comments/{bookId} ${e instanceof Error ? e.message : ""}`);
-  }
+  return getCommentsByBookID(Number(req.params.bookId), req, res);
 });
 
+/** create new */
 router.post('/', async (req, res) => {
   try {
     const user = Auth.isAuth(req);
@@ -56,6 +30,10 @@ router.post('/', async (req, res) => {
 
     const d = new Date();
 
+    /** here should be in a command line 
+     * comment should be included in books
+     * /books/:id/comment/:id...|create
+    */
     const comment = {
       id: maxCommentId + 1,
       bookId: body.bookId,
@@ -76,6 +54,34 @@ router.post('/', async (req, res) => {
   }
 });
 
-export const getCommentsRouts = () => {
-  return router;
-}
+/** patch - update comment */
+router.patch('/:bookId', async (req, res) => {
+  try {
+    const user = Auth.isAuth(req);
+
+    if (!user) {
+      return Ret.err401(res);
+    }
+
+    return Ret.CustomReturnData(res, "Updated comment", {});
+  } catch (e) {
+    return Ret.err500(res, `err: comments ${e instanceof Error ? e.message : ""}`);
+  }
+});
+
+/** delete */
+router.delete('/:bookId', async (req, res) => {
+  try {
+    const user = Auth.isAuth(req);
+
+    if (!user) {
+      return Ret.err401(res);
+    }
+
+    return Ret.CustomReturnData(res, "Delete comment", {});
+  } catch (e) {
+    return Ret.err500(res, `err: comments ${e instanceof Error ? e.message : ""}`);
+  }
+});
+
+export const getCommentsRouts = () => router;

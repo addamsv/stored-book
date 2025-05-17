@@ -93,8 +93,17 @@ export interface IBook {
 
     enabled?: boolean;
 }
+
+export interface IHelpSteps {
+  id: number;
+  link: string;
+  title: string;
+  description: string;
+}
+
 export interface IPersist {
   posts: any[];
+  helpSteps: IHelpSteps[];
   books: IBook[];
   comments: IComment[];
   users: any[];
