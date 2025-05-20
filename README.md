@@ -1,5 +1,6 @@
 # STORED AUDIO BOOKS
 
+ссылки на аудиокниги на английском языке
 <br><br>
 
 ## Пример Опубликован:
@@ -22,37 +23,45 @@ https://stored-books.netlify.app/
 
 # КРАТКО О ПРИЛОЖЕНИИ:
 
+## Есть Progressive Web App (WPA)
+
+<img src="./.github/projectDescription/images/wpa.jpg" width="394px" height="250px">
+
 ## Страница доступного списка книг
 
-<img src="./.github/projectDescription/images/bookList.png" width="104px">
+<img src="./.github/projectDescription/images/bookList.png" width="300px">
 
 ## о книге подробнее с комментариями
 
-<img src="./.github/projectDescription/images/bookDescription.png" width="104px">
+<img src="./.github/projectDescription/images/bookDescription.png" width="300px">
 
 ## Страницы профиля пользователя
 
 (только для авторизированных пользователей)
 
-<img src="./.github/projectDescription/images/userProfile.png" width="104px">
+<img src="./.github/projectDescription/images/userProfile.png" width="300px">
 
 ## Basic и JSON Web Token аутентификация
 
-<img src="./.github/projectDescription/images/basicAuth.png" width="104px">
+<img src="./.github/projectDescription/images/basicAuth.png" width="300px">
 
 ## Различные темы и интернационализация (RU, EN)
 
-<img src="./.github/projectDescription/images/darkBlue.png" width="104px"><img src="./.github/projectDescription/images/dark.png" width="104px"><img src="./.github/projectDescription/images/lightBlue.png" width="104px">
+<img src="./.github/projectDescription/images/darkBlue.png" width="100px"><img src="./.github/projectDescription/images/dark.png" width="100px"><img src="./.github/projectDescription/images/lightBlue.png" width="100px">
 
 <br><br>
 
-# Технологический стек FRONT:
+# Технологический стек
 
-Typescript, React, Redux Toolkit, Thunk (async), Webpack, FSD;
+## FRONT:
+
+Typescript, React, Thunk (async), RTK query, Webpack, FSD, Redux Toolkit;
 <br>
 jest, integration, ui, screenshot tests, ts lint, style lint; Storybook;
+<br>
+CI/CD
 
-# Технологический стек BACK:
+## BACK:
 
 Dev: Nodejs json-mock-server (смотри папку mock-server)
 <br>
@@ -60,7 +69,7 @@ Prod: Java Spring Boot + (H2 | postgresql | mysql...) (смотри sb-lab-api r
 
 <br>
 
-# Install APP
+# Установка приложения
 
 ### разрабатывалось с node version: v16.14.0
 
@@ -76,20 +85,25 @@ build storybook: (sudo)
 npm run sb:build
 ```
 
-в node_modules/entities удалил поля "module" и "exports" и всё заработало
+<!-- в node_modules/entities удалил поля "module" и "exports" и всё заработало -->
 
-# Запуск App:
+# Запуск приложения:
 
 ```bash
 npm start
 ```
 
-# Запуск Mock-Server:
-
-#### и просматривать его изменения в папке ./mock-server/db.json
+# Установка и Запуск JSON сервера:
 
 ```bash
-npm run server
+# clone the repo
+git clone --single-branch -b mock-server https://github.com/addamsv/stored-book.git
+
+# install all deps
+npm install
+
+# launch the server:
+npm start
 ```
 
 # Запуск Storybook:
