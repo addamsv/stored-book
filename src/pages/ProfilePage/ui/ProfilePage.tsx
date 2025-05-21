@@ -13,9 +13,7 @@ const ProfilePage = () => {
 
   return (
     <Page>
-
       <EditProfileCard id={id} />
-
     </Page>
   );
 };

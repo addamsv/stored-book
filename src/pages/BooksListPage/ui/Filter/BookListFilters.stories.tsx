@@ -6,7 +6,7 @@ import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeD
 import { BookListFilters } from "./BookListFilters";
 
 export default {
-  title: "shared/BookListFilters",
+  title: "pages/BookListFilters/BookListFilters",
   component: BookListFilters,
   argTypes: {
     backgroundColor: { control: "color" },
