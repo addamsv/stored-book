@@ -2,10 +2,11 @@ import * as express from 'express';
 import { Auth } from '../../model/Auth';
 import { Ret } from '../../model/Ret';
 import { Persistence } from '../../model/Persistence';
+import { Response, Request } from 'express';
 
 const router = express.Router();
 
-router.get('/:userId', async (req, res) => {
+router.get('/:userId', async (req: Request, res: Response): Promise<any> => {
     try {
       const user = Auth.isAuth(req);
   
@@ -29,7 +30,7 @@ router.get('/:userId', async (req, res) => {
     }
 });
 
-router.put('/:profileId', async (req, res) => {
+router.put('/:profileId', async (req: Request, res: Response): Promise<any> => {
   try {
     const user = Auth.isAuth(req);
 

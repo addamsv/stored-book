@@ -1,17 +1,15 @@
 import { IS_PROD } from "../../conf";
+import { Response } from 'express';
 
 export const Ret = {
-  _res: undefined as any,
-
-  _req: undefined as any,
-
-  err500: (res: any, data: string) => {
+  err500: (res: Response, data: string) => {
     if (!IS_PROD) {
       console.log(data);
     }
 
     if (!res) {
       console.log("_res is not Defined");
+      
       throw new Error("_res is not Defined");
     }
 
@@ -25,7 +23,7 @@ export const Ret = {
     });
   },
 
-  err403: (res: any, unit: string) => {
+  err403: (res: Response, unit: string) => {
     res.status(403);
 
     return res.json({
@@ -35,7 +33,7 @@ export const Ret = {
     });
   },
 
-  err404: (res: any, unit: string) => {
+  err404: (res: Response, unit: string) => {
     res.status(404);
 
     return res.json({
@@ -45,7 +43,7 @@ export const Ret = {
     });
   },
 
-  err401: (res: any) => {
+  err401: (res: Response, mes?: string) => {
     res.status(401);
 
     res.set({ "www-authenticate": "Basic realm=\"Realm\"" });
@@ -53,11 +51,11 @@ export const Ret = {
     return res.json({
       isSuccess: false,
       statusCode: 401,
-      message: "Unauthorized"
+      message: mes || "Unauthorized"
     });
   },
 
-  CustomReturnData: (res: any, message: string, data: any) => {
+  CustomReturnData: (res: Response, message: string, data: any) => {
     return res!.json({
       isSuccess: true,
       statusCode: 200,

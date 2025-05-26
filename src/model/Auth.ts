@@ -1,8 +1,9 @@
+import { Response, Request } from "express";
 import { Persistence } from "./Persistence";
 import { IS_PROD, SECRET_KEY } from "../../conf";
 
 const { createHmac } = require("node:crypto");
-      /*
+/*
       iss — (issuer) издатель токена
       sub — (subject) "тема", назначение токена
       aud — (audience) аудитория, получатели токена
@@ -35,9 +36,7 @@ export const Auth = {
   // 1 hour from now:
   _getExp: Math.round((new Date().getTime() + 60 * 60 * 1000) / 1000),
 
-  _decodeBase64: (data: string) => {
-    return Buffer.from(data, "base64").toString("ascii");
-  },
+  _decodeBase64: (data: string) => Buffer.from(data, "base64").toString("ascii"),
 
   _basicAuthFilter: (data: string) => {
     try {
@@ -53,6 +52,7 @@ export const Auth = {
 
       const signature = hmac.digest("hex");
 
+      // const users = await Persistence.findAll(ECollectionName.USERS) as IUsers[];
       const { users = [] } = Persistence.get();
 
       const candidate = users.find(
@@ -64,7 +64,7 @@ export const Auth = {
           console.log("BasicAuth");
         }
 
-        const { password, ...returnUserData } = candidate;
+        const { password: pass, ...returnUserData } = candidate;
         return returnUserData as IUser;
       }
 
@@ -128,7 +128,7 @@ export const Auth = {
       const { users = [] } = Persistence.get();
 
       const candidate = users.find(
-        (user: IUser) => user.name === decode?.sub
+        (user: IUser) => user.name === decode?.sub,
       );
 
       if (candidate) {
@@ -152,12 +152,12 @@ export const Auth = {
     }
   },
 
-  _getAuthData: (req: any): string[] => {
+  _getAuthData: (req: Request): string[] => {
     if (!req?.headers?.authorization) {
       return ["none"];
     }
 
-    const [type = "", data = ""] = req.headers.authorization.split(" ") || "";
+    const [type = "", data = ""] = req.headers.authorization.split(" ");
 
     switch (type) {
       case "Basic":
@@ -175,7 +175,7 @@ export const Auth = {
     const { users = [] } = Persistence.get();
 
     const candidate = users.find(
-      (user: IUser) => user.name === sub
+      (user: IUser) => user.name === sub,
     );
 
     if (!candidate) {
@@ -199,7 +199,7 @@ export const Auth = {
       sub, // "admin"
       exp, // 1732827822
       iat, // 1732820622
-      authorities // "ROLE_ADMIN"
+      authorities, // "ROLE_ADMIN"
     };
 
     const data = `${btoa(JSON.stringify(jwtHeader))}.${btoa(JSON.stringify(claims))}`;
@@ -215,7 +215,7 @@ export const Auth = {
     return `${data}.${signature}`;
   },
 
-  isAuth: (req: any): IUser | false => {
+  isAuth: (req: Request): IUser | false => {
     const [type, data] = Auth._getAuthData(req);
 
     if (type === "Bearer") {

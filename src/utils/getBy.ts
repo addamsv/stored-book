@@ -1,6 +1,6 @@
 type Book = {
-  title: string;
   id: number;
+  title: string;
   hasInBasket: boolean;
 }
 
@@ -14,3 +14,21 @@ function getBy<T, P extends keyof T>(arr: T[], prop: P, val: T[P]): T | null {
 
 // example
 const res = getBy(basket, "title", "Book1")
+
+
+// interface IDataBase {
+//   profiles: {id: number, a: string};
+//   products: {id: number, b: boolean};
+// }
+
+// const dataBase: IDataBase = {
+//   profiles: {id: 1, a: "from profile"},
+//   products: {id: 2, b: true}
+// }
+
+// function getByCN<T, P extends keyof T>(dataBase: T, collectionName: P): T[P] | null {
+//   return dataBase[collectionName] || null;
+// }
+
+// // example
+// const cN = getByCN(dataBase, "profiles");

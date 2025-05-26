@@ -1,24 +1,32 @@
-import * as express from 'express';
-import { Ret } from '../../model/Ret';
-import { IS_PROD } from '../../../conf';
-import { Persistence } from '../../model/Persistence';
-import { IBook, TBookBlock } from '../../types';
-import {Request, Response} from 'express';
+import * as express from "express";
+import { Request, Response } from "express";
+import { Ret } from "../../model/Ret";
+import { IS_PROD } from "../../../conf";
+import { ECollectionName, Persistence } from "../../model/Persistence";
+import {
+  IProducts, TBookBlock, TCollection,
+} from "../../types";
+import { isArrTypeProper, isType } from "../../utils/typesHelpers";
 
 const router = express.Router();
 
-router.get('/', async (req: Request, res: Response): Promise<any> => {
+router.get("/", async (req: Request, res: Response): Promise<any> => {
   try {
     // if (!Auth.isAuth(req)) {
     //   return Ret.err401(res);
     // }
 
-    const { books = [] } = Persistence.get();
+    const products = await Persistence.findAll(ECollectionName.PRODUCTS);
 
-    // q = "",  _page = 1, _limit = 10, _sort = false, _order = "asc", first, prev, next, last, links
+    if (!products || !isArrTypeProper<IProducts[]>(products, ["views", "link", "linkEx", "blocks"])) {
+      throw new Error("products have unknown type");
+    }
+
+    // q = "",  _page = 1, _limit = 10, _sort = false, _order = "asc",
+    // first, prev, next, last, links
 
     const {
-      q = "", _page = 1, _limit = 10, _order, hashTag, _sort
+      q = "", _page = 1, _limit = 10, _order, hashTag, _sort,
     }: {
       q?: string,
       _page?: number,
@@ -36,6 +44,7 @@ router.get('/', async (req: Request, res: Response): Promise<any> => {
       if (!title) {
         return false;
       }
+
       return title.toLowerCase().includes(q.toLowerCase());
     };
 
@@ -43,28 +52,31 @@ router.get('/', async (req: Request, res: Response): Promise<any> => {
       if (!authors) {
         return false;
       }
+
       return authors.some((author) => isTitleInc(author));
     };
 
-    const isBlockInc = (blocks: TBookBlock[]) => {
-      return blocks.some((block) => (block.type === "TEXT" ? block.paragraphs.some((par) => isTitleInc(par)) : false));
-    };
+    const isBlockInc = (blocks: TBookBlock[]) => blocks.some((block) => (
+      block.type === "TEXT" ? block.paragraphs.some((par) => isTitleInc(par)) : false
+    ));
 
     const offset = _limit * _page - _limit;
 
-    const result = books
+    const result = products
       // hashTag
-      .filter((book: IBook) => {
+      .filter((prod: IProducts) => {
         if (hashTag) {
-          return book.Genres?.some((tag) => tag === hashTag);
+          return prod.Genres?.some((tag) => tag === hashTag);
         }
+
         return true;
       })
       // query
-      .filter((book: IBook) => {
+      .filter((prod: IProducts) => {
         if (q) {
-          return isTitleInc(book.Title) || isAuthorInc(book.Author) || isBlockInc(book.blocks);
+          return isTitleInc(prod.Title) || isAuthorInc(prod.Author) || isBlockInc(prod.blocks);
         }
+
         return true;
       })
       // _sort
@@ -130,37 +142,30 @@ router.get('/', async (req: Request, res: Response): Promise<any> => {
       // paging | infinite scroll
       .filter((_, indx) => indx < _limit * _page && indx >= offset);
 
-    return Ret.CustomReturnData(res, `All books limit:${_limit}, page:${_page}`, result);
+    return Ret.CustomReturnData(res, `All products limit:${_limit}, page:${_page}`, result);
   } catch (e) {
-    return Ret.err500(res, `err: books ${e instanceof Error ? e.message : ""}`);
+    return Ret.err500(res, `err: products ${e instanceof Error ? e.message : ""}`);
   }
 });
 
-router.get('/:id', async (req: Request, res: Response): Promise<any> => {
+router.get("/:id", async (req: Request, res: Response): Promise<any> => {
   try {
-    // if (!Auth.isAuth(req)) {
-    //   return Ret.err401(res);
-    // }
+    const product = await Persistence.findById(1, ECollectionName.PRODUCTS);
 
-    const { books = [] } = Persistence.get();
-
-    const bookCandidate = books.find(
-      (book) => book.id === Number(req.params.id)
-    );
-    
     if (!IS_PROD) {
-      console.log("bookCandidate", bookCandidate);
-    }
-    
-    if (bookCandidate) {
-      return Ret.CustomReturnData(res, `Book Details with ID: ${req.params.id}`, bookCandidate);
+      console.log("productsCandidate", product);
     }
 
-    return Ret.err404(res, `Book Details with ID: ${req.params.id}`);
+    if (product
+      && isType<IProducts>(product, ECollectionName.PRODUCTS)
+      && product.id === Number(req.params.userId)) {
+      return Ret.CustomReturnData(res, `Products Details with ID: ${req.params.id}`, product);
+    }
+
+    return Ret.err404(res, `Products Details with ID: ${req.params.id}`);
   } catch (e) {
-    return Ret.err500(res, `err: books/{id} ${e instanceof Error ? e.message : ""}`);
+    return Ret.err500(res, `err: products/{id} ${e instanceof Error ? e.message : ""}`);
   }
 });
 
-
-export const Books = () => router;
+export const Products = () => router;

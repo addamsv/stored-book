@@ -7,24 +7,33 @@ import { getCommentsRouts } from "./comments/commentsController";
 import bodyParser from "body-parser";
 import path from "path";
 import { HelpSteps } from "./helpSteps/HelpStepsController";
+import { Products } from "./products/ProductsController";
+import { corsOptionsDelegate, DEV_PORT, IS_PROD } from "../../conf";
 
 const app = express();
-app.use(cors());
+
+if (!IS_PROD) {
+  console.log("ENV.IS_PROD: ", IS_PROD);
+  console.log("statistics: ", "http://localhost:" + DEV_PORT);
+}
+
 app.use(bodyParser.json());
+
+app.use(cors(corsOptionsDelegate));
 
 /* API | ROUTES */
 app.use("/api/v1/users", Users());
 app.use("/api/v1/profiles", getProfilesRouts());
 app.use("/api/v1/books", Books());
+app.use("/api/v1/products", Products());
 app.use("/api/v1/comments", getCommentsRouts());
 app.use("/api/v1/helpSteps", HelpSteps());
 
+
+
 /* PUBLIC | STATIC VIEW */
 app.use(express.static(path.join(__dirname, "..", "..", "public")));
-// app.get("*", (req, res) => { // Handle requests by serving index.html for all routes
-//     res.sendFile("index.html", { root: path.join(__dirname, "..", "..", "public") });
-// });
 
-export const getExpressApp = () => {
-  return app;
-}
+
+
+export const getExpressApp = () => app;

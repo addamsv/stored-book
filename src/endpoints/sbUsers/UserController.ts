@@ -1,52 +1,25 @@
 import * as express from 'express';
-import { Auth } from '../../model/Auth';
 import { Ret } from '../../model/Ret';
-import { IS_PROD } from '../../../conf';
-import { Persistence } from '../../model/Persistence';
+import { Response, Request } from 'express';
+import getLoginUserInfoAndJWT from './UserService';
 
 const router = express.Router();
 
-router.post('/login', async (req, res) => {
-  try {
-    const user = Auth.isAuth(req);
-
-    if (!user) {
-      return Ret.err401(res);
-    }
-
-    const token = Auth.getCustomJWT(user.name);
-
-    const { profiles = [] } = Persistence.get();
-
-    const profileCandidate = profiles.find(
-      (profile) => profile.owner === Number(user.id)
-    );
-
-    const data = { user, token, avatar: profileCandidate?.image };
-
-    if (!IS_PROD) {
-      console.log(data);
-    }
-
-    return Ret.CustomReturnData(res, "Login user info and JWT", data);
-  } catch (e: unknown) {
-    return Ret.err500(res, `err: Login ${e instanceof Error ? e.message : ""}`);
-  }
+router.post('/login', async (req: Request, res: Response): Promise<any> => {
+  return await getLoginUserInfoAndJWT(req, res);
 });
 
-router.post('/signin', async (req, res) => {
+router.post('/signin', async (req: Request, res: Response): Promise<any> => {
   return Ret.err401(res);
 });
 
-router.post('/recovery', async (req, res) => {
+router.post('/recovery', async (req: Request, res: Response): Promise<any> => {
   return Ret.err401(res);
 });
 
 /** reset pass */
-router.post('/reset', async (req, res) => {
+router.post('/reset', async (req: Request, res: Response): Promise<any> => {
   return Ret.err401(res);
 });
 
-export const Users = () => {
-  return router;
-}
+export const Users = () => router;

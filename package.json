@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "deploy": "cd dist && vercel --prod",
-    "build": "tsc && cp -R ./db.json ./dist/ && cp -R ./public ./dist/ && cp -R ./.github/distFiles/vercel.json ./dist/ && cp -R ./.vercel ./dist/ && cp -R ./.github/distFiles/package.json ./dist/",
+    "build": "tsc && cp -R ./db.json ./dist/ && cp -R ./public ./dist/ && cp -R ./.github/distFiles/vercel.json ./dist/ && cp -R ./.github/distFiles/.vercel ./dist/ && cp -R ./.github/distFiles/package.json ./dist/",
     "server": "node ./dist/index.js",
     "start": "nodemon ./index.ts"
   },
@@ -18,7 +18,15 @@
     "@types/node": "^22.13.9",
     "nodemon": "^3.1.9",
     "ts-node": "^10.5.0",
-    "typescript": "^4.5.5"
+    "typescript": "^4.9.5",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1"
   },
   "dependencies": {
     "cors": "^2.8.5",

@@ -1,18 +1,55 @@
 import fs from "fs";
 // import * as initKnex from 'knex';
 import path from "path";
-import { IPersist } from "../types";
-// import { DATABASE_URL, IS_PROD } from "../../conf";
+import {
+  IPersist, TCollection, TCollectionArray,
+} from "../types";
 
-type TCollectionName =  "posts" | "books" | "comments" | "users" | "profiles";
+export const enum ECollectionName {
+  BOOKS = "books",
+  COMMENTS = "comments",
+  HELP_STEPS = "helpSteps",
+  PRODUCTS = "products",
+  PROFILES = "profiles",
+  USERS = "users",
+}
+
+type TCollectionName = "books" | "comments" | "helpSteps" | "products" | "profiles" | "users";
+
+export interface ICollectionOfPersist {
+  id: number;
+  collectionName: ECollectionName;
+}
 
 // const knex = initKnex({ client: 'pg', connection: DATABASE_URL, debug: IS_PROD });
+interface IPersistence {
+  /**
+   * @deprecated A legacy feature for browser compatibility
+   * @returns All Data
+   */
+    get: () => IPersist;
 
-export const Persistence = {
-  get: (collectionName?: TCollectionName) => {
+  /**
+   * @deprecated A legacy feature for browser compatibility
+   * @returns void
+   */
+    put: (json: IPersist) => void;
+
+    findById: (id: number, collectionName: ECollectionName) => Promise<TCollection | undefined>;
+
+    findAll: (collectionName: ECollectionName) => Promise<TCollectionArray | null>;
+
+    // create: (item: any, collectionName?: ECollectionName) => Promise<any>;
+
+    // deleteById: (id: number | string, collectionName?: ECollectionName) => Promise<any>;
+
+    // updateById: (id: number | string, collectionName?: ECollectionName) => Promise<any>;
+}
+
+export const Persistence: IPersistence = {
+  get: () => {
     try {
-      // @ts-ignore
-      const data: IPersist = JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "..", "db.json"), "UTF-8"));
+      const data: IPersist = JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "..", "db.json"), { encoding: "utf8" }));
       return data;
     } catch (e) {
       if (e instanceof Error) {
@@ -22,7 +59,34 @@ export const Persistence = {
     }
   },
 
-  findById: async (id: string | number, collectionName: TCollectionName) => {
+  put: (json: IPersist) => {
+    try {
+      const data = JSON.stringify(json);
+
+      fs.writeFileSync(path.resolve(__dirname, "..", "..", "db.json"), data, { encoding: "utf8" });
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error with putData: ${e.message}`);
+      }
+      throw new Error("Error with putData");
+    }
+  },
+
+  findById: async (id: number, collectionName: ECollectionName) => {
+    try {
+      const data: IPersist = JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "..", "db.json"), { encoding: "utf8" }));
+
+      const collection: TCollection[] = data[collectionName];
+
+      const candidate = collection.find((item) => item.id === id);
+
+      return candidate;
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new Error(`Error with getData: ${e.message}`);
+      }
+      throw new Error("Error with getData");
+    }
     // const list = await knex(collectionName)
     //   .select()
     //   .where({ id });
@@ -31,103 +95,101 @@ export const Persistence = {
   },
 
   findAll: async (collectionName: TCollectionName) => {
+    try {
+      const data: IPersist = JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "..", "db.json"), { encoding: "utf8" }));
+
+      const collection: TCollectionArray = data[collectionName];
+
+      return collection;
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new Error(`Error with getData: ${e.message}`);
+      }
+      throw new Error("Error with getData");
+    }
+
     // const list = await knex(collectionName)
     //   .select()
 
     // return list[0];
   },
 
-  create: async (item: any, collectionName?: TCollectionName) => {
-    // const { id, password, login } = item;
+  // create: async (item: TCollection) => {
+  //   switch (item.type) {
+  //     case ECollectionName.BOOKS:
+  //       return undefined;
+  //     case ECollectionName.USERS: {
+  //       // const { id, password, login } = item;
 
-    // const isTransactionOk = await knex.transaction(
-    //   (t) => knex(collectionName)
-    //   .transacting(t)
-    //   .insert({ id, password, login })
+  //       // const isTransactionOk = await knex.transaction(
+  //       //   (t) => knex(collectionName)
+  //       //   .transacting(t)
+  //       //   .insert({ id, password, login })
 
-    //   // .then(
-    //   //   () => knex(collectionTokens)
-    //   //   .transacting(t)
-    //   //   .insert({ uuid: id })
+  //       //   // .then(
+  //       //   //   () => knex(collectionTokens)
+  //       //   //   .transacting(t)
+  //       //   //   .insert({ uuid: id })
 
-    //   //   .then(
-    //   //     () => knex(collectionPlayerSettings)
-    //   //     .transacting(t)
-    //   //     .insert({ uuid: id })
+  //       //   //   .then(
+  //       //   //     () => knex(collectionPlayerSettings)
+  //       //   //     .transacting(t)
+  //       //   //     .insert({ uuid: id })
 
-    //   //     .then(
-    //   //       () => knex(collectionPlayerStatistics)
-    //   //       .transacting(t)
-    //   //       .insert({ uuid: id })
-    //   //     )
-    //   //   )
-    //   // )
+  //       //   //     .then(
+  //       //   //       () => knex(collectionPlayerStatistics)
+  //       //   //       .transacting(t)
+  //       //   //       .insert({ uuid: id })
+  //       //   //     )
+  //       //   //   )
+  //       //   // )
 
-    //   .then(t.commit)
-    //   .catch(t.rollback)
-    // )
+  //       //   .then(t.commit)
+  //       //   .catch(t.rollback)
+  //       // )
 
-    // .then(() => true)
+  //       // .then(() => true)
 
-    // .catch(() => false);
+  //       // .catch(() => false);
 
-    // return isTransactionOk;
-  },
+  //       // return isTransactionOk;
+  //     }
+  //     case ECollectionName.COMMENTS:
+  //       return undefined;
+  //     default:
+  //       return null;
+  //   }
+  // },
 
-  /* DEPRECATED SOON */
-  put: (json: IPersist, collectionName?: TCollectionName) => {
-    try {
-      const data = JSON.stringify(json);
-      // @ts-ignore
-      fs.writeFileSync(path.resolve(__dirname, "..", "..", "db.json"), data, "UTF-8");
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error with putData: ${e.message}`);
-      }
-      throw new Error("Error with putData");
-    }
-  },
+  // deleteById: async (id: number | string, collectionName?: ECollectionName) => {
+  //   try {
+  //     // if (!id) {
+  //     //   throw new Error("Error with remData: id not found");
+  //     // }
 
-  update: (item: IPersist, collectionName?: string) => {
-    try {
-      const data = JSON.stringify(item);
-      // @ts-ignore
-      fs.writeFileSync(path.resolve(__dirname, "..", "..", "db.json"), data, "UTF-8");
+  //     // await knex(collectionName)
+  //     //   .delete()
+  //     //   .where({ id });
 
-      // const { id, password, login } = item;
-  
-      // const list = await knex(collectionName)
-      //   .update({ id, password, login })
-      //   .where({ id })
-      //   .returning('*');
-  
-      // return list[0];
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error with putData: ${e.message}`);
-      }
-      throw new Error("Error with putData");
-    }
-  },
+  //     // const data = JSON.stringify(item);
+  //     // // @ts-ignore
+  //     // fs.writeFileSync(path.resolve(__dirname, "..", "..", "db.json"), data, { encoding: "utf8" });
+  //   } catch (e: unknown) {
+  //     if (e instanceof Error) {
+  //       throw new Error(`Error with remData: ${e.message}`);
+  //     }
+  //     throw new Error("Error with remData");
+  //   }
+  // },
 
-  deleteById: async (data: IPersist, collectionName?: TCollectionName) => {
-    try {
-      // if (!id) {
-      //   throw new Error("Error with remData: id not found");
-      // }
+  // updateById: async (id: string | number, collectionName?: ECollectionName) => {
+  // const { id, login } = item;
 
-      // await knex(collectionName)
-      //   .delete()
-      //   .where({ id });
+  // const list = await knex(collectionName)
+  //   .update({ id, password, login })
+  //   .where({ id })
+  //   .returning('*');
 
-      // const data = JSON.stringify(item);
-      // // @ts-ignore
-      // fs.writeFileSync(path.resolve(__dirname, "..", "..", "db.json"), data, "UTF-8");
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error with remData: ${e.message}`);
-      }
-      throw new Error("Error with remData");
-    }
-  }
+  // return list[0];
+  // },
 };
