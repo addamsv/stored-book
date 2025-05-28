@@ -1,27 +1,12 @@
 import fs from "fs";
-// import * as initKnex from 'knex';
+// import * as initKnex from "knex";
 import path from "path";
 import {
-  IPersist, TCollection, TCollectionArray,
+  ECollectionName, IPersist, TCollection, TCollectionArray,
 } from "../types";
 
-export const enum ECollectionName {
-  BOOKS = "books",
-  COMMENTS = "comments",
-  HELP_STEPS = "helpSteps",
-  PRODUCTS = "products",
-  PROFILES = "profiles",
-  USERS = "users",
-}
+// const knex = initKnex({ client: "pg", connection: DATABASE_URL, debug: IS_PROD });
 
-type TCollectionName = "books" | "comments" | "helpSteps" | "products" | "profiles" | "users";
-
-export interface ICollectionOfPersist {
-  id: number;
-  collectionName: ECollectionName;
-}
-
-// const knex = initKnex({ client: 'pg', connection: DATABASE_URL, debug: IS_PROD });
 interface IPersistence {
   /**
    * @deprecated A legacy feature for browser compatibility
@@ -49,7 +34,10 @@ interface IPersistence {
 export const Persistence: IPersistence = {
   get: () => {
     try {
-      const data: IPersist = JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "..", "db.json"), { encoding: "utf8" }));
+      const data: IPersist = JSON.parse(
+        fs.readFileSync(path.resolve(__dirname, "..", "..", "db.json"),
+          { encoding: "utf8" }),
+      );
       return data;
     } catch (e) {
       if (e instanceof Error) {
@@ -63,7 +51,11 @@ export const Persistence: IPersistence = {
     try {
       const data = JSON.stringify(json);
 
-      fs.writeFileSync(path.resolve(__dirname, "..", "..", "db.json"), data, { encoding: "utf8" });
+      fs.writeFileSync(
+        path.resolve(__dirname, "..", "..", "db.json"),
+        data,
+        { encoding: "utf8" },
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error with putData: ${e.message}`);
@@ -74,7 +66,10 @@ export const Persistence: IPersistence = {
 
   findById: async (id: number, collectionName: ECollectionName) => {
     try {
-      const data: IPersist = JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "..", "db.json"), { encoding: "utf8" }));
+      const data: IPersist = JSON.parse(
+        fs.readFileSync(path.resolve(__dirname, "..", "..", "db.json"),
+          { encoding: "utf8" }),
+      );
 
       const collection: TCollection[] = data[collectionName];
 
@@ -94,9 +89,12 @@ export const Persistence: IPersistence = {
     // return list[0];
   },
 
-  findAll: async (collectionName: TCollectionName) => {
+  findAll: async (collectionName: ECollectionName) => {
     try {
-      const data: IPersist = JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "..", "db.json"), { encoding: "utf8" }));
+      const data: IPersist = JSON.parse(
+        fs.readFileSync(path.resolve(__dirname, "..", "..", "db.json"),
+          { encoding: "utf8" }),
+      );
 
       const collection: TCollectionArray = data[collectionName];
 

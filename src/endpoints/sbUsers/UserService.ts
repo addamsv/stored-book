@@ -1,10 +1,8 @@
 import { Response, Request } from "express";
-import { Auth } from "../../model/Auth";
+import { Auth } from "../../services/auth/Auth";
 import { Ret } from "../../model/Ret";
 import { IS_PROD } from "../../../conf";
-import { ECollectionName, Persistence } from "../../model/Persistence";
-import { IProfile } from "../../types";
-import { isArrTypeProper } from "../../utils/typesHelpers";
+import { getProfileById } from "./UserRepository";
 
 const getLoginUserInfoAndJWT = async (req: Request, res: Response): Promise<any> => {
   try {
@@ -16,15 +14,7 @@ const getLoginUserInfoAndJWT = async (req: Request, res: Response): Promise<any>
 
     const token = Auth.getCustomJWT(user.name);
 
-    const profiles = await Persistence.findAll(ECollectionName.PROFILES);
-
-    if (!profiles || !isArrTypeProper<IProfile[]>(profiles, ["owner", "firstname", "lastname", "age"])) {
-      throw new Error("profiles have unknown type");
-    }
-
-    const profileCandidate = profiles.find(
-      (profile) => profile.owner === Number(user.id),
-    );
+    const profileCandidate = await getProfileById(Number(user.id));
 
     const data = { user, token, avatar: profileCandidate?.image };
 

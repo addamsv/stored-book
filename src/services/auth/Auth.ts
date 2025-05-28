@@ -1,33 +1,18 @@
 import { Response, Request } from "express";
-import { Persistence } from "./Persistence";
-import { IS_PROD, SECRET_KEY } from "../../conf";
+import { Persistence } from "../../model/Persistence";
+import { IS_PROD, SECRET_KEY } from "../../../conf";
+import { IClaims, IUser } from "../../types";
 
 const { createHmac } = require("node:crypto");
 /*
-      iss — (issuer) издатель токена
-      sub — (subject) "тема", назначение токена
-      aud — (audience) аудитория, получатели токена
-      exp — (expire time) срок действия токена
-      nbf — (not before) срок, до которого токен не действителен
-      iat — (issued at) время создания токена 30d (days), 1h (hour)
-      jti — (JWT id) идентификатор токена
-      */
-interface IClaims {
-  iss: string;
-  sub: string;
-  exp: number;
-  iat: number;
-  authorities: string;
-}
-
-interface IUser {
-  id: number;
-  name: string;
-  iat?: string;
-  roles?: string;
-  enabled?: boolean;
-  password?: string;
-}
+  iss — (issuer) издатель токена
+  sub — (subject) "тема", назначение токена
+  aud — (audience) аудитория, получатели токена
+  exp — (expire time) срок действия токена
+  nbf — (not before) срок, до которого токен не действителен
+  iat — (issued at) время создания токена 30d (days), 1h (hour)
+  jti — (JWT id) идентификатор токена
+  */
 
 export const Auth = {
   _getIat: Math.round((new Date().getTime() / 1000)),
@@ -184,7 +169,7 @@ export const Auth = {
 
     const jwtHeader = { alg: "RS256" };
 
-    const authorities = candidate.roles;
+    const authorities = candidate.roles || [];
 
     const iat = Auth._getIat;
 
@@ -194,7 +179,7 @@ export const Auth = {
       console.log(authorities);
     }
 
-    const claims = {
+    const claims: IClaims = {
       iss: "self",
       sub, // "admin"
       exp, // 1732827822

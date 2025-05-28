@@ -1,18 +1,17 @@
 import * as express from "express";
 import { Request, Response } from "express";
-import { Auth } from "../../model/Auth";
+import { Auth } from "../../services/auth/Auth";
 import { Ret } from "../../model/Ret";
 import { createComment, getCommentsByBookID } from "./commentsService";
 
 const router = express.Router();
 
-router.get(
-  "/:bookId",
-  async (req: Request, res: Response): Promise<any> => getCommentsByBookID(Number(req.params.bookId), req, res),
-);
+router.get("/:bookId",
+  async (req: Request, res: Response): Promise<any> => getCommentsByBookID(Number(req.params.bookId), req, res));
 
 /** create new */
-router.post("/", async (req: Request, res: Response): Promise<any> => createComment(req, res));
+router.post("/",
+  async (req: Request, res: Response): Promise<any> => createComment(req, res));
 
 /** patch - update comment */
 router.patch("/:bookId", async (req: Request, res: Response): Promise<any> => {

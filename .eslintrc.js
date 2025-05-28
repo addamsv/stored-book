@@ -29,6 +29,8 @@ module.exports = {
     "no-unused-vars": "off",
     "max-len": ["warn", { code: 120 }],
     "no-underscore-dangle": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "warn",
   },
   settings: {
     "import/resolver": {

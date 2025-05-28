@@ -1,5 +1,5 @@
-import { ECollectionName, Persistence } from "../../model/Persistence";
-import { IHelpSteps } from "../../types";
+import { Persistence } from "../../model/Persistence";
+import { ECollectionName, IHelpSteps } from "../../types";
 import { isArrTypeProper } from "../../utils/typesHelpers";
 
 export const getAllHelpSteps = async (): Promise<IHelpSteps[] | null> => {

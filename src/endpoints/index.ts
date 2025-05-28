@@ -1,27 +1,27 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import bodyParser from "body-parser";
 import { Users } from "./sbUsers/UserController";
 import { getProfilesRouts } from "./profiles/profilesController";
 import { Books } from "./books/BooksController";
 import { getCommentsRouts } from "./comments/commentsController";
-import bodyParser from "body-parser";
-import path from "path";
 import { HelpSteps } from "./helpSteps/HelpStepsController";
 import { Products } from "./products/ProductsController";
 import { corsOptionsDelegate, DEV_PORT, IS_PROD } from "../../conf";
 
 const app = express();
 
+app.use(bodyParser.json());
+
 if (!IS_PROD) {
   console.log("ENV.IS_PROD: ", IS_PROD);
-  console.log("statistics: ", "http://localhost:" + DEV_PORT);
+  console.log("HTML CONTENT: ", `http://localhost:${DEV_PORT}`);
 }
-
-app.use(bodyParser.json());
 
 app.use(cors(corsOptionsDelegate));
 
-/* API | ROUTES */
+/* API | ENDPOINTS | ROUTES */
 app.use("/api/v1/users", Users());
 app.use("/api/v1/profiles", getProfilesRouts());
 app.use("/api/v1/books", Books());
@@ -29,11 +29,7 @@ app.use("/api/v1/products", Products());
 app.use("/api/v1/comments", getCommentsRouts());
 app.use("/api/v1/helpSteps", HelpSteps());
 
-
-
-/* PUBLIC | STATIC VIEW */
+/* PUBLIC | STATIC VIEW | HTML JS IMAGES */
 app.use(express.static(path.join(__dirname, "..", "..", "public")));
-
-
 
 export const getExpressApp = () => app;

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Auth } from "../../model/Auth";
+import { Auth } from "../../services/auth/Auth";
 import { Persistence } from "../../model/Persistence";
 import { Ret } from "../../model/Ret";
 import { getCommentsAndProfiles } from "./commentsRepository";
@@ -36,6 +36,7 @@ export const createComment = (req: Request, res: Response) => {
       return Ret.err401(res);
     }
 
+    console.log("MAKING COMMENTS");
     const { comments = [] } = Persistence.get();
 
     const commentIds = comments

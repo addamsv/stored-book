@@ -1,4 +1,23 @@
-import { ECollectionName } from "../model/Persistence";
+export const enum ECollectionName {
+  BOOKS = "books",
+  COMMENTS = "comments",
+  HELP_STEPS = "helpSteps",
+  PRODUCTS = "products",
+  PROFILES = "profiles",
+  USERS = "users",
+}
+
+export const enum ERoles {
+  ADMIN = "ROLE_ADMIN",
+  GUEST = "ROLE_GUEST",
+  USER = "ROLE_USER",
+  MANAGER = "ROLE_MANAGER",
+}
+
+export interface ICollectionOfPersist {
+  id: number;
+  collectionName: ECollectionName;
+}
 
 export interface ICommentUserProfile {
   id: number;
@@ -6,19 +25,25 @@ export interface ICommentUserProfile {
   image?: string;
 }
 
-export interface IUsers {
+export interface IClaims {
+  iss: string;
+  sub: string;
+  exp: number;
+  iat: number;
+  authorities: ERoles[];
+}
+
+export interface IUser {
   id: number;
-  type?: ECollectionName.USERS;
-  iat: string;
   name: string;
-  password: string;
-  roles: string;
-  enabled: boolean;
+  iat?: string;
+  roles?: ERoles[];
+  enabled?: boolean;
+  password?: string;
 }
 
 export interface IComment {
   id: number;
-  type?: ECollectionName.COMMENTS;
   owner: number; // ICommentUserProfile;
   text: string;
   iat: string;
@@ -26,7 +51,6 @@ export interface IComment {
 }
 export interface IProfile {
   id: number;
-  type?: ECollectionName.PROFILES;
   owner?: number;
   firstname?: string;
   lastname?: string;
@@ -83,7 +107,6 @@ export interface IBook {
     // hashTagType: EBookOfHashTagType[];
 
     id: number;
-    type?: ECollectionName.BOOKS;
     owner?: number;
     views: number;
     link: string;
@@ -109,7 +132,7 @@ export interface IBook {
     enabled?: boolean;
 }
 
-export interface IProducts {
+export interface IProduct {
   // id: number;
   // owner: number | undefined;
   // title: string;
@@ -127,7 +150,6 @@ export interface IProducts {
     // hashTagType: EBookOfHashTagType[];
 
     id: number;
-    type?: ECollectionName.PRODUCTS;
     owner?: number;
     views: number;
     link: string;
@@ -155,20 +177,19 @@ export interface IProducts {
 
 export interface IHelpSteps {
   id: number;
-  type?: ECollectionName.HELP_STEPS;
   link: string;
   title: string;
   description: string;
 }
 
-export type TCollection = IHelpSteps | IProducts | IBook | IUsers | IComment | IProfile;
-export type TCollectionArray = IHelpSteps[] | IProducts[] | IBook[] | IUsers[] | IComment[] | IProfile[];
+export type TCollection = IHelpSteps | IProduct | IBook | IUser | IComment | IProfile;
+export type TCollectionArray = IHelpSteps[] | IProduct[] | IBook[] | IUser[] | IComment[] | IProfile[];
 
 export interface IPersist {
   helpSteps: IHelpSteps[];
   books: IBook[];
-  products: IProducts[];
+  products: IProduct[];
   comments: IComment[];
-  users: IUsers[];
+  users: IUser[];
   profiles: IProfile[];
 }
