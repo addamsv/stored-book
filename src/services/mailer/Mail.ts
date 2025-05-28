@@ -13,8 +13,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false, // upgrade later with STARTTLS
   auth: {
-    user: "strdbook@gmail.com", // process.env.SMTP_USER ||
-    pass: "tzru jhtu nnyj oswt", // process.env.SMTP_PASS ||
+    user: process.env.SMTP_USER || "strdbook@gmail.com",
+    pass: process.env.SMTP_PASS || "[YOUR APP PASS]",
   },
 });
 
