@@ -10,6 +10,23 @@ https://mock-server-gules.vercel.app/api/v1/books/
 
 # INSTALL:
 
+## обязательно создать файлик .env
+
+```bash
+IS_PROD=false
+
+SMTP_USER=mail@gmail.com
+SMTP_PASS=upjq
+MAIL_TO=receivemail@mail.ru
+
+SHOP_SECRET_KEY=test_1
+SHOP_ID=10
+
+SECRET_KEY=L16wsS
+DB_NAME=sb-data
+DATABASE_URL=postgres://postgres:@localhost:5432/postgres
+```
+
 ## ЗАПУСК:
 
 ```bash
@@ -379,6 +396,31 @@ RESPONSE 200:
 
 ```bash
   curl -X GET http://localhost:8000/api/v1/products/1 -H "Content-Type: application/json" -H "Accept: application/json" -v
+```
+
+<!-- </details> -->
+
+<br>
+
+<!-- <details> -->
+<summary> MAKE </summary>
+
+- POST /api/v1/pay
+
+```bash
+  curl -X POST http://localhost:8000/api/v1/pay -H "Content-Type: application/json" -H "Accept: application/json" -v
+```
+
+<!-- </details> -->
+<br>
+
+<!-- <details> -->
+<summary> MAIL </summary>
+
+- POST /api/v1/mail
+
+```bash
+  curl -X POST http://localhost:8000/api/v1/mail -H "Content-Type: application/json" -H "Accept: application/json" -v
 ```
 
 <!-- </details> -->

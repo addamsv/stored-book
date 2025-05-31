@@ -1,42 +1,38 @@
+import "dotenv/config";
+
 const nodemailer = require("nodemailer");
 
-// Enable less secure app form setting -
-// https://www.google.com/settings/security/lesssecureapps
-// Disable Captcha  -
-// https://accounts.google.com/b/0/displayunlockcaptcha
-// https://stackoverflow.com/questions/39448394/how-to-send-an-email-in-nodejs
-
-// Create a transporter for SMTP
 const transporter = nodemailer.createTransport({
   service: "gmail",
   host: "smtp.gmail.com",
   port: 587,
   secure: false, // upgrade later with STARTTLS
   auth: {
-    user: process.env.SMTP_USER || "strdbook@gmail.com",
-    pass: process.env.SMTP_PASS || "[YOUR APP PASS]",
+    user: process.env.SMTP_USER || "app_mail@gmail.com",
+    pass: process.env.SMTP_PASS || "upjq",
   },
 });
 
-const message = {
+const options = {
   from: {
     name: "Sergi",
-    address: "strdbook@gmail.com",
+    address: process.env.SMTP_USER || "app_mail@gmail.com",
   },
-  to: ["swares@mail.ru"],
+  to: [process.env.MAIL_TO || "mail_to@mail.ru"],
   subject: "Message title",
   text: "Plaintext version of the message",
-  html: "<p>HTML version of the message</p>",
+  // html: "<p>HTML version of the message</p>",
 };
 
-export const sendEmail = async () => {
-  try {
-    const info = await transporter.sendMail(message);
+export const sendEmail = async (title: string, message: string) => {
+  options.subject = title;
+  options.text = message;
 
-    console.log("SENDEDs", info);
+  try {
+    const info = await transporter.sendMail(options);
+
+    return info;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
-
-sendEmail();

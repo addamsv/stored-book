@@ -29,8 +29,10 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "@a2seven/yoo-checkout": "^1.1.4",
     "@types/body-parser": "^1.19.5",
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^4.16.4",
     "nodemailer": "^7.0.3"
   }
