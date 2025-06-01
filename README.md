@@ -1,3 +1,6 @@
+![GitHub tag check runs](https://img.shields.io/github/check-runs/addamsv/stored-book/dev-front)
+![Netlify](https://img.shields.io/netlify/ea40207c-2101-4923-bb84-1b6983cf3cfd)
+
 # STORED AUDIO BOOKS
 
 ссылки на аудиокниги на английском языке
