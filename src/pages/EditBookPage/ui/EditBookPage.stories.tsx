@@ -6,7 +6,7 @@ import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeD
 import EditBookPage from "./EditBookPage";
 
 export default {
-  title: "shared/EditBookPage",
+  title: "pages/EditBookPage/EditBookPage",
   component: EditBookPage,
   argTypes: {
     backgroundColor: { control: "color" },
