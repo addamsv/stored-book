@@ -70,6 +70,7 @@
   "books": [
     {
       "id": 1,
+      "enabled": true,
       "owner": 1,
       "Title": "We Would Never",
       "Series": "",

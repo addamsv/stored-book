@@ -90,22 +90,8 @@ export type TBookBlock = {
 }
 
 export interface IBook {
-  // id: number;
-  // owner: number | undefined;
-  // title: string;
+
   // subTitle: string;
-  // link: string;
-  // img: string;
-  // views: number;
-  // createdAt: string;
-  // hashTagType: EBookOfHashTagType[];
-  // blocks: TBookBlock[];
-
-    // title: string;
-    // subTitle: string;
-    // createdAt: string;
-    // hashTagType: EBookOfHashTagType[];
-
     id: number;
     owner?: number;
     views: number;

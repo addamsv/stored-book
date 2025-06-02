@@ -74,6 +74,12 @@ export const getBooksLimitedAndPaged = async (req: Request, res: Response) => {
     }
 
     const result = books
+      // isEnabled
+      .filter((book: IBook) => {
+        const { enabled = true } = book;
+
+        return enabled;
+      })
       // hashTag
       .filter((book: IBook) => {
         if (hashTag) {
