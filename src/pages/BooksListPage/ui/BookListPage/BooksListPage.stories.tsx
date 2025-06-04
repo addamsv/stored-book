@@ -7,7 +7,7 @@ import { StoreDecorator } from "resources/config/storybook/StoreDecorator/StoreD
 import BooksListPage from "./BooksListPage";
 
 export default {
-  title: "pages/BooksListPage",
+  title: "pages/BooksListPage/BooksListPage",
   component: BooksListPage,
   argTypes: {
     backgroundColor: { control: "color" },

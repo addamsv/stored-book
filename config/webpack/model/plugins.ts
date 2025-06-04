@@ -51,10 +51,13 @@ export function plugins({
     plugins.push(new BundleAnalyzerPlugin({
       openAnalyzer: false
     }));
+
+    /**
+    * @link https://developers.google.com/speed/pagespeed/insights/
+    * @link https://jigsaw.w3.org/css-validator/
+    * @link https://validator.w3.org
+    */
   }
 
-  // plugins.push(new BundleAnalyzerPlugin({
-  //   openAnalyzer: true
-  // }));
   return plugins;
 }
